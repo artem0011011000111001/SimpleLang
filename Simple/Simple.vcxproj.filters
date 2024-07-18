@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{584f8b17-4e3c-4206-abab-b2e92e6a059d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{b5a37c97-4236-490c-9c09-649c544c8919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\Math">
+      <UniqueIdentifier>{6dfb1c92-d660-4769-a6ba-e6d3f2b94652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\Stream">
+      <UniqueIdentifier>{793dfa17-8585-4faa-8cc7-4fff1d09b39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\Type">
+      <UniqueIdentifier>{03e0fffb-78ba-4959-82e0-2fd2979a4e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2d7ec370-350b-415c-bb1b-f448b1c78ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures">
+      <UniqueIdentifier>{f9adf0f6-c854-4acc-90e6-53b525ca9074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures">
+      <UniqueIdentifier>{282487a2-e378-4dc0-aae2-9b821d1b0533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{4debdfd1-ca98-41fd-8140-75b2559e4d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\modules">
+      <UniqueIdentifier>{d6f9bbc3-d6ef-4955-8298-83eae933ee18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core">
+      <UniqueIdentifier>{0fe4033b-e3d1-4adb-aad8-e39382e7acab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\AST">
+      <UniqueIdentifier>{11f393d8-5b83-4818-9904-9c04a30d4fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\modules">
+      <UniqueIdentifier>{329a84c6-a3c8-43ba-8574-6abac202895b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{372d83cb-720e-4890-9a40-d6434b2641e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{a3d5d800-b666-4421-aa74-fae593013a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST">
+      <UniqueIdentifier>{863b2907-3f50-401b-8648-7a22206d1d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\Lexer">
+      <UniqueIdentifier>{a5bcf992-99e6-4b08-b3a6-806b06ba598c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\Token">
+      <UniqueIdentifier>{afb05ac1-e2ea-4707-bc04-827206072be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\Parser">
+      <UniqueIdentifier>{4558bd8a-63d4-4a08-bdcb-42e0cc14c70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\modules\Expressions">
+      <UniqueIdentifier>{8b1c699f-3b68-45af-b657-f196bd1aa0eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\modules\Function">
+      <UniqueIdentifier>{7b4d61bd-420c-4735-b175-03996c74f08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\modules\Simple_Module">
+      <UniqueIdentifier>{73ff4b92-a929-4958-a095-69be28596137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\modules\Values">
+      <UniqueIdentifier>{2b586771-8b18-41ef-9243-8d0e17896dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Lexer">
+      <UniqueIdentifier>{cbb422c1-171b-485a-a63a-88d7a549089c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser">
+      <UniqueIdentifier>{c045b785-25ea-4136-8bd0-9892231d5012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Token">
+      <UniqueIdentifier>{da5e3d5d-5a05-4842-b241-8cedcfc58dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\modules\Expressions">
+      <UniqueIdentifier>{ed3b2a4b-7a92-479f-bd4c-b4d97b41b6c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\modules\Simple_Module">
+      <UniqueIdentifier>{8497c2ef-d3cb-4660-8003-b7d0486b0d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\modules\Values">
+      <UniqueIdentifier>{a6a6695a-859e-47d7-bad5-11ad4a4a1486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Loops">
+      <UniqueIdentifier>{5c6bb414-cc41-4514-ab3c-1ec2e5d77d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Switch">
+      <UniqueIdentifier>{42046878-54d1-4be2-b548-10f9071fe6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Blocks">
+      <UniqueIdentifier>{f3fc4245-1056-4a55-80e5-fa2ee9c902c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\If">
+      <UniqueIdentifier>{3ed6e8d1-21b2-46b2-8daf-430d0b59ede8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Function">
+      <UniqueIdentifier>{fb780b10-07e3-443c-853e-942354e7137e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Assign">
+      <UniqueIdentifier>{56d0d092-68ff-4105-8924-0d59a8142dc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Import">
+      <UniqueIdentifier>{d53a6e90-3211-4a75-9f7f-cf757eaa3293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs">
+      <UniqueIdentifier>{c703e8e1-94a5-4fcf-922c-93c700dce939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\Math">
+      <UniqueIdentifier>{ea6a4c7d-a690-4051-8e5d-e0cf12f9aded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\Stream">
+      <UniqueIdentifier>{a0eaf80a-b1b2-405a-86a4-7ac0086b4729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\Type">
+      <UniqueIdentifier>{602b0707-3541-4f50-a073-d4d8cdfd083e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Handles">
+      <UniqueIdentifier>{f1cf87c4-501d-4068-8c78-91f23b94e368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Handles\Expression">
+      <UniqueIdentifier>{7155055b-405b-405d-8b0a-60ca9801cfca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Utils">
+      <UniqueIdentifier>{691b4ece-6f82-42e6-805f-d2f6b2bab7db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics">
+      <UniqueIdentifier>{171754cf-f574-47ad-89d4-7281cdb20604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Block">
+      <UniqueIdentifier>{3510265d-0fd0-426d-98e0-f157ace95ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\Switch">
+      <UniqueIdentifier>{91c41347-c896-4c67-a4b1-8acc8c9d48d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\Assign">
+      <UniqueIdentifier>{2fed7cd4-d294-4945-a11c-bd29591775c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\Loops">
+      <UniqueIdentifier>{9db8abd4-34bc-4444-b8fb-63d6c2cdb479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\Function">
+      <UniqueIdentifier>{ad3a3c3f-adc1-4db4-91cb-07f1ec68eb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\IfElse">
+      <UniqueIdentifier>{ac26ca74-00e9-4f20-a457-f1584dad1c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\Import">
+      <UniqueIdentifier>{e1e1ab69-de31-42c3-93f1-58b4d033ac84}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Simple.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="MathFunctions.cpp">
+      <Filter>src\libs\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>src\libs\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamFunctions.cpp">
+      <Filter>src\libs\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>src\libs\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeFunctions.cpp">
+      <Filter>src\libs\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>src\libs\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>src\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Variables.cpp">
+      <Filter>src\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Simple_Error.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportStatement.cpp">
+      <Filter>src\core\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="DoWhileStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="ForStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="WhileStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBlockStatement.cpp">
+      <Filter>src\core\AST\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchStatement.cpp">
+      <Filter>src\core\AST\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortBlockStatement.cpp">
+      <Filter>src\core\AST\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockStatement.cpp">
+      <Filter>src\core\AST\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalBlockStatement.cpp">
+      <Filter>src\core\AST\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="IfStatement.cpp">
+      <Filter>src\core\AST\If</Filter>
+    </ClCompile>
+    <ClCompile Include="CaseStatement.cpp">
+      <Filter>src\core\AST\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionDefineStatement.cpp">
+      <Filter>src\core\AST\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionStatement.cpp">
+      <Filter>src\core\AST\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnStatement.cpp">
+      <Filter>src\core\AST\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="AssigmentStatement.cpp">
+      <Filter>src\core\AST\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstAssigmentStatement.cpp">
+      <Filter>src\core\AST\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintStatement.cpp">
+      <Filter>src\core\AST\Import</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
+      <Filter>src\core\Token</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexer.cpp">
+      <Filter>src\core\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexer_utils.cpp">
+      <Filter>src\core\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>src\core\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp">
+      <Filter>src\modules\Simple_Module</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="StringValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionalExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionalExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="StringExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="UnaryExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ArithmeticExpression.cpp">
+      <Filter>src\core\Parser\Handles\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalExpression.cpp">
+      <Filter>src\core\Parser\Handles\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser_utils.cpp">
+      <Filter>src\core\Parser\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>src\core\Parser\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Switch_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="Assigment_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="Loops_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="Function_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="IfElse_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\IfElse</Filter>
+    </ClCompile>
+    <ClCompile Include="Import_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Import</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MathFunctions.h">
+      <Filter>libs\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>libs\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamFunctions.h">
+      <Filter>libs\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>libs\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeFunctions.h">
+      <Filter>libs\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>libs\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple_defines.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple_Error.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple_typedefs.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Expressions.h">
+      <Filter>include\modules\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>include\modules\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexer.h">
+      <Filter>include\core\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>include\core\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="AST.h">
+      <Filter>include\core\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="Values.h">
+      <Filter>include\modules\Values</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>include\modules\Simple_Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Module_defines.h">
+      <Filter>include\modules\Simple_Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>include\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Variables.h">
+      <Filter>include\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>include\core\Token</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenType.h">
+      <Filter>include\core\Token</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs.h">
+      <Filter>libs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="code.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
+</Project>
