@@ -1,4 +1,5 @@
 #include "AST.h"
+#include "Variables.h"
 
 using namespace Simple;
 
@@ -7,11 +8,14 @@ IfStatement::IfStatement(ExpressionPtr expr, StatementPtr ifStatement, Statement
 
 void IfStatement::execute() {
 	double result = expr->eval()->AsDouble();
+	
+	Variables::PushState();
 	if (result != 0) {
 		elseStatement = nullptr;
 		ifStatement->execute();
 	}
 	else if (elseStatement) elseStatement->execute();
+	Variables::PopState();
 }
 
 std::string IfStatement::to_string() {

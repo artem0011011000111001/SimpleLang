@@ -1,18 +1,24 @@
 #include "AST.h"
+#include "Variables.h"
 
 using namespace Simple;
 
-ForStatement::ForStatement(StatementPtr initialization, ExpressionPtr termination,
+ForStatement::ForStatement(std::string InitName, StatementPtr initialization, ExpressionPtr termination,
 	StatementPtr increment, StatementPtr block) 
-	: initialization(std::move(initialization)), termination(std::move(termination)),
-	increment(std::move(increment)), statement(std::move(block)) {}
+	: InitName(InitName), initialization(std::move(initialization)), 
+	termination(std::move(termination)), increment(std::move(increment)), statement(std::move(block)) {}
 
 void ForStatement::execute() {
+	Variables::PushState();
+	ValuePtr SaveGlobalMatchWithInitNameValue;
+	if (Variables::IsExist(InitName)) {
+		SaveGlobalMatchWithInitNameValue = Variables::Get(InitName);
+	}
+
 	for (initialization->execute();
 		termination->eval()->AsDouble() != 0;
 		increment->execute()) {
-		try
-		{
+		try {
 			statement->execute();
 		}
 		catch (const BreakStatement&) {
@@ -22,6 +28,9 @@ void ForStatement::execute() {
 			//continue;
 		}
 	}
+	if (SaveGlobalMatchWithInitNameValue)
+		Variables::Set(InitName, std::move(SaveGlobalMatchWithInitNameValue));
+	Variables::PopState();
 }
 
 std::string ForStatement::to_string() {

@@ -32,7 +32,6 @@ std::function<ValuePtr(std::vector<ValuePtr>)> FunctionDefineStatement::TurnFunc
 				Variables::Set(pair.first, pair.second->clone());
 			}
 
-
 			Variables::PopState();
 			return ZERO;
 		}

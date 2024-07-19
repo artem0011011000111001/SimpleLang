@@ -193,9 +193,6 @@
     <ClCompile Include="Simple_Error.cpp">
       <Filter>src\utils</Filter>
     </ClCompile>
-    <ClCompile Include="ImportStatement.cpp">
-      <Filter>src\core\AST</Filter>
-    </ClCompile>
     <ClCompile Include="DoWhileStatement.cpp">
       <Filter>src\core\AST\Loops</Filter>
     </ClCompile>
@@ -246,9 +243,6 @@
     </ClCompile>
     <ClCompile Include="ContinueStatement.cpp">
       <Filter>src\core\AST\Loops</Filter>
-    </ClCompile>
-    <ClCompile Include="PrintStatement.cpp">
-      <Filter>src\core\AST\Import</Filter>
     </ClCompile>
     <ClCompile Include="Token.cpp">
       <Filter>src\core\Token</Filter>
@@ -321,6 +315,12 @@
     </ClCompile>
     <ClCompile Include="Import_parsing.cpp">
       <Filter>src\core\Parser\Semantics\Import</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportStatement.cpp">
+      <Filter>src\core\AST\Import</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintStatement.cpp">
+      <Filter>src\core\AST</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

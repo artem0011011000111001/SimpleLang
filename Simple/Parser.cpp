@@ -31,8 +31,11 @@ StatementPtr Parser::statement() {
 	if (match(TokenType::PRINT))
 		return Print();
 
-	else if (match(TokenType::CONST))
-		return ConstAssignment();
+	else if (match(TokenType::CONST)) {
+		StatementPtr result = ConstAssignment();
+		CHECK_END_STR;
+		return std::move(result);
+	}
 
 	else if (match(TokenType::IF))
 		return IfElse();
@@ -67,16 +70,29 @@ StatementPtr Parser::statement() {
 	else if (match(TokenType::RETURN))
 		return Return();
 
-	else if (get(0).getType() == TokenType::WORD && get(1).getType() == TokenType::LPAREN) {
-		FunctionStatement result = std::move(Function());
-		CHECK_END_STR
-		return std::make_unique<FunctionStatement>(std::move(result));
+	else if (get(0).getType() == TokenType::WORD) {
+		if (get(1).getType() == TokenType::LPAREN) {
+			FunctionStatement result = std::move(Function());
+			CHECK_END_STR;
+			return std::make_unique<FunctionStatement>(std::move(result));
+		}
+		else {
+			StatementPtr result = std::move(Assignment());
+			CHECK_END_STR;
+			return std::move(result);
+		}
+	}
+
+	else if (get(0).getType() == TokenType::PLUSPLUS || get(0).getType() == TokenType::MINUSMINUS) {
+		StatementPtr result = std::move(Assignment());
+		CHECK_END_STR;
+		return std::move(result);
 	}
 
 	/*else if (match(TokenType::NEWLINE))
 		return NewLine();*/
 
-	return Assignment();
+	else throw Simple_Error("Unknown statement");
 }
 
 StatementPtr Parser::statementOrBlock() {

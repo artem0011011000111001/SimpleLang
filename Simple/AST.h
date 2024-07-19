@@ -122,13 +122,14 @@ namespace Simple {
 	};
 
 	class ForStatement : public Statement {
+		std::string InitName;
 		StatementPtr initialization;
 		ExpressionPtr termination;
 		StatementPtr increment;
 		StatementPtr statement;
 
 	public:
-		ForStatement(StatementPtr initialization, ExpressionPtr termination,
+		ForStatement(std::string InitName, StatementPtr initialization, ExpressionPtr termination,
 			StatementPtr increment, StatementPtr block);
 		void execute() override;
 

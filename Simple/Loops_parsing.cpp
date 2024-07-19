@@ -31,8 +31,13 @@ StatementPtr Parser::For() {
 	consume(TokenType::LPAREN);
 	StatementPtr initialization;
 
+	Token CurrentToken = get(0);
+	std::string InitName;
+	if (CurrentToken.getType() == TokenType::WORD) InitName = CurrentToken.getText();
+
 	if (match(TokenType::CONST)) initialization = ConstAssignment();
 	else initialization = Assignment();
+	consume(TokenType::SEMICOLON);
 
 	ExpressionPtr termination = expression();
 	consume(TokenType::SEMICOLON);
@@ -43,6 +48,7 @@ StatementPtr Parser::For() {
 	StatementPtr statement = statementOrBlock();
 
 	return std::make_unique<ForStatement>(
+		std::move(InitName),
 		std::move(initialization),
 		std::move(termination),
 		std::move(increment),

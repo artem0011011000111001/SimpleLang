@@ -3,22 +3,29 @@
 
 //__denys = 10;
 
-func test(__denys){
-    print __denys, "\n";
-}
+//func test(__denys){
+//    print __denys, "\n";
+//}
 
-func test(a){
-    print "\t", a, "\n";
-}
+//func test(a){
+//    print "\t", a, "\n";
+//}
 //test(0);
-test(0);
-test(2);
-test(6);
+//test(0);
+//test(2);
+//test(6);
 //test10(19);
 //test10(88);
 //print test(0), "\n", __denys;
 
+i = 14;
 
+for (i = 0; i < 10; ++i) {
+    print i;
+    //break;
+}
+
+print i;
 
 
 

@@ -12,37 +12,37 @@ StatementPtr Parser::Assignment(bool IsConst) {
 		if (match(TokenType::EQ)) {
 
 			ExpressionPtr result = expression();
-			CHECK_END_STR
-				if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::move(result));
+			//CHECK_END_STR
+			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::move(result));
 
-				else return std::make_unique<AssigmentStatement>(variable, std::move(result));
+			else return std::make_unique<AssigmentStatement>(variable, std::move(result));
 		}
 
 		else if (match(TokenType::PLUSPLUS)) {
 
-			CHECK_END_STR
-				if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
-					std::make_unique<VariableExpression>(variable)));
+			//CHECK_END_STR
+			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
+				std::make_unique<VariableExpression>(variable)));
 
-				else return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
-					std::make_unique<VariableExpression>(variable)));
+			else return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
+				std::make_unique<VariableExpression>(variable)));
 		}
 
 		else if (match(TokenType::MINUSMINUS)) {
 
-			CHECK_END_STR
-				return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("--i",
-					std::make_unique<VariableExpression>(variable)));
+			//CHECK_END_STR
+			return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("--i",
+				std::make_unique<VariableExpression>(variable)));
 		}
 
 		auto OPEREQ = [this, variable, IsConst](const BinaryOperators operation) -> StatementPtr {
 			ExpressionPtr result = expression();
-			CHECK_END_STR
-				if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable,
-					std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
+			//CHECK_END_STR
+			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable,
+				std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
 
-				else return std::make_unique<AssigmentStatement>(variable,
-					std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
+			else return std::make_unique<AssigmentStatement>(variable,
+				std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
 			};
 
 		if (match(TokenType::PLUSEQ))
@@ -72,9 +72,9 @@ StatementPtr Parser::Assignment(bool IsConst) {
 		else result = std::make_unique<AssigmentStatement>(get(0).getText(),
 			std::make_unique<UnaryExpression>("++i", std::move(primary())));
 
-		CHECK_END_STR
+		//CHECK_END_STR
 
-			return result;
+		return result;
 	}
 
 	else if (match(TokenType::MINUSMINUS) && get(0).getType() == TokenType::WORD) {
@@ -86,12 +86,10 @@ StatementPtr Parser::Assignment(bool IsConst) {
 		else result = std::make_unique<AssigmentStatement>(get(0).getText(),
 			std::make_unique<UnaryExpression>("--i", std::move(primary())));
 
-		CHECK_END_STR
+		//CHECK_END_STR
 
-			return result;
+		return result;
 	}
-
-	throw Simple_Error("Unknown statement");
 }
 
 StatementPtr Parser::ConstAssignment() {
