@@ -28,10 +28,7 @@ GlobalBlockStatement Parser::parse() {
 }
 
 StatementPtr Parser::statement() {
-	if (match(TokenType::PRINT))
-		return Print();
-
-	else if (match(TokenType::CONST)) {
+	if (match(TokenType::CONST)) {
 		StatementPtr result = ConstAssignment();
 		CHECK_END_STR;
 		return std::move(result);
@@ -76,7 +73,7 @@ StatementPtr Parser::statement() {
 			CHECK_END_STR;
 			return std::make_unique<FunctionStatement>(std::move(result));
 		}
-		else {
+		else if (get(1).getType() == TokenType::EQ) {
 			StatementPtr result = std::move(Assignment());
 			CHECK_END_STR;
 			return std::move(result);
@@ -92,7 +89,7 @@ StatementPtr Parser::statement() {
 	/*else if (match(TokenType::NEWLINE))
 		return NewLine();*/
 
-	else throw Simple_Error("Unknown statement");
+	throw Simple_Error("Unknown statement");
 }
 
 StatementPtr Parser::statementOrBlock() {
@@ -106,17 +103,6 @@ StatementPtr Parser::statementOrBlock() {
 		VariablesBefore[var.first] = var.second->clone();
 	}*/
 	return std::make_unique<ShortBlockStatement>(std::move(statement()));
-}
-
-StatementPtr Parser::Print() {
-	//StatementPtr result = std::make_unique<PrintStatement>(std::move(expression()));
-	BlockStatement result;
-	do {
-		result.add(std::make_unique<PrintStatement>(std::move(expression())));
-	} while (match(TokenType::COMMA));
-	CHECK_END_STR
-
-	return std::make_unique<BlockStatement>(std::move(result));
 }
 
 //StatementPtr Parser::NewLine() {

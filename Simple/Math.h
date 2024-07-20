@@ -19,4 +19,4 @@ namespace Simple {
 	};
 }
 
-#endif // !_MATH_H_
+#endif // _MATH_H_

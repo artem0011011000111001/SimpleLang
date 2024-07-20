@@ -29,6 +29,8 @@ namespace Simple {
 
 		static std::unordered_map<std::string, FunctionPtr> CreateStandartFunctions();
 	};
+
+	ValuePtr Print(std::vector<ValuePtr> args);
 }
 
 #endif // !_FUNCTIONS_H_

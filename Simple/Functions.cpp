@@ -7,6 +7,8 @@
 #include "Stream.h"
 #include "Type.h"
 
+#include <iostream>
+
 using namespace Simple;
 
 bool Functions::IsExist(const std::string& key) {
@@ -40,7 +42,7 @@ void Functions::RegisterDynamicFunction(const std::string& name, std::function<V
         }
 
         FunctionPtr clone() const override {
-            return std::make_unique<DynamicFunction>(funcbody, argscount);
+            return CREATE_PTR<DynamicFunction>(funcbody, argscount);
         }
 
     private:
@@ -48,18 +50,21 @@ void Functions::RegisterDynamicFunction(const std::string& name, std::function<V
         std::vector<size_t> argscount;
     };
 
-    Set(name, std::make_unique<DynamicFunction>(funcbody, argscount));
+    Set(name, CREATE_PTR<DynamicFunction>(funcbody, argscount));
 }
 
 std::unordered_map<std::string, FunctionPtr> Functions::CreateStandartFunctions() {
 	std::unordered_map<std::string, FunctionPtr> funcs;
-	/*funcs.emplace("sin", std::make_unique<SinFunction>());
-	funcs.emplace("cos", std::make_unique<CosFunction>());
-	funcs.emplace("tan", std::make_unique<TanFunction>());*/
-	//Math::InitFuncs();
-	//Stream::InitFuncs();
-	//Type::InitFuncs();
+    _DEFINE_FUNCTION_CLASS(PrintFunc, Print);
+    funcs.emplace("print", CREATE_PTR<PrintFunc>());
 	return funcs;
 }
 
 std::unordered_map<std::string, FunctionPtr> Functions::functions = CreateStandartFunctions();
+
+ValuePtr Simple::Print(std::vector<ValuePtr> args) {
+    for (auto& arg : args) {
+        std::cout << arg->AsString();
+    }
+    return ZERO;
+}

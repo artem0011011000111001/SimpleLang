@@ -22,4 +22,4 @@ namespace Simple {
 	ValuePtr Floor(std::vector<ValuePtr> args);
 }
 
-#endif // !_MATH_FUNCTIONS_H_
+#endif // _MATH_FUNCTIONS_H_

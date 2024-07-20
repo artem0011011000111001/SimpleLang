@@ -19,4 +19,4 @@ namespace Simple {
 	};
 }
 
-#endif // !_STREAM_H_
+#endif // _STREAM_H_

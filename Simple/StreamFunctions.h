@@ -14,4 +14,4 @@ namespace Simple {
 	ValuePtr Input(std::vector<ValuePtr> args);
 }
 
-#endif // !_STREAM_FUNCTIONS_H_
+#endif // _STREAM_FUNCTIONS_H_

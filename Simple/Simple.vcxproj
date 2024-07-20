@@ -145,7 +145,11 @@
     <ClCompile Include="Parser_utils.cpp" />
     <ClCompile Include="ReturnStatement.cpp" />
     <ClCompile Include="ShortBlockStatement.cpp" />
+    <ClCompile Include="Simple.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TimeFunctions.cpp" />
+    <ClCompile Include="TimeFunctions.h" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="TypeFunctions.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
@@ -176,7 +180,7 @@
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="NumberExpression.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Simple.cpp">
+    <ClCompile Include="Main.cpp">
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp20</LanguageStandard>
     </ClCompile>
     <ClCompile Include="Simple_Error.cpp" />
@@ -189,6 +193,7 @@
     <ClInclude Include="Libs.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="TypeFunctions.h" />
     <ClInclude Include="Expressions.h" />

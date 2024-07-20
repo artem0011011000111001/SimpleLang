@@ -13,7 +13,6 @@ namespace Simple {
 		TEXT,
 
 		// Keywords
-		PRINT,
 		CONST,
 		IF,
 		ELSE,

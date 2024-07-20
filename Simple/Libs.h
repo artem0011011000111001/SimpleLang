@@ -6,5 +6,6 @@
 #include "Math.h"
 #include "Stream.h"
 #include "Type.h"
+#include "Time.h"
 
 #endif // _LIBS_H_

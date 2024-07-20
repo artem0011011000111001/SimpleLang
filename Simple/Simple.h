@@ -19,4 +19,9 @@
 #include "Simple_typedefs.h"
 #include "Libs.h"
 
+namespace Simple {
+	static void RegisterStandartModules();
+	void compile(std::string& code);
+}
+
 #endif // _SIMPLE_LANGUAGE_

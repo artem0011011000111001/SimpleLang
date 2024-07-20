@@ -95,9 +95,6 @@ std::string Token::enum_in_string() const {
 	case TokenType::COMMA:
 		return "COMMA";
 
-	case TokenType::PRINT:
-		return "PRINT";
-
 	case TokenType::CONST:
 		return "CONST";
 

@@ -14,7 +14,7 @@ namespace Simple {
 
 	ValuePtr Typeof(std::vector<ValuePtr> args);
 
-	ValuePtr IsConst(std::vector<ValuePtr> args);
+	ValuePtr Is_const(std::vector<ValuePtr> args);
 }
 
-#endif // !_CAST_FUNCTIONS_H_
+#endif // _CAST_FUNCTIONS_H_

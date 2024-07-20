@@ -37,8 +37,6 @@ namespace Simple {
 
 		StatementPtr ConstAssignment();
 
-		StatementPtr Print();
-
 		StatementPtr IfElse();
 
 		StatementPtr DoWhile();

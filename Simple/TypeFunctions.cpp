@@ -8,7 +8,7 @@ ValuePtr Simple::Cast_number(std::vector<ValuePtr> args) {
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return std::make_unique<NumberValue>(args.front()->AsDouble());
+	return CREATE_PTR<NumberValue>(args.front()->AsDouble());
 }
 
 ValuePtr Simple::Cast_string(std::vector<ValuePtr> args) {
@@ -16,7 +16,7 @@ ValuePtr Simple::Cast_string(std::vector<ValuePtr> args) {
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return std::make_unique<StringValue>(args.front()->AsString());
+	return CREATE_PTR<StringValue>(args.front()->AsString());
 }
 
 ValuePtr Simple::Typeof(std::vector<ValuePtr> args) {
@@ -24,13 +24,13 @@ ValuePtr Simple::Typeof(std::vector<ValuePtr> args) {
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return std::make_unique<StringValue>(to_string(IdentifyValueType(args.front())));
+	return CREATE_PTR<StringValue>(to_string(IdentifyValueType(args.front())));
 }
 
-ValuePtr Simple::IsConst(std::vector<ValuePtr> args) {
+ValuePtr Simple::Is_const(std::vector<ValuePtr> args) {
 	size_t param_count = args.size();
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return std::make_unique<NumberValue>(Variables::IsConstant(args.front()->AsString()));
+	return CREATE_PTR<NumberValue>(Variables::IsConstant(args.front()->AsString()));
 }

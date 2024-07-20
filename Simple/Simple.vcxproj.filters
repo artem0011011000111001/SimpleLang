@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="include">
       <UniqueIdentifier>{584f8b17-4e3c-4206-abab-b2e92e6a059d}</UniqueIdentifier>
     </Filter>
@@ -167,11 +163,17 @@
     <Filter Include="src\structures\Variable">
       <UniqueIdentifier>{18af09cb-0ab8-45d4-b7f4-de24d4c5d0e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{990cfe29-21ec-4952-bea3-1f66476cefa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\Time">
+      <UniqueIdentifier>{040612dc-7861-4811-a36a-ddac3d214d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\Time">
+      <UniqueIdentifier>{0ebba39b-bdc6-484c-8399-b347e33c34f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Simple.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="MathFunctions.cpp">
       <Filter>src\libs\Math</Filter>
     </ClCompile>
@@ -334,6 +336,21 @@
     <ClCompile Include="Variable.cpp">
       <Filter>src\structures\Variable</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Simple.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeFunctions.h">
+      <Filter>libs\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>src\libs\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeFunctions.cpp">
+      <Filter>src\libs\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MathFunctions.h">
@@ -411,13 +428,16 @@
     <ClInclude Include="Variable.h">
       <Filter>include\structures\Variable</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="code.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
+    <ClInclude Include="Time.h">
+      <Filter>libs\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="code.txt">
+      <Filter>tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

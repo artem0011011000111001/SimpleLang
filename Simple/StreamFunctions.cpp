@@ -38,10 +38,10 @@ ValuePtr Simple::Input(std::vector<ValuePtr> args) {
 
 	try
 	{
-		return std::make_unique<NumberValue>(strict_stod(input));
+		return CREATE_PTR<NumberValue>(strict_stod(input));
 	}
 	catch (const Simple_Error&)
 	{
-		return std::make_unique<StringValue>(input);
+		return CREATE_PTR<StringValue>(input);
 	}
 }

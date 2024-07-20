@@ -53,10 +53,8 @@ void Lexer::tokenizeWord() {
 		buffer.push_back(current);
 		current = next();
 	}
-	if (buffer == "print")
-		addToken(TokenType::PRINT);
 
-	else if (buffer == "const")
+	if (buffer == "const")
 		addToken(TokenType::CONST);
 
 	else if (buffer == "if")
@@ -106,6 +104,8 @@ void Lexer::tokenizeText() {
 	std::string buffer;
 	char current = peek(0);
 	while (current != '\"') {
+		if (current == '\0')
+			throw Simple_Error("No closing found \"");
 		if (current == '\\') {
 			current = next();
 			switch (current) {
