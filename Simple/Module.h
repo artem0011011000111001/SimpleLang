@@ -8,6 +8,8 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <algorithm>
+#include <iterator>
 
 namespace Simple {
 

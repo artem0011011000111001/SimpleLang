@@ -11,9 +11,11 @@ namespace Simple {
 	class Statement;
 	class Function;
 
-	using ValuePtr      = std::unique_ptr<Value>;
-	using ExpressionPtr = std::unique_ptr<Expression>;
-	using StatementPtr  = std::unique_ptr<Statement>;
-	using FunctionPtr   = std::unique_ptr<Function>;
+	template<class _PtrTy>
+	using Ptr			= std::unique_ptr<_PtrTy>;
+	using ValuePtr      = Ptr<Value>;
+	using ExpressionPtr = Ptr<Expression>;
+	using StatementPtr  = Ptr<Statement>;
+	using FunctionPtr   = Ptr<Function>;
 }
 #endif // !_TYPEDEFS_H_

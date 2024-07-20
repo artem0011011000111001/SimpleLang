@@ -24,7 +24,7 @@ ValuePtr UnaryExpression::eval() const {
 			double value = Variables::Get(key)->AsDouble();
 			double newValue = IsInc ? value + 1 : value - 1;
 
-			Variables::Set(key, std::make_unique<NumberValue>(newValue));
+			Variables::Set(key, Variable(std::make_unique<NumberValue>(newValue), Variables::IsConstant(key)));
 			return std::make_unique<NumberValue>(IsPr ? newValue : value);
 
 		}

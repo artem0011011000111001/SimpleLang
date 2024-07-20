@@ -8,7 +8,7 @@ void Stream::Init() {
 }
 
 void Stream::InitVars() {
-	Variables::Set("endl",	   _FLASH_VAR(StringValue(), "\n"));
+	_DEFINE_VAR_STR("endl", "\n", true);
 }
 
 void Stream::InitFuncs() {

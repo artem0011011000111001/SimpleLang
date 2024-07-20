@@ -18,7 +18,7 @@ namespace Simple {
 
 		virtual ValuePtr clone() const = 0;
 
-		virtual ValueType GetType() const = 0;
+		//virtual ValueType GetType() const = 0;
 
 		virtual bool operator==(const ValuePtr& other) const = 0;
 
@@ -38,7 +38,7 @@ namespace Simple {
 
 		ValuePtr clone() const override;
 
-		ValueType GetType() const override;
+		//ValueType GetType() const override;
 
 		bool operator==(const ValuePtr& other) const override;
 	};
@@ -56,7 +56,7 @@ namespace Simple {
 
 		ValuePtr clone() const override;
 
-		ValueType GetType() const override;
+		//ValueType GetType() const override;
 
 		bool operator==(const ValuePtr& other) const override;
 	};

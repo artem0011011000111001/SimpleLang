@@ -9,10 +9,12 @@ ForStatement::ForStatement(std::string InitName, StatementPtr initialization, Ex
 	termination(std::move(termination)), increment(std::move(increment)), statement(std::move(block)) {}
 
 void ForStatement::execute() {
+
 	Variables::PushState();
-	ValuePtr SaveGlobalMatchWithInitNameValue;
+	Variable SaveGlobalMatchWithInitNameValue;
+
 	if (Variables::IsExist(InitName)) {
-		SaveGlobalMatchWithInitNameValue = Variables::Get(InitName);
+		SaveGlobalMatchWithInitNameValue = Variable(Variables::Get(InitName), Variables::IsConstant(InitName));
 	}
 
 	for (initialization->execute();
@@ -28,7 +30,7 @@ void ForStatement::execute() {
 			//continue;
 		}
 	}
-	if (SaveGlobalMatchWithInitNameValue)
+	if (SaveGlobalMatchWithInitNameValue.value)
 		Variables::Set(InitName, std::move(SaveGlobalMatchWithInitNameValue));
 	Variables::PopState();
 }

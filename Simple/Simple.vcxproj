@@ -170,6 +170,7 @@
     <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="SwitchBlockStatement.cpp" />
     <ClCompile Include="SwitchStatement.cpp" />
+    <ClCompile Include="Variable.cpp" />
     <ClCompile Include="Variables.cpp" />
     <ClCompile Include="VariableExpression.cpp" />
     <ClCompile Include="Lexer.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenType.h" />
     <ClInclude Include="Values.h" />
+    <ClInclude Include="Variable.h" />
     <ClInclude Include="Variables.h" />
   </ItemGroup>
   <ItemGroup>

@@ -8,8 +8,8 @@ void Math::Init() {
 }
 
 void Math::InitVars() {
-	Variables::Set("PI",	CREATE_PTR<NumberValue>(MATH_PI));
-	Variables::Set("E",		CREATE_PTR<NumberValue>(MATH_E));
+	_DEFINE_VAR_NUM("PI", MATH_PI, true);
+	_DEFINE_VAR_NUM("E",  MATH_E,  true);
 }
 
 void Math::InitFuncs() {

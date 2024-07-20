@@ -1,5 +1,5 @@
 //import Stream;
-//import Type;
+import Type;
 
 //__denys = 10;
 
@@ -17,26 +17,6 @@
 //test10(19);
 //test10(88);
 //print test(0), "\n", __denys;
-
-i = 14;
-
-for (i = 0; i < 10; ++i) {
-    print i;
-    //break;
-}
-
-print i;
-
-
-
-
-
-
-
-
-
-
-
 
 
 

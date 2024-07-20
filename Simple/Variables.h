@@ -6,6 +6,7 @@
 #include "Simple_typedefs.h"
 #include "AST.h"
 #include "Parser.h"
+#include "Variable.h"
 
 #include <unordered_map>
 #include <vector>
@@ -16,12 +17,9 @@ namespace Simple {
 
 	struct Variables {
 	private:
-		static std::unordered_map<std::string, ValuePtr> variables;
+		static std::unordered_map<std::string, Variable> variables;
 
-		static std::vector<std::string> constants;
-
-		static std::stack<std::unordered_map<std::string, ValuePtr>> variablesState;
-		static std::stack<std::vector<std::string>> constantsState;
+		static std::stack<std::unordered_map<std::string, Variable>> variablesState;
 
 	public:
 
@@ -31,21 +29,15 @@ namespace Simple {
 
 		static ValuePtr Get(const std::string& key);
 
-		static void SetAllVariables(std::unordered_map<std::string, ValuePtr>&& variables);
+		static void SetAllVariables(std::unordered_map<std::string, Variable>&& variables);
 
-		static void SetAllConstants(const std::vector<std::string>& constants);
+		static const std::unordered_map<std::string, Variable>& GetAllVariables();
 
-		static const std::unordered_map<std::string, ValuePtr>& GetAllVariables();
+		static void Set(const std::string& key, Variable value);
 
-		static const std::vector<std::string>& GetAllConstants();
+		static void SetNew(const std::string& key, Variable value);
 
-		static void Set(const std::string& key, ValuePtr value);
-
-		static void AddConstant(const std::string& key);
-
-		static void RemoveConstant(const std::string& key);
-
-		static std::unordered_map<std::string, ValuePtr> CreateStandartVariables();
+		static std::unordered_map<std::string, Variable> CreateStandartVariables();
 
 		static void PushState();
 

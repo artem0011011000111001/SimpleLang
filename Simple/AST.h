@@ -213,13 +213,13 @@ namespace Simple {
 
 	class FunctionDefineStatement : public Statement {
 		std::string name;
-		std::list<std::string> argsNames;
+		std::pair<std::list<std::string>, std::list<bool>> argsParam;
 		StatementPtr statement;
 
 		std::function <ValuePtr(std::vector<ValuePtr>)> TurnFuncFromVoidToValuePtr(StatementPtr& statement);
 
 	public:
-		FunctionDefineStatement(std::string name, std::list<std::string> argsNames, StatementPtr statement);
+		FunctionDefineStatement(std::string name, std::pair<std::list<std::string>, std::list<bool>>, StatementPtr statement);
 
 		void execute() override;
 

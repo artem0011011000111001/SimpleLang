@@ -4,6 +4,7 @@
 #define _FUNCTIONS_H_
 
 #include "Simple_typedefs.h"
+#include "Variable.h"
 
 #include <unordered_map>
 #include <vector>

@@ -65,9 +65,6 @@
     <Filter Include="include\modules\Expressions">
       <UniqueIdentifier>{8b1c699f-3b68-45af-b657-f196bd1aa0eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\modules\Function">
-      <UniqueIdentifier>{7b4d61bd-420c-4735-b175-03996c74f08f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="include\modules\Simple_Module">
       <UniqueIdentifier>{73ff4b92-a929-4958-a095-69be28596137}</UniqueIdentifier>
     </Filter>
@@ -158,6 +155,18 @@
     <Filter Include="src\core\Parser\Semantics\Import">
       <UniqueIdentifier>{e1e1ab69-de31-42c3-93f1-58b4d033ac84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\structures\Function">
+      <UniqueIdentifier>{7b4d61bd-420c-4735-b175-03996c74f08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures\Variable">
+      <UniqueIdentifier>{69364786-1ce3-454a-9384-4294879ffb94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Function">
+      <UniqueIdentifier>{c9a7b871-2bd5-4360-bb88-42de8860db50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Variable">
+      <UniqueIdentifier>{18af09cb-0ab8-45d4-b7f4-de24d4c5d0e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Simple.cpp">
@@ -180,12 +189,6 @@
     </ClCompile>
     <ClCompile Include="Type.cpp">
       <Filter>src\libs\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="Functions.cpp">
-      <Filter>src\structures</Filter>
-    </ClCompile>
-    <ClCompile Include="Variables.cpp">
-      <Filter>src\structures</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>src\utils</Filter>
@@ -322,6 +325,15 @@
     <ClCompile Include="PrintStatement.cpp">
       <Filter>src\core\AST</Filter>
     </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>src\structures\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Variables.cpp">
+      <Filter>src\structures\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="Variable.cpp">
+      <Filter>src\structures\Variable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MathFunctions.h">
@@ -361,7 +373,7 @@
       <Filter>include\modules\Expressions</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
-      <Filter>include\modules\Function</Filter>
+      <Filter>include\structures\Function</Filter>
     </ClInclude>
     <ClInclude Include="Lexer.h">
       <Filter>include\core\Lexer</Filter>
@@ -381,12 +393,6 @@
     <ClInclude Include="Module_defines.h">
       <Filter>include\modules\Simple_Module</Filter>
     </ClInclude>
-    <ClInclude Include="Functions.h">
-      <Filter>include\structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Variables.h">
-      <Filter>include\structures</Filter>
-    </ClInclude>
     <ClInclude Include="Token.h">
       <Filter>include\core\Token</Filter>
     </ClInclude>
@@ -395,6 +401,15 @@
     </ClInclude>
     <ClInclude Include="Libs.h">
       <Filter>libs</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>include\structures\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Variables.h">
+      <Filter>include\structures\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="Variable.h">
+      <Filter>include\structures\Variable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

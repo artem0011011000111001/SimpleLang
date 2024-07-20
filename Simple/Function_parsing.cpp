@@ -8,17 +8,21 @@ FunctionDefineStatement Parser::FunctionDefine() {
 	std::string name = consume(TokenType::WORD).getText();
 	consume(TokenType::LPAREN);
 
-	std::list<std::string> argsNames;
+	std::pair<std::list<std::string>, std::list<bool>> argsParam;
 
 	while (!match(TokenType::RPAREN)) {
-		argsNames.push_back(consume(TokenType::WORD).getText());
+		if (match(TokenType::CONST))
+			argsParam.second.push_back(true);
+		else
+			argsParam.second.push_back(false);
+		argsParam.first.push_back(consume(TokenType::WORD).getText());
 
 		if (match(TokenType::COMMA) && (get(0).getType() == TokenType::RPAREN))
 			throw Simple_Error("Name required");
 	}
 
 	StatementPtr body = statementOrBlock();
-	return FunctionDefineStatement(name, argsNames, std::move(body));
+	return FunctionDefineStatement(name, argsParam, std::move(body));
 }
 
 StatementPtr Parser::Return() {

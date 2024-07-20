@@ -1,6 +1,7 @@
 #include "Utils.h"
 #include "Values.h"
 #include "Simple_Error.h"
+#include "Variable.h"
 
 using namespace Simple;
 
@@ -91,9 +92,8 @@ std::string Simple::to_string(ValueType val) {
 	}
 }
 
-void Simple::copy_variables(const std::unordered_map<std::string, ValuePtr>&from, std::unordered_map<std::string, ValuePtr>&whom) {
+void Simple::copy_variables(const std::unordered_map<std::string, Variable>&from, std::unordered_map<std::string, Variable>&whom) {
 	for (const auto& var : from) {
-		whom[var.first] = var.second->clone();
+		whom[var.first].value = var.second.value->clone();
 	}
-
 }

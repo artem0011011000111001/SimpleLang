@@ -21,9 +21,9 @@ ValuePtr NumberValue::clone() const {
 	return std::make_unique<NumberValue>(value);
 }
 
-ValueType NumberValue::GetType() const {
-	return ValueType::NUMBER;
-}
+//ValueType NumberValue::GetType() const {
+//	return ValueType::NUMBER;
+//}
 
 bool NumberValue::operator==(const ValuePtr& other) const {
 	if (IdentifyValueType(other) != ValueType::NUMBER)

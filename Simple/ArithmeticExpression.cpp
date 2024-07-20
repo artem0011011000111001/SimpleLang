@@ -101,8 +101,14 @@ ExpressionPtr Parser::primary() {
 	if (get(0).getType() == TokenType::WORD && get(1).getType() == TokenType::LPAREN)
 		return std::make_unique<FunctionalExpression>(std::move(Function()));
 
-	if (match(TokenType::WORD))
-		return std::make_unique<VariableExpression>(CurrentToken.getText());
+	if (match(TokenType::WORD)) {
+		if (get(-1).getText() == "true")
+			return std::make_unique<NumberExpression>(1);
+		if (get(-1).getText() == "false")
+			return std::make_unique<NumberExpression>(0);
+		else 
+			return std::make_unique<VariableExpression>(CurrentToken.getText());
+	}
 
 	if (match(TokenType::TEXT))
 		return std::make_unique<StringExpression>(CurrentToken.getText());

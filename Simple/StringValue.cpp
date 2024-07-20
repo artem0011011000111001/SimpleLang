@@ -18,10 +18,10 @@ ValuePtr StringValue::clone() const {
 	return std::make_unique<StringValue>(value);
 }
 
-ValueType StringValue::GetType() const
-{
-	return ValueType::STRING;
-}
+//ValueType StringValue::GetType() const
+//{
+//	return ValueType::STRING;
+//}
 
 bool StringValue::operator==(const ValuePtr& other) const {
 	if (IdentifyValueType(other) != ValueType::STRING)

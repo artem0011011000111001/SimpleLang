@@ -1,14 +1,17 @@
 #pragma once
 
-#ifndef _OTHER_H_
-#define _OTHER_H_
+#ifndef _UTILS_H_
+#define _UTILS_H_
 
 #include "Simple_typedefs.h"
+#include "Variable.h"
 
 #include <string>
 #include <unordered_map>
 
 namespace Simple {
+
+	struct Variable;
 
 	enum class ValueType
 	{
@@ -42,6 +45,6 @@ namespace Simple {
 	std::string to_string(LogicOperators op);
 	std::string to_string(BinaryOperators op);
 	std::string to_string(ValueType val);
-	void copy_variables(const std::unordered_map<std::string, ValuePtr>& from, std::unordered_map<std::string, ValuePtr>& whom);
+	void copy_variables(const std::unordered_map<std::string, Variable>& from, std::unordered_map<std::string, Variable>& whom);
 }
-#endif // !_OTHER_H_
+#endif // _UTILS_H_

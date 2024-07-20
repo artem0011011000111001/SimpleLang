@@ -1,2 +1,66 @@
-﻿  Loops_parsing.cpp
+﻿  Assigment_parsing.cpp
+  BinaryExpression.cpp
+  Block.cpp
+  BlockStatement.cpp
+  BreakStatement.cpp
+  CaseStatement.cpp
+  ArithmeticExpression.cpp
+  Function_parsing.cpp
+  FunctionDefineStatement.cpp
+  IfElse_parsing.cpp
+  Import_parsing.cpp
+  Lexer_utils.cpp
+  LogicalExpression.cpp
+  Loops_parsing.cpp
+  Module.cpp
+  Parser_utils.cpp
+  ReturnStatement.cpp
+  ShortBlockStatement.cpp
+  Switch_parsing.cpp
+  Type.cpp
+  Создание кода...
+D:\Projects\MYFOLDER\C++\Simple\Simple\Assigment_parsing.cpp(93): warning C4715: Simple::Parser::Assignment: значение возвращается не при всех путях выполнения
+  Компиляция...
+  TypeFunctions.cpp
+  ConditionalExpression.cpp
+  ConstAssigmentStatement.cpp
+  ContinueStatement.cpp
+  DoWhileStatement.cpp
+  ForStatement.cpp
+  Functions.cpp
+  FunctionalExpression.cpp
+  FunctionStatement.cpp
+  GlobalBlockStatement.cpp
+  IfStatement.cpp
+  ImportStatement.cpp
+  Math.cpp
+  MathFunctions.cpp
+  NumberValue.cpp
+  Utils.cpp
+  PrintStatement.cpp
+  Stream.cpp
+  StreamFunctions.cpp
+  StringExpression.cpp
+  Создание кода...
+D:\Projects\MYFOLDER\C++\Simple\Simple\Utils.cpp(93): warning C4715: Simple::to_string: значение возвращается не при всех путях выполнения
+D:\Projects\MYFOLDER\C++\Simple\Simple\Utils.cpp(62): warning C4715: Simple::to_string: значение возвращается не при всех путях выполнения
+D:\Projects\MYFOLDER\C++\Simple\Simple\Utils.cpp(81): warning C4715: Simple::to_string: значение возвращается не при всех путях выполнения
+D:\Projects\MYFOLDER\C++\Simple\Simple\Utils.cpp(29): warning C4715: Simple::IdentifyValueType: значение возвращается не при всех путях выполнения
+  Компиляция...
+  StringValue.cpp
+  SwitchBlockStatement.cpp
+  SwitchStatement.cpp
+  Variable.cpp
+  Variables.cpp
+  VariableExpression.cpp
+  Lexer.cpp
+  NumberExpression.cpp
+  Parser.cpp
+  Simple_Error.cpp
+  AssigmentStatement.cpp
+  Token.cpp
+  UnaryExpression.cpp
+  WhileStatement.cpp
+  Создание кода...
+  Simple.cpp
   Simple.vcxproj -> D:\Projects\MYFOLDER\C++\Simple\x64\Debug\Simple.exe

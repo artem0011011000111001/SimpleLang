@@ -2,6 +2,7 @@
 #include "Values.h"
 #include "Function.h"
 #include "Functions.h"
+#include "Variable.h"
 #include "Variables.h"
 
 using namespace Simple;
