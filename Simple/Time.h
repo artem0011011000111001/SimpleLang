@@ -10,13 +10,19 @@
 
 #include "Simple_defines.h"
 
-namespace Simple {
-	class Time : public Module_Base {
-		void InitVars();
-		void InitFuncs();
-	public:
-		void Init() override;
-	};
+using namespace Simple;
+
+namespace Simple_libs {
+
+	namespace Time {
+
+		class Time : public Module_Base {
+			void InitVars();
+			void InitFuncs();
+		public:
+			void Init() override;
+		};
+	}
 }
 
 #endif // _TIME_H_

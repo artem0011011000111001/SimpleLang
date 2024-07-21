@@ -2,10 +2,10 @@
 #include <iostream>
 
 void Simple::RegisterStandartModules() {
-	RegisterModule<Simple::Math>("Math");
-	RegisterModule<Simple::Stream>("Stream");
-	RegisterModule<Simple::Type>("Type");
-	RegisterModule<Simple::Time>("Time");
+	RegisterModule<Simple_libs::Math::Math>("Math");
+	RegisterModule<Simple_libs::Stream::Stream>("Stream");
+	RegisterModule<Simple_libs::Type::Type>("Type");
+	RegisterModule<Simple_libs::Time::Time>("Time");
 }
 
 void Simple::compile(std::string& code) {

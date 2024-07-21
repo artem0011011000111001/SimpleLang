@@ -4,58 +4,66 @@
 
 using namespace Simple;
 
-ValuePtr Simple::Sin(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Sin(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::sin(args[0]->AsDouble()));
+	return NUM_VALUE(std::sin(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Cos(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Cos(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::cos(args[0]->AsDouble()));
+	return NUM_VALUE(std::cos(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Tan(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Tan(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::tan(args[0]->AsDouble()));
+	return NUM_VALUE(std::tan(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Sqrt(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Sqrt(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::sqrt(args[0]->AsDouble()));
+	return NUM_VALUE(std::sqrt(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Cbrt(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Cbrt(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::cbrt(args[0]->AsDouble()));
+	return NUM_VALUE(std::cbrt(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Round(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Round(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::round(args[0]->AsDouble()));
+	return NUM_VALUE(std::round(args[0]->AsDouble()));
 }
 
-ValuePtr Simple::Floor(std::vector<ValuePtr> args) {
+VALUE Simple_libs::Math::Floor(Args_t args) {
 	size_t param_count = args.size();
 
 	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(std::floor(args[0]->AsDouble()));
+	return NUM_VALUE(std::floor(args[0]->AsDouble()));
+}
+
+VALUE Simple_libs::Math::Log(Args_t args) {
+	size_t param_count = args.size();
+
+	if (param_count != 1) throw Simple_Error("Expected " + std::to_string(param_count));
+
+	return NUM_VALUE(std::log(args[0]->AsDouble()));
 }

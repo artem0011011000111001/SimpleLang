@@ -2,16 +2,16 @@
 
 using namespace Simple;
 
-void Time::Init() {
+void Simple_libs::Time::Time::Init() {
 	InitVars();
 	InitFuncs();
 }
 
-void Time::InitVars() {
-	
+void Simple_libs::Time::Time::InitVars() {
+
 }
 
-void Time::InitFuncs() {
+void Simple_libs::Time::Time::InitFuncs() {
 	_DEFINE_FUNCTION_AND_FUNCTION_CLASS(NowFunc,   Now,   "now");
 	_DEFINE_FUNCTION_AND_FUNCTION_CLASS(SleepFunc, Sleep, "sleep");
 }

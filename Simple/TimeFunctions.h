@@ -5,12 +5,16 @@
 
 #include "Function.h"
 
-namespace Simple {
+using namespace Simple;
 
-	ValuePtr Now(std::vector<ValuePtr> args);
+namespace Simple_libs {
 
-	ValuePtr Sleep(std::vector<ValuePtr> args);
+	namespace Time {
 
+		VALUE Now(Args_t args);
+
+		VALUE Sleep(Args_t args);
+	}
 }
 
 #endif // _TIME_FUNCTIONS_H_

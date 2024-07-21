@@ -10,13 +10,19 @@
 
 #include "Simple_defines.h"
 
-namespace Simple {
-	class Math : public Module_Base {
-		void InitVars();
-		void InitFuncs();
-	public:
-		void Init() override;
-	};
+using namespace Simple;
+
+namespace Simple_libs {
+
+	namespace Math {
+
+		class Math : public Module_Base {
+			void InitVars();
+			void InitFuncs();
+		public:
+			void Init() override;
+		};
+	}
 }
 
 #endif // _MATH_H_

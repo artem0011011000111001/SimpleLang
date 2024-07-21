@@ -5,13 +5,18 @@
 
 #include "Function.h"
 
-namespace Simple {
+using namespace Simple;
 
-	ValuePtr Output(std::vector<ValuePtr> args);
+namespace Simple_libs {
 
-	ValuePtr Outputln(std::vector<ValuePtr> args);
+	namespace Stream {
 
-	ValuePtr Input(std::vector<ValuePtr> args);
+		VALUE Output(Args_t args);
+
+		VALUE Outputln(Args_t args);
+
+		VALUE Input(Args_t args);
+	}
 }
 
 #endif // _STREAM_FUNCTIONS_H_

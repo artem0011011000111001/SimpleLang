@@ -342,9 +342,6 @@
     <ClCompile Include="Simple.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="TimeFunctions.h">
-      <Filter>libs\Time</Filter>
-    </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>src\libs\Time</Filter>
     </ClCompile>
@@ -429,6 +426,9 @@
       <Filter>include\structures\Variable</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
+      <Filter>libs\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeFunctions.h">
       <Filter>libs\Time</Filter>
     </ClInclude>
   </ItemGroup>

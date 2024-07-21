@@ -1,10 +1,12 @@
 import Time;
-
-start = now();
+import Math;
+/*start = now();
 
 sleep(1000);
 
 end = now();
 
 
-print(end - start);
+print(end - start, " ", log(5));*/
+
+print(now());

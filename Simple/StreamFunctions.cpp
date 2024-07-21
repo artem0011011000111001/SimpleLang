@@ -6,16 +6,15 @@
 
 using namespace Simple;
 
-ValuePtr Simple::Output(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Stream::Output(Args_t args) {
 	size_t param_count = args.size();
-	for (const auto& arg : args)
-	{
+	for (const auto& arg : args) {
 		std::cout << arg->AsString();
 	}
 	return ZERO;
 }
 
-ValuePtr Simple::Outputln(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Stream::Outputln(Args_t args) {
 	size_t param_count = args.size();
 	for (const auto& arg : args)
 	{
@@ -24,7 +23,7 @@ ValuePtr Simple::Outputln(std::vector<ValuePtr> args) {
 	return ZERO;
 }
 
-ValuePtr Simple::Input(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Stream::Input(Args_t args) {
 	size_t param_count = args.size();
 	if (param_count > 1)
 		throw Simple_Error("Expected 1 or 0 parameters instead of " + std::to_string(param_count));
@@ -38,10 +37,10 @@ ValuePtr Simple::Input(std::vector<ValuePtr> args) {
 
 	try
 	{
-		return CREATE_PTR<NumberValue>(strict_stod(input));
+		return NUM_VALUE(strict_stod(input));
 	}
 	catch (const Simple_Error&)
 	{
-		return CREATE_PTR<StringValue>(input);
+		return STR_VALUE(input);
 	}
 }

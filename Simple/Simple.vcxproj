@@ -149,7 +149,6 @@
     <ClCompile Include="Switch_parsing.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="TimeFunctions.cpp" />
-    <ClCompile Include="TimeFunctions.h" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="TypeFunctions.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
@@ -194,6 +193,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="TimeFunctions.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="TypeFunctions.h" />
     <ClInclude Include="Expressions.h" />

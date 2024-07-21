@@ -10,13 +10,19 @@
 
 #include "Simple_defines.h"
 
-namespace Simple {
-	class Type : public Module_Base {
-		void InitVars();
-		void InitFuncs();
-	public:
-		void Init() override;
-	};
+using namespace Simple;
+
+namespace Simple_libs {
+
+	namespace Type {
+
+		class Type : public Module_Base {
+			void InitVars();
+			void InitFuncs();
+		public:
+			void Init() override;
+		};
+	}
 }
 
 #endif // _TYPE_H_

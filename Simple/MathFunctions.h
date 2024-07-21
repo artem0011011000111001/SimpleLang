@@ -5,21 +5,28 @@
 
 #include "Function.h"
 
-namespace Simple {
+using namespace Simple;
 
-	ValuePtr Sin(std::vector<ValuePtr> args);
+namespace Simple_libs {
 
-	ValuePtr Cos(std::vector<ValuePtr> args);
+	namespace Math {
 
-	ValuePtr Tan(std::vector<ValuePtr> args);
+		VALUE Sin(Args_t args);
 
-	ValuePtr Sqrt(std::vector<ValuePtr> args);
+		VALUE Cos(Args_t args);
 
-	ValuePtr Cbrt(std::vector<ValuePtr> args);
+		VALUE Tan(Args_t args);
 
-	ValuePtr Round(std::vector<ValuePtr> args);
+		VALUE Sqrt(Args_t args);
 
-	ValuePtr Floor(std::vector<ValuePtr> args);
+		VALUE Cbrt(Args_t args);
+
+		VALUE Round(Args_t args);
+
+		VALUE Floor(Args_t args);
+
+		VALUE Log(Args_t args);
+	}
 }
 
 #endif // _MATH_FUNCTIONS_H_

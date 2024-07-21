@@ -1,36 +1,37 @@
 #include "TypeFunctions.h"
 #include "Utils.h"
+#include "Variables.h"
 
 using namespace Simple;
 
-ValuePtr Simple::Cast_number(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Type::Cast_number(Args_t args) {
 	size_t param_count = args.size();
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(args.front()->AsDouble());
+	return NUM_VALUE(args.front()->AsDouble());
 }
 
-ValuePtr Simple::Cast_string(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Type::Cast_string(Args_t args) {
 	size_t param_count = args.size();
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return CREATE_PTR<StringValue>(args.front()->AsString());
+	return STR_VALUE(args.front()->AsString());
 }
 
-ValuePtr Simple::Typeof(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Type::Typeof(Args_t args) {
 	size_t param_count = args.size();
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return CREATE_PTR<StringValue>(to_string(IdentifyValueType(args.front())));
+	return STR_VALUE(to_string(IdentifyValueType(args.front())));
 }
 
-ValuePtr Simple::Is_const(std::vector<ValuePtr> args) {
+ValuePtr Simple_libs::Type::Is_const(Args_t args) {
 	size_t param_count = args.size();
 	if (param_count != 1)
 		throw Simple_Error("Expected 1 parameter instead of " + std::to_string(param_count));
 
-	return CREATE_PTR<NumberValue>(Variables::IsConstant(args.front()->AsString()));
+	return NUM_VALUE(Variables::IsConstant(args.front()->AsString()));
 }
