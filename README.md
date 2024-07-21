@@ -25,13 +25,13 @@ var2 = "World";       // error "var2" is const
 const var3 = 2 < 5;   // var3 = true(1)
 var3 = false;         // error "var3" is const
 // Also available
-var4 = 16;         // var4 is not const
-const var3 = var3; // var4 is const
-var4 = "Hi";       // error "var4" is const
+var4 = 16;            // var4 is not const
+const var3 = var3;    // var4 is const
+var4 = "Hi";          // error "var4" is const
 ```
 Expressions
 ```
-a = 2 + 3;                       // a = 5
+a = 2 + 3 ** 2;                       // a = 11
 a = "Hello" + " world!";         // a = "Hello world!"
 a = 3 * "ab";                    // a = "ababab"
 a = 2 < 5 && !(5 > 10) || 9 > 6; // a = true(1)
@@ -46,7 +46,7 @@ a /= 5;  // a = 3
 ```
 Standart functions
 ```
-print("Hello world!"); // output expression
+print("Hello world!"); // output to console expression
 ```
 Statement if-else
 ```
@@ -156,4 +156,62 @@ Statement import
 import Math;
 
 print(PI);
+```
+Standart libs:
+Math
+```
+// include
+import Math
+
+// Variables
+const PI = 3.14159265...;
+const E  = 2,71828182...;
+
+// Functions
+sin(arg)   // return sin of arg
+cos(arg)   // return cos of arg
+tan(arg)   // return tan of arg
+sqrt(arg)  // return ²√ of arg
+cbrt(arg)  // return ³√ of arg
+floor(arg) // return math [] of arg
+log(arg)   // return log of arg
+```
+Stream
+```
+// include
+import Stream;
+
+// Variables
+const endl = "\n";
+
+// Functions
+output(args...)  // output to console args
+outputln(args..) // output to console args who will split "\n"
+input(arg = "")  // return user input with output arg
+```
+Type
+```
+// include
+import Type;
+
+// Variables
+// None
+
+// Functions
+cast_number(arg) // try cast arg to number
+cast_string(arg) // try cast arg to string
+typeof(arg)      // return type name of arg
+is_const(arg)    // return is there a variable name from the passed string is constant
+```
+Time
+```
+// include
+import Time
+
+// Variables
+// None
+
+// Functions
+now()      // return now time measured relative to internal epochal time
+sleep(arg) // stops the thread at arg milliseconds 
 ```
