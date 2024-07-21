@@ -31,9 +31,9 @@ var4 = "Hi";       // error "var4" is const
 ```
 Expressions
 ```
-a = 2 + 3; // a = 5
-a = "Hello" + " world!"; // a = "Hello world!"
-a = 3 * "ab"; // a = "ababab"
+a = 2 + 3;                       // a = 5
+a = "Hello" + " world!";         // a = "Hello world!"
+a = 3 * "ab";                    // a = "ababab"
 a = 2 < 5 && !(5 > 10) || 9 > 6; // a = true(1)
 ```
 Shortened arithmetic operations
@@ -107,5 +107,53 @@ if (true)
 
 print(a); // error "a" not defined
 ```
+Statement switch
+```
+switch(2 + 2) {
+   case 3 {
+      print("First case");
+      break;
+   }
+   case 4
+      print("Second case");
+   default {
+      print("Default");
+   }
+}
+// Important
+// Switch does not support short blocks, case and default is support
 
+// Also available
+// keyword break
+```
+Function declaration
+```
+func test_function_without_args() {
+   print("Hello");
+}
 
+test_function_without_args(); // output Hello
+
+func test_function_with_args(a, b) {
+   return a + b;
+}
+
+print(test_function_with_args(2 + 3)); // output 5
+
+// Also available
+func test_function_with_constant_arg(const a, b) {
+   a = 10; // error "a" is const
+   b = 15; // good
+}
+// Also available
+func test_function_with_short_block(x)
+   print(x);
+
+test_function_with_short_block("Hello"); // output Hello
+```
+Statement import
+```
+import Math;
+
+print(PI);
+```
