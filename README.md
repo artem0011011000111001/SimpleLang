@@ -31,7 +31,7 @@ var4 = "Hi";          // error "var4" is const
 ```
 Expressions
 ```
-a = 2 + 3 ** 2;                       // a = 11
+a = 2 + 3 ** 2;                   // a = 11
 a = "Hello" + " world!";         // a = "Hello world!"
 a = 3 * "ab";                    // a = "ababab"
 a = 2 < 5 && !(5 > 10) || 9 > 6; // a = true(1)
@@ -165,7 +165,7 @@ import Math
 
 // Variables
 const PI = 3.14159265...;
-const E  = 2,71828182...;
+const E  = 2.71828182...;
 
 // Functions
 sin(arg)   // return sin of arg
@@ -174,6 +174,7 @@ tan(arg)   // return tan of arg
 sqrt(arg)  // return ²√ of arg
 cbrt(arg)  // return ³√ of arg
 floor(arg) // return math [] of arg
+round(arg) // return round of arg
 log(arg)   // return log of arg
 ```
 Stream
@@ -186,7 +187,7 @@ const endl = "\n";
 
 // Functions
 output(args...)  // output to console args
-outputln(args..) // output to console args who will split "\n"
+outputln(args...) // output to console args who will split "\n"
 input(arg = "")  // return user input with output arg
 ```
 Type
@@ -206,7 +207,7 @@ is_const(arg)    // return is there a variable name from the passed string is co
 Time
 ```
 // include
-import Time
+import Time;
 
 // Variables
 // None
