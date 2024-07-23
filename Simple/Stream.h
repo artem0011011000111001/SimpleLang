@@ -4,9 +4,6 @@
 #define _STREAM_H_
 
 #include "Module.h"
-#include "StreamFunctions.h"
-#include "Functions.h"
-#include "Variables.h"
 
 #include "Simple_defines.h"
 

@@ -51,6 +51,7 @@ void Variables::Set(const std::string& key, Variable value) {
 
 void Variables::SetNew(const std::string& key, Variable value) {
 	if (IsExist(key)) variables[key] = std::move(value);
+	else variables.emplace(key, std::move(value));
 }
 
 std::unordered_map<std::string, Variable> Variables::CreateStandartVariables() {

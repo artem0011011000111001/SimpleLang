@@ -35,7 +35,7 @@ void Functions::RegisterDynamicFunction(const std::string& name, std::function<V
             size_t param_count = args.size();
             for (auto& count : argscount) {
                 if (param_count != count) {
-                    throw Simple_Error("Expected " + std::to_string(count) + " parameter(s) instead of " + std::to_string(param_count));
+                    throw Simple_Error("Expected " + std::to_string(count) + " arg(s) instead of " + std::to_string(param_count));
                 }
             }
             return funcbody(std::move(args));
@@ -55,16 +55,24 @@ void Functions::RegisterDynamicFunction(const std::string& name, std::function<V
 
 std::unordered_map<std::string, FunctionPtr> Functions::CreateStandartFunctions() {
 	std::unordered_map<std::string, FunctionPtr> funcs;
-    _DEFINE_FUNCTION_CLASS(PrintFunc, Print);
+
+    _DEFINE_FUNCTION_CLASS(PrintFunc, [](std::vector<ValuePtr> args) {
+        for (auto& arg : args) {
+            std::cout << arg->AsString();
+        }
+        return ZERO;
+    }, any_args);
+
+    _DEFINE_FUNCTION_CLASS(PrintlnFunc, [](std::vector<ValuePtr> args) {
+        for (auto& arg : args) {
+            std::cout << arg->AsString() << std::endl;
+        }
+        return ZERO;
+        }, any_args);
+
     funcs.emplace("print", CREATE_PTR<PrintFunc>());
+    funcs.emplace("println", CREATE_PTR<PrintlnFunc>());
 	return funcs;
 }
 
 std::unordered_map<std::string, FunctionPtr> Functions::functions = CreateStandartFunctions();
-
-ValuePtr Simple::Print(std::vector<ValuePtr> args) {
-    for (auto& arg : args) {
-        std::cout << arg->AsString();
-    }
-    return ZERO;
-}

@@ -4,9 +4,6 @@
 #define _TIME_H_
 
 #include "Module.h"
-#include "TimeFunctions.h"
-#include "Functions.h"
-#include "Variables.h"
 
 #include "Simple_defines.h"
 

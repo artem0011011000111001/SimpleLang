@@ -19,9 +19,7 @@ D:\Projects\MYFOLDER\C++\Simple\Simple\ShortBlockStatement.cpp;D:\Projects\MYFOL
 D:\Projects\MYFOLDER\C++\Simple\Simple\Simple.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Simple.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Switch_parsing.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Switch_parsing.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Time.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Time.obj
-D:\Projects\MYFOLDER\C++\Simple\Simple\TimeFunctions.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\TimeFunctions.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Type.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Type.obj
-D:\Projects\MYFOLDER\C++\Simple\Simple\TypeFunctions.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\TypeFunctions.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\ConditionalExpression.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ConditionalExpression.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\ConstAssigmentStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ConstAssigmentStatement.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\ContinueStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ContinueStatement.obj
@@ -34,12 +32,10 @@ D:\Projects\MYFOLDER\C++\Simple\Simple\GlobalBlockStatement.cpp;D:\Projects\MYFO
 D:\Projects\MYFOLDER\C++\Simple\Simple\IfStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\IfStatement.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\ImportStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ImportStatement.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Math.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Math.obj
-D:\Projects\MYFOLDER\C++\Simple\Simple\MathFunctions.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\MathFunctions.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\NumberValue.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\NumberValue.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Utils.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Utils.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\PrintStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\PrintStatement.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Stream.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Stream.obj
-D:\Projects\MYFOLDER\C++\Simple\Simple\StreamFunctions.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\StreamFunctions.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\StringExpression.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\StringExpression.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\StringValue.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\StringValue.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\SwitchBlockStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\SwitchBlockStatement.obj

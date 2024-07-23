@@ -21,8 +21,9 @@ std::string ReadCodeFromFile(std::string path) {
 	return code;
 }
 
-int main() 
+int main()
 { 
+	setlocale(LC_ALL, "ru");
 	std::string code = ReadCodeFromFile("code.txt");
 
 	Simple::compile(code);

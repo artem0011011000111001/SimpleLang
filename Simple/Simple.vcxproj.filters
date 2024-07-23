@@ -174,20 +174,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MathFunctions.cpp">
-      <Filter>src\libs\Math</Filter>
-    </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>src\libs\Math</Filter>
     </ClCompile>
-    <ClCompile Include="StreamFunctions.cpp">
-      <Filter>src\libs\Stream</Filter>
-    </ClCompile>
     <ClCompile Include="Stream.cpp">
       <Filter>src\libs\Stream</Filter>
-    </ClCompile>
-    <ClCompile Include="TypeFunctions.cpp">
-      <Filter>src\libs\Type</Filter>
     </ClCompile>
     <ClCompile Include="Type.cpp">
       <Filter>src\libs\Type</Filter>
@@ -345,25 +336,13 @@
     <ClCompile Include="Time.cpp">
       <Filter>src\libs\Time</Filter>
     </ClCompile>
-    <ClCompile Include="TimeFunctions.cpp">
-      <Filter>src\libs\Time</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MathFunctions.h">
-      <Filter>libs\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>libs\Math</Filter>
     </ClInclude>
-    <ClInclude Include="StreamFunctions.h">
-      <Filter>libs\Stream</Filter>
-    </ClInclude>
     <ClInclude Include="Stream.h">
       <Filter>libs\Stream</Filter>
-    </ClInclude>
-    <ClInclude Include="TypeFunctions.h">
-      <Filter>libs\Type</Filter>
     </ClInclude>
     <ClInclude Include="Type.h">
       <Filter>libs\Type</Filter>
@@ -428,14 +407,14 @@
     <ClInclude Include="Time.h">
       <Filter>libs\Time</Filter>
     </ClInclude>
-    <ClInclude Include="TimeFunctions.h">
-      <Filter>libs\Time</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Mathlib_test.txt">
+      <Filter>tests</Filter>
+    </Text>
     <Text Include="code.txt">
       <Filter>tests</Filter>
     </Text>

@@ -148,9 +148,7 @@
     <ClCompile Include="Simple.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="TimeFunctions.cpp" />
     <ClCompile Include="Type.cpp" />
-    <ClCompile Include="TypeFunctions.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
     <ClCompile Include="ConstAssigmentStatement.cpp" />
     <ClCompile Include="ContinueStatement.cpp" />
@@ -163,12 +161,10 @@
     <ClCompile Include="IfStatement.cpp" />
     <ClCompile Include="ImportStatement.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="NumberValue.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="PrintStatement.cpp" />
     <ClCompile Include="Stream.cpp" />
-    <ClCompile Include="StreamFunctions.cpp" />
     <ClCompile Include="StringExpression.cpp" />
     <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="SwitchBlockStatement.cpp" />
@@ -193,15 +189,12 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="TimeFunctions.h" />
     <ClInclude Include="Type.h" />
-    <ClInclude Include="TypeFunctions.h" />
     <ClInclude Include="Expressions.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Simple.h" />
@@ -210,7 +203,6 @@
     <ClInclude Include="Simple_typedefs.h" />
     <ClInclude Include="AST.h" />
     <ClInclude Include="Stream.h" />
-    <ClInclude Include="StreamFunctions.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenType.h" />
     <ClInclude Include="Values.h" />
@@ -219,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />
+    <Text Include="Mathlib_test.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

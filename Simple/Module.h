@@ -4,6 +4,10 @@
 #define	_SIMPLE_MODULE_H_
 
 #include "Module_defines.h"
+#include "Variable.h"
+#include "Variables.h"
+#include "Function.h"
+#include "Functions.h"
 
 #include <string>
 #include <memory>
@@ -19,24 +23,24 @@ namespace Simple {
 		virtual ~Module_Base() = default;
 	};
 
-    class GetModuleByName {
+    class CreateModuleByName {
     public:
         using CreateFunc = std::unique_ptr<Module_Base>(*)();
 
-        static GetModuleByName& getInstance();
+        static CreateModuleByName& getInstance();
 
         void registerClass(const std::string& className, CreateFunc createFunc);
 
         std::unique_ptr<Module_Base> createInstance(const std::string& className);
 
     private:
-        GetModuleByName() = default;
+        CreateModuleByName() = default;
         std::unordered_map<std::string, CreateFunc> registry;
     };
 
     template<class _ModuleTy>
     void RegisterModule(const std::string& designator) {
-        GetModuleByName::getInstance().registerClass(designator, []() -> std::unique_ptr<Module_Base> {
+        CreateModuleByName::getInstance().registerClass(designator, []() -> std::unique_ptr<Module_Base> {
             return std::make_unique<_ModuleTy>();
             });
     }

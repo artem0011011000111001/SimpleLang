@@ -4,9 +4,6 @@
 #define _MATH_H_
 
 #include "Module.h"
-#include "MathFunctions.h"
-#include "Functions.h"
-#include "Variables.h"
 
 #include "Simple_defines.h"
 
@@ -19,6 +16,8 @@ namespace Simple_libs {
 		class Math : public Module_Base {
 			void InitVars();
 			void InitFuncs();
+			static double _factorial(double n);
+			static double _mean(std::vector<double>& values);
 		public:
 			void Init() override;
 		};

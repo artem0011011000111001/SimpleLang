@@ -13,8 +13,8 @@ ValuePtr ConditionalExpression::eval() const {
 	const ValuePtr value1 = (*expr1).eval();
 	const ValuePtr value2 = (*expr2).eval();
 
-	auto value1_type = IdentifyValueType(value1);
-	auto value2_type = IdentifyValueType(value2);
+	auto value1_type = value1->GetType();
+	auto value2_type = value2->GetType();
  
 	double result1, result2;
 

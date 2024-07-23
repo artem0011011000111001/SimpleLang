@@ -13,8 +13,7 @@ namespace Simple {
 
 	struct Variable;
 
-	enum class ValueType
-	{
+	enum class ValueType {
 		NUMBER,
 		STRING
 	};
@@ -41,7 +40,7 @@ namespace Simple {
 	};
 
 	double strict_stod(const std::string str);
-	ValueType IdentifyValueType(const ValuePtr& valuePtr);
+	//ValueType IdentifyValueType(const ValuePtr& valuePtr);
 	std::string to_string(LogicOperators op);
 	std::string to_string(BinaryOperators op);
 	std::string to_string(ValueType val);

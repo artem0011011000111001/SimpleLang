@@ -19,14 +19,14 @@ double Simple::strict_stod(const std::string str) {
 	return result;
 }
 
-ValueType Simple::IdentifyValueType(const ValuePtr& valuePtr) {
-
-	if (dynamic_cast<NumberValue*>(valuePtr.get()))
-		return ValueType::NUMBER;
-
-	else if (dynamic_cast<StringValue*>(valuePtr.get()))
-		return ValueType::STRING;
-}
+//ValueType Simple::IdentifyValueType(const ValuePtr& valuePtr) {
+//
+//	if (dynamic_cast<NumberValue*>(valuePtr.get()))
+//		return ValueType::NUMBER;
+//
+//	else if (dynamic_cast<StringValue*>(valuePtr.get()))
+//		return ValueType::STRING;
+//}
 
 std::string Simple::to_string(LogicOperators op)
 {

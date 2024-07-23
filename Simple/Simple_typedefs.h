@@ -18,7 +18,7 @@ namespace Simple {
 	using ExpressionPtr = Ptr<Expression>;
 	using StatementPtr  = Ptr<Statement>;
 	using FunctionPtr   = Ptr<Function>;
-	using Args_t		= std::vector<ValuePtr>;
 	using VALUE			= ValuePtr;
+	using Args_t		= std::vector<VALUE>;
 }
 #endif // !_TYPEDEFS_H_

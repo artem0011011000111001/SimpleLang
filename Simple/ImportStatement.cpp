@@ -40,10 +40,10 @@ void ImportStatement::execute() {
 
 		InitAll();*/
 		
-	auto instance = GetModuleByName::getInstance().createInstance(module_name);
+	auto Module = CreateModuleByName::getInstance().createInstance(module_name);
 
-	if (instance)
-		instance->Init();
+	if (Module)
+		Module->Init();
 	else
 		throw Simple_Error("\"" + module_name + "\" not found");
 }

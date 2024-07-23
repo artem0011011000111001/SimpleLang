@@ -2,16 +2,16 @@
 
 using namespace Simple;
 
-GetModuleByName& GetModuleByName::getInstance() {
-    static GetModuleByName instance;
+CreateModuleByName& CreateModuleByName::getInstance() {
+    static CreateModuleByName instance;
     return instance;
 }
 
-void GetModuleByName::registerClass(const std::string& className, CreateFunc createFunc) {
+void CreateModuleByName::registerClass(const std::string& className, CreateFunc createFunc) {
     registry[className] = createFunc;
 }
 
-std::unique_ptr<Module_Base> GetModuleByName::createInstance(const std::string& className) {
+std::unique_ptr<Module_Base> CreateModuleByName::createInstance(const std::string& className) {
     auto it = registry.find(className);
     if (it != registry.end()) {
         return it->second();

@@ -4,7 +4,6 @@
 #define _TYPE_H_
 
 #include "Module.h"
-#include "TypeFunctions.h"
 #include "Functions.h"
 #include "Variables.h"
 

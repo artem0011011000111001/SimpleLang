@@ -23,7 +23,7 @@ std::function<ValuePtr(std::vector<ValuePtr>)> FunctionDefineStatement::TurnFunc
 				if (Variables::IsExist(*argNameIt)) {
 					savedGlobals[*argNameIt] = Variable(Variables::Get(*argNameIt), Variables::IsConstant(*argNameIt));
 				}
-				Variables::Set(*argNameIt, Variable(std::move(arg), *argIsConstIt));
+				Variables::SetNew(*argNameIt, Variable(std::move(arg), *argIsConstIt));
 				++argNameIt;
 			}
 
