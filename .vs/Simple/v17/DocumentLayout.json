@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Mathlib_test.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|solutionrelative:Simple\\Mathlib_test.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|solutionrelative:Simple\\code.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 456,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +31,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Mathlib_test.txt",
+              "DocumentMoniker": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Mathlib_test.txt",
+              "RelativeDocumentMoniker": "Simple\\Mathlib_test.txt",
+              "ToolTip": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Mathlib_test.txt",
+              "RelativeToolTip": "Simple\\Mathlib_test.txt",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-07-23T08:41:59.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "code.txt",
+              "DocumentMoniker": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt",
+              "RelativeDocumentMoniker": "Simple\\code.txt",
+              "ToolTip": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt",
+              "RelativeToolTip": "Simple\\code.txt",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-07-23T08:40:40.088Z",
+              "EditorCaption": ""
             }
           ]
         }
