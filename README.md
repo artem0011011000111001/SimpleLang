@@ -31,7 +31,7 @@ var4 = "Hi";          // error "var4" is const
 ```
 Expressions
 ```
-a = 2 + 3 ** 2;                   // a = 11
+a = 2 + 3 ** 2;                  // a = 11
 a = "Hello" + " world!";         // a = "Hello world!"
 a = 3 * "ab";                    // a = "ababab"
 a = 2 < 5 && !(5 > 10) || 9 > 6; // a = true(1)
@@ -46,7 +46,8 @@ a /= 5;  // a = 3
 ```
 Standart functions
 ```
-print("Hello world!"); // output to console expression
+print(args);   // output to console args
+println(args); // output to console args who will split "\n"
 ```
 Statement if-else
 ```
@@ -164,18 +165,40 @@ Math
 import Math
 
 // Variables
-const PI = 3.14159265...;
-const E  = 2.71828182...;
+const PI = 3.14159265...
+const E  = 2.71828182...
 
 // Functions
-sin(arg)   // return sin of arg
-cos(arg)   // return cos of arg
-tan(arg)   // return tan of arg
-sqrt(arg)  // return ²√ of arg
-cbrt(arg)  // return ³√ of arg
-floor(arg) // return math [] of arg
-round(arg) // return round of arg
-log(arg)   // return log of arg
+sin(arg)          // return sin of arg
+cos(arg)          // return cos of arg
+tan(arg)          // return tan of arg
+asin(arg)         // return asin of arg
+acos(arg)         // return acos of arg
+atan(arg)         // return atan of arg
+atan2(arg)        // return atan of arg
+sinh(arg)         // return sin of arg
+cosh(arg)         // return cos of arg
+tanh(arg)         // return tan of arg
+power(arg)        // return power of arg
+sqrt(arg)         // return ²√ of arg
+cbrt(arg)         // return ³√ of arg
+abs(arg)          // retuurn absolute value of arg
+round(arg)        // return round of arg
+ceil(arg)         // return ceil of arg
+floor(arg)        // return math [] of arg
+exp(arg)          // return exponent of arg
+log(arg)          // return log of arg
+log10(arg)        // return log10 of arg
+factorial(arg)    // return factorial of arg
+comb(args...)     // return combination of args
+perm(args...)     // return permutation of args
+mean(args...)     // return mean of args
+median(args...)   // return median of args
+std_dev(args...)  // return standart deviation of args
+variance(args...) // return variance of args
+is_prime(arg)     // return is prime arg
+is_even(arg)      // return is even arg
+is_odd(arg)       // return is odd arg
 ```
 Stream
 ```
