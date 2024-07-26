@@ -6,6 +6,7 @@
 #include "Simple_typedefs.h"
 #include "Expressions.h"
 #include "Values.h"
+#include "Simple_typedefs.h"
 
 #include <list>
 #include <string>
@@ -18,40 +19,35 @@ namespace Simple {
 	public:
 		virtual void execute() = 0;
 		virtual ~Statement() = default;
+	};
 
-		virtual std::string to_string() = 0;
+	class VariableDefineStatement : public Statement {
+		std::string name;
+		ExpressionPtr expr;
+		bool IsConst;
+
+	public:
+		VariableDefineStatement(std::string name, ExpressionPtr expr, bool IsConst);
+		void execute() override;
 	};
 
 	class AssigmentStatement : public Statement {
-		std::string variable;
-		ExpressionPtr expression;
+		ExpressionPtr expr1;
+		ExpressionPtr expr2;
 
 	public:
-		AssigmentStatement(std::string variable, ExpressionPtr expression);
+		AssigmentStatement(ExpressionPtr expr1, ExpressionPtr expr2);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
-	class ConstAssigmentStatement : public Statement {
-		std::string variable;
-		ExpressionPtr expression;
+	class AbbreviatedOperationsStatement : public Statement {
+		ExpressionPtr expr1;
+		ExpressionPtr expr2;
+		BinaryOperators operation;
 
 	public:
-		ConstAssigmentStatement(std::string variable, ExpressionPtr expression);
+		AbbreviatedOperationsStatement(ExpressionPtr expr1, BinaryOperators operation, ExpressionPtr expr2);
 		void execute() override;
-
-		std::string to_string() override;
-	};
-
-	class PrintStatement : public Statement {
-		ExpressionPtr expr;
-
-	public:
-		PrintStatement(ExpressionPtr expr);
-		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class IfStatement : public Statement {
@@ -61,8 +57,6 @@ namespace Simple {
 	public:
 		IfStatement(ExpressionPtr expr, StatementPtr ifStatement, StatementPtr elseStatement);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class GlobalBlockStatement : public Statement {
@@ -73,8 +67,6 @@ namespace Simple {
 		virtual void execute() override;
 
 		void add(StatementPtr statement);
-
-		std::string to_string() override;
 	};
 
 	class BlockStatement : public Statement {
@@ -85,8 +77,6 @@ namespace Simple {
 		void execute() override;
 
 		void add(StatementPtr statement);
-
-		std::string to_string() override;
 	};
 
 	class ShortBlockStatement : public Statement {
@@ -95,8 +85,6 @@ namespace Simple {
 	public:
 		ShortBlockStatement(StatementPtr statement);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class DoWhileStatement : public Statement {
@@ -106,8 +94,6 @@ namespace Simple {
 	public:
 		DoWhileStatement(ExpressionPtr condition, StatementPtr statement);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class WhileStatement : public Statement {
@@ -117,43 +103,29 @@ namespace Simple {
 	public:
 		WhileStatement(ExpressionPtr condition, StatementPtr statement);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class ForStatement : public Statement {
 		std::string InitName;
 		StatementPtr initialization;
 		ExpressionPtr termination;
-		StatementPtr increment;
+		ExpressionPtr increment;
 		StatementPtr statement;
 
 	public:
 		ForStatement(std::string InitName, StatementPtr initialization, ExpressionPtr termination,
-			StatementPtr increment, StatementPtr block);
+			ExpressionPtr increment, StatementPtr block);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class BreakStatement : public Statement {
+	public:
 		void execute() override;
-		std::string to_string() override;
 	};
 
 	class ContinueStatement : public Statement {
-		void execute() override;
-		std::string to_string() override;
-	};
-
-	class FunctionStatement : public Statement {
-		FunctionalExpression function;
-
 	public:
-		FunctionStatement(FunctionalExpression function);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class ImportStatement : public Statement {
@@ -162,8 +134,6 @@ namespace Simple {
 	public:
 		ImportStatement(std::string module_name);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class CaseStatement : public Statement {
@@ -180,8 +150,6 @@ namespace Simple {
 		bool IsDefault() const {
 			return isDefault;
 		}
-
-		std::string to_string() override;
 	};
 
 	class SwitchBlockStatement : public Statement {
@@ -196,9 +164,22 @@ namespace Simple {
 		// CaseStatement Get(size_t pos);
 
 		std::list<CaseStatement>& getCaseStatements();
+	};
+
+	/*class StructBlockStatement : public Statement {
+		std::vector<std::string> fields_names;
+		VALUE(*constructor)(Args_t) = nullptr;
+
+	public:
+		StructBlockStatement() = default;
+		void execute() override;
+
+		void add(CaseStatement statement);
+
+		void setConstructor(VALUE(*constructor)(Args_t));
 
 		std::string to_string() override;
-	};
+	};*/
 
 	class SwitchStatement : public Statement {
 		ExpressionPtr expr;
@@ -207,8 +188,6 @@ namespace Simple {
 	public:
 		SwitchStatement(ExpressionPtr expr, SwitchBlockStatement block);
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class FunctionDefineStatement : public Statement {
@@ -222,8 +201,6 @@ namespace Simple {
 		FunctionDefineStatement(std::string name, std::pair<std::list<std::string>, std::list<bool>>, StatementPtr statement);
 
 		void execute() override;
-
-		std::string to_string() override;
 	};
 
 	class ReturnStatement : public Statement {
@@ -234,9 +211,14 @@ namespace Simple {
 		void execute() override;
 
 		const ExpressionPtr& GetExpression() const;
+	};
 
-		std::string to_string() override;
+	class ExpressionStatement : public Statement {
+		ExpressionPtr expr;
 
+	public:
+		ExpressionStatement(ExpressionPtr expr);
+		void execute() override;
 	};
 }
 #endif // !_STATEMENTS_H_

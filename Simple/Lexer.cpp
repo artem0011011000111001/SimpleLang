@@ -26,6 +26,7 @@ void Lexer::tokenizeNumber() {
 	while (true) {
 		if (current == '.') {
 			if (indexOf(buffer, '.') != simple_npos) throw Simple_Error("Two dots in float number");
+			if (!isdigit(peek(1))) throw Simple_Error("Expected digit after .");
 		}
 		else if (!std::isdigit(current)) 
 			break;
@@ -95,6 +96,9 @@ void Lexer::tokenizeWord() {
 
 	else if (buffer == "return")
 		addToken(TokenType::RETURN);
+
+	else if (buffer == "struct")
+		addToken(TokenType::STRUCT);
 
 	else addToken(TokenType::WORD, buffer);
 }

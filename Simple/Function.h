@@ -15,6 +15,8 @@ namespace Simple {
 	public:
 		virtual ValuePtr execute(std::vector<ValuePtr> args) = 0;
 		virtual FunctionPtr clone() const = 0;
+		virtual Function& get_ref() = 0;
+		virtual void set_ref(FunctionPtr& ref) = 0;
 
 		virtual ~Function() = default;
 	};

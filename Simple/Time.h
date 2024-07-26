@@ -16,6 +16,9 @@ namespace Simple_libs {
 		class Time : public Module_Base {
 			void InitVars();
 			void InitFuncs();
+			void InitStructs();
+
+			static VALUE _Date(Args_t args);
 		public:
 			void Init() override;
 		};

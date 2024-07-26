@@ -16,12 +16,3 @@ void CaseStatement::execute() {
 ExpressionPtr CaseStatement::GetExpression() {
 	return std::move(expr);
 }
-
-std::string CaseStatement::to_string() {
-	if (isDefault) {
-		return "default: " + statement->to_string();
-	}
-	else {
-		return "case " + expr->to_string() + statement->to_string();
-	}
-}

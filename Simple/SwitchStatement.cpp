@@ -7,7 +7,7 @@ SwitchStatement::SwitchStatement(ExpressionPtr expr, SwitchBlockStatement block)
 	: expr(std::move(expr)), block(std::move(block)) {}
 
 void SwitchStatement::execute() {
-	ValuePtr ExprRes = expr->eval();    
+	ValuePtr ExprRes = expr->eval().clone();    
 
 	for (auto& Case : block.getCaseStatements()) {
 
@@ -19,7 +19,7 @@ void SwitchStatement::execute() {
                 break;
             }
         }
-        else if (ExprRes->operator==(Case.GetExpression()->eval())) {
+        else if (ExprRes->operator==(Case.GetExpression()->eval().clone())) {
             try {
                 Case.execute();
             }
@@ -28,8 +28,4 @@ void SwitchStatement::execute() {
             }
         }
 	}
-}
-
-std::string SwitchStatement::to_string() {
-	return "switch (" + expr->to_string() + ") {\n" + block.to_string() + "}";
 }

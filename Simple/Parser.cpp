@@ -29,7 +29,7 @@ GlobalBlockStatement Parser::parse() {
 
 StatementPtr Parser::statement() {
 	if (match(TokenType::CONST)) {
-		StatementPtr result = ConstAssignment();
+		StatementPtr result = ConstVariableDefine();
 		CHECK_END_STR;
 		return std::move(result);
 	}
@@ -62,34 +62,37 @@ StatementPtr Parser::statement() {
 		return Switch();
 
 	else if (match(TokenType::FUNC))
-		return std::make_unique<FunctionDefineStatement>(std::move(FunctionDefine()));
+		return FunctionDefine();
 
 	else if (match(TokenType::RETURN))
 		return Return();
 
-	else if (get(0).getType() == TokenType::WORD) {
-		if (get(1).getType() == TokenType::LPAREN) {
-			FunctionStatement result = std::move(Function());
-			CHECK_END_STR;
-			return std::make_unique<FunctionStatement>(std::move(result));
-		}
-		else if (get(1).getType() == TokenType::EQ) {
-			StatementPtr result = std::move(Assignment());
-			CHECK_END_STR;
-			return std::move(result);
-		}
-	}
+	else if (match(TokenType::STRUCT))
+		return StructDefine();
 
-	else if (get(0).getType() == TokenType::PLUSPLUS || get(0).getType() == TokenType::MINUSMINUS) {
-		StatementPtr result = std::move(Assignment());
+	else if (get(0).getType() == TokenType::WORD && get(1).getType() == TokenType::EQ) {
+		StatementPtr result = VariableDefine();
 		CHECK_END_STR;
 		return std::move(result);
 	}
 
-	/*else if (match(TokenType::NEWLINE))
-		return NewLine();*/
+	ExpressionPtr expr = std::move(expression());
 
-	throw Simple_Error("Unknown statement");
+	Token CurrentToken = get(0);
+	if (CurrentToken.getType() == TokenType::EQ ||
+		CurrentToken.getType() == TokenType::PLUSEQ ||
+		CurrentToken.getType() == TokenType::MINUSEQ ||
+		CurrentToken.getType() == TokenType::STAREQ ||
+		CurrentToken.getType() == TokenType::SLASHEQ ||
+		CurrentToken.getType() == TokenType::STARSTAREQ
+		) {
+		StatementPtr result = Assignment(std::move(expr));
+		CHECK_END_STR;
+		return std::move(result);
+	}
+
+	else CHECK_END_STR;
+	return CREATE_PTR<ExpressionStatement>(std::move(expr));
 }
 
 StatementPtr Parser::statementOrBlock() {
@@ -102,7 +105,7 @@ StatementPtr Parser::statementOrBlock() {
 	{
 		VariablesBefore[var.first] = var.second->clone();
 	}*/
-	return std::make_unique<ShortBlockStatement>(std::move(statement()));
+	return CREATE_PTR<ShortBlockStatement>(std::move(statement()));
 }
 
 //StatementPtr Parser::NewLine() {

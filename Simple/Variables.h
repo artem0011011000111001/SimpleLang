@@ -29,6 +29,8 @@ namespace Simple {
 
 		static ValuePtr Get(const std::string& key);
 
+		static Value& GetRef(const std::string& key);
+
 		static void SetAllVariables(std::unordered_map<std::string, Variable>&& variables);
 
 		static const std::unordered_map<std::string, Variable>& GetAllVariables();

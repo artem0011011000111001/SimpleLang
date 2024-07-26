@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "Simple.h"
 #include <fstream>
+#include <string>
 
 std::string ReadCodeFromFile(std::string path) {
 	std::string code;
@@ -21,10 +22,11 @@ std::string ReadCodeFromFile(std::string path) {
 	return code;
 }
 
-int main()
-{ 
-	setlocale(LC_ALL, "ru");
+int main() { 
+	//setlocale(LC_ALL, "ru");
 	std::string code = ReadCodeFromFile("code.txt");
 
 	Simple::compile(code);
+
+	return 0;
 }

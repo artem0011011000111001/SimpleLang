@@ -55,15 +55,3 @@ FunctionDefineStatement::FunctionDefineStatement(std::string name, std::pair<std
 void FunctionDefineStatement::execute() {
 	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToValuePtr(statement), { argsParam.first.size() });
 }
-
-std::string FunctionDefineStatement::to_string() {
-	return "function " + name + "(" + [this](){
-		std::string res;
-
-		for (const auto& name : argsParam.first)
-		{
-			res += name + ", ";
-		}
-		return res;
-		}() + ")" + statement->to_string();
-}

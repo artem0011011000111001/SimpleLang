@@ -172,6 +172,12 @@
     <Filter Include="src\libs\Time">
       <UniqueIdentifier>{0ebba39b-bdc6-484c-8399-b347e33c34f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\core\Parser\Semantics\Struct">
+      <UniqueIdentifier>{0109a973-72de-47a4-b977-63bf0507d7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Expression">
+      <UniqueIdentifier>{91b1b004-7b67-4d5c-97ba-8e0ce7379288}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -222,9 +228,6 @@
     <ClCompile Include="FunctionDefineStatement.cpp">
       <Filter>src\core\AST\Function</Filter>
     </ClCompile>
-    <ClCompile Include="FunctionStatement.cpp">
-      <Filter>src\core\AST\Function</Filter>
-    </ClCompile>
     <ClCompile Include="ReturnStatement.cpp">
       <Filter>src\core\AST\Function</Filter>
     </ClCompile>
@@ -232,9 +235,6 @@
       <Filter>src\core\AST\Loops</Filter>
     </ClCompile>
     <ClCompile Include="AssigmentStatement.cpp">
-      <Filter>src\core\AST\Assign</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstAssigmentStatement.cpp">
       <Filter>src\core\AST\Assign</Filter>
     </ClCompile>
     <ClCompile Include="ContinueStatement.cpp">
@@ -315,9 +315,6 @@
     <ClCompile Include="ImportStatement.cpp">
       <Filter>src\core\AST\Import</Filter>
     </ClCompile>
-    <ClCompile Include="PrintStatement.cpp">
-      <Filter>src\core\AST</Filter>
-    </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>src\structures\Function</Filter>
     </ClCompile>
@@ -335,6 +332,30 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>src\libs\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="StructExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="StructValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="Struct_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpressionStatement.cpp">
+      <Filter>src\core\AST\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="AbbreviatedOperationsStatement.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableDefine_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableDefineStatement.cpp">
+      <Filter>src\core\AST\Assign</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

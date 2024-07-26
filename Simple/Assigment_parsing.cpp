@@ -4,94 +4,40 @@
 
 using namespace Simple;
 
-StatementPtr Parser::Assignment(bool IsConst) {
+StatementPtr Parser::Assignment(ExpressionPtr expr) {
 	Token CurrentToken = get(0);
-	if (match(TokenType::WORD)) {
 
-		const std::string variable = CurrentToken.getText();
-		if (match(TokenType::EQ)) {
+	if (match(TokenType::EQ)) {
 
-			ExpressionPtr result = expression();
-			//CHECK_END_STR
-			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::move(result));
+		ExpressionPtr result = expression();
 
-			else return std::make_unique<AssigmentStatement>(variable, std::move(result));
-		}
-
-		else if (match(TokenType::PLUSPLUS)) {
-
-			//CHECK_END_STR
-			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
-				std::make_unique<VariableExpression>(variable)));
-
-			else return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("++i",
-				std::make_unique<VariableExpression>(variable)));
-		}
-
-		else if (match(TokenType::MINUSMINUS)) {
-
-			//CHECK_END_STR
-			return std::make_unique<AssigmentStatement>(variable, std::make_unique<UnaryExpression>("--i",
-				std::make_unique<VariableExpression>(variable)));
-		}
-
-		auto OPEREQ = [this, variable, IsConst](const BinaryOperators operation) -> StatementPtr {
-			ExpressionPtr result = expression();
-			//CHECK_END_STR
-			if (IsConst) return std::make_unique<ConstAssigmentStatement>(variable,
-				std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
-
-			else return std::make_unique<AssigmentStatement>(variable,
-				std::make_unique<BinaryExpression>(std::make_unique<VariableExpression>(variable), operation, std::move(result)));
-			};
-
-		if (match(TokenType::PLUSEQ))
-			return OPEREQ(BinaryOperators::PLUS);
-
-
-		else if (match(TokenType::MINUSEQ))
-			return OPEREQ(BinaryOperators::MINUS);
-
-		else if (match(TokenType::STAREQ))
-			return OPEREQ(BinaryOperators::MULTIPLY);
-
-		else if (match(TokenType::SLASHEQ))
-			return OPEREQ(BinaryOperators::DIVIDE);
-
-		else if (match(TokenType::STARSTAREQ))
-			return OPEREQ(BinaryOperators::POWER);
+		return CREATE_PTR<AssigmentStatement>(std::move(expr), std::move(result));
 	}
 
-	else if (match(TokenType::PLUSPLUS) && get(0).getType() == TokenType::WORD) {
+	auto OPEREQ = [this, &expr](const BinaryOperators operation) -> StatementPtr {
+		ExpressionPtr result = expression();
 
-		StatementPtr result;
+		/*if (IsConst) 
+			return CREATE_PTR<ConstAssigmentStatement>(std::move(expr),
+				CREATE_PTR<BinaryExpression>(std::move(expr), operation, std::move(result)));
 
-		if (IsConst) result = std::make_unique<ConstAssigmentStatement>(get(0).getText(),
-			std::make_unique<UnaryExpression>("++i", std::move(primary())));
+		else return CREATE_PTR<AssigmentStatement>(variable,
+			CREATE_PTR<BinaryExpression>(CREATE_PTR<VariableExpression>(variable), operation, std::move(result)));*/
+		return StatementPtr();
+		};
 
-		else result = std::make_unique<AssigmentStatement>(get(0).getText(),
-			std::make_unique<UnaryExpression>("++i", std::move(primary())));
+	if (match(TokenType::PLUSEQ))
+		return OPEREQ(BinaryOperators::PLUS);
 
-		//CHECK_END_STR
+	else if (match(TokenType::MINUSEQ))
+		return OPEREQ(BinaryOperators::MINUS);
 
-		return result;
-	}
+	else if (match(TokenType::STAREQ))
+		return OPEREQ(BinaryOperators::MULTIPLY);
 
-	else if (match(TokenType::MINUSMINUS) && get(0).getType() == TokenType::WORD) {
-		StatementPtr result;
+	else if (match(TokenType::SLASHEQ))
+		return OPEREQ(BinaryOperators::DIVIDE);
 
-		if (IsConst) result = std::make_unique<ConstAssigmentStatement>(get(0).getText(),
-			std::make_unique<UnaryExpression>("--i", std::move(primary())));
-
-		else result = std::make_unique<AssigmentStatement>(get(0).getText(),
-			std::make_unique<UnaryExpression>("--i", std::move(primary())));
-
-		//CHECK_END_STR
-
-		return result;
-	}
-}
-
-StatementPtr Parser::ConstAssignment() {
-	return Assignment(true);
+	else if (match(TokenType::STARSTAREQ))
+		return OPEREQ(BinaryOperators::POWER);
 }

@@ -18,10 +18,6 @@ void DoWhileStatement::execute() {
 		catch (const ContinueStatement&) {
 			//continue;
 		}
-	} while (expr->eval()->AsDouble() != 0);
+	} while (expr->eval().AsDouble() != 0);
 	Variables::PopState();
-}
-
-std::string DoWhileStatement::to_string() {
-	return "do {\n" + statement->to_string() + "} while" + expr->to_string();
 }

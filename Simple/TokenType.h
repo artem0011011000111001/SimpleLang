@@ -27,6 +27,7 @@ namespace Simple {
 		DEFAULT,
 		FUNC,
 		RETURN,
+		STRUCT,
 
 		// Operators
 		PLUS,          //   +
@@ -59,6 +60,9 @@ namespace Simple {
 		LBRACE,        //   {
 		RBRACE,		   //   }
 		COMMA,		   //   ,
+		DOT,           //   .
+		LSBRACKET,     //   [
+		RSBRACKET,     //   ]
 
 		END_OF_FILE
 	};

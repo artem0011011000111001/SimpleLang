@@ -4,7 +4,7 @@
 using namespace Simple;
 
 ForStatement::ForStatement(std::string InitName, StatementPtr initialization, ExpressionPtr termination,
-	StatementPtr increment, StatementPtr block) 
+	ExpressionPtr increment, StatementPtr block)
 	: InitName(InitName), initialization(std::move(initialization)), 
 	termination(std::move(termination)), increment(std::move(increment)), statement(std::move(block)) {}
 
@@ -18,8 +18,8 @@ void ForStatement::execute() {
 	}
 
 	for (initialization->execute();
-		termination->eval()->AsDouble() != 0;
-		increment->execute()) {
+		termination->eval().AsDouble() != 0;
+		increment->eval()) {
 		try {
 			statement->execute();
 		}
@@ -33,9 +33,4 @@ void ForStatement::execute() {
 	if (SaveGlobalMatchWithInitNameValue.value)
 		Variables::Set(InitName, std::move(SaveGlobalMatchWithInitNameValue));
 	Variables::PopState();
-}
-
-std::string ForStatement::to_string() {
-	return "for " + initialization->to_string() + ", " + termination->to_string() + ", " + 
-		increment->to_string() + " {\n" + statement->to_string() + "}";
 }

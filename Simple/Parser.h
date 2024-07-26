@@ -33,9 +33,7 @@ namespace Simple {
 
 		StatementPtr statement();
 
-		StatementPtr Assignment(bool IsConst = false);
-
-		StatementPtr ConstAssignment();
+		StatementPtr Assignment(ExpressionPtr expr);
 
 		StatementPtr IfElse();
 
@@ -53,14 +51,20 @@ namespace Simple {
 
 		StatementPtr Switch();
 
-		FunctionDefineStatement FunctionDefine();
+		StatementPtr VariableDefine(bool isConst = false);
+
+		StatementPtr ConstVariableDefine();
+
+		StatementPtr FunctionDefine();
+
+		StatementPtr StructDefine();
 
 		StatementPtr Return();
 
 		//StatementPtr NewLine();
 
 		// expression
-		FunctionalExpression Function();
+		ExpressionPtr Function();
 
 		ExpressionPtr expression();
 

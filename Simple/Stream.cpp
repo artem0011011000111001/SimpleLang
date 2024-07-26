@@ -14,21 +14,21 @@ void Simple_libs::Stream::Stream::InitVars() {
 }
 
 void Simple_libs::Stream::Stream::InitFuncs() {
-	_DEFINE_FUNCTION_S(output, [](Args_t args) {
+	_DEFINE_FUNCTION("output", [](Args_t args) {
 		size_t param_count = args.size();
 		for (const auto& arg : args) {
 			std::cout << arg->AsString();
 		}
 		return ZERO;
 		});
-	_DEFINE_FUNCTION_S(outputln, [](Args_t args) {
+	_DEFINE_FUNCTION("outputln", [](Args_t args) {
 		size_t param_count = args.size();
 		for (const auto& arg : args) {
 			std::cout << arg->AsString() << std::endl;
 		}
 		return ZERO;
 		});
-	_DEFINE_FUNCTION_S(input, [](Args_t args) -> VALUE {
+	_DEFINE_FUNCTION("input", [](Args_t args) -> VALUE {
 		size_t param_count = args.size();
 		if (param_count > 1)
 			throw Simple_Error("Expected 1 or 0 parameters instead of " + std::to_string(param_count));

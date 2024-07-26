@@ -5,9 +5,7 @@ using namespace Simple;
 Token::Token(TokenType type, std::string text) : type(type), text(text) {}
 
 std::string Token::enum_in_string() const {
-	switch (type)
-	{
-
+	switch (type) {
 	case TokenType::NUMBER:
 		return "NUMBER " + text;
 

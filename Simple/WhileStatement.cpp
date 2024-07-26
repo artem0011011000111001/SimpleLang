@@ -8,7 +8,7 @@ WhileStatement::WhileStatement(ExpressionPtr expr, StatementPtr statement)
 
 void WhileStatement::execute() {
 	Variables::PushState();
-	while (expr->eval()->AsDouble() != 0) {
+	while (expr->eval().AsDouble() != 0) {
 		try {
 			statement->execute();
 		}
@@ -20,8 +20,4 @@ void WhileStatement::execute() {
 		}
 	}
 	Variables::PopState();
-}
-
-std::string WhileStatement::to_string() {
-	return "while " + expr->to_string() + " {\n" + statement->to_string() + "}";
 }

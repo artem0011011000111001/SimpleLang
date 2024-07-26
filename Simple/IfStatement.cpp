@@ -7,7 +7,7 @@ IfStatement::IfStatement(ExpressionPtr expr, StatementPtr ifStatement, Statement
 	: expr(std::move(expr)), ifStatement(std::move(ifStatement)), elseStatement(std::move(elseStatement)) {}
 
 void IfStatement::execute() {
-	double result = expr->eval()->AsDouble();
+	double result = expr->eval().AsDouble();
 	
 	Variables::PushState();
 	if (result != 0) {
@@ -16,9 +16,4 @@ void IfStatement::execute() {
 	}
 	else if (elseStatement) elseStatement->execute();
 	Variables::PopState();
-}
-
-std::string IfStatement::to_string() {
-	return "if " + expr->eval()->AsString() + " {\n" + ifStatement->to_string() + "}" + 
-		(elseStatement ? "\nelse {\n" + elseStatement->to_string() + "}" : "");
 }

@@ -14,6 +14,7 @@
 #define CREATE_PTR std::make_unique
 #define NUMBER(val) CREATE_PTR<NumberValue>(val)
 #define STRING(val) CREATE_PTR<StringValue>(val)
+#define STRUCT(name, fields) CREATE_PTR<StructValue>(name, std::move(fields))
 #define BOOL(val) NUMBER(val)
 #define ZERO NUMBER(0)
 #define TRUE NUMBER(1)

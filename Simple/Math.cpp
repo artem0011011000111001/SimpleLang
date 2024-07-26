@@ -15,91 +15,91 @@ void Simple_libs::Math::Math::InitVars() {
 }
 
 void Simple_libs::Math::Math::InitFuncs() {
-	_DEFINE_FUNCTION_WITH_ARGS_S(sin, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("sin", [](Args_t args) {
 		return NUMBER(std::sin(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(cos, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("cos", [](Args_t args) {
 		return NUMBER(std::cos(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(tan, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("tan", [](Args_t args) {
 		return NUMBER(std::tan(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(asin, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("asin", [](Args_t args) {
 		return NUMBER(std::asin(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(acos, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("acos", [](Args_t args) {
 		return NUMBER(std::acos(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(atan, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("atan", [](Args_t args) {
 		return NUMBER(std::atan(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(atan2, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("atan2", [](Args_t args) {
 		return NUMBER(std::atan2(args[0]->AsDouble(), args[1]->AsDouble()));
 		}, 2);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(sinh, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("sinh", [](Args_t args) {
 		return NUMBER(std::sinh(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(cosh, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("cosh", [](Args_t args) {
 		return NUMBER(std::cosh(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(tanh, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("tanh", [](Args_t args) {
 		return NUMBER(std::tanh(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(power, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("power", [](Args_t args) {
 		return NUMBER(std::pow(args[0]->AsDouble(), args[1]->AsDouble()));
 		}, 2);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(sqrt, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("sqrt", [](Args_t args) {
 		return NUMBER(std::sqrt(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(cbrt, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("cbrt", [](Args_t args) {
 		return NUMBER(std::cbrt(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(abs, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("abs", [](Args_t args) {
 		return NUMBER(std::abs(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(round, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("round", [](Args_t args) {
 		return NUMBER(std::round(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(ceil, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("ceil", [](Args_t args) {
 		return NUMBER(std::ceil(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(floor, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("floor", [](Args_t args) {
 		return NUMBER(std::floor(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(exp, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("exp", [](Args_t args) {
 		return NUMBER(std::exp(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(log, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("log", [](Args_t args) {
 		return NUMBER(std::log(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(log10, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("log10", [](Args_t args) {
 		return NUMBER(std::log10(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(factorial, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("factorial", [](Args_t args) {
 		return NUMBER(_factorial(args[0]->AsDouble()));
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(comb, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("comb", [](Args_t args) {
 		int n = static_cast<int>(args[0]->AsDouble());
 		int k = static_cast<int>(args[1]->AsDouble());
 		if (k > n) {
@@ -108,7 +108,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return NUMBER(_factorial(n) / (_factorial(k) * _factorial(n - k)));
 		}, 2);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(perm, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("perm", [](Args_t args) {
 		int n = static_cast<int>(args[0]->AsDouble());
 		int k = static_cast<int>(args[1]->AsDouble());
 		if (k > n) {
@@ -117,7 +117,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return NUMBER(_factorial(n) / _factorial(n - k));
 		}, 2);
 
-	_DEFINE_FUNCTION_S(mean, [](Args_t args) {
+	_DEFINE_FUNCTION("mean", [](Args_t args) {
 		std::vector<double> values;
 		for (auto& val : args) {
 			values.push_back(val->AsDouble());
@@ -125,7 +125,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return NUMBER(_mean(values));
 		});
 
-	_DEFINE_FUNCTION_S(median, [](Args_t args) {
+	_DEFINE_FUNCTION("median", [](Args_t args) {
 		std::sort(args.begin(), args.end(), [](const VALUE& val1, const VALUE& val2) {
 			return val1->AsDouble() < val2->AsDouble();
 			});
@@ -136,7 +136,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 			return NUMBER(args[args_size / 2]->AsDouble());
 		});
 
-	_DEFINE_FUNCTION_S(std_dev, [](Args_t args) {
+	_DEFINE_FUNCTION("std_dev", [](Args_t args) {
 		std::vector<double> values(args.size());
 		std::transform(args.begin(), args.end(), values.begin(), [](const VALUE& val) {
 			return val->AsDouble();
@@ -150,7 +150,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return NUMBER(std::sqrt(accum / (values.size() - 1)));
 		});
 
-	_DEFINE_FUNCTION_S(variance, [](Args_t args) {
+	_DEFINE_FUNCTION("variance", [](Args_t args) {
 		std::vector<double> values(args.size());
 		std::transform(args.begin(), args.end(), values.begin(), [](const VALUE& val) {
 			return val->AsDouble();
@@ -164,7 +164,7 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return NUMBER(accum / (values.size() - 1));
 		});
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(is_prime, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("is_prime", [](Args_t args) {
 		int n = static_cast<int>(args[0]->AsDouble());
 		if (n <= 1) return FALSE;
 		for (int i = 2; i <= std::sqrt(n); ++i) {
@@ -173,12 +173,12 @@ void Simple_libs::Math::Math::InitFuncs() {
 		return TRUE;
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(is_even, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("is_even", [](Args_t args) {
 		int n = static_cast<int>(args[0]->AsDouble());
 		return BOOL(n % 2 == 0);
 		}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS_S(is_odd, [](Args_t args) {
+	_DEFINE_FUNCTION_WITH_ARGS("is_odd", [](Args_t args) {
 		int n = static_cast<int>(args[0]->AsDouble());
 		return BOOL(n % 2 != 0);
 		}, 1);

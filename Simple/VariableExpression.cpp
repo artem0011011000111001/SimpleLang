@@ -7,11 +7,11 @@ using namespace Simple;
 
 VariableExpression::VariableExpression(const std::string& name) : name(name) {}
 
-ValuePtr VariableExpression::eval() const {
-	if (!Variables::IsExist(name)) throw Simple_Error("\"" + name + "\" not defined");
-	return Variables::Get(name);
-}
+//ValuePtr VariableExpression::eval() {
+//	return get_ref().clone();
+//}
 
-std::string VariableExpression::to_string() const {
-	return name;
+Value& VariableExpression::eval() {
+	if (!Variables::IsExist(name)) throw Simple_Error("\"" + name + "\" not defined");
+	return Variables::GetRef(name);
 }

@@ -80,18 +80,6 @@ std::string Simple::to_string(BinaryOperators op)
 	}
 }
 
-std::string Simple::to_string(ValueType val) {
-	switch (val)
-	{
-	case ValueType::NUMBER:
-		return "number";
-	case ValueType::STRING:
-		return "string";
-	default:
-		break;
-	}
-}
-
 void Simple::copy_variables(const std::unordered_map<std::string, Variable>&from, std::unordered_map<std::string, Variable>&whom) {
 	for (const auto& var : from) {
 		whom[var.first].value = var.second.value->clone();

@@ -47,7 +47,3 @@ void ImportStatement::execute() {
 	else
 		throw Simple_Error("\"" + module_name + "\" not found");
 }
-
-std::string ImportStatement::to_string() {
-	return "import" + module_name + ";";
-}

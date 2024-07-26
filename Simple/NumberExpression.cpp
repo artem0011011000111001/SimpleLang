@@ -1,14 +1,17 @@
 #include "Expressions.h"
 #include "Values.h"
+#include "Simple_defines.h"
 
 using namespace Simple;
 
-NumberExpression::NumberExpression(const double value) : value(value) {}
+NumberExpression::NumberExpression(double value) : value(value) {}
 
-ValuePtr NumberExpression::eval() const {
-	return std::make_unique<NumberValue>(value);
-}
+//ValuePtr NumberExpression::eval() {
+//	return get_ref().clone();
+//}
 
-std::string NumberExpression::to_string() const {
-	return std::to_string(value);
+Value& NumberExpression::eval() {
+	ref = NUMBER(value);
+
+	return *ref;
 }

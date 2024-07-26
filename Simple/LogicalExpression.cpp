@@ -14,7 +14,7 @@ ExpressionPtr Parser::logicalOr() {
 	while (true)
 	{
 		if (match(TokenType::BARBAR)) {
-			return std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::OR, std::move(logicalAnd()));
+			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::OR, std::move(logicalAnd()));
 			continue;
 		}
 		break;
@@ -28,7 +28,7 @@ ExpressionPtr Parser::logicalAnd() {
 	while (true)
 	{
 		if (match(TokenType::AMPAMP)) {
-			return std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::AND, std::move(equality()));
+			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::AND, std::move(equality()));
 			continue;
 		}
 		break;
@@ -41,11 +41,11 @@ ExpressionPtr Parser::equality() {
 	while (true)
 	{
 		if (match(TokenType::EQEQ)) {
-			return std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::EQUALS, std::move(conditinal()));
+			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::EQUALS, std::move(conditinal()));
 			continue;
 		}
 		if (match(TokenType::EXCLEQ)) {
-			return std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::NOT_EQUALS, std::move(conditinal()));
+			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::NOT_EQUALS, std::move(conditinal()));
 			continue;
 		}
 		break;
@@ -59,19 +59,19 @@ ExpressionPtr Parser::conditinal() {
 	while (true)
 	{
 		if (match(TokenType::LT)) {
-			result = std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::LT, std::move(additive()));
+			result = CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::LT, std::move(additive()));
 			continue;
 		}
 		else if (match(TokenType::LTEQ)) {
-			result = std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::LTEQ, std::move(additive()));
+			result = CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::LTEQ, std::move(additive()));
 			continue;
 		}
 		else if (match(TokenType::GT)) {
-			result = std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::GT, std::move(additive()));
+			result = CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::GT, std::move(additive()));
 			continue;
 		}
 		else if (match(TokenType::GTEQ)) {
-			result = std::make_unique<ConditionalExpression>(std::move(result), LogicOperators::GTEQ, std::move(additive()));
+			result = CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::GTEQ, std::move(additive()));
 			continue;
 		}
 		break;

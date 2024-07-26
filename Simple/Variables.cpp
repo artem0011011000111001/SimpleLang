@@ -4,9 +4,6 @@
 #include "Simple_defines.h"
 #include "Utils.h"
 
-#include "Math.h"
-#include "Stream.h"
-
 using namespace Simple;
 
 void Variables::SetAllVariables(std::unordered_map<std::string, Variable>&& variables) {
@@ -36,6 +33,11 @@ bool Variables::IsExist(const std::string& key) {
 ValuePtr Variables::Get(const std::string& key) {
 	if (!IsExist(key)) return ZERO;
 	return variables.at(key).value->clone();
+}
+
+Value& Variables::GetRef(const std::string& key) {
+	if (!IsExist(key)) throw Simple_Error("Ref not send");
+	return variables.at(key).value->get_ref();
 }
 
 const std::unordered_map<std::string, Variable>& Variables::GetAllVariables() {

@@ -56,7 +56,10 @@ namespace Simple {
 			{">=",     TokenType::GTEQ},
 			{"{" ,     TokenType::LBRACE},
 			{"}" ,     TokenType::RBRACE},
-			{"," ,     TokenType::COMMA}
+			{"," ,     TokenType::COMMA},
+			{"." ,     TokenType::DOT},
+			{"[" ,     TokenType::LSBRACKET},
+			{"]" ,     TokenType::RSBRACKET}
 		};
 
 	private:

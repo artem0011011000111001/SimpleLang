@@ -23,14 +23,14 @@ namespace Simple {
 
 		static FunctionPtr Get(const std::string& key);
 
+		static Function& GetRef(const std::string& key);
+
 		static void Set(const std::string& key, FunctionPtr value);
 
-		static void RegisterDynamicFunction(const std::string& name, std::function<ValuePtr(std::vector<ValuePtr>)> funcbody, const std::vector<size_t>& argscount);
+		static void RegisterDynamicFunction(const std::string& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount);
 
-		static std::unordered_map<std::string, FunctionPtr> CreateStandartFunctions();
+		static void CreateStandartFunctions();
 	};
-
-	ValuePtr Print(std::vector<ValuePtr> args);
 }
 
-#endif // !_FUNCTIONS_H_
+#endif // _FUNCTIONS_H_

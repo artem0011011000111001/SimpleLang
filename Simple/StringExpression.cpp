@@ -1,14 +1,16 @@
 #include "Expressions.h"
 #include "Values.h"
+#include "Simple_defines.h"
 
 using namespace Simple;
 
-StringExpression::StringExpression(const std::string value) : value(value) {}
+StringExpression::StringExpression(std::string value) : value(value) {}
 
-ValuePtr StringExpression::eval() const {
-	return std::make_unique<StringValue>(value);
-}
+//ValuePtr StringExpression::eval() {
+//	return get_ref().clone();
+//}
 
-std::string StringExpression::to_string() const {
-	return value;
+Value& StringExpression::eval() {
+	ref = STRING(value);
+	return *ref;
 }

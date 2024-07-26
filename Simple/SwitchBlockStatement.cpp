@@ -17,11 +17,3 @@ void SwitchBlockStatement::add(CaseStatement statement) {
 std::list<CaseStatement>& SwitchBlockStatement::getCaseStatements() {
 	return CaseStatements;
 }
-
-std::string SwitchBlockStatement::to_string() {
-	std::string res;
-	for (auto& Case : CaseStatements) {
-		res += Case.to_string() + "\n";
-	}
-	return res;
-}

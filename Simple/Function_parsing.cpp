@@ -4,7 +4,7 @@
 
 using namespace Simple;
 
-FunctionDefineStatement Parser::FunctionDefine() {
+StatementPtr Parser::FunctionDefine() {
 	std::string name = consume(TokenType::WORD).getText();
 	consume(TokenType::LPAREN);
 
@@ -22,7 +22,7 @@ FunctionDefineStatement Parser::FunctionDefine() {
 	}
 
 	StatementPtr body = statementOrBlock();
-	return FunctionDefineStatement(name, argsParam, std::move(body));
+	return CREATE_PTR<FunctionDefineStatement>(name, argsParam, std::move(body));
 }
 
 StatementPtr Parser::Return() {

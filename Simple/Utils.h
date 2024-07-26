@@ -15,7 +15,8 @@ namespace Simple {
 
 	enum class ValueType {
 		NUMBER,
-		STRING
+		STRING,
+		STRUCT
 	};
 
 	enum class LogicOperators {
@@ -43,7 +44,6 @@ namespace Simple {
 	//ValueType IdentifyValueType(const ValuePtr& valuePtr);
 	std::string to_string(LogicOperators op);
 	std::string to_string(BinaryOperators op);
-	std::string to_string(ValueType val);
 	void copy_variables(const std::unordered_map<std::string, Variable>& from, std::unordered_map<std::string, Variable>& whom);
 }
 #endif // _UTILS_H_

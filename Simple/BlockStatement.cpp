@@ -27,12 +27,3 @@ void BlockStatement::execute() {
 void BlockStatement::add(StatementPtr statement) {
 	statements.push_back(std::move(statement));
 }
-
-std::string BlockStatement::to_string() {
-	std::string result;
-	for (const auto& statement : statements)
-	{
-		result += statement->to_string() + "\n";
-	}
-	return result;
-}

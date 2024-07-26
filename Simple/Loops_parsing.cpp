@@ -35,14 +35,14 @@ StatementPtr Parser::For() {
 	std::string InitName;
 	if (CurrentToken.getType() == TokenType::WORD) InitName = CurrentToken.getText();
 
-	if (match(TokenType::CONST)) initialization = ConstAssignment();
-	else initialization = Assignment();
+	if (match(TokenType::CONST)) initialization = ConstVariableDefine();
+	else initialization = VariableDefine();
 	consume(TokenType::SEMICOLON);
 
 	ExpressionPtr termination = expression();
 	consume(TokenType::SEMICOLON);
 
-	StatementPtr increment = Assignment();
+	ExpressionPtr increment = expression();
 	consume(TokenType::RPAREN);
 
 	StatementPtr statement = statementOrBlock();

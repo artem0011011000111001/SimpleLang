@@ -9,13 +9,15 @@ void Simple::RegisterStandartModules() {
 }
 
 void Simple::compile(std::string& code) {
+	std::locale::global(std::locale("C"));
 	RegisterStandartModules();
-
-	Lexer lexer(code);
-
-	Parser parser(lexer.tokenize());
+	Functions::CreateStandartFunctions();
 
 	try {
+		Lexer lexer(code);
+
+		Parser parser(lexer.tokenize());
+
 		auto res = CREATE_PTR<GlobalBlockStatement>(parser.parse());
 		res->execute();
 	}

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbbreviatedOperationsStatement.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
     <ClCompile Include="BinaryExpression.cpp" />
     <ClCompile Include="Block.cpp" />
@@ -134,10 +135,12 @@
     <ClCompile Include="BreakStatement.cpp" />
     <ClCompile Include="CaseStatement.cpp" />
     <ClCompile Include="ArithmeticExpression.cpp" />
+    <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="Function_parsing.cpp" />
     <ClCompile Include="FunctionDefineStatement.cpp" />
     <ClCompile Include="IfElse_parsing.cpp" />
     <ClCompile Include="Import_parsing.cpp" />
+    <ClCompile Include="IndexExpression.cpp" />
     <ClCompile Include="Lexer_utils.cpp" />
     <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="Loops_parsing.cpp" />
@@ -146,30 +149,32 @@
     <ClCompile Include="ReturnStatement.cpp" />
     <ClCompile Include="ShortBlockStatement.cpp" />
     <ClCompile Include="Simple.cpp" />
+    <ClCompile Include="StructExpression.cpp" />
+    <ClCompile Include="StructValue.cpp" />
+    <ClCompile Include="Struct_parsing.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
-    <ClCompile Include="ConstAssigmentStatement.cpp" />
     <ClCompile Include="ContinueStatement.cpp" />
     <ClCompile Include="DoWhileStatement.cpp" />
     <ClCompile Include="ForStatement.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="FunctionalExpression.cpp" />
-    <ClCompile Include="FunctionStatement.cpp" />
     <ClCompile Include="GlobalBlockStatement.cpp" />
     <ClCompile Include="IfStatement.cpp" />
     <ClCompile Include="ImportStatement.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="NumberValue.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="PrintStatement.cpp" />
     <ClCompile Include="Stream.cpp" />
     <ClCompile Include="StringExpression.cpp" />
     <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="SwitchBlockStatement.cpp" />
     <ClCompile Include="SwitchStatement.cpp" />
     <ClCompile Include="Variable.cpp" />
+    <ClCompile Include="VariableDefineStatement.cpp" />
+    <ClCompile Include="VariableDefine_parsing.cpp" />
     <ClCompile Include="Variables.cpp" />
     <ClCompile Include="VariableExpression.cpp" />
     <ClCompile Include="Lexer.cpp" />

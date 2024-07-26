@@ -10,7 +10,3 @@ ShortBlockStatement::ShortBlockStatement(StatementPtr statement)
 void ShortBlockStatement::execute() {
 	statement->execute();
 }
-
-std::string ShortBlockStatement::to_string() {
-	return statement->to_string();
-}

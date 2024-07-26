@@ -25,3 +25,4 @@ SwitchBlockStatement Parser::switchBlock() {
 
 	return SwitchBlockStatement(std::move(block));
 }
+
