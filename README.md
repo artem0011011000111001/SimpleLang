@@ -24,10 +24,6 @@ const var2 = "Hello"; // var2 = "Hello"
 var2 = "World";       // error "var2" is const
 const var3 = 2 < 5;   // var3 = true(1)
 var3 = false;         // error "var3" is const
-// Also available
-var4 = 16;            // var4 is not const
-const var3 = var3;    // var4 is const
-var4 = "Hi";          // error "var4" is const
 ```
 Expressions
 ```
@@ -237,5 +233,9 @@ import Time;
 
 // Functions
 now()      // return now time measured relative to internal epochal time
-sleep(arg) // stops the thread at arg milliseconds 
+system_now() // return struct Date with system date
+sleep(arg) // stops the thread at arg milliseconds
+
+// Structures
+Date(year, month, day, hour, minute, second)
 ```
