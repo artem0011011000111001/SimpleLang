@@ -1,8 +1,8 @@
 Launch project:
-1. Create new .txt file.
+1. Create new .simple file.
 2. Create new .cpp file.
-3. Include "Simple.h" and "fstream".
-4. Read code from file, and call function "compile" from namespace Simple, and pass the source code as parameters.
+3. Include "Simple.h".
+4. Call "ReadCodeFromFile" from namespace Simple pass the path to the file as an argument and pass the resulting result to "compile" from namespace Simple
 5. Launch .cpp file.
 
 Language syntax:
