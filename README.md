@@ -8,22 +8,22 @@ Launch project:
 Language syntax:
 Variable declaration
 ```
-var = 10;       // var = 10
-var = 15;       // var = 15
-var = "String"; // var = "String"
-var2 = "Hello"; // var2 = "Hello"
-var2 = "World"; // var2 = "World"
-var2 = 5;       // var2 = 5
-var3 = 2 < 5;   // var3 = true(1)
+a = 10;       // a = 10
+a = 15;       // a = 15
+a = "String"; // a = "String"
+b = "Hello";  // b = "Hello"
+b = "World";  // b = "World"
+b = 5;        // b = 5
+c = 2 < 5;    // c = true(1)
 ```
 Const variable declaration
 ```
-const var = 10;       // var = 15
-var = 15;             // error "var" is const
-const var2 = "Hello"; // var2 = "Hello"
-var2 = "World";       // error "var2" is const
-const var3 = 2 < 5;   // var3 = true(1)
-var3 = false;         // error "var3" is const
+const a = 10;       // a = 15
+a = 15;             // error "a" is const
+const b = "Hello";  // b = "Hello"
+b = "World";        // error "b" is const
+const c = 2 < 5;    // c = true(1)
+c = false;          // error "c" is const
 ```
 Expressions
 ```
