@@ -2,6 +2,8 @@
 #include "Values.h"
 #include "Simple_Error.h"
 #include "Variable.h"
+#include "Variables.h"
+#include "Structs.h"
 
 using namespace Simple;
 
@@ -10,7 +12,7 @@ double Simple::strict_stod(const std::string str) {
 	size_t pos;
 	try {
 		result = std::stod(str, &pos);
-		if (pos != str.length()) 
+		if (pos != str.length())
 			throw 0;
 	}
 	catch (...) {
@@ -19,27 +21,9 @@ double Simple::strict_stod(const std::string str) {
 	return result;
 }
 
-//ValueType Simple::IdentifyValueType(const ValuePtr& valuePtr) {
-//
-//	if (dynamic_cast<NumberValue*>(valuePtr.get()))
-//		return ValueType::NUMBER;
-//
-//	else if (dynamic_cast<StringValue*>(valuePtr.get()))
-//		return ValueType::STRING;
-//}
-
 std::string Simple::to_string(LogicOperators op)
 {
-	switch (op)
-	{
-	/*case LogicOperators::PLUS:
-		return "+";
-	case LogicOperators::MINUS:
-		return "-";
-	case LogicOperators::MULTIPLY:
-		return "*";
-	case LogicOperators::DIVIDE:
-		return "/";*/
+	switch (op) {
 	case LogicOperators::EQUALS:
 		return "==";
 	case LogicOperators::NOT_EQUALS:
@@ -80,8 +64,76 @@ std::string Simple::to_string(BinaryOperators op)
 	}
 }
 
+std::string Simple::IdentifyCategory(ValueType type) {
+	switch (type) {
+
+	case Simple::ValueType::_DIGIT_:
+		return "Primitive";
+
+	case Simple::ValueType::_NUMBER:
+		return "Primitive";
+
+	case Simple::ValueType::_CHAR:
+		return "Primitive";
+
+	case Simple::ValueType::_STRING:
+		return "Primitive";
+
+	case Simple::ValueType::_STRUCT:
+		return "Struct";
+
+	case Simple::ValueType::_VOID:
+		return "Primitive";
+
+	default:
+		throw Simple_Error("Unknown type");
+	}
+}
+
+ValueType Simple::IdentifyValueType(const String& key) {
+	if (key == "num")
+		return ValueType::_NUMBER;
+	else if (key == "str")
+		return ValueType::_STRING;
+	else if (key == "void")
+		return ValueType::_VOID;
+	else if (key == "digit")
+		return ValueType::_DIGIT_;
+	else if (key == "char")
+		return ValueType::_CHAR;
+	else if (Structs::IsExist(key))
+		return ValueType::_USER_STRUCT;
+	else throw Simple_Error("\"" + key + "\" is invalid type");
+}
+
+bool Simple::equals_type(const String& key1, const String& key2) {
+	ValueType type1 = IdentifyValueType(key1),
+	type2 = IdentifyValueType(key2);
+	if (type1 == ValueType::_USER_STRUCT && type2 == ValueType::_USER_STRUCT)
+		return Structs::_equals(key1, key2);
+	return type1 == type2;
+}
+
 void Simple::copy_variables(const std::unordered_map<std::string, Variable>&from, std::unordered_map<std::string, Variable>&whom) {
 	for (const auto& var : from) {
 		whom[var.first].value = var.second.value->clone();
+	}
+}
+
+void Simple::create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<std::string, Variable>& whom) {
+	auto argNameIt = argsParam.first.begin();
+	auto argIsConstIt = argsParam.second.begin();
+	for (auto& arg : args) {
+		if (Variables::IsExist(*argNameIt)) {
+			whom[*argNameIt] = Variable(Variables::Get(*argNameIt), Variables::IsConstant(*argNameIt));
+		}
+		Variables::SetNew(*argNameIt, Variable(std::move(arg), *argIsConstIt));
+		++argNameIt;
+	}
+}
+
+void Simple::disassemble_arguments(std::unordered_map<std::string, Variable>& from) {
+	for (const auto& var : from) {
+		Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
 	}
 }

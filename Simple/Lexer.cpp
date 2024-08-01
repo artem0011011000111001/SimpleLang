@@ -9,11 +9,15 @@ Lexer::Lexer(std::string& input) : input(input), tokens(), pos(0), length(input.
 std::list<Token> Lexer::tokenize() {
 	while (pos < length) {
 		char current = peek(0);
-		if (std::isdigit(current)) tokenizeNumber();
+		if (std::isdigit(current))
+			if (peek(1) == 'd') tokenizeDigit();
+			else tokenizeNumber();
+
 		else if (std::isalpha(current) || current == '_' || current == '$') tokenizeWord();
 		else if (current == '\"') tokenizeText();
+		else if (current == '\'') tokenizeChar();
 		else if (current == '#') tokenizeHexNumber();
-		//else if (current == '\n') tokenizeNewLine();
+		else if (current == '\n') tokenizeNewLine();
 		else if (indexOfUnMap(OPERATORS, current) != simple_npos) tokenizeOperator();
 		else next();
 	}
@@ -33,7 +37,13 @@ void Lexer::tokenizeNumber() {
 		buffer.push_back(current);
 		current = next();
 	}
-	addToken(TokenType::NUMBER, buffer);
+	addToken(TokenType::NUM, buffer);
+}
+
+void Lexer::tokenizeDigit() {
+	addToken(TokenType::DIGIT_, std::string(1 ,peek(0)));
+	next(); // skip digit
+	next();	// skip d
 }
 
 void Lexer::tokenizeHexNumber() {
@@ -44,7 +54,7 @@ void Lexer::tokenizeHexNumber() {
 		buffer.push_back(current);
 		current = next();
 	}
-	addToken(TokenType::HEX_NUMBER, buffer);
+	addToken(TokenType::HEX_NUM, buffer);
 }
 
 void Lexer::tokenizeWord() {
@@ -100,6 +110,18 @@ void Lexer::tokenizeWord() {
 	else if (buffer == "struct")
 		addToken(TokenType::STRUCT);
 
+	else if (buffer == "field")
+		addToken(TokenType::FIELD);
+
+	else if (buffer == "try")
+		addToken(TokenType::TRY);
+
+	else if (buffer == "catch")
+		addToken(TokenType::CATCH);
+
+	else if (buffer == "throw")
+		addToken(TokenType::THROW);
+
 	else addToken(TokenType::WORD, buffer);
 }
 
@@ -135,6 +157,13 @@ void Lexer::tokenizeText() {
 	}
 	next(); // skip closing "
 	addToken(TokenType::TEXT, buffer);
+}
+
+void Lexer::tokenizeChar() {
+	next(); // skip opening '
+	addToken(TokenType::CHAR_, std::string(1, peek(0)));
+	next(); // skip char
+	next(); // skip closing '
 }
 
 void Lexer::tokenizeOperator() {
@@ -182,7 +211,7 @@ void Lexer::tokenizeMultilineComment() {
 	next(); // skip /
 }
 
-//void Lexer::tokenizeNewLine() {
-//	addToken(TokenType::NEWLINE);
-//	next(); // skip \n
-//}
+void Lexer::tokenizeNewLine() {
+	addToken(TokenType::NEW_LINE);
+	next(); // skip \n
+}

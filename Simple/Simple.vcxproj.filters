@@ -178,6 +178,27 @@
     <Filter Include="src\core\AST\Expression">
       <UniqueIdentifier>{91b1b004-7b67-4d5c-97ba-8e0ce7379288}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\Exception">
+      <UniqueIdentifier>{2f1e1d06-5214-4d7a-ada9-56ed2de362de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\Exception">
+      <UniqueIdentifier>{76dbb804-3332-47f2-a700-093282c4ff6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Struct">
+      <UniqueIdentifier>{35e71b59-853a-4842-b651-3b60933093fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Parser\Semantics\TryCatch">
+      <UniqueIdentifier>{e5e6be58-f8a6-4e77-b383-7e44cacecf08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures\Struct">
+      <UniqueIdentifier>{96f56587-8f69-4937-8be7-a803c864929e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Struct">
+      <UniqueIdentifier>{b1860bf4-12ff-45b6-8dd1-1e048680ee8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\TryCatch">
+      <UniqueIdentifier>{13e7970e-6621-4eb2-92ca-a888156428a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -357,6 +378,42 @@
     <ClCompile Include="VariableDefineStatement.cpp">
       <Filter>src\core\AST\Assign</Filter>
     </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>src\libs\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstructorDefineStatement.cpp">
+      <Filter>src\core\AST\Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="CharValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="CharExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="DigitValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="DigitExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="TryCatch_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\TryCatch</Filter>
+    </ClCompile>
+    <ClCompile Include="Structs.cpp">
+      <Filter>src\structures\Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="TryCatchStatement.cpp">
+      <Filter>src\core\AST\TryCatch</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrowStatement.cpp">
+      <Filter>src\core\AST\TryCatch</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -428,15 +485,24 @@
     <ClInclude Include="Time.h">
       <Filter>libs\Time</Filter>
     </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>libs\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Structs.h">
+      <Filter>include\structures\Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Mathlib_test.txt">
+    <Text Include="Mathlib_test.simple">
       <Filter>tests</Filter>
     </Text>
-    <Text Include="code.txt">
+    <Text Include="code.simple">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="code2.simple">
       <Filter>tests</Filter>
     </Text>
   </ItemGroup>

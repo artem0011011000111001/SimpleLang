@@ -67,27 +67,35 @@ Value& ConditionalExpression::eval() {
 	switch (operation) {
 	case LogicOperators::EQUALS:
 		ref = BOOL(value1->operator==(value2));
+		break;
 
 	case LogicOperators::NOT_EQUALS:
 		ref = BOOL(value1->operator!=(value2));
+		break;
 
 	case LogicOperators::LT:
 		ref = BOOL(value1->operator<(value2));
+		break;
 
 	case LogicOperators::LTEQ:
 		ref = BOOL(value1->operator<=(value2));
+		break;
 
 	case LogicOperators::GT:
 		ref = BOOL(value1->operator>(value2));
+		break;
 
 	case LogicOperators::GTEQ:
 		ref = BOOL(value1->operator>=(value2));
+		break;
 
 	case LogicOperators::AND:
 		ref = BOOL(value1->AsDouble() != 0 && value2->AsDouble() != 0);
+		break;
 
 	case LogicOperators::OR:
 		ref = BOOL(value1->AsDouble() != 0 || value2->AsDouble() != 0);
+		break;
 
 	default:
 		throw Simple_Error("Unknown logic operation");

@@ -83,15 +83,20 @@ Value& BinaryExpression::eval() {
 	{
 	case BinaryOperators::PLUS:
 		ref = value1->operator+(value2);
+		break;
 	case BinaryOperators::MINUS:
 		ref = value1->operator-(value2);
+		break;
 	case BinaryOperators::MULTIPLY:
 		ref = value1->operator*(value2);
+		break;
 	case BinaryOperators::DIVIDE:
 		ref = value1->operator/(value2);
+		break;
 	case BinaryOperators::POWER:
 		ref = value1->power(value2);
-	default: throw Simple_Error("\"" + Simple::to_string(operation) + std::string("\" is unknown operation"));
+		break;
+	default: throw Simple_Error("\"" + Simple::to_string(operation) + String("\" is unknown operation"));
 	}
 	return *ref;
 }

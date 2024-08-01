@@ -4,11 +4,8 @@
 
 using namespace Simple;
 
-StatementPtr Parser::FunctionDefine() {
-	std::string name = consume(TokenType::WORD).getText();
+void Parser::AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body) {
 	consume(TokenType::LPAREN);
-
-	std::pair<std::list<std::string>, std::list<bool>> argsParam;
 
 	while (!match(TokenType::RPAREN)) {
 		if (match(TokenType::CONST))
@@ -21,7 +18,17 @@ StatementPtr Parser::FunctionDefine() {
 			throw Simple_Error("Name required");
 	}
 
-	StatementPtr body = statementOrBlock();
+	body = statementOrBlock();
+}
+
+StatementPtr Parser::FunctionDefine() {
+
+	String name = consume(TokenType::WORD).getText();
+	ArgsParam_t argsParam;
+	StatementPtr body;
+
+	AnalyzeFunction(argsParam, body);
+
 	return CREATE_PTR<FunctionDefineStatement>(name, argsParam, std::move(body));
 }
 
@@ -30,5 +37,5 @@ StatementPtr Parser::Return() {
 
 	CHECK_END_STR;
 
-	return std::make_unique<ReturnStatement>(std::move(expr));
+	return CREATE_PTR<ReturnStatement>(std::move(expr));
 }

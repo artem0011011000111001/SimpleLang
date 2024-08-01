@@ -5,25 +5,16 @@
 using namespace Simple;
 
 StatementPtr Parser::Assignment(ExpressionPtr expr) {
-	Token CurrentToken = get(0);
 
 	if (match(TokenType::EQ)) {
+		ExpressionPtr expr2 = expression();
 
-		ExpressionPtr result = expression();
-
-		return CREATE_PTR<AssigmentStatement>(std::move(expr), std::move(result));
+		return CREATE_PTR<AssigmentStatement>(std::move(expr), std::move(expr2));
 	}
 
 	auto OPEREQ = [this, &expr](const BinaryOperators operation) -> StatementPtr {
-		ExpressionPtr result = expression();
-
-		/*if (IsConst) 
-			return CREATE_PTR<ConstAssigmentStatement>(std::move(expr),
-				CREATE_PTR<BinaryExpression>(std::move(expr), operation, std::move(result)));
-
-		else return CREATE_PTR<AssigmentStatement>(variable,
-			CREATE_PTR<BinaryExpression>(CREATE_PTR<VariableExpression>(variable), operation, std::move(result)));*/
-		return StatementPtr();
+		ExpressionPtr expr2 = expression();
+		return CREATE_PTR<AbbreviatedOperationsStatement>(std::move(expr), operation, std::move(expr2));
 		};
 
 	if (match(TokenType::PLUSEQ))

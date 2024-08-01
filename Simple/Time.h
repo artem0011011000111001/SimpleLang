@@ -18,7 +18,7 @@ namespace Simple_libs {
 			void InitFuncs();
 			void InitStructs();
 
-			static VALUE _Date(Args_t args);
+			//static VALUE _Date(Args_t args);
 		public:
 			void Init() override;
 		};

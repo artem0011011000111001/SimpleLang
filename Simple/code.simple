@@ -1,0 +1,29 @@
+import Type;
+import Exception;
+
+struct Vector2D {
+	field x: num;
+	field y: num;
+
+	func constructor(x, y) {
+		if (!instanseof(x, 0))
+			throw TypeError("x has invalid type: ", x);
+		else if (!instanseof(y, 0))
+			throw TypeError("y has invalid type: ", y);
+		
+		this.x = x;
+		this.y = y;
+	}
+}
+
+try {
+
+vec = Vector2D("2", 4);
+
+print("x = ", vec.x, "\ny = ", vec.y);
+
+}
+catch(ex:TypeError){
+	print(ex.error, ex.type.name);
+}
+

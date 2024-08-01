@@ -15,19 +15,17 @@ namespace Simple {
 
 	struct Functions {
 	private:
-		static std::unordered_map<std::string, FunctionPtr> functions;
+		static Funcs_t functions;
 
 	public:
 
-		static bool IsExist(const std::string& key);
+		static bool IsExist(const String& key);
 
-		static FunctionPtr Get(const std::string& key);
+		static FunctionPtr Get(const String& key);
 
-		static Function& GetRef(const std::string& key);
+		static void Set(const String& key, FunctionPtr value);
 
-		static void Set(const std::string& key, FunctionPtr value);
-
-		static void RegisterDynamicFunction(const std::string& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount);
+		static void RegisterDynamicFunction(const String& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount);
 
 		static void CreateStandartFunctions();
 	};

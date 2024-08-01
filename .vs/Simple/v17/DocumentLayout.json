@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|solutionrelative:Simple\\code.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.simple||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|solutionrelative:Simple\\code.simple||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Type.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{205F6F4D-C2D5-4C78-A8F3-0DB9B3015663}|Simple\\Simple.vcxproj|solutionrelative:Simple\\Type.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 456,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,15 +34,27 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Type.cpp",
+              "DocumentMoniker": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Type.cpp",
+              "RelativeDocumentMoniker": "Simple\\Type.cpp",
+              "ToolTip": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\Type.cpp",
+              "RelativeToolTip": "Simple\\Type.cpp",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAwwB0AAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-01T06:31:23.898Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "code.txt",
-              "DocumentMoniker": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt",
-              "RelativeDocumentMoniker": "Simple\\code.txt",
-              "ToolTip": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.txt",
-              "RelativeToolTip": "Simple\\code.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-07-25T07:34:45.654Z",
+              "Title": "code.simple",
+              "DocumentMoniker": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.simple",
+              "RelativeDocumentMoniker": "Simple\\code.simple",
+              "ToolTip": "D:\\Projects\\MYFOLDER\\C\u002B\u002B\\Simple\\Simple\\code.simple",
+              "RelativeToolTip": "Simple\\code.simple",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-01T06:29:16.342Z",
               "EditorCaption": ""
             }
           ]

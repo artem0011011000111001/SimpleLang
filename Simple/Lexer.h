@@ -59,7 +59,8 @@ namespace Simple {
 			{"," ,     TokenType::COMMA},
 			{"." ,     TokenType::DOT},
 			{"[" ,     TokenType::LSBRACKET},
-			{"]" ,     TokenType::RSBRACKET}
+			{"]" ,     TokenType::RSBRACKET},
+			{":" ,     TokenType::COLON}
 		};
 
 	private:
@@ -75,15 +76,19 @@ namespace Simple {
 	private:
 		void tokenizeNumber();
 
+		void tokenizeDigit();
+
 		void tokenizeHexNumber();
 
 		void tokenizeWord();
 
 		void tokenizeText();
 
+		void tokenizeChar();
+
 		void tokenizeOperator();
 
-		//void tokenizeNewLine();
+		void tokenizeNewLine();
 
 		void tokenizeComment();
 

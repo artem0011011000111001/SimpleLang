@@ -5,7 +5,7 @@
 
 using namespace Simple;
 
-UnaryExpression::UnaryExpression(const std::string operation, ExpressionPtr expr) : operation(operation), expr(std::move(expr)) {}
+UnaryExpression::UnaryExpression(const UnaryOperators operation, ExpressionPtr expr) : operation(operation), expr(std::move(expr)) {}
 
 //ValuePtr UnaryExpression::eval() {
 //	return get_ref().clone();
@@ -35,28 +35,28 @@ Value& UnaryExpression::eval() {
 		return std::move(newValue);
 		};
 
-	if (operation == "+")
-		ref = NUMBER(expr->eval().AsDouble());
+	/*if (operation == "+")
+		ref = NUMBER(expr->eval().AsDouble());*/
 
-	else if (operation == "-")
+	if (operation == UnaryOperators::MINUS)
 		ref = NUMBER(-expr->eval().AsDouble());
 
-	else if (operation == "!")
+	else if (operation == UnaryOperators::NOT)
 		ref = NUMBER(!(expr->eval().AsDouble()));
 
-	else if (operation == "++i") {
+	else if (operation == UnaryOperators::PRE_INC) {
 		ref = IncrementDecrement(true, true);
 	}
 
-	else if (operation == "i++") {
+	else if (operation == UnaryOperators::POST_INC) {
 		ref = IncrementDecrement(true, false);
 	}
 
-	else if (operation == "--i") {
+	else if (operation == UnaryOperators::PRE_DEC) {
 		ref = IncrementDecrement(false, true);
 	}
 
-	else if (operation == "i--") {
+	else if (operation == UnaryOperators::POST_DEC) {
 		ref = IncrementDecrement(false, false);
 	}
 

@@ -43,7 +43,7 @@ void Simple_libs::Time::Time::InitFuncs() {
 		_Date_args.push_back(std::move(minute));
 		_Date_args.push_back(std::move(second));	// Decided
 
-		VALUE temp = _Date(std::move(_Date_args));
+		VALUE temp = Functions::Get("Date")->execute(std::move(_Date_args));	
 		return std::move(temp);
 		};
 
@@ -51,22 +51,45 @@ void Simple_libs::Time::Time::InitFuncs() {
 
 	_DEFINE_FUNCTION_WITH_ARGS("sleep", [](Args_t args) {
 		std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(args.front()->AsDouble()));
-		return ZERO;
+		return VOID;
 	}, 1);
 }
 
 void Simple_libs::Time::Time::InitStructs() {
-	const size_t Date_fields_count = 6;
-	_DEFINE_STRUCT_WITH_CONSTRUCTOR("Date", _Date, Date_fields_count);
+	Fields_decl_t fields_decl = {
+		{ "year" , ValueType::_NUMBER },
+		{ "month" , ValueType::_NUMBER },
+		{ "day" , ValueType::_NUMBER },
+		{ "hour" , ValueType::_NUMBER },
+		{ "minute" , ValueType::_NUMBER },
+		{ "second" , ValueType::_NUMBER }
+	};
+
+	_DEFINE_STRUCT("Date", fields_decl);
 }
 
-VALUE Simple_libs::Time::Time::_Date(Args_t args) {
-	std::vector<std::string> fields_names = { "year", "month", "day", "hour", "minute", "second" };
-	std::unordered_map<std::string, ValuePtr> fields;
-	auto fields_names_it = fields_names.begin();
-	for (auto& arg : args) {
-		fields.emplace(*fields_names_it, arg->clone());
-		++fields_names_it;
-	}
-	return STRUCT("Date", fields);
-}
+//VALUE Simple_libs::Time::Time::_Date(Args_t args) {
+//
+//	Val_map fields;
+//	Fields_decl_t fields_decl = {
+//		{ "year" , ValueType::_NUMBER },
+//		{ "month" , ValueType::_NUMBER },
+//		{ "day" , ValueType::_NUMBER },
+//		{ "hour" , ValueType::_NUMBER },
+//		{ "minute" , ValueType::_NUMBER },
+//		{ "second" , ValueType::_NUMBER }
+//	};
+//
+//	auto fields_decl_it = fields_decl.begin();
+//	for (auto& arg : args) {
+//
+//		if (arg->GetType() != ValueType::_NUMBER)
+//			throw Simple_Error("Invalid type"); // 
+//
+//		fields.emplace(fields_decl_it->first, arg->clone());
+//
+//		++fields_decl_it;
+//	}
+//	Structs::Add("Date", fields_decl);
+//	return STRUCT("Date", fields);
+//}

@@ -7,34 +7,29 @@
 
 using namespace Simple;
 
-bool Functions::IsExist(const std::string& key) {
+bool Functions::IsExist(const String& key) {
 	return functions.find(key) != functions.end();
 }
 
-FunctionPtr Functions::Get(const std::string& key) {
+FunctionPtr Functions::Get(const String& key) {
 	if (!IsExist(key)) throw Simple_Error("Function \"" + key + "\" not defined");
 	return std::move(functions.at(key)->clone());
 }
 
-Function& Functions::GetRef(const std::string& key) {
-    if (!IsExist(key)) throw Simple_Error("Function \"" + key + "\" not defined");
-    return functions.at(key)->get_ref();
-}
-
-void Functions::Set(const std::string& key, FunctionPtr value) {
+void Functions::Set(const String& key, FunctionPtr value) {
 	if (IsExist(key)) throw Simple_Error("\"" + key + "\" is already defined");
 	else functions.emplace(key, std::move(value));
 }
 
-void Functions::RegisterDynamicFunction(const std::string& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount) {
+void Functions::RegisterDynamicFunction(const String& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount) {
     class DynamicFunction : public Function {
         std::function<ValuePtr(std::vector<ValuePtr>)> funcbody;
         size_t argscount;
     public:
-        DynamicFunction(std::function<ValuePtr(std::vector<ValuePtr>)> func, const size_t argscount)
+        DynamicFunction(std::function<VALUE(Args_t)> func, const size_t argscount)
             : funcbody(std::move(func)), argscount(argscount) {}
 
-        ValuePtr execute(std::vector<ValuePtr> args) override {
+        ValuePtr execute(Args_t args) override {
             size_t param_count = args.size();
             if (argscount != any_args)
                 if (param_count != argscount) {
@@ -45,21 +40,6 @@ void Functions::RegisterDynamicFunction(const std::string& name, std::function<V
 
         FunctionPtr clone() const override {
             return CREATE_PTR<DynamicFunction>(funcbody, argscount);
-        }
-
-        Function& get_ref() override {
-            return *this;
-        }
-
-        void set_ref(FunctionPtr& ref) override {
-            if (auto castRef = dynamic_cast<DynamicFunction*>(ref.get())) {
-                funcbody = std::move(castRef->funcbody);
-                argscount = castRef->argscount;
-            }
-            else {
-
-                throw Simple_Error("Invalid reference type");
-            }
         }
     };
 
@@ -82,4 +62,4 @@ void Functions::CreateStandartFunctions() {
         });
 }
 
-std::unordered_map<std::string, FunctionPtr> Functions::functions;
+Funcs_t Functions::functions;

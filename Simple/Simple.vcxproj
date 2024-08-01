@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,12 +130,18 @@
   <ItemGroup>
     <ClCompile Include="AbbreviatedOperationsStatement.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
+    <ClCompile Include="CharExpression.cpp" />
+    <ClCompile Include="CharValue.cpp" />
+    <ClCompile Include="ConstructorDefineStatement.cpp" />
     <ClCompile Include="BinaryExpression.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockStatement.cpp" />
     <ClCompile Include="BreakStatement.cpp" />
     <ClCompile Include="CaseStatement.cpp" />
     <ClCompile Include="ArithmeticExpression.cpp" />
+    <ClCompile Include="DigitExpression.cpp" />
+    <ClCompile Include="DigitValue.cpp" />
+    <ClCompile Include="Exception.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="Function_parsing.cpp" />
     <ClCompile Include="FunctionDefineStatement.cpp" />
@@ -150,10 +157,14 @@
     <ClCompile Include="ShortBlockStatement.cpp" />
     <ClCompile Include="Simple.cpp" />
     <ClCompile Include="StructExpression.cpp" />
+    <ClCompile Include="Structs.cpp" />
     <ClCompile Include="StructValue.cpp" />
     <ClCompile Include="Struct_parsing.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
+    <ClCompile Include="ThrowStatement.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TryCatchStatement.cpp" />
+    <ClCompile Include="TryCatch_parsing.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
     <ClCompile Include="ContinueStatement.cpp" />
@@ -187,12 +198,16 @@
     <ClCompile Include="AssigmentStatement.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="UnaryExpression.cpp" />
+    <ClCompile Include="VoidExpression.cpp" />
+    <ClCompile Include="VoidValue.cpp" />
     <ClCompile Include="WhileStatement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="Libs.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
+    <ClInclude Include="Structs.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Expressions.h" />
@@ -215,8 +230,9 @@
     <ClInclude Include="Variables.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="code.txt" />
-    <Text Include="Mathlib_test.txt" />
+    <Text Include="code.simple" />
+    <Text Include="code2.simple" />
+    <Text Include="Mathlib_test.simple" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

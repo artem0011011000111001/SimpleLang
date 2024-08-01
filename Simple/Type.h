@@ -18,6 +18,7 @@ namespace Simple_libs {
 		class Type : public Module_Base {
 			void InitVars();
 			void InitFuncs();
+			void InitStruct();
 		public:
 			void Init() override;
 		};

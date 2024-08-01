@@ -7,5 +7,6 @@
 #include "Stream.h"
 #include "Type.h"
 #include "Time.h"
+#include "Exception.h"
 
 #endif // _LIBS_H_

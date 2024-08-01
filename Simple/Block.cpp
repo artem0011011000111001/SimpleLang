@@ -7,9 +7,9 @@ StatementPtr Parser::block() {
 	BlockStatement block;
 	consume(TokenType::LBRACE);
 	while (!match(TokenType::RBRACE)) {
-		block.add(statement());
+		block.add(getNextStatement());
 	}
-	return std::make_unique<BlockStatement>(std::move(block));
+	return CREATE_PTR<BlockStatement>(std::move(block));
 }
 
 SwitchBlockStatement Parser::switchBlock() {
@@ -23,6 +23,5 @@ SwitchBlockStatement Parser::switchBlock() {
 	}
 	if (IsFirst) throw Simple_Error("Expected case or default");
 
-	return SwitchBlockStatement(std::move(block));
+	return block;
 }
-

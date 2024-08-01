@@ -6,10 +6,10 @@ Token::Token(TokenType type, std::string text) : type(type), text(text) {}
 
 std::string Token::enum_in_string() const {
 	switch (type) {
-	case TokenType::NUMBER:
+	case TokenType::NUM:
 		return "NUMBER " + text;
 
-	case TokenType::HEX_NUMBER:
+	case TokenType::HEX_NUM:
 		return "HEX_NUMBER " + text;
 
 	case TokenType::WORD:
@@ -86,6 +86,9 @@ std::string Token::enum_in_string() const {
 
 	case TokenType::SEMICOLON:
 		return "SEMICOLON";
+
+	case TokenType::COLON:
+		return "COLON";
 
 	case TokenType::EQEQ:
 		return "EQEQ";

@@ -2,6 +2,8 @@
 #include "Variables.h"
 #include "Simple_Error.h"
 
+#include <iostream>
+
 using namespace Simple;
 
 StructExpression::StructExpression(ExpressionPtr expr, std::string field_name)
@@ -14,12 +16,16 @@ StructExpression::StructExpression(ExpressionPtr expr, std::string field_name)
 //}
 
 Value& StructExpression::eval() {
-	/*if (is_request)
-		ref = expr->eval().dot(field_name)->operator[](index);*/
-	ref = expr->eval().dot(field_name);
-
-	return *ref;
+   return expr->eval().dot(field_name);
 }
+
+//StructExpression::~StructExpression() {
+//    std::cout << "destructor";
+//    if (ref) {
+//        delete ref;
+//        ref = nullptr;
+//    }
+//}
 
 //void StructExpression::SetIndex(const int index) {
 //	this->index = index;

@@ -22,12 +22,12 @@ namespace Simple {
 	};
 
 	class VariableDefineStatement : public Statement {
-		std::string name;
+		String name;
 		ExpressionPtr expr;
 		bool IsConst;
 
 	public:
-		VariableDefineStatement(std::string name, ExpressionPtr expr, bool IsConst);
+		VariableDefineStatement(String name, ExpressionPtr expr, bool IsConst);
 		void execute() override;
 	};
 
@@ -106,14 +106,14 @@ namespace Simple {
 	};
 
 	class ForStatement : public Statement {
-		std::string InitName;
+		String InitName;
 		StatementPtr initialization;
 		ExpressionPtr termination;
 		ExpressionPtr increment;
 		StatementPtr statement;
 
 	public:
-		ForStatement(std::string InitName, StatementPtr initialization, ExpressionPtr termination,
+		ForStatement(String InitName, StatementPtr initialization, ExpressionPtr termination,
 			ExpressionPtr increment, StatementPtr block);
 		void execute() override;
 	};
@@ -129,10 +129,12 @@ namespace Simple {
 	};
 
 	class ImportStatement : public Statement {
-		std::string module_name;
+		String key;
+		static Str_vec connected_modules;
+		bool isPath;
 
 	public:
-		ImportStatement(std::string module_name);
+		ImportStatement(String key, bool isPath = false);
 		void execute() override;
 	};
 
@@ -166,21 +168,6 @@ namespace Simple {
 		std::list<CaseStatement>& getCaseStatements();
 	};
 
-	/*class StructBlockStatement : public Statement {
-		std::vector<std::string> fields_names;
-		VALUE(*constructor)(Args_t) = nullptr;
-
-	public:
-		StructBlockStatement() = default;
-		void execute() override;
-
-		void add(CaseStatement statement);
-
-		void setConstructor(VALUE(*constructor)(Args_t));
-
-		std::string to_string() override;
-	};*/
-
 	class SwitchStatement : public Statement {
 		ExpressionPtr expr;
 		SwitchBlockStatement block;
@@ -191,26 +178,45 @@ namespace Simple {
 	};
 
 	class FunctionDefineStatement : public Statement {
-		std::string name;
-		std::pair<std::list<std::string>, std::list<bool>> argsParam;
+		String name;
+		ArgsParam_t argsParam;
 		StatementPtr statement;
 
-		std::function <ValuePtr(std::vector<ValuePtr>)> TurnFuncFromVoidToValuePtr(StatementPtr& statement);
-
+		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement);
 	public:
-		FunctionDefineStatement(std::string name, std::pair<std::list<std::string>, std::list<bool>>, StatementPtr statement);
+		FunctionDefineStatement(String name, ArgsParam_t argsParam, StatementPtr statement);
 
+		void execute() override;
+
+		virtual ~FunctionDefineStatement() = default;
+	};
+
+	class ConstructorDefineStatement : public Statement {
+		String name;
+		ArgsParam_t argsParam;
+		StatementPtr statement;
+		Fields_decl_t fields_params;
+
+		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement);
+	public:
+		ConstructorDefineStatement(String name, ArgsParam_t argsParam, StatementPtr statement, Fields_decl_t fields_params);
 		void execute() override;
 	};
 
 	class ReturnStatement : public Statement {
 		ExpressionPtr expr;
 
+		friend class FunctionDefineStatement;
 	public:
 		ReturnStatement(ExpressionPtr expr);
 		void execute() override;
 
 		const ExpressionPtr& GetExpression() const;
+
+		struct ReturnValue {
+			ValuePtr value;
+			ReturnValue(ValuePtr value);
+		};
 	};
 
 	class ExpressionStatement : public Statement {
@@ -218,6 +224,26 @@ namespace Simple {
 
 	public:
 		ExpressionStatement(ExpressionPtr expr);
+		void execute() override;
+	};
+
+	class TryCatchStatement : public Statement {
+
+		StatementPtr tryBlock;
+		String key;
+		bool isConst;
+		String type_in_str;
+		StatementPtr catchBlock;
+	public:
+		TryCatchStatement(StatementPtr tryBlock, const String& key, bool isConst, const String& type_in_str, StatementPtr catchBlock);
+		void execute() override;
+	};
+
+	class ThrowStatement : public Statement {
+
+		ExpressionPtr expr;
+	public:
+		ThrowStatement(ExpressionPtr expr);
 		void execute() override;
 	};
 }

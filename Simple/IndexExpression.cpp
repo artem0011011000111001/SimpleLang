@@ -11,6 +11,5 @@ IndexExpression::IndexExpression(ExpressionPtr expr, ExpressionPtr pos)
 //}
 
 Value& IndexExpression::eval() {
-	ref = expr->eval().operator[](static_cast<int>(pos->eval().AsDouble()));
-	return *ref;
+	return expr->eval().operator[](static_cast<int>(pos->eval().AsDouble()));
 }

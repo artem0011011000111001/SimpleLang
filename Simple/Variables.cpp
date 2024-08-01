@@ -45,6 +45,16 @@ const std::unordered_map<std::string, Variable>& Variables::GetAllVariables() {
 }
 
 void Variables::Set(const std::string& key, Variable value) {
+	auto CheckInvalidName = [key](std::string invalidName) {
+		if (key == invalidName)
+			throw Simple_Error("\"" + invalidName + "\" invalid name");
+		};
+
+	CheckInvalidName("true");
+	CheckInvalidName("false");
+	CheckInvalidName("void");
+	CheckInvalidName("this");
+
 	bool IsIsExist = IsExist(key);
 	if (IsIsExist && IsConstant(key)) throw Simple_Error("\"" + key + "\" is const");
 	else if (IsIsExist) variables[key] = std::move(value);

@@ -30,13 +30,34 @@ namespace Simple {
 		Value& eval() override;
 	};
 
+	class DigitExpression : public Expression {
+
+		double value;
+		ValuePtr ref;
+	public:
+		DigitExpression(double value);
+		//ValuePtr eval() override;
+		Value& eval() override;
+	};
+
 	class StringExpression : public Expression {
 
-		std::string value;
+		String value;
 		ValuePtr ref;
 	public:
 
-		StringExpression(std::string value);
+		StringExpression(String value);
+		//ValuePtr eval() override;
+		Value& eval() override;
+	};
+
+	class CharExpression : public Expression {
+
+		String value;
+		ValuePtr ref;
+	public:
+
+		CharExpression(String value);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
@@ -56,21 +77,21 @@ namespace Simple {
 	class UnaryExpression : public Expression {
 
 		const ExpressionPtr expr;
-		const std::string operation;
+		const UnaryOperators operation;
 		ValuePtr ref;
 	public:
 
-		UnaryExpression(const std::string operation, ExpressionPtr expr);
+		UnaryExpression(const UnaryOperators operation, ExpressionPtr expr);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
 
 	class VariableExpression : public Expression {
 
-		std::string name;
+		String name;
 	public:
 
-		VariableExpression(const std::string& name);
+		VariableExpression(const String& name);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
@@ -89,12 +110,12 @@ namespace Simple {
 
 	class FunctionalExpression : public Expression {
 
-		std::string name;
+		String name;
 		std::vector<ExpressionPtr> args;
 		ValuePtr ref;
 	public:
 		
-		FunctionalExpression(std::string name, std::vector<ExpressionPtr> args = {});
+		FunctionalExpression(String name, std::vector<ExpressionPtr> args = {});
 		//ValuePtr eval() override;
 		Value& eval() override;
 
@@ -104,29 +125,31 @@ namespace Simple {
 	class StructExpression : public Expression {
 
 		ExpressionPtr expr;
-		std::string field_name;
-		ValuePtr ref;
-
-		// for requests struct.field.field and struct.field[0]
-		/*bool is_request = false;
-		int index = -1;*/
+		String field_name;
 	public:
 
-		StructExpression(ExpressionPtr expr, std::string field_name);
-		//ValuePtr eval() override;
-		Value& eval() override;
+		StructExpression(ExpressionPtr expr, String field_name);
 
-		//void SetIndex(const int index);
+		Value& eval() override;
+	};
+
+	class VoidExpression : public Expression {
+
+		ValuePtr ref;
+	public:
+
+		VoidExpression() = default;
+
+		Value& eval() override;
 	};
 
 	class IndexExpression : public Expression {
 
 		ExpressionPtr expr;
 		ExpressionPtr pos;
-		ValuePtr ref;
 	public:
 		IndexExpression(ExpressionPtr expr, ExpressionPtr pos);
-		//ValuePtr eval() override;
+
 		Value& eval() override;
 	};
 }

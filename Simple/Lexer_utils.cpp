@@ -23,12 +23,11 @@ char Lexer::next() {
 	return peek(0);
 }
 
-bool Simple::Lexer::IsWord(const char c)
-{
+bool Lexer::IsWord(const char c) {
 	return std::isalnum(c) || c == '_' || c == '$';
 }
 
-bool Simple::Lexer::IsHex(const char c) {
+bool Lexer::IsHex(const char c) {
 	return std::isdigit(c) || indexOf(std::string("abcdef"), std::tolower(c)) != simple_npos;
 }
 

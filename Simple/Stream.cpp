@@ -19,14 +19,14 @@ void Simple_libs::Stream::Stream::InitFuncs() {
 		for (const auto& arg : args) {
 			std::cout << arg->AsString();
 		}
-		return ZERO;
+		return VOID;
 		});
 	_DEFINE_FUNCTION("outputln", [](Args_t args) {
 		size_t param_count = args.size();
 		for (const auto& arg : args) {
 			std::cout << arg->AsString() << std::endl;
 		}
-		return ZERO;
+		return VOID;
 		});
 	_DEFINE_FUNCTION("input", [](Args_t args) -> VALUE {
 		size_t param_count = args.size();

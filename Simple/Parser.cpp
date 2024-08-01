@@ -22,12 +22,26 @@ GlobalBlockStatement Parser::parse() {
 		/*StatementPtr CurrentStatement = statement();
 		CurrentStatement->execute();
 		result.add(std::move(CurrentStatement));*/
-		result.add(statement());
+		result.add(getNextGlobalStatement());
 	}
 	return result;
 }
 
-StatementPtr Parser::statement() {
+StatementPtr Parser::getNextGlobalStatement() {
+
+	if (match(TokenType::IMPORT))
+		return Import();
+
+	else if (match(TokenType::FUNC))
+		return FunctionDefine();
+
+	else if (match(TokenType::STRUCT))
+		return StructDefine();
+
+	else return getNextStatement();
+}
+
+StatementPtr Parser::getNextStatement() {
 	if (match(TokenType::CONST)) {
 		StatementPtr result = ConstVariableDefine();
 		CHECK_END_STR;
@@ -56,19 +70,31 @@ StatementPtr Parser::statement() {
 		return Continue();
 
 	else if (match(TokenType::IMPORT))
-		return Import();
+		throw Simple_Error("Cannot be imported not in global visibility", line);
 
 	else if (match(TokenType::SWITCH))
 		return Switch();
 
 	else if (match(TokenType::FUNC))
-		return FunctionDefine();
+		throw Simple_Error("You cannot declare a function not in global visibility", line);
 
 	else if (match(TokenType::RETURN))
 		return Return();
 
 	else if (match(TokenType::STRUCT))
-		return StructDefine();
+		throw Simple_Error("You cannot declare a struct not in global visibility", line);
+
+	else if (match(TokenType::FIELD))
+		throw Simple_Error("Keyword field cannot be used here");
+
+	else if (match(TokenType::TRY))
+		return TryCatch();
+
+	else if (match(TokenType::THROW)) {
+		StatementPtr result = Throw();
+		CHECK_END_STR;
+		return std::move(result);
+	}
 
 	else if (get(0).getType() == TokenType::WORD && get(1).getType() == TokenType::EQ) {
 		StatementPtr result = VariableDefine();
@@ -105,7 +131,7 @@ StatementPtr Parser::statementOrBlock() {
 	{
 		VariablesBefore[var.first] = var.second->clone();
 	}*/
-	return CREATE_PTR<ShortBlockStatement>(std::move(statement()));
+	return CREATE_PTR<ShortBlockStatement>(std::move(getNextStatement()));
 }
 
 //StatementPtr Parser::NewLine() {

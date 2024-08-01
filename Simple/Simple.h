@@ -22,7 +22,9 @@
 #include "Libs.h"
 
 namespace Simple {
-	static void RegisterStandartModules();
+	std::string ReadCodeFromFile(std::string path);
+	void RegisterStandartModules();
+	void HandleErrors(void (*func)(std::string), std::string code);
 	void compile(std::string& code);
 }
 

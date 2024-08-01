@@ -5,19 +5,29 @@
 
 using namespace Simple;
 
-StringValue::StringValue(const std::string value) 
-	: value(value) {}
+StringValue::StringValue(const std::string& value) 
+	: value([this, value]() {
+			std::vector<CharValue> result;
+			for (auto& Char : value) {
+				result.push_back(std::string(1, Char));
+			}
+			return result;
+		}()) {}
 
-double StringValue::AsDouble() {
-	return strict_stod(value);
+double StringValue::AsDouble() const {
+	return strict_stod(AsString());
 }
 
-std::string StringValue::AsString() {
-	return value;
+std::string StringValue::AsString() const {
+	std::string result;
+	for (auto& Char : value) {
+		result.push_back(Char.AsString()[0]);
+	}
+	return result;
 }
 
 ValuePtr StringValue::clone() const {
-	return STRING(value);
+	return STRING(AsString());
 }
 
 Value& StringValue::get_ref() {
@@ -29,21 +39,22 @@ void StringValue::set_ref(ValuePtr& ref) {
 		value = stringRef->value;
 	}
 	else {
-		throw Simple_Error("Invalid reference type");
+		throw Simple_Error("Invalid type");
 	}
 }
 
 ValueType StringValue::GetType() const {
-	return ValueType::STRING;
+	return ValueType::_STRING;
 }
 
 std::string StringValue::GetTypeInString() const {
-	return "\"String\"";
+	return "str";
 }
 
 ValuePtr StringValue::operator+(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return STRING(value + other->AsString());
+	if (other->GetType() == ValueType::_STRING || other->GetType() == ValueType::_CHAR)
+		return STRING(AsString() + other->AsString());
+
 	throw Simple_Error("+ There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
@@ -53,11 +64,11 @@ ValuePtr StringValue::operator-(const ValuePtr& other) const {
 }
 
 ValuePtr StringValue::operator*(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::NUMBER) {
+	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_) {
 		auto result = [this, &other]() {
 			std::string result;
 			for (size_t i = 0, size = (size_t)other->AsDouble(); i < size; i++) {
-				result += value;
+				result += AsString();
 			}
 			return result;
 			};
@@ -72,81 +83,82 @@ ValuePtr StringValue::operator/(const ValuePtr& other) const {
 }
 
 ValuePtr StringValue::operator++() {
-	throw Simple_Error("++str There is no operator corresponding");
+	throw Simple_Error("++i There is no operator corresponding");
 }
 
 ValuePtr StringValue::operator++(int) {
-	throw Simple_Error("str++ There is no operator corresponding");
+	throw Simple_Error("i++ There is no operator corresponding");
 }
 
 ValuePtr StringValue::operator--() {
-	throw Simple_Error("--str There is no operator corresponding");
+	throw Simple_Error("--i There is no operator corresponding");
 }
 
 ValuePtr StringValue::operator--(int) {
-	throw Simple_Error("str-- There is no operator corresponding");
+	throw Simple_Error("i-- There is no operator corresponding");
 }
 
 bool StringValue::operator<(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value < other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() < other->AsString();
 
 	throw Simple_Error("< There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
 bool StringValue::operator>(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value > other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() > other->AsString();
 
 	throw Simple_Error("> There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
 bool StringValue::operator<=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value <= other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() <= other->AsString();
 
 	throw Simple_Error("<= There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
 bool StringValue::operator>=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value >= other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() >= other->AsString();
 
 	throw Simple_Error(">= There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
 bool StringValue::operator==(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value == other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() == other->AsString();
 
 	throw Simple_Error("== There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
 bool StringValue::operator!=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::STRING)
-		return value != other->AsString();
+	if (other->GetType() == ValueType::_STRING)
+		return AsString() != other->AsString();
 
 	throw Simple_Error("!= There is no operator corresponding to these operands: "
 		+ GetTypeInString() + " " + other->GetTypeInString());
 }
 
-ValuePtr StringValue::operator[](int pos) const {
-	if (pos >= value.length())
+Value& StringValue::operator[](int pos) {
+	if (pos >= AsString().length())
 		throw Simple_Error("Pos greater than string length");
 	else if (pos < 0)
 		throw Simple_Error("Pos cannot be negative");
-	return STRING(std::string(1, value[pos]));
+
+	return value[pos].get_ref();
 }
 
 ValuePtr StringValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-ValuePtr StringValue::dot(const std::string& key) const {
+Value& StringValue::dot(const std::string& key) const {
 	throw Simple_Error("String does not have a member named \"" + key + "\"");
 }

@@ -13,6 +13,7 @@ namespace Simple {
 		std::vector<Token> tokens;
 		const size_t size;
 		size_t pos;
+		size_t line = 1;
 
 	public:
 		Parser(const std::list<Token>& tokens);
@@ -31,7 +32,9 @@ namespace Simple {
 
 		StatementPtr statementOrBlock();
 
-		StatementPtr statement();
+		StatementPtr getNextGlobalStatement();
+
+		StatementPtr getNextStatement();
 
 		StatementPtr Assignment(ExpressionPtr expr);
 
@@ -55,11 +58,17 @@ namespace Simple {
 
 		StatementPtr ConstVariableDefine();
 
+		void AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body);
+
 		StatementPtr FunctionDefine();
 
 		StatementPtr StructDefine();
 
 		StatementPtr Return();
+
+		StatementPtr TryCatch();
+
+		StatementPtr Throw();
 
 		//StatementPtr NewLine();
 
@@ -87,6 +96,8 @@ namespace Simple {
 		ExpressionPtr primary();
 
 	private:
+
+		void skip_newlines();
 
 		Token get(const size_t relativePosition);
 

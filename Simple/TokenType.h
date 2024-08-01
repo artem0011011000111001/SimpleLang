@@ -7,10 +7,12 @@ namespace Simple {
 
 	enum class TokenType {
 		// Types
-		NUMBER,
-		HEX_NUMBER,
+		NUM,
+		HEX_NUM,
 		WORD,
 		TEXT,
+		CHAR_,
+		DIGIT_,
 
 		// Keywords
 		CONST,
@@ -28,6 +30,10 @@ namespace Simple {
 		FUNC,
 		RETURN,
 		STRUCT,
+		FIELD,
+		TRY,
+		CATCH,
+		THROW,
 
 		// Operators
 		PLUS,          //   +
@@ -63,7 +69,9 @@ namespace Simple {
 		DOT,           //   .
 		LSBRACKET,     //   [
 		RSBRACKET,     //   ]
+		COLON,		   //   :
 
+		NEW_LINE,
 		END_OF_FILE
 	};
 }

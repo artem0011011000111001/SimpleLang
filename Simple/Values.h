@@ -17,8 +17,8 @@ namespace Simple {
 	class Value {
 
 	public:
-		virtual double AsDouble() = 0;
-		virtual std::string AsString() = 0;
+		virtual double AsDouble() const = 0;
+		virtual std::string AsString() const = 0;
 
 		virtual ValuePtr clone() const = 0;
 		virtual Value& get_ref() = 0;
@@ -44,25 +44,65 @@ namespace Simple {
 		virtual bool operator==(const ValuePtr& other) const = 0;
 		virtual bool operator!=(const ValuePtr& other) const = 0;
 
-		virtual ValuePtr operator[](int pos) const = 0;
+		virtual Value& operator[](int pos) = 0;
 
 		virtual ValuePtr power(const ValuePtr& other) const = 0;
-		virtual ValuePtr dot(const std::string& key) const = 0;
+		virtual Value& dot(const std::string& key) const = 0;
 
 		virtual ~Value() = default;
+	};
+
+	class DigitValue : public Value {
+
+		double value;
+
+	public:
+		DigitValue(const double value);
+		DigitValue() = default;
+
+		double AsDouble() const override;
+		std::string AsString() const override;
+
+		ValuePtr clone() const override;
+		Value& get_ref() override;
+		void set_ref(ValuePtr& ref) override;
+
+		ValueType GetType() const override;
+		std::string GetTypeInString() const override;
+
+		ValuePtr operator+(const ValuePtr& other) const override;
+		ValuePtr operator-(const ValuePtr& other) const override;
+		ValuePtr operator*(const ValuePtr& other) const override;
+		ValuePtr operator/(const ValuePtr& other) const override;
+
+		ValuePtr operator++() override;
+		ValuePtr operator++(int) override;
+		ValuePtr operator--() override;
+		ValuePtr operator--(int) override;
+
+		bool operator<(const ValuePtr& other) const override;
+		bool operator>(const ValuePtr& other) const override;
+		bool operator<=(const ValuePtr& other) const override;
+		bool operator>=(const ValuePtr& other) const override;
+		bool operator==(const ValuePtr& other) const override;
+		bool operator!=(const ValuePtr& other) const override;
+
+		Value& operator[](int pos) override;
+
+		ValuePtr power(const ValuePtr& other) const override;
+		Value& dot(const std::string& key) const override;
 	};
 
 	class NumberValue : public Value {
 
 		double value;
-		ValuePtr ref;
 
 	public:
 		NumberValue(const double value);
 		NumberValue() = default;
 
-		double AsDouble() override;
-		virtual std::string AsString() override;
+		double AsDouble() const override;
+		std::string AsString() const override;
 
 		ValuePtr clone() const override;
 		Value& get_ref() override;
@@ -88,23 +128,63 @@ namespace Simple {
 		bool operator==(const ValuePtr& other) const override;
 		bool operator!=(const ValuePtr& other) const override;
 
-		ValuePtr operator[](int pos) const override;
+		Value& operator[](int pos) override;
 
 		ValuePtr power(const ValuePtr& other) const override;
-		ValuePtr dot(const std::string& key) const override;
+		Value& dot(const std::string& key) const override;
+	};
+
+	class CharValue : public Value {
+
+		std::string value;
+
+	public:
+		CharValue(const std::string& value);
+		CharValue() = default;
+
+		double AsDouble() const override;
+		std::string AsString() const override;
+
+		ValuePtr clone() const override;
+		Value& get_ref() override;
+		void set_ref(ValuePtr& ref) override;
+
+		ValueType GetType() const override;
+		std::string GetTypeInString() const override;
+
+		ValuePtr operator+(const ValuePtr& other) const override;
+		ValuePtr operator-(const ValuePtr& other) const override;
+		ValuePtr operator*(const ValuePtr& other) const override;
+		ValuePtr operator/(const ValuePtr& other) const override;
+
+		ValuePtr operator++() override;
+		ValuePtr operator++(int) override;
+		ValuePtr operator--() override;
+		ValuePtr operator--(int) override;
+
+		bool operator<(const ValuePtr& other) const override;
+		bool operator>(const ValuePtr& other) const override;
+		bool operator<=(const ValuePtr& other) const override;
+		bool operator>=(const ValuePtr& other) const override;
+		bool operator==(const ValuePtr& other) const override;
+		bool operator!=(const ValuePtr& other) const override;
+
+		Value& operator[](int pos) override;
+
+		ValuePtr power(const ValuePtr& other) const override;
+		Value& dot(const std::string& key) const override;
 	};
 
 	class StringValue : public Value {
 
-		std::string value;
-		ValuePtr ref;
+		std::vector<CharValue> value;
 
 	public:
-		StringValue(const std::string value);
+		StringValue(const std::string& value);
 		StringValue() = default;
 
-		double AsDouble() override;
-		virtual std::string AsString() override;
+		double AsDouble() const override;
+		std::string AsString() const override;
 
 		ValuePtr clone() const override;
 		Value& get_ref() override;
@@ -130,24 +210,23 @@ namespace Simple {
 		bool operator==(const ValuePtr& other) const override;
 		bool operator!=(const ValuePtr& other) const override;
 
-		ValuePtr operator[](int pos) const override;
+		Value& operator[](int pos) override;
 
 		ValuePtr power(const ValuePtr& other) const override;
-		ValuePtr dot(const std::string& key) const override;
+		Value& dot(const std::string& key) const override;
 	};
 
 	class StructValue : public Value {
 
 		std::string name;
-		std::unordered_map<std::string, ValuePtr> fields;
-		ValuePtr ref = nullptr;
+		Val_map fields;
 
 	public:
-		StructValue(const std::string& name, std::unordered_map<std::string, ValuePtr> fields);
+		StructValue(const std::string& name, Val_map fields);
 		StructValue() = default;
 
-		double AsDouble() override;
-		virtual std::string AsString() override;
+		double AsDouble() const override;
+		std::string AsString() const override;
 
 		ValuePtr clone() const override;
 		Value& get_ref() override;
@@ -173,10 +252,51 @@ namespace Simple {
 		bool operator==(const ValuePtr& other) const override;
 		bool operator!=(const ValuePtr& other) const override;
 
-		ValuePtr operator[](int pos) const override;
+		Value& operator[](int pos) override;
 
 		ValuePtr power(const ValuePtr& other) const override;
-		ValuePtr dot(const std::string& key) const override;
+		Value& dot(const std::string& key) const override;
+
+		int fields_count();
+
+		std::vector<std::string> fields_names();
+	};
+
+	class VoidValue : public Value {
+	public:
+		VoidValue() = default;
+
+		double AsDouble() const override;
+		std::string AsString() const override;
+
+		ValuePtr clone() const override;
+		Value& get_ref() override;
+		void set_ref(ValuePtr& ref) override;
+
+		ValueType GetType() const override;
+		std::string GetTypeInString() const override;
+
+		ValuePtr operator+(const ValuePtr& other) const override;
+		ValuePtr operator-(const ValuePtr& other) const override;
+		ValuePtr operator*(const ValuePtr& other) const override;
+		ValuePtr operator/(const ValuePtr& other) const override;
+
+		ValuePtr operator++() override;
+		ValuePtr operator++(int) override;
+		ValuePtr operator--() override;
+		ValuePtr operator--(int) override;
+
+		bool operator<(const ValuePtr& other) const override;
+		bool operator>(const ValuePtr& other) const override;
+		bool operator<=(const ValuePtr& other) const override;
+		bool operator>=(const ValuePtr& other) const override;
+		bool operator==(const ValuePtr& other) const override;
+		bool operator!=(const ValuePtr& other) const override;
+
+		Value& operator[](int pos) override;
+
+		ValuePtr power(const ValuePtr& other) const override;
+		Value& dot(const std::string& key) const override;
 	};
 }
 #endif // _VALUES_H_

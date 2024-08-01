@@ -8,6 +8,7 @@
 #include "Variables.h"
 #include "Function.h"
 #include "Functions.h"
+#include "Structs.h"
 
 #include <string>
 #include <memory>

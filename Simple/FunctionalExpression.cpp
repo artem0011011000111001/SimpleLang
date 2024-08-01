@@ -8,11 +8,11 @@
 using namespace Simple;
 
 
-FunctionalExpression::FunctionalExpression(std::string name, std::vector<ExpressionPtr> args) 
+FunctionalExpression::FunctionalExpression(String name, std::vector<ExpressionPtr> args)
 	: name(name), args(std::move(args)) {}
 
 Value& FunctionalExpression::eval() {
-	std::vector<ValuePtr> values;
+	Args_t values;
 	values.reserve(args.size());
 
 	for (const auto& arg : args) {

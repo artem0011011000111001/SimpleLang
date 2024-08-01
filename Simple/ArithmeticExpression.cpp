@@ -54,34 +54,28 @@ ExpressionPtr Parser::power() {
 ExpressionPtr Parser::Unary() {
 
 	if (match(TokenType::MINUS))
-		return CREATE_PTR<UnaryExpression>("-", std::move(primary()));
+		return CREATE_PTR<UnaryExpression>(UnaryOperators::MINUS, std::move(primary()));
 
 	if (match(TokenType::PLUS))
 		return primary();
 
 	if (match(TokenType::EXCL))
-		return CREATE_PTR<UnaryExpression>("!", std::move(primary()));
+		return CREATE_PTR<UnaryExpression>(UnaryOperators::NOT, std::move(primary()));
 
 	if (match(TokenType::PLUSPLUS)) {
-		return CREATE_PTR<UnaryExpression>("++i", std::move(primary()));
+		return CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_INC, std::move(primary()));
 	}
 
 	if (match(TokenType::MINUSMINUS)) {
-		return CREATE_PTR<UnaryExpression>("--i", std::move(primary()));
+		return CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_DEC, std::move(primary()));
 	}
 
-	ExpressionPtr expr = primary();
-
-	if (match(TokenType::PLUSPLUS))
-		return CREATE_PTR<UnaryExpression>("i++", std::move(expr));
-
-	if (match(TokenType::MINUSMINUS))
-		return CREATE_PTR<UnaryExpression>("i--", std::move(expr));
+	ExpressionPtr expr = primary(); ///////////////
 
 	ExpressionPtr result = std::move(expr);
 	while (true) {
 		if (match(TokenType::DOT)) {
-			std::string field_name = consume(TokenType::WORD).getText();
+			String field_name = consume(TokenType::WORD).getText();
 			result = CREATE_PTR<StructExpression>(std::move(result), field_name);
 		}
 
@@ -91,6 +85,12 @@ ExpressionPtr Parser::Unary() {
 
 			result = CREATE_PTR<IndexExpression>(std::move(result), std::move(pos));
 		}
+
+		else if (match(TokenType::PLUSPLUS))
+			result = CREATE_PTR<UnaryExpression>(UnaryOperators::POST_INC, std::move(result));
+
+		else if (match(TokenType::MINUSMINUS))
+			result = CREATE_PTR<UnaryExpression>(UnaryOperators::POST_DEC, std::move(result));
 
 		else break;
 	}
@@ -108,35 +108,31 @@ ExpressionPtr Parser::primary() {
 			return Function();
 	}
 
-	/*if ((
-		CurrentToken.getType() == TokenType::WORD ||
-		CurrentToken.getType() == TokenType::TEXT ||
-		CurrentToken.getType() == TokenType::HEX_NUMBER)
-		&& !in_processing)
-		if (get(1).getType() == TokenType::DOT)
-			return Struct();
-		else if (get(1).getType() == TokenType::LSBRACKET)
-			return Index();*/
-
 	if (match(TokenType::WORD)) {
 		if (get(-1).getText() == "true")
 			return CREATE_PTR<NumberExpression>(1);
-		if (get(-1).getText() == "false")
+		else if (get(-1).getText() == "false")
 			return CREATE_PTR<NumberExpression>(0);
+		else if (get(-1).getText() == "void")
+			return CREATE_PTR<VoidExpression>();
 		else
 			return CREATE_PTR<VariableExpression>(CurrentToken.getText());
 	}
 
-	if (match(TokenType::NUMBER)) {
-		double temp = std::stod(CurrentToken.getText());
-		return CREATE_PTR<NumberExpression>(temp);
-	}
+	if (match(TokenType::NUM))
+		return CREATE_PTR<NumberExpression>(std::stod(CurrentToken.getText()));
 
-	if (match(TokenType::HEX_NUMBER))
+	if (match(TokenType::DIGIT_))
+		return CREATE_PTR<DigitExpression>(std::stod(CurrentToken.getText()));
+
+	if (match(TokenType::HEX_NUM))
 		return CREATE_PTR<NumberExpression>(stoihex(CurrentToken.getText()));
 
 	if (match(TokenType::TEXT))
 		return CREATE_PTR<StringExpression>(CurrentToken.getText());
+
+	if (match(TokenType::CHAR_))
+		return CREATE_PTR<CharExpression>(CurrentToken.getText());
 
 	if (match(TokenType::LPAREN)) {
 		ExpressionPtr result = expression();
@@ -148,7 +144,7 @@ ExpressionPtr Parser::primary() {
 }
 
 ExpressionPtr Parser::Function() {
-	std::string name = consume(TokenType::WORD).getText();
+	String name = consume(TokenType::WORD).getText();
 	consume(TokenType::LPAREN);
 
 	FunctionalExpression function(name);
@@ -159,19 +155,5 @@ ExpressionPtr Parser::Function() {
 			throw Simple_Error("Expression required");
 	}
 
-	/*ExpressionPtr result = CREATE_PTR<FunctionalExpression>(std::move(function));
-	while (true) {
-		if (match(TokenType::DOT)) {
-			std::string field_name = consume(TokenType::WORD).getText();
-			result = CREATE_PTR<StructExpression>(std::move(result), field_name);
-		}
-		else if (match(TokenType::LSBRACKET)) {
-			ExpressionPtr pos = expression();
-			consume(TokenType::RSBRACKET);
-
-			result = CREATE_PTR<IndexExpression>(std::move(result), std::move(pos));
-		}
-		else break;
-	}*/
 	return CREATE_PTR<FunctionalExpression>(std::move(function));
 }

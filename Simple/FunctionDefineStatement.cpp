@@ -7,17 +7,14 @@
 using namespace Simple;
 
 
-std::function<ValuePtr(std::vector<ValuePtr>)> FunctionDefineStatement::TurnFuncFromVoidToValuePtr(StatementPtr& statement) {
-	return [&statement, this](std::vector<ValuePtr> args) -> ValuePtr {
-		std::unordered_map<std::string, Variable> savedGlobals;
+std::function<VALUE(Args_t)> FunctionDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement) {
+	return [&statement, this](Args_t args) -> VALUE {
+		Vars_t savedGlobals;
 		try {
 			Variables::PushState();
+			create_arguments(argsParam, args, savedGlobals);
 
-			/*for (auto& arg : args) {
-				Variables::Set(*argIt, std::move(arg));
-				++argIt;
-			}*/
-			auto argNameIt = argsParam.first.begin();
+			/*auto argNameIt = argsParam.first.begin();
 			auto argIsConstIt = argsParam.second.begin();
 			for (auto& arg : args) {
 				if (Variables::IsExist(*argNameIt)) {
@@ -25,33 +22,29 @@ std::function<ValuePtr(std::vector<ValuePtr>)> FunctionDefineStatement::TurnFunc
 				}
 				Variables::SetNew(*argNameIt, Variable(std::move(arg), *argIsConstIt));
 				++argNameIt;
-			}
+			}*/
 
 			statement->execute();
 
-			for (const auto& var : savedGlobals) {
-				Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
-			}
-
+			disassemble_arguments(savedGlobals);
 			Variables::PopState();
-			return ZERO;
+
+			return VOID;
 		}
-		catch (ValuePtr& ReturnValue) {
+		catch (ReturnStatement::ReturnValue& ReturnValue) {
 			//ValuePtr result = Return.GetExpression()->eval();
 
-			for (const auto& var : savedGlobals) {
-				Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
-			}
+			disassemble_arguments(savedGlobals);
 
 			Variables::PopState();
-			return std::move(ReturnValue);
+			return std::move(ReturnValue.value);
 		}
 		};
 }
 
-FunctionDefineStatement::FunctionDefineStatement(std::string name, std::pair<std::list<std::string>, std::list<bool>> argsParam, StatementPtr statement)
+FunctionDefineStatement::FunctionDefineStatement(String name, ArgsParam_t argsParam, StatementPtr statement)
 	: statement(std::move(statement)), name(std::move(name)), argsParam(std::move(argsParam)) {}
 
 void FunctionDefineStatement::execute() {
-	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToValuePtr(statement), { argsParam.first.size() });
+	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToVALUE(statement), { argsParam.first.size() });
 }

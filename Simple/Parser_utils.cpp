@@ -9,18 +9,32 @@ Token Parser::get(const size_t relativePosition) {
 	return tokens.at(position);
 }
 
+void Parser::skip_newlines() {
+	while (get(0).getType() == TokenType::NEW_LINE) {
+		pos++, line++;
+	}
+}
+
 bool Parser::match(const TokenType type) {
+	skip_newlines();
+
 	const Token CurrentToken = get(0);
 	if (type != CurrentToken.getType()) return false;
 	pos++;
+
 	return true;
 }
 
 Token Parser::consume(const TokenType type) {
-	if (!match(type)) {
-		throw Simple_Error("Expected " + Token(type, "").enum_in_string());
+	skip_newlines();
+
+	const Token CurrentToken = get(0);
+	if (type != CurrentToken.getType()) {
+		throw Simple_Error("Expected " + Token(type, "").enum_in_string(), line);
 	}
-	return get(-1);
+	pos++;
+
+	return CurrentToken;
 }
 
 int Parser::stoihex(const std::string& hex)

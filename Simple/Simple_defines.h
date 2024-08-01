@@ -12,10 +12,13 @@
 #define MATH_E 2.71828182845904523536
 
 #define CREATE_PTR std::make_unique
-#define NUMBER(val) CREATE_PTR<NumberValue>(val)
-#define STRING(val) CREATE_PTR<StringValue>(val)
+#define NUMBER	CREATE_PTR<NumberValue>
+#define DIGIT	CREATE_PTR<DigitValue>
+#define STRING	CREATE_PTR<StringValue>
+#define CHAR	CREATE_PTR<CharValue>
+#define VOID	CREATE_PTR<VoidValue>()
 #define STRUCT(name, fields) CREATE_PTR<StructValue>(name, std::move(fields))
-#define BOOL(val) NUMBER(val)
+#define BOOL NUMBER
 #define ZERO NUMBER(0)
 #define TRUE NUMBER(1)
 #define FALSE NUMBER(0)
