@@ -43,7 +43,11 @@ StatementPtr Parser::getNextGlobalStatement() {
 
 StatementPtr Parser::getNextStatement() {
 	if (match(TokenType::CONST)) {
-		StatementPtr result = ConstVariableDefine();
+		StatementPtr result;
+		if (get(2).getType() == TokenType::EQ)
+			result = ConstVariableDefine();
+		else if (get(2).getType() == TokenType::LBRACE)
+			result = ConstObjectDefine();
 		CHECK_END_STR;
 		return std::move(result);
 	}
@@ -96,10 +100,17 @@ StatementPtr Parser::getNextStatement() {
 		return std::move(result);
 	}
 
-	else if (get(0).getType() == TokenType::WORD && get(1).getType() == TokenType::EQ) {
-		StatementPtr result = VariableDefine();
-		CHECK_END_STR;
-		return std::move(result);
+	else if (get(0).getType() == TokenType::WORD) {
+		if (get(1).getType() == TokenType::EQ) {
+			StatementPtr result = VariableDefine();
+			CHECK_END_STR;
+			return std::move(result);
+		}
+		else if (get(1).getType() == TokenType::LBRACE) {
+			StatementPtr result = ObjectDefine();
+			CHECK_END_STR;
+			return std::move(result);
+		}
 	}
 
 	ExpressionPtr expr = std::move(expression());

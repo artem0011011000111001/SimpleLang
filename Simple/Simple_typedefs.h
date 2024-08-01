@@ -18,21 +18,27 @@ namespace Simple {
 	struct Variable;
 	enum class ValueType;
 
+	using String = std::string;
 	template<class _PtrTy>
 	using Ptr			= std::unique_ptr<_PtrTy>;
-	using String		= std::string;
-	using Str_vec		= std::vector<String>;
+	template<class _KeyTy, class _ValTy>
+	using Map			= std::unordered_map<_KeyTy, _ValTy>;
+	template<class _ValTy>
+	using Str_map		= Map<String, _ValTy>;
+	template<class _Ty>
+	using Vec			= std::vector<_Ty>;
+	using Str_vec		= Vec<String>;
 	using ValuePtr      = Ptr<Value>;
 	using ExpressionPtr = Ptr<Expression>;
 	using StatementPtr  = Ptr<Statement>;
 	using FunctionPtr   = Ptr<Function>;
 	using VALUE			= ValuePtr;
-	using Val_map		= std::unordered_map<String, ValuePtr>;
-	using Vars_t		= std::unordered_map<String, Variable>;
-	using Funcs_t		= std::unordered_map<String, FunctionPtr>;
-	using Fields_decl_t = std::unordered_map<String, ValueType>;
-	using Structs_t		= std::unordered_map<String, Fields_decl_t>;
-	using Args_t		= std::vector<VALUE>;
+	using Val_map		= Str_map<ValuePtr>;
+	using Vars_t		= Str_map<Variable>;
+	using Funcs_t		= Str_map<FunctionPtr>;
+	using Fields_decl_t = Str_map<ValueType>;
+	using Structs_t		= Str_map<Fields_decl_t>;
+	using Args_t		= Vec<ValuePtr>;
 	using ArgsParam_t   = std::pair<std::list<String>, std::list<bool>>;
 }
 #endif // _SIMPLE_TYPEDEFS_H_

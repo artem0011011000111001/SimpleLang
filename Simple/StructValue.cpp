@@ -15,7 +15,13 @@ double StructValue::AsDouble() const {
 }
 
 std::string StructValue::AsString() const {
-	throw Simple_Error("You can't convert a structure to a string");
+	return name + " {\n" + [this]() {
+		std::string result;
+		for (auto& field : fields) {
+			result += "    " + field.first + ": " + field.second->AsString() + "\n";
+		}
+		return result;
+		}() + "}";
 }
 
 ValuePtr StructValue::clone() const {

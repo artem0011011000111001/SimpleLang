@@ -152,6 +152,7 @@
     <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="Loops_parsing.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="ObjectDefineStatement.cpp" />
     <ClCompile Include="Parser_utils.cpp" />
     <ClCompile Include="ReturnStatement.cpp" />
     <ClCompile Include="ShortBlockStatement.cpp" />

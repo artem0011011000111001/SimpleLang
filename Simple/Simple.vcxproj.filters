@@ -414,6 +414,9 @@
     <ClCompile Include="ThrowStatement.cpp">
       <Filter>src\core\AST\TryCatch</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectDefineStatement.cpp">
+      <Filter>src\core\AST\Assign</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">

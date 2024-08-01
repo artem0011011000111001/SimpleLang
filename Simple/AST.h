@@ -31,6 +31,16 @@ namespace Simple {
 		void execute() override;
 	};
 
+	class ObjectDefineStatement : public Statement {
+		String name;
+		Str_map<ExpressionPtr> fields;
+		bool IsConst;
+
+	public:
+		ObjectDefineStatement(String name, Str_map<ExpressionPtr> fields, bool IsConst);
+		void execute() override;
+	};
+
 	class AssigmentStatement : public Statement {
 		ExpressionPtr expr1;
 		ExpressionPtr expr2;

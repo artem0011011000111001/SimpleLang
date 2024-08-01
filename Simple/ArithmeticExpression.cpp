@@ -53,26 +53,27 @@ ExpressionPtr Parser::power() {
 
 ExpressionPtr Parser::Unary() {
 
+	ExpressionPtr result;
+
 	if (match(TokenType::MINUS))
-		return CREATE_PTR<UnaryExpression>(UnaryOperators::MINUS, std::move(primary()));
+		result = CREATE_PTR<UnaryExpression>(UnaryOperators::MINUS, std::move(primary()));
 
-	if (match(TokenType::PLUS))
-		return primary();
+	else if (match(TokenType::PLUS))
+		result = primary();
 
-	if (match(TokenType::EXCL))
-		return CREATE_PTR<UnaryExpression>(UnaryOperators::NOT, std::move(primary()));
+	else if (match(TokenType::EXCL))
+		result = CREATE_PTR<UnaryExpression>(UnaryOperators::NOT, std::move(primary()));
 
-	if (match(TokenType::PLUSPLUS)) {
-		return CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_INC, std::move(primary()));
+	else if (match(TokenType::PLUSPLUS)) {
+		result = CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_INC, std::move(primary()));
 	}
 
-	if (match(TokenType::MINUSMINUS)) {
-		return CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_DEC, std::move(primary()));
+	else if (match(TokenType::MINUSMINUS)) {
+		result = CREATE_PTR<UnaryExpression>(UnaryOperators::PRE_DEC, std::move(primary()));
 	}
 
-	ExpressionPtr expr = primary(); ///////////////
+	else result = primary();
 
-	ExpressionPtr result = std::move(expr);
 	while (true) {
 		if (match(TokenType::DOT)) {
 			String field_name = consume(TokenType::WORD).getText();

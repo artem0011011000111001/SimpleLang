@@ -56,7 +56,11 @@ namespace Simple {
 
 		StatementPtr VariableDefine(bool isConst = false);
 
+		StatementPtr ObjectDefine(bool isConst = false);
+
 		StatementPtr ConstVariableDefine();
+
+		StatementPtr ConstObjectDefine();
 
 		void AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body);
 

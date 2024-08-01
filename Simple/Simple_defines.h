@@ -17,7 +17,7 @@
 #define STRING	CREATE_PTR<StringValue>
 #define CHAR	CREATE_PTR<CharValue>
 #define VOID	CREATE_PTR<VoidValue>()
-#define STRUCT(name, fields) CREATE_PTR<StructValue>(name, std::move(fields))
+#define STRUCT(name, fields) CREATE_PTR<StructValue>(name, MOVE(fields))
 #define BOOL NUMBER
 #define ZERO NUMBER(0)
 #define TRUE NUMBER(1)
