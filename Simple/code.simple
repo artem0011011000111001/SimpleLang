@@ -1,3 +1,4 @@
 import System;
 
+clear_rep();
 upload_to_git("Added arrays and System library");

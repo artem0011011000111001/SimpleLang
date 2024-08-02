@@ -105,11 +105,11 @@ void Simple_libs::System::System::InitFuncs() {
 		return VOID;
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("clear_rep", BLOCK(args) {
+	_DEFINE_FUNCTION("clear_rep", BLOCK(args) {
 		CALL("run", HAND_OVER_ARGS(STRING("git pull origin master")));
 		CALL("run", HAND_OVER_ARGS(STRING("git fetch origin master")));
 		return VOID;
-	}, 1);
+	});
 }
 
 void Simple_libs::System::System::InitStructs() {
