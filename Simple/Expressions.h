@@ -111,7 +111,7 @@ namespace Simple {
 	class FunctionalExpression : public Expression {
 
 		String name;
-		std::vector<ExpressionPtr> args;
+		Vec<ExpressionPtr> args;
 		ValuePtr ref;
 	public:
 		
@@ -149,6 +149,16 @@ namespace Simple {
 		ExpressionPtr pos;
 	public:
 		IndexExpression(ExpressionPtr expr, ExpressionPtr pos);
+
+		Value& eval() override;
+	};
+
+	class ArrayExpression : public Expression {
+
+		Vec<ExpressionPtr> elements;
+		ValuePtr ref;
+	public:
+		ArrayExpression(Vec<ExpressionPtr> elements);
 
 		Value& eval() override;
 	};

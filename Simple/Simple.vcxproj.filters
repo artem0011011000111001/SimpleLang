@@ -199,6 +199,12 @@
     <Filter Include="src\core\AST\TryCatch">
       <UniqueIdentifier>{13e7970e-6621-4eb2-92ca-a888156428a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\System">
+      <UniqueIdentifier>{4f4b8b33-8fd7-48cd-a29c-a56fa22ebaf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libs\System">
+      <UniqueIdentifier>{dc04b663-6668-48cb-90f6-7423e1a661ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -417,6 +423,15 @@
     <ClCompile Include="ObjectDefineStatement.cpp">
       <Filter>src\core\AST\Assign</Filter>
     </ClCompile>
+    <ClCompile Include="ArrayValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>src\libs\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -493,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="Structs.h">
       <Filter>include\structures\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>libs\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

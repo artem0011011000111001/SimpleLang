@@ -141,6 +141,15 @@ ExpressionPtr Parser::primary() {
 		return result;
 	}
 
+	if (match(TokenType::LBRACE)) {
+		Vec<ExpressionPtr> elements;
+		while (!match(TokenType::RBRACE)) {
+			elements.push_back(expression());
+			match(TokenType::COMMA);
+		}
+		return CREATE_PTR<ArrayExpression>(std::move(elements));
+	}
+
 	else throw Simple_Error("Unknown expression");
 }
 

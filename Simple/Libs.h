@@ -8,5 +8,6 @@
 #include "Type.h"
 #include "Time.h"
 #include "Exception.h"
+#include "System.h"
 
 #endif // _LIBS_H_

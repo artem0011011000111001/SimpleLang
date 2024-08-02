@@ -1,4 +1,6 @@
 D:\Projects\MYFOLDER\C++\Simple\Simple\AbbreviatedOperationsStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\AbbreviatedOperationsStatement.obj
+D:\Projects\MYFOLDER\C++\Simple\Simple\ArrayExpression.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ArrayExpression.obj
+D:\Projects\MYFOLDER\C++\Simple\Simple\ArrayValue.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ArrayValue.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Assigment_parsing.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Assigment_parsing.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\CharExpression.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\CharExpression.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\CharValue.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\CharValue.obj
@@ -32,6 +34,7 @@ D:\Projects\MYFOLDER\C++\Simple\Simple\Structs.cpp;D:\Projects\MYFOLDER\C++\Simp
 D:\Projects\MYFOLDER\C++\Simple\Simple\StructValue.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\StructValue.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Struct_parsing.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Struct_parsing.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Switch_parsing.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Switch_parsing.obj
+D:\Projects\MYFOLDER\C++\Simple\Simple\System.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\System.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\ThrowStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\ThrowStatement.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\Time.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\Time.obj
 D:\Projects\MYFOLDER\C++\Simple\Simple\TryCatchStatement.cpp;D:\Projects\MYFOLDER\C++\Simple\Simple\x64\Debug\TryCatchStatement.obj

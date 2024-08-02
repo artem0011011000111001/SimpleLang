@@ -20,6 +20,7 @@ namespace Simple {
 		_STRING,
 		_STRUCT,
 		_VOID,
+		_ARRAY,
 		_USER_STRUCT
 	};
 
@@ -62,5 +63,6 @@ namespace Simple {
 	void copy_variables(const std::unordered_map<std::string, Variable>& from, std::unordered_map<std::string, Variable>& whom);
 	void create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<std::string, Variable>& whom);
 	void disassemble_arguments(std::unordered_map<std::string, Variable> &from);
+	void check_pos(int pos, int max_pos, const std::string& designator);
 }
 #endif // _UTILS_H_

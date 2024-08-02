@@ -147,11 +147,7 @@ bool StringValue::operator!=(const ValuePtr& other) const {
 }
 
 Value& StringValue::operator[](int pos) {
-	if (pos >= AsString().length())
-		throw Simple_Error("Pos greater than string length");
-	else if (pos < 0)
-		throw Simple_Error("Pos cannot be negative");
-
+	check_pos(pos, (int)AsString().length(), "str");
 	return value[pos].get_ref();
 }
 

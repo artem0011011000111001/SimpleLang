@@ -137,3 +137,10 @@ void Simple::disassemble_arguments(std::unordered_map<std::string, Variable>& fr
 		Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
 	}
 }
+
+void Simple::check_pos(int pos, int max_pos, const std::string& designator) {
+	if (pos >= max_pos)
+		throw Simple_Error("Pos greater than " + designator + " size");
+	else if (pos < 0)
+		throw Simple_Error("Pos cannot be negative");
+}

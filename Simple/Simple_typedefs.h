@@ -40,5 +40,6 @@ namespace Simple {
 	using Structs_t		= Str_map<Fields_decl_t>;
 	using Args_t		= Vec<ValuePtr>;
 	using ArgsParam_t   = std::pair<std::list<String>, std::list<bool>>;
+	using Elements_t	= Args_t;
 }
 #endif // _SIMPLE_TYPEDEFS_H_

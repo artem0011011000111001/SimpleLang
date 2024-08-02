@@ -129,6 +129,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbbreviatedOperationsStatement.cpp" />
+    <ClCompile Include="ArrayExpression.cpp" />
+    <ClCompile Include="ArrayValue.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
     <ClCompile Include="CharExpression.cpp" />
     <ClCompile Include="CharValue.cpp" />
@@ -162,6 +164,7 @@
     <ClCompile Include="StructValue.cpp" />
     <ClCompile Include="Struct_parsing.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
+    <ClCompile Include="System.cpp" />
     <ClCompile Include="ThrowStatement.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="TryCatchStatement.cpp" />
@@ -209,6 +212,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
     <ClInclude Include="Structs.h" />
+    <ClInclude Include="System.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Expressions.h" />

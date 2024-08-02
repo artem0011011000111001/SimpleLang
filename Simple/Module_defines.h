@@ -8,8 +8,8 @@
 #define _DEFINE_FUNCTION(designator, funcbody) \
         _DEFINE_FUNCTION_WITH_ARGS(designator, funcbody, any_args)
 
-#define _DEFINE_FUNCTION_WITH_ARGS(designator, funcbody, argscount) \
-        Functions::RegisterDynamicFunction(designator, funcbody, argscount)
+#define _DEFINE_FUNCTION_WITH_ARGS    \
+        Functions::RegisterDynamicFunction
 
 #define _DEFINE_VAR_NUM(name, value, is_const) Variables::Set(name, Variable(NUMBER(value), is_const));
 #define _DEFINE_VAR_STR(name, value, is_const) Variables::Set(name, Variable(STRING(value), is_const));

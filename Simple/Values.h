@@ -258,7 +258,6 @@ namespace Simple {
 		Value& dot(const std::string& key) const override;
 
 		int fields_count();
-
 		std::vector<std::string> fields_names();
 	};
 
@@ -297,6 +296,49 @@ namespace Simple {
 
 		ValuePtr power(const ValuePtr& other) const override;
 		Value& dot(const std::string& key) const override;
+	};
+
+	class ArrayValue : public Value {
+		
+		Elements_t elements;
+
+	public:
+		ArrayValue(Elements_t elements);
+		ArrayValue() = default;
+
+		double AsDouble() const override;
+		std::string AsString() const override;
+
+		ValuePtr clone() const override;
+		Value& get_ref() override;
+		void set_ref(ValuePtr& ref) override;
+
+		ValueType GetType() const override;
+		std::string GetTypeInString() const override;
+
+		ValuePtr operator+(const ValuePtr& other) const override;
+		ValuePtr operator-(const ValuePtr& other) const override;
+		ValuePtr operator*(const ValuePtr& other) const override;
+		ValuePtr operator/(const ValuePtr& other) const override;
+
+		ValuePtr operator++() override;
+		ValuePtr operator++(int) override;
+		ValuePtr operator--() override;
+		ValuePtr operator--(int) override;
+
+		bool operator<(const ValuePtr& other) const override;
+		bool operator>(const ValuePtr& other) const override;
+		bool operator<=(const ValuePtr& other) const override;
+		bool operator>=(const ValuePtr& other) const override;
+		bool operator==(const ValuePtr& other) const override;
+		bool operator!=(const ValuePtr& other) const override;
+
+		Value& operator[](int pos) override;
+
+		ValuePtr power(const ValuePtr& other) const override;
+		Value& dot(const std::string& key) const override;
+
+		void AddElement(ValuePtr el);
 	};
 }
 #endif // _VALUES_H_

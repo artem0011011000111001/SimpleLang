@@ -1,7 +1,3 @@
+import System;
 
-object {
-	name: "artem"
-	age: 14
-};
-
-print(object);
+upload_to_git("Added arrays and System library");

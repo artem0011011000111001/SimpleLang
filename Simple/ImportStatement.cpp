@@ -44,12 +44,7 @@ void ImportStatement::execute() {
 	if (std::find(connected_modules.begin(), connected_modules.end(), key) == connected_modules.end()) {
 		if (isPath) {
 			std::string code = ReadCodeFromFile(key);
-			std::locale::global(std::locale("C"));
-			RegisterStandartModules();
-
-			HandleErrors([](std::string code) {
-				Parser(Lexer(code).tokenize()).parse().execute();
-				}, code);
+			compile(code);
 		}
 		else {
 			auto Module = CreateModuleByName::getInstance().createInstance(key);

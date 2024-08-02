@@ -1,1 +1,1 @@
-func hello() { return 2+ 2;}
+func hello() return "Hello";

@@ -27,6 +27,7 @@ void Simple::RegisterStandartModules() {
 	RegisterModule<Simple_libs::Type::Type>("Type");
 	RegisterModule<Simple_libs::Time::Time>("Time");
 	RegisterModule<Simple_libs::Exception::Exception>("Exception");
+	RegisterModule<Simple_libs::System::System>("System");
 }
 
 void Simple::HandleErrors(void(*func)(std::string), std::string code) {

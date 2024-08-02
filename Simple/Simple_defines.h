@@ -16,6 +16,7 @@
 #define DIGIT	CREATE_PTR<DigitValue>
 #define STRING	CREATE_PTR<StringValue>
 #define CHAR	CREATE_PTR<CharValue>
+#define ARRAY	CREATE_PTR<ArrayValue>
 #define VOID	CREATE_PTR<VoidValue>()
 #define STRUCT(name, fields) CREATE_PTR<StructValue>(name, MOVE(fields))
 #define BOOL NUMBER

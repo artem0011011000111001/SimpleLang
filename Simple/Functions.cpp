@@ -17,8 +17,7 @@ FunctionPtr Functions::Get(const String& key) {
 }
 
 void Functions::Set(const String& key, FunctionPtr value) {
-	if (IsExist(key)) throw Simple_Error("\"" + key + "\" is already defined");
-	else functions.emplace(key, std::move(value));
+	functions.emplace(key, std::move(value));
 }
 
 void Functions::RegisterDynamicFunction(const String& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount) {
@@ -47,18 +46,26 @@ void Functions::RegisterDynamicFunction(const String& name, std::function<VALUE(
 }
 
 void Functions::CreateStandartFunctions() {
-    _DEFINE_FUNCTION("print", [](std::vector<ValuePtr> args) {
+    _DEFINE_FUNCTION("print", [](Args_t args) {
         for (auto& arg : args) {
             std::cout << arg->AsString();
         }
         return ZERO;
     });
 
-    _DEFINE_FUNCTION("println", [](std::vector<ValuePtr> args) {
+    _DEFINE_FUNCTION("println", [](Args_t args) {
         for (auto& arg : args) {
             std::cout << arg->AsString() << std::endl;
         }
         return ZERO;
+        });
+
+    _DEFINE_FUNCTION("Array", [](Args_t args) {
+        ArrayValue arr;
+        for (auto& arg : args) {
+            arr.AddElement(MOVE(arg));
+        }
+        return ARRAY(MOVE(arr));
         });
 }
 
