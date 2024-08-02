@@ -1,29 +1,29 @@
 Launch project:
-1. Create new .txt file.
+1. Create new .simple file.
 2. Create new .cpp file.
-3. Include "Simple.h" and "fstream".
-4. Read code from file, and call function "compile" from namespace Simple, and pass the source code as parameters.
+3. Include "Simple.h".
+4. Call "ReadCodeFromFile" from namespace Simple pass the path to the file as an argument and pass the resulting result to "compile" from namespace Simple
 5. Launch .cpp file.
 
 Language syntax:
 Variable declaration
 ```
-var = 10;       // var = 10
-var = 15;       // var = 15
-var = "String"; // var = "String"
-var2 = "Hello"; // var2 = "Hello"
-var2 = "World"; // var2 = "World"
-var2 = 5;       // var2 = 5
-var3 = 2 < 5;   // var3 = true(1)
+a = 10;       // a = 10
+a = 15;       // a = 15
+a = "String"; // a = "String"
+b = "Hello";  // b = "Hello"
+b = "World";  // b = "World"
+b = 5;        // b = 5
+c = 2 < 5;    // c = true(1)
 ```
 Const variable declaration
 ```
-const var = 10;       // var = 15
-var = 15;             // error "var" is const
-const var2 = "Hello"; // var2 = "Hello"
-var2 = "World";       // error "var2" is const
-const var3 = 2 < 5;   // var3 = true(1)
-var3 = false;         // error "var3" is const
+const a = 10;       // a = 15
+a = 15;             // error "a" is const
+const b = "Hello";  // b = "Hello"
+b = "World";        // error "b" is const
+const c = 2 < 5;    // c = true(1)
+c = false;          // error "c" is const
 ```
 Expressions
 ```
@@ -123,6 +123,15 @@ switch(2 + 2) {
 // Also available
 // keyword break
 ```
+Statement try-catch, throw
+```
+try {
+  throw "This is a thrown error";
+}
+catch(ex:str) {
+  print(ex);
+}
+```
 Function declaration
 ```
 func test_function_without_args() {
@@ -147,6 +156,31 @@ func test_function_with_short_block(x)
    print(x);
 
 test_function_with_short_block("Hello"); // output Hello
+```
+Struct declaration
+```
+struct MyStruct {
+  field x: num;
+  field y: num;
+
+  func constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  // field z: num; // this field will cause an error
+}
+
+Struct_test = MyStruct(2, 3);
+
+print(Struct_test.x); // output 2
+```
+Object declaration
+```
+test_object {
+  name: "Nick"
+  age: 15
+}
+print("Name = ", test_object.name, ", Age = ", test_object.age); // output Name = Nick, Age = 15
 ```
 Statement import
 ```
@@ -220,8 +254,18 @@ import Type;
 // Functions
 cast_number(arg) // try cast arg to number
 cast_string(arg) // try cast arg to string
-typeof(arg)      // return type name of arg
+instanseof(arg1, arg2) // returns whether the types are equal to each other
 is_const(arg)    // return is there a variable name from the passed string is constant
+
+// Structures
+typeof(value)  // fields: name: str, category: str, fields_count: num
+// Example
+println(typeof("Hello").name, typeof("Hello").category, typeof("Hello").fields_count) // output str, Primitive, 0
+is_exist(name) // fields: _var: bool, _func: bool, _struct: bool
+// Example
+func foo() {}
+a = 10;
+println(is_exist("a")._var, is_exist("foo")._func, is_exist("test")._struct) // output 1, 1, 0
 ```
 Time
 ```
@@ -237,5 +281,20 @@ system_now() // return struct Date with system date
 sleep(arg) // stops the thread at arg milliseconds
 
 // Structures
-Date(year, month, day, hour, minute, second)
+Date(year, month, day, hour, minute, second) // fields: year: num, month: num, day: num, hour: num, minute: num, second: num
+```
+Exception
+```
+// include
+import Exception;
+
+// Variables
+// None
+
+// Functions
+error(error_text) // gives error
+
+// Structures
+TypeError(error_text, type) // fields: error_text: str, type: typeof
+ValueError(error_text) // fields: error_text: str
 ```
