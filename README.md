@@ -25,6 +25,12 @@ b = "World";        // error "b" is const
 const c = 2 < 5;    // c = true(1)
 c = false;          // error "c" is const
 ```
+Array declaration
+```
+arr = {1, "Nick", 2.5};       // arr = {1, "Nick", 2.5}
+// or
+arr2 = Array(1, "Nick", 2.5); // arr = {1, "Nick", 2.5}
+```
 Expressions
 ```
 a = 2 + 3 ** 2;                  // a = 11
@@ -297,4 +303,25 @@ error(error_text) // gives error
 // Structures
 TypeError(error_text, type) // fields: error_text: str, type: typeof
 ValueError(error_text) // fields: error_text: str
+```
+System
+```
+// include
+import System;
+
+// Variables
+// None
+
+// Functions
+file_exists(file_path)           // return whether the file exists
+create_file(path)                // creates a file in the specified path
+delete_file(path)                // deletes a file in the specified path
+write(file_path, content)        // erases past content and writes new
+write_append(file_path, content) // adds new content to old
+read(file_path)                  // return content from a file
+run(command)                     // return the result of the passed command
+
+// Structures
+FileError(error_text) // fields: error: str
+file_info(file_patj)  // fields: path: str, name: str, extension: str, content: str, size: num
 ```
