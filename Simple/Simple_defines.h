@@ -19,10 +19,11 @@
 #define ARRAY	CREATE_PTR<ArrayValue>
 #define VOID	CREATE_PTR<VoidValue>()
 #define STRUCT(name, fields) CREATE_PTR<StructValue>(name, MOVE(fields))
-#define BOOL NUMBER
-#define ZERO NUMBER(0)
-#define TRUE NUMBER(1)
-#define FALSE NUMBER(0)
+#define BOOL	  NUMBER
+#define ZERO	  NUMBER(0)
+#define EMPTY_STR STRING("")
+#define TRUE	  NUMBER(1)
+#define FALSE	  NUMBER(0)
 #define CHECK_END_STR consume(TokenType::SEMICOLON);
 
 #endif // _SIMPLE_DEFINES_H_

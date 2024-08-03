@@ -22,10 +22,10 @@
 #include "Libs.h"
 
 namespace Simple {
-	std::string ReadCodeFromFile(std::string path);
+	String ReadCodeFromFile(String path);
 	void RegisterStandartModules();
-	void HandleErrors(void (*func)(std::string), std::string code);
-	void compile(std::string& code);
+	void HandleErrors(void (*func)(String), String code);
+	void compile(String& code);
 }
 
 #endif // _SIMPLE_LANGUAGE_

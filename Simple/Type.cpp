@@ -1,6 +1,8 @@
 #include "Type.h"
 #include "Utils.h"
 
+#include <algorithm>
+
 using namespace Simple;
 
 void Simple_libs::Type::Type::Init() {
@@ -44,10 +46,27 @@ void Simple_libs::Type::Type::InitStruct() {
 	_DEFINE_STRUCT_WITH_CONSTRUCTOR("typeof", [](Args_t args) {
 		Val_map fields;
 
-		fields.emplace("name", STRING(args[0]->GetTypeInString()));
-		fields.emplace("category", STRING(IdentifyCategory(args[0]->GetType())));
-		fields.emplace("fields_count", NUMBER(args[0]->GetType() == ValueType::_STRUCT ?
-			dynamic_cast<StructValue*>(args[0].get())->fields_count() : 0));
+		StructValue* struct_value;
+		if (struct_value = dynamic_cast<StructValue*>(args[0].get()));
+		else struct_value = nullptr;
+
+		fields.emplace("name",         STRING(args[0]->GetTypeInString()));
+		fields.emplace("category",	   STRING(IdentifyCategory(args[0]->GetType())));
+		fields.emplace("fields_count", NUMBER(struct_value ?
+			struct_value->fields_count() : 0));
+
+		Elements_t fields_names;
+		if (struct_value) {
+			Str_vec str_fields_names = struct_value->fields_names();
+			fields_names.resize(str_fields_names.size());
+
+			std::transform(str_fields_names.begin(), str_fields_names.end(),
+				fields_names.begin(), [](const String& val) {
+					return STRING(val);
+				}
+			);
+		}
+		fields.emplace("fields_names", ARRAY(MOVE(fields_names)));
 
 		return STRUCT("typeof", fields);
 		}, 1);
@@ -65,7 +84,7 @@ void Simple_libs::Type::Type::InitStruct() {
 
 		CHECK_TYPE("str", args[0]);
 
-		std::string key = args[0]->AsString();
+		String key = args[0]->AsString();
 
 		fields.emplace("_var", BOOL(Variables::IsExist(key)));
 		fields.emplace("_func", BOOL(Functions::IsExist(key)));

@@ -4,6 +4,7 @@
 #define _TOKEN_H_
 
 #include "TokenType.h"
+#include "Simple_typedefs.h"
 
 #include <string>
 
@@ -12,22 +13,22 @@ namespace Simple {
 	struct Token {
 	private:
 		TokenType type;
-		std::string text;
+		String text;
 
 	public:
 		Token() = default;
 
-		Token(TokenType type, std::string text);
+		Token(TokenType type, String text);
 
-		std::string enum_in_string() const;
+		String enum_in_string() const;
 
 		TokenType getType() const;
 
 		void setType(TokenType newType);
 
-		std::string getText() const;
+		String getText() const;
 
-		void setText(std::string newText);
+		void setText(String newText);
 	};
 }
 

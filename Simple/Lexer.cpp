@@ -4,7 +4,7 @@
 
 using namespace Simple;
 
-Lexer::Lexer(std::string& input) : input(input), tokens(), pos(0), length(input.length()) {}
+Lexer::Lexer(String& input) : input(input), tokens(), pos(0), length(input.length()) {}
 
 std::list<Token> Lexer::tokenize() {
 	while (pos < length) {
@@ -25,7 +25,7 @@ std::list<Token> Lexer::tokenize() {
 }
 
 void Lexer::tokenizeNumber() {
-	std::string buffer;
+	String buffer;
 	char current = peek(0);
 	while (true) {
 		if (current == '.') {
@@ -41,14 +41,14 @@ void Lexer::tokenizeNumber() {
 }
 
 void Lexer::tokenizeDigit() {
-	addToken(TokenType::DIGIT_, std::string(1 ,peek(0)));
+	addToken(TokenType::DIGIT_, String(1 ,peek(0)));
 	next(); // skip digit
 	next();	// skip d
 }
 
 void Lexer::tokenizeHexNumber() {
 	next(); // skip #
-	std::string buffer;
+	String buffer;
 	char current = peek(0);
 	while (IsHex(current)) {
 		buffer.push_back(current);
@@ -58,7 +58,7 @@ void Lexer::tokenizeHexNumber() {
 }
 
 void Lexer::tokenizeWord() {
-	std::string buffer;
+	String buffer;
 	char current = peek(0);
 	while (IsWord(current)) {
 		buffer.push_back(current);
@@ -127,7 +127,7 @@ void Lexer::tokenizeWord() {
 
 void Lexer::tokenizeText() {
 	next(); // skip opening "
-	std::string buffer;
+	String buffer;
 	char current = peek(0);
 	while (current != '\"') {
 		if (current == '\0')
@@ -161,7 +161,7 @@ void Lexer::tokenizeText() {
 
 void Lexer::tokenizeChar() {
 	next(); // skip opening '
-	addToken(TokenType::CHAR_, std::string(1, peek(0)));
+	addToken(TokenType::CHAR_, String(1, peek(0)));
 	next(); // skip char
 	next(); // skip closing '
 }
@@ -182,9 +182,9 @@ void Lexer::tokenizeOperator() {
 			return;
 		}
 	}
-	std::string buffer;
+	String buffer;
 	while (true) {
-		std::string text = buffer;
+		String text = buffer;
 		if (OPERATORS.find(text + current) == OPERATORS.end() && !OPERATORS.empty()) {
 			addToken(OPERATORS.at(text));
 			return;

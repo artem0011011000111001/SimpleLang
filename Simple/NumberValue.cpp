@@ -11,7 +11,7 @@ double NumberValue::AsDouble() const {
 	return value;
 }
 
-std::string NumberValue::AsString() const {
+String NumberValue::AsString() const {
 	int int_value = static_cast<int>(value);
 	if (value == int_value)
 		return std::to_string(int_value);
@@ -39,7 +39,7 @@ ValueType NumberValue::GetType() const {
 	return ValueType::_NUMBER;
 }
 
-std::string NumberValue::GetTypeInString() const {
+String NumberValue::GetTypeInString() const {
 	return "num";
 }
 
@@ -62,7 +62,7 @@ ValuePtr NumberValue::operator*(const ValuePtr& other) const {
 		return NUMBER(value * other->AsDouble());
 
 	auto multiply_str = [this, &other]() {
-		std::string result, str = other->AsString();
+		String result, str = other->AsString();
 		for (size_t i = 0; i < AsDouble(); i++) {
 			result += str;
 		}
@@ -161,6 +161,6 @@ ValuePtr NumberValue::power(const ValuePtr& other) const {
 	return NUMBER(std::pow(AsDouble(), other->AsDouble()));
 }
 
-Value& NumberValue::dot(const std::string& key) const {
+Value& NumberValue::dot(const String& key) const {
 	throw Simple_Error("Number does not have a member named \"" + key + "\"");
 }

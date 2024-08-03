@@ -1,1 +1,3 @@
-func hello() return "Hello";
+import System;
+
+write("test.txt", "not this time _Noreturn");

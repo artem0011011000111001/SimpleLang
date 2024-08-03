@@ -5,11 +5,11 @@
 
 using namespace Simple;
 
-StringValue::StringValue(const std::string& value) 
+StringValue::StringValue(const String& value) 
 	: value([this, value]() {
 			std::vector<CharValue> result;
 			for (auto& Char : value) {
-				result.push_back(std::string(1, Char));
+				result.push_back(String(1, Char));
 			}
 			return result;
 		}()) {}
@@ -18,8 +18,8 @@ double StringValue::AsDouble() const {
 	return strict_stod(AsString());
 }
 
-std::string StringValue::AsString() const {
-	std::string result;
+String StringValue::AsString() const {
+	String result;
 	for (auto& Char : value) {
 		result.push_back(Char.AsString()[0]);
 	}
@@ -47,7 +47,7 @@ ValueType StringValue::GetType() const {
 	return ValueType::_STRING;
 }
 
-std::string StringValue::GetTypeInString() const {
+String StringValue::GetTypeInString() const {
 	return "str";
 }
 
@@ -66,7 +66,7 @@ ValuePtr StringValue::operator-(const ValuePtr& other) const {
 ValuePtr StringValue::operator*(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_) {
 		auto result = [this, &other]() {
-			std::string result;
+			String result;
 			for (size_t i = 0, size = (size_t)other->AsDouble(); i < size; i++) {
 				result += AsString();
 			}
@@ -155,6 +155,6 @@ ValuePtr StringValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-Value& StringValue::dot(const std::string& key) const {
+Value& StringValue::dot(const String& key) const {
 	throw Simple_Error("String does not have a member named \"" + key + "\"");
 }

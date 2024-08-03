@@ -33,7 +33,7 @@ void Simple_libs::Stream::Stream::InitFuncs() {
 		if (param_count > 1)
 			throw Simple_Error("Expected 1 or 0 parameters instead of " + std::to_string(param_count));
 
-		std::string input;
+		String input;
 
 		if (param_count == 0) std::cout << "";
 		else std::cout << args.front()->AsString();

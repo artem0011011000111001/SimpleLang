@@ -11,7 +11,7 @@ double ArrayValue::AsDouble() const {
 	throw Simple_Error("to_num There is no operator corresponding");
 }
 
-std::string ArrayValue::AsString() const {
+String ArrayValue::AsString() const {
 	String result;
 
 	for (auto& el : elements) {
@@ -48,7 +48,7 @@ ValueType ArrayValue::GetType() const {
 	return ValueType::_ARRAY;
 }
 
-std::string ArrayValue::GetTypeInString() const {
+String ArrayValue::GetTypeInString() const {
 	return "arr";
 }
 
@@ -178,7 +178,8 @@ ValuePtr ArrayValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-Value& ArrayValue::dot(const std::string& key) const {
+Value& ArrayValue::dot(const String& key) const {
+	if (key == "size") return *(sizeRef = NUMBER((double)elements.size()));
 	throw Simple_Error("Array does not have a member named \"" + key + "\"");
 }
 

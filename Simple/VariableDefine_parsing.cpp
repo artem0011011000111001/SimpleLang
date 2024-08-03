@@ -6,7 +6,7 @@ using namespace Simple;
 
 StatementPtr Parser::VariableDefine(bool isConst) {
 
-	std::string name = consume(TokenType::WORD).getText();
+	String name = consume(TokenType::WORD).getText();
 
 	consume(TokenType::EQ);
 
@@ -17,14 +17,14 @@ StatementPtr Parser::VariableDefine(bool isConst) {
 
 StatementPtr Parser::ObjectDefine(bool isConst) {
 	
-	std::string name = consume(TokenType::WORD).getText();
+	String name = consume(TokenType::WORD).getText();
 
 	consume(TokenType::LBRACE);
 
 	Str_map<ExpressionPtr> fields;
 
 	while (!match(TokenType::RBRACE)) {
-		std::string field_name = consume(TokenType::WORD).getText();
+		String field_name = consume(TokenType::WORD).getText();
 
 		consume(TokenType::COLON);
 

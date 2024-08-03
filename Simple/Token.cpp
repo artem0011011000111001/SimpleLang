@@ -2,9 +2,9 @@
 
 using namespace Simple;
 
-Token::Token(TokenType type, std::string text) : type(type), text(text) {}
+Token::Token(TokenType type, String text) : type(type), text(text) {}
 
-std::string Token::enum_in_string() const {
+String Token::enum_in_string() const {
 	switch (type) {
 	case TokenType::NUM:
 		return "NUMBER " + text;
@@ -148,10 +148,10 @@ void Token::setType(TokenType newType) {
 	type = newType;
 }
 
-std::string Token::getText() const {
+String Token::getText() const {
 	return text;
 }
 
-void Token::setText(std::string newText) { 
+void Token::setText(String newText) { 
 	text = newText;
 }

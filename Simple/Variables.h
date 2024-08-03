@@ -17,29 +17,29 @@ namespace Simple {
 
 	struct Variables {
 	private:
-		static std::unordered_map<std::string, Variable> variables;
+		static std::unordered_map<String, Variable> variables;
 
-		static std::stack<std::unordered_map<std::string, Variable>> variablesState;
+		static std::stack<std::unordered_map<String, Variable>> variablesState;
 
 	public:
 
-		static bool IsExist(const std::string& key);
+		static bool IsExist(const String& key);
 
-		static bool IsConstant(const std::string& key);
+		static bool IsConstant(const String& key);
 
-		static ValuePtr Get(const std::string& key);
+		static ValuePtr Get(const String& key);
 
-		static Value& GetRef(const std::string& key);
+		static Value& GetRef(const String& key);
 
-		static void SetAllVariables(std::unordered_map<std::string, Variable>&& variables);
+		static void SetAllVariables(std::unordered_map<String, Variable>&& variables);
 
-		static const std::unordered_map<std::string, Variable>& GetAllVariables();
+		static const std::unordered_map<String, Variable>& GetAllVariables();
 
-		static void Set(const std::string& key, Variable value);
+		static void Set(const String& key, Variable value);
 
-		static void SetNew(const std::string& key, Variable value);
+		static void SetNew(const String& key, Variable value);
 
-		static std::unordered_map<std::string, Variable> CreateStandartVariables();
+		static std::unordered_map<String, Variable> CreateStandartVariables();
 
 		static void PushState();
 

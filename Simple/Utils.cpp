@@ -7,7 +7,7 @@
 
 using namespace Simple;
 
-double Simple::strict_stod(const std::string str) {
+double Simple::strict_stod(const String str) {
 	double result;
 	size_t pos;
 	try {
@@ -21,7 +21,7 @@ double Simple::strict_stod(const std::string str) {
 	return result;
 }
 
-std::string Simple::to_string(LogicOperators op)
+String Simple::to_string(LogicOperators op)
 {
 	switch (op) {
 	case LogicOperators::EQUALS:
@@ -45,7 +45,7 @@ std::string Simple::to_string(LogicOperators op)
 	}
 }
 
-std::string Simple::to_string(BinaryOperators op)
+String Simple::to_string(BinaryOperators op)
 {
 	switch (op)
 	{
@@ -64,7 +64,7 @@ std::string Simple::to_string(BinaryOperators op)
 	}
 }
 
-std::string Simple::IdentifyCategory(ValueType type) {
+String Simple::IdentifyCategory(ValueType type) {
 	switch (type) {
 
 	case Simple::ValueType::_DIGIT_:
@@ -114,13 +114,13 @@ bool Simple::equals_type(const String& key1, const String& key2) {
 	return type1 == type2;
 }
 
-void Simple::copy_variables(const std::unordered_map<std::string, Variable>&from, std::unordered_map<std::string, Variable>&whom) {
+void Simple::copy_variables(const std::unordered_map<String, Variable>&from, std::unordered_map<String, Variable>&whom) {
 	for (const auto& var : from) {
 		whom[var.first].value = var.second.value->clone();
 	}
 }
 
-void Simple::create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<std::string, Variable>& whom) {
+void Simple::create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<String, Variable>& whom) {
 	auto argNameIt = argsParam.first.begin();
 	auto argIsConstIt = argsParam.second.begin();
 	for (auto& arg : args) {
@@ -132,13 +132,13 @@ void Simple::create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unorder
 	}
 }
 
-void Simple::disassemble_arguments(std::unordered_map<std::string, Variable>& from) {
+void Simple::disassemble_arguments(std::unordered_map<String, Variable>& from) {
 	for (const auto& var : from) {
 		Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
 	}
 }
 
-void Simple::check_pos(int pos, int max_pos, const std::string& designator) {
+void Simple::check_pos(int pos, int max_pos, const String& designator) {
 	if (pos >= max_pos)
 		throw Simple_Error("Pos greater than " + designator + " size");
 	else if (pos < 0)

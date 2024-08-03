@@ -22,7 +22,7 @@ void Simple_libs::System::System::InitFuncs() {
 	}, 1);
 
 	_DEFINE_FUNCTION_WITH_ARGS("create_file", BLOCK(args) {
-		std::string path = args[0]->AsString();
+		String path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
@@ -34,7 +34,7 @@ void Simple_libs::System::System::InitFuncs() {
 	}, 1);
 
 	_DEFINE_FUNCTION_WITH_ARGS("delete_file", BLOCK(args) {
-		std::string path = args[0]->AsString();
+		String path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
@@ -72,9 +72,9 @@ void Simple_libs::System::System::InitFuncs() {
 	}, 1);
 
 	_DEFINE_FUNCTION_WITH_ARGS("run", BLOCK(args) {
-		std::string command = args[0]->AsString();
+		String command = args[0]->AsString();
 		std::array<char, 128> buffer;
-		std::string result;
+		String result;
 
 		#ifdef _WIN32
 			FILE* pipe = _popen(command.c_str(), "r");
@@ -83,7 +83,7 @@ void Simple_libs::System::System::InitFuncs() {
 		#endif
 
 		if (!pipe) {
-			THROW_FILE_ERROR("Failed to run command: " + command);
+			throw STRING("Failed to run command: " + command);
 		}
 		while (fgets(buffer.data(), (int)buffer.size(), pipe) != nullptr) {
 			result += buffer.data();
@@ -130,7 +130,7 @@ void Simple_libs::System::System::InitStructs() {
 
 	_DEFINE_STRUCT_WITH_CONSTRUCTOR("file_info", BLOCK(args) {
 		Val_map fields;
-		std::string path = args[0]->AsString();
+		String path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
@@ -147,7 +147,7 @@ void Simple_libs::System::System::InitStructs() {
 	}, 1);
 }
 
-std::string Simple_libs::System::System::read_file_content(const std::filesystem::path& file_path) {
+String Simple_libs::System::System::read_file_content(const std::filesystem::path& file_path) {
 	std::ifstream file(file_path, std::ios::in | std::ios::binary);
 	if (!file) {
 		THROW_FILE_ERROR("Failed to open file: " + file_path.string());
@@ -157,7 +157,7 @@ std::string Simple_libs::System::System::read_file_content(const std::filesystem
 	std::streamsize size = file.tellg();
 	file.seekg(0, std::ios::beg);
 
-	std::string content(size, '\0');
+	String content(size, '\0');
 	if (!file.read(&content[0], size)) {
 		THROW_FILE_ERROR("Failed to read file content: " + file_path.string());
 	}
@@ -165,7 +165,7 @@ std::string Simple_libs::System::System::read_file_content(const std::filesystem
 	return content;
 }
 
-void Simple_libs::System::System::write_file_content(const std::filesystem::path& file_path, const std::string& content, bool isAppend) {
+void Simple_libs::System::System::write_file_content(const std::filesystem::path& file_path, const String& content, bool isAppend) {
 	std::ofstream file(file_path, std::ios::out | (isAppend ? std::ios::app : std::ios::trunc));
 	if (!file) {
 		THROW_FILE_ERROR("Failed to open file for writing: " + file_path.string());

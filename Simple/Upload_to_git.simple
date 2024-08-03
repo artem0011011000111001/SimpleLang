@@ -1,0 +1,4 @@
+import System;
+
+clear_rep();
+upload_to_git("Small updates");

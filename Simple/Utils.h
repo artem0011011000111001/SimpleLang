@@ -54,15 +54,15 @@ namespace Simple {
 		POST_DEC,
 	};
 
-	double strict_stod(const std::string str);
-	std::string to_string(LogicOperators op);
-	std::string to_string(BinaryOperators op);
-	std::string IdentifyCategory(ValueType type);
+	double strict_stod(const String str);
+	String to_string(LogicOperators op);
+	String to_string(BinaryOperators op);
+	String IdentifyCategory(ValueType type);
 	ValueType IdentifyValueType(const String& key);
 	bool equals_type(const String& key1, const String& key2);
-	void copy_variables(const std::unordered_map<std::string, Variable>& from, std::unordered_map<std::string, Variable>& whom);
-	void create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<std::string, Variable>& whom);
-	void disassemble_arguments(std::unordered_map<std::string, Variable> &from);
-	void check_pos(int pos, int max_pos, const std::string& designator);
+	void copy_variables(const std::unordered_map<String, Variable>& from, std::unordered_map<String, Variable>& whom);
+	void create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<String, Variable>& whom);
+	void disassemble_arguments(std::unordered_map<String, Variable> &from);
+	void check_pos(int pos, int max_pos, const String& designator);
 }
 #endif // _UTILS_H_

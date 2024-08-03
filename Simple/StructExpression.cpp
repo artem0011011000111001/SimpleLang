@@ -6,7 +6,7 @@
 
 using namespace Simple;
 
-StructExpression::StructExpression(ExpressionPtr expr, std::string field_name)
+StructExpression::StructExpression(ExpressionPtr expr, String field_name)
 	: expr(std::move(expr)), field_name(field_name) {}
 
 //ValuePtr StructExpression::eval() {

@@ -37,7 +37,7 @@ Token Parser::consume(const TokenType type) {
 	return CurrentToken;
 }
 
-int Parser::stoihex(const std::string& hex)
+int Parser::stoihex(const String& hex)
 {
 	int decimal = 0;
 	size_t length = hex.length();

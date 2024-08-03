@@ -32,7 +32,7 @@ StatementPtr Parser::For() {
 	StatementPtr initialization;
 
 	Token CurrentToken = get(0);
-	std::string InitName;
+	String InitName;
 	if (CurrentToken.getType() == TokenType::WORD) InitName = CurrentToken.getText();
 
 	if (match(TokenType::CONST)) initialization = ConstVariableDefine();

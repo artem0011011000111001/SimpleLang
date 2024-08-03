@@ -6,13 +6,13 @@ using namespace Simple;
 
 void BlockStatement::execute() {
 	//const auto& CurrentVariables = Variables::GetAllVariables();
-	//std::unordered_map<std::string, ValuePtr> VariablesBefore;
+	//std::unordered_map<String, ValuePtr> VariablesBefore;
 
 	/*for (auto& var : CurrentVariables)
 	{
 		VariablesBefore[var.first] = var.second->clone();
 	}*/
-	//std::unordered_map<std::string, ValuePtr> VariablesBefore;
+	//std::unordered_map<String, ValuePtr> VariablesBefore;
 	//copy_variables(Variables::GetAllVariables(), VariablesBefore);
 
 	for (const auto& statement : statements)

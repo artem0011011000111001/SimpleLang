@@ -7,7 +7,7 @@ double VoidValue::AsDouble() const {
 	return 0;
 }
 
-std::string VoidValue::AsString() const {
+String VoidValue::AsString() const {
 	return "Void";
 }
 
@@ -32,7 +32,7 @@ ValueType VoidValue::GetType() const {
 	return ValueType::_VOID;
 }
 
-std::string VoidValue::GetTypeInString() const {
+String VoidValue::GetTypeInString() const {
 	return "void";
 }
 
@@ -100,6 +100,6 @@ ValuePtr VoidValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-Value& VoidValue::dot(const std::string& key) const {
+Value& VoidValue::dot(const String& key) const {
 	throw Simple_Error("Void does not have a member named \"" + key + "\"");
 }

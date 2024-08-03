@@ -109,7 +109,7 @@ namespace Simple {
 
 		Token consume(const TokenType type);
 
-		static int stoihex(const std::string& hex);
+		static int stoihex(const String& hex);
 	};
 }
 #endif // !_PARSER_H_

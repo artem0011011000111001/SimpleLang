@@ -2,9 +2,9 @@
 #include <iostream>
 #include <fstream>
 
-std::string Simple::ReadCodeFromFile(std::string path) {
-	std::string code;
-	std::string line;
+String Simple::ReadCodeFromFile(String path) {
+	String code;
+	String line;
 	try
 	{
 		std::ifstream file(path);
@@ -30,7 +30,7 @@ void Simple::RegisterStandartModules() {
 	RegisterModule<Simple_libs::System::System>("System");
 }
 
-void Simple::HandleErrors(void(*func)(std::string), std::string code) {
+void Simple::HandleErrors(void(*func)(String), String code) {
 	try {
 		func(code);
 	}
@@ -51,12 +51,12 @@ void Simple::HandleErrors(void(*func)(std::string), std::string code) {
 	}
 }
 
-void Simple::compile(std::string& code) {
+void Simple::compile(String& code) {
 	std::locale::global(std::locale("C"));
 	RegisterStandartModules();
 	Functions::CreateStandartFunctions();
 
-	HandleErrors([](std::string code) {
+	HandleErrors([](String code) {
 		Lexer lexer(code);
 
 		Parser parser(lexer.tokenize());

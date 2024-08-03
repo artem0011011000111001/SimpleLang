@@ -5,6 +5,7 @@
 
 #include "Token.h"
 #include "TokenType.h"
+#include "Simple_typedefs.h"
 #include "Simple_defines.h"
 #include "Simple_Error.h"
 
@@ -17,7 +18,7 @@ namespace Simple {
 	{
 	private:
 
-		/*const std::string OPERATORS_CHARS = "+-()=;<>";
+		/*const String OPERATORS_CHARS = "+-()=;<>";
 		const TokenType OPERATORS_TOKENS[10] = {
 			TokenType::PLUS, TokenType::MINUS,
 			TokenType::STAR, TokenType::SLASH,
@@ -26,7 +27,7 @@ namespace Simple {
 			TokenType::LT, TokenType::GT
 		};*/
 
-		const std::unordered_map<std::string, TokenType> OPERATORS = {
+		const Str_map<TokenType> OPERATORS = {
 			{"+",      TokenType::PLUS},
 			{"-",      TokenType::MINUS},
 			{"*",      TokenType::STAR},
@@ -64,13 +65,13 @@ namespace Simple {
 		};
 
 	private:
-		const std::string input;
+		const String input;
 		std::list<Token> tokens;
 		size_t pos;
 		const size_t length;
 
 	public:
-		Lexer(std::string& input);
+		Lexer(String& input);
 
 		std::list<Token> tokenize();
 	private:
@@ -98,7 +99,7 @@ namespace Simple {
 
 		void addToken(const TokenType type);
 
-		void addToken(const TokenType type, const std::string text);
+		void addToken(const TokenType type, const String text);
 
 		char peek(const size_t relativePostion) const;
 
@@ -116,7 +117,7 @@ namespace Simple {
 		}
 
 		template<class _Ty, class _Ty2>
-		size_t indexOfUnMap(const std::unordered_map<std::string, _Ty>& collection, const _Ty2& val) {
+		size_t indexOfUnMap(const Str_map<_Ty>& collection, const _Ty2& val) {
 			size_t count = 0;
 			for (const auto& el : collection)
 			{

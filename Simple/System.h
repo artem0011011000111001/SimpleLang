@@ -22,8 +22,8 @@ namespace Simple_libs {
 			void InitFuncs();
 			void InitStructs();
 
-			std::string read_file_content(const std::filesystem::path& file_path);
-			void write_file_content(const std::filesystem::path& file_path, const std::string& content, bool isAppend = false);
+			String read_file_content(const std::filesystem::path& file_path);
+			void write_file_content(const std::filesystem::path& file_path, const String& content, bool isAppend = false);
 		public:
 			void Init() override;
 		};

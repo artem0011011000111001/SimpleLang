@@ -1,4 +1,11 @@
-import System;
+import Type;
 
-clear_rep();
-upload_to_git("Added arrays and System library");
+obj {
+	name: "Nick"
+	age: 16
+};
+
+fields_names = typeof(obj).fields_names;
+
+for (i = 0; i < fields_names.size; ++i)
+	println(fields_names[i]);

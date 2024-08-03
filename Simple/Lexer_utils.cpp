@@ -8,7 +8,7 @@ void Lexer::addToken(const TokenType type) {
 	addToken(type, "");
 }
 
-void Lexer::addToken(const TokenType type, const std::string text) {
+void Lexer::addToken(const TokenType type, const String text) {
 	tokens.push_back(Token(type, text));
 }
 
@@ -28,7 +28,7 @@ bool Lexer::IsWord(const char c) {
 }
 
 bool Lexer::IsHex(const char c) {
-	return std::isdigit(c) || indexOf(std::string("abcdef"), std::tolower(c)) != simple_npos;
+	return std::isdigit(c) || indexOf(String("abcdef"), std::tolower(c)) != simple_npos;
 }
 
 //template<class _Ty, class _Ty2>
@@ -42,7 +42,7 @@ bool Lexer::IsHex(const char c) {
 //}
 //
 //template<class _Ty, class _Ty2>
-//size_t Lexer::indexOfUnMap(const std::unordered_map<std::string, _Ty>& collection, const _Ty2& val) {
+//size_t Lexer::indexOfUnMap(const std::unordered_map<String, _Ty>& collection, const _Ty2& val) {
 //	size_t count = 0;
 //	for (const auto& el : collection)
 //	{

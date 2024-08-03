@@ -30,17 +30,17 @@ namespace Simple {
 
         static CreateModuleByName& getInstance();
 
-        void registerClass(const std::string& className, CreateFunc createFunc);
+        void registerClass(const String& className, CreateFunc createFunc);
 
-        std::unique_ptr<Module_Base> createInstance(const std::string& className);
+        std::unique_ptr<Module_Base> createInstance(const String& className);
 
     private:
         CreateModuleByName() = default;
-        std::unordered_map<std::string, CreateFunc> registry;
+        std::unordered_map<String, CreateFunc> registry;
     };
 
     template<class _ModuleTy>
-    void RegisterModule(const std::string& designator) {
+    void RegisterModule(const String& designator) {
         CreateModuleByName::getInstance().registerClass(designator, []() -> std::unique_ptr<Module_Base> {
             return std::make_unique<_ModuleTy>();
             });

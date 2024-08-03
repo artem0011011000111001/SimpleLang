@@ -5,7 +5,7 @@
 
 using namespace Simple;
 
-VariableExpression::VariableExpression(const std::string& name) : name(name) {}
+VariableExpression::VariableExpression(const String& name) : name(name) {}
 
 //ValuePtr VariableExpression::eval() {
 //	return get_ref().clone();

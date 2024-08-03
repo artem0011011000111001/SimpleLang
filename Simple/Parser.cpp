@@ -136,7 +136,7 @@ StatementPtr Parser::statementOrBlock() {
 	if (get(0).getType() == TokenType::LBRACE) return block();
 
 	/*const auto& CurrentVariables = Variables::GetAllVariables();
-	std::unordered_map<std::string, ValuePtr> VariablesBefore;
+	std::unordered_map<String, ValuePtr> VariablesBefore;
 
 	for (auto& var : CurrentVariables)
 	{

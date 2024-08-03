@@ -6,18 +6,18 @@
 using namespace Simple;
 
 StatementPtr Parser::StructDefine() {
-	std::string name = consume(TokenType::WORD).getText();
+	String name = consume(TokenType::WORD).getText();
 
 	Fields_decl_t fields_params;
 	consume(TokenType::LBRACE);
 
 	while (!match(TokenType::RBRACE)) {
 		if (match(TokenType::FIELD)) {
-			std::string name = consume(TokenType::WORD).getText();
+			String name = consume(TokenType::WORD).getText();
 
 			consume(TokenType::COLON);
 
-			std::string type_in_str = consume(TokenType::WORD).getText();
+			String type_in_str = consume(TokenType::WORD).getText();
 			
 			ValueType type = IdentifyValueType(type_in_str);
 

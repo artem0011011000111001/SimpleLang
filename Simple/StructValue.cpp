@@ -7,16 +7,16 @@
 
 using namespace Simple;
 
-StructValue::StructValue(const std::string& name, Val_map fields)
+StructValue::StructValue(const String& name, Val_map fields)
 	: name(name), fields(std::move(fields)) {}
 
 double StructValue::AsDouble() const {
 	throw Simple_Error("You can't convert a structure to a number");
 }
 
-std::string StructValue::AsString() const {
+String StructValue::AsString() const {
 	return name + " {\n" + [this]() {
-		std::string result;
+		String result;
 		for (auto& field : fields) {
 			result += "    " + field.first + ": " + field.second->AsString() + "\n";
 		}
@@ -53,7 +53,7 @@ ValueType StructValue::GetType() const {
 	return ValueType::_STRUCT;
 }
 
-std::string StructValue::GetTypeInString() const {
+String StructValue::GetTypeInString() const {
 	return name;
 }
 
@@ -121,7 +121,7 @@ ValuePtr StructValue::power(const ValuePtr& other) const {
 	throw Simple_Error("Structure cannot be raised to a power");
 }
 
-Value& StructValue::dot(const std::string& key) const {
+Value& StructValue::dot(const String& key) const {
 	auto find_result = fields.find(key);
 	if (find_result != fields.end())
 		return fields.find(key)->second->get_ref();
@@ -132,8 +132,8 @@ int StructValue::fields_count() {
 	return static_cast<int>(fields.size());
 }
 
-std::vector<std::string> StructValue::fields_names() {
-	std::vector<std::string> fields_names;
+Str_vec StructValue::fields_names() {
+	Str_vec fields_names;
 
 	for (auto& field : fields) {
 		fields_names.push_back(field.first);

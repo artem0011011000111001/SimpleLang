@@ -22,8 +22,8 @@ ConditionalExpression::ConditionalExpression(ExpressionPtr expr1, const LogicOpe
 //
 //	if (value1_type == ValueType::STRING) {
 //		if (value2_type == ValueType::NUMBER) throw Simple_Error("Can't compare string and number");
-//		const std::string str1 = value1.get()->AsString();
-//		const std::string str2 = value2.get()->AsString();
+//		const String str1 = value1.get()->AsString();
+//		const String str2 = value2.get()->AsString();
 //		switch (operation)
 //		{
 //		case LogicOperators::EQUALS:	 return std::make_unique<NumberValue>(str1 == str2);

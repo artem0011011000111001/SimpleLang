@@ -4,7 +4,7 @@
 
 using namespace Simple;
 
-StringExpression::StringExpression(std::string value) : value(value) {}
+StringExpression::StringExpression(String value) : value(value) {}
 
 //ValuePtr StringExpression::eval() {
 //	return get_ref().clone();

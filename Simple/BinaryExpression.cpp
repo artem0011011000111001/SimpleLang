@@ -17,12 +17,12 @@ BinaryExpression::BinaryExpression(ExpressionPtr expr1, const BinaryOperators op
 //	auto value2_type = value2->GetType();
 //
 //	if (value1_type == ValueType::STRING) {
-//		const std::string str = value1.get()->AsString();
+//		const String str = value1.get()->AsString();
 //		switch (operation)
 //		{
 //		case BinaryOperators::MULTIPLY:
 //			if (value2_type == ValueType::NUMBER) {
-//				std::string buffer;
+//				String buffer;
 //				double double_value = value2.get()->AsDouble();
 //
 //				if (double_value < 0) throw Simple_Error("Multiplying a string by a negative number");
@@ -44,14 +44,14 @@ BinaryExpression::BinaryExpression(ExpressionPtr expr1, const BinaryOperators op
 //
 //	if (value2_type == ValueType::STRING) {
 //		if (operation == BinaryOperators::MULTIPLY) {
-//			std::string str = value2.get()->AsString();
+//			String str = value2.get()->AsString();
 //			double double_value = value1.get()->AsDouble();
 //
 //			if (double_value < 0) throw Simple_Error("Multiplying a string by a negative number");
 //			else if (double_value == 0) return std::make_unique<StringValue>("");
 //
 //			const size_t iterations = static_cast<size_t>(double_value);
-//			std::string buffer;
+//			String buffer;
 //
 //			for (size_t i = 0; i < iterations; i++) {
 //				buffer.append(str);
@@ -71,7 +71,7 @@ BinaryExpression::BinaryExpression(ExpressionPtr expr1, const BinaryOperators op
 //	case BinaryOperators::DIVIDE:  return std::make_unique<NumberValue>(double_value1 / double_value2);
 //	case BinaryOperators::PLUS:  return std::make_unique<NumberValue>(double_value1 + double_value2);
 //	case BinaryOperators::POWER: return std::make_unique<NumberValue>(std::pow(double_value1, double_value2));
-//	default: throw Simple_Error("\"" + Simple::to_string(operation) + std::string("\" is unknown operation"));
+//	default: throw Simple_Error("\"" + Simple::to_string(operation) + String("\" is unknown operation"));
 //	}*/
 //}
 

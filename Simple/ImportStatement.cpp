@@ -11,7 +11,7 @@
 
 using namespace Simple;
 
-ImportStatement::ImportStatement(std::string key, bool isPath) : key(key), isPath(isPath) {}
+ImportStatement::ImportStatement(String key, bool isPath) : key(key), isPath(isPath) {}
 
 void ImportStatement::execute() {
 
@@ -19,11 +19,11 @@ void ImportStatement::execute() {
 
 	/*const char* path = "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe\"";
 
-	if (std::system(std::string("\"" + std::string(path) + "\" /EHsc /Fo\"" + module_name + ".obj\" \"" + module_name + ".cpp\"").c_str()) != 0)
+	if (std::system(String("\"" + String(path) + "\" /EHsc /Fo\"" + module_name + ".obj\" \"" + module_name + ".cpp\"").c_str()) != 0)
 		throw Simple_Error("Compilation \"" + module_name + "\" failed");
 
 	//std::wstring module_path = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>>().from_bytes(module_name);
-	std::string dllName = module_name + ".dll";
+	String dllName = module_name + ".dll";
 	HMODULE hLib = LoadLibraryA(dllName.c_str());
 
 	if (!hLib) {
@@ -43,7 +43,7 @@ void ImportStatement::execute() {
 	InitAll();*/
 	if (std::find(connected_modules.begin(), connected_modules.end(), key) == connected_modules.end()) {
 		if (isPath) {
-			std::string code = ReadCodeFromFile(key);
+			String code = ReadCodeFromFile(key);
 			compile(code);
 		}
 		else {
@@ -58,4 +58,4 @@ void ImportStatement::execute() {
 	}
 }
 
-std::vector<std::string> ImportStatement::connected_modules;
+std::vector<String> ImportStatement::connected_modules;

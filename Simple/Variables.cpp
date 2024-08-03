@@ -6,7 +6,7 @@
 
 using namespace Simple;
 
-void Variables::SetAllVariables(std::unordered_map<std::string, Variable>&& variables) {
+void Variables::SetAllVariables(std::unordered_map<String, Variable>&& variables) {
 
 	/*for (auto& var : variables)
 	{
@@ -14,7 +14,7 @@ void Variables::SetAllVariables(std::unordered_map<std::string, Variable>&& vari
 			Variables::variables[var.first] = std::move(var.second);
 	}*/
 
-	std::unordered_map<std::string, Variable> resultMap;
+	std::unordered_map<String, Variable> resultMap;
 	for (auto& pair : variables) {
 		if (Variables::variables.find(pair.first) != Variables::variables.end()) {
 			resultMap[pair.first] = std::move(Variables::variables[pair.first]);
@@ -26,26 +26,26 @@ void Variables::SetAllVariables(std::unordered_map<std::string, Variable>&& vari
 	Variables::variables = std::move(resultMap);
 }
 
-bool Variables::IsExist(const std::string& key) {
+bool Variables::IsExist(const String& key) {
 	return variables.find(key) != variables.end();
 }
 
-ValuePtr Variables::Get(const std::string& key) {
+ValuePtr Variables::Get(const String& key) {
 	if (!IsExist(key)) return ZERO;
 	return variables.at(key).value->clone();
 }
 
-Value& Variables::GetRef(const std::string& key) {
+Value& Variables::GetRef(const String& key) {
 	if (!IsExist(key)) throw Simple_Error("Ref not send");
 	return variables.at(key).value->get_ref();
 }
 
-const std::unordered_map<std::string, Variable>& Variables::GetAllVariables() {
+const std::unordered_map<String, Variable>& Variables::GetAllVariables() {
 	return variables;
 }
 
-void Variables::Set(const std::string& key, Variable value) {
-	auto CheckInvalidName = [key](std::string invalidName) {
+void Variables::Set(const String& key, Variable value) {
+	auto CheckInvalidName = [key](String invalidName) {
 		if (key == invalidName)
 			throw Simple_Error("\"" + invalidName + "\" invalid name");
 		};
@@ -61,13 +61,13 @@ void Variables::Set(const std::string& key, Variable value) {
 	else variables.emplace(key, std::move(value));
 }
 
-void Variables::SetNew(const std::string& key, Variable value) {
+void Variables::SetNew(const String& key, Variable value) {
 	if (IsExist(key)) variables[key] = std::move(value);
 	else variables.emplace(key, std::move(value));
 }
 
-std::unordered_map<std::string, Variable> Variables::CreateStandartVariables() {
-	std::unordered_map<std::string, Variable> vars;
+std::unordered_map<String, Variable> Variables::CreateStandartVariables() {
+	std::unordered_map<String, Variable> vars;
 
 	//Math::InitVars();
 	//Stream::InitVars();
@@ -78,11 +78,11 @@ std::unordered_map<std::string, Variable> Variables::CreateStandartVariables() {
 }
 
 void Variables::PushState() {
-	/*std::unordered_map<std::string, ValuePtr> currentState;
+	/*std::unordered_map<String, ValuePtr> currentState;
 	copy_variables(Variables::GetAllVariables(), currentState);
 	variablesState.push(std::move(currentState));*/
 
-	std::unordered_map<std::string, Variable> currentState;
+	std::unordered_map<String, Variable> currentState;
 	copy_variables(Variables::GetAllVariables(), currentState);
 	variablesState.push(std::move(currentState));
 }
@@ -104,7 +104,7 @@ void Variables::PopState() {
 	}
 }
 
-bool Variables::IsConstant(const std::string& key) {
+bool Variables::IsConstant(const String& key) {
 	for (auto& var : variables) {
 		if (var.first == key && var.second.is_const)
 			return true;
@@ -112,6 +112,6 @@ bool Variables::IsConstant(const std::string& key) {
 	return false;
 }
 
-std::unordered_map<std::string, Variable> Variables::variables = CreateStandartVariables();
+std::unordered_map<String, Variable> Variables::variables = CreateStandartVariables();
 
-std::stack<std::unordered_map<std::string, Variable>> Variables::variablesState;
+std::stack<std::unordered_map<String, Variable>> Variables::variablesState;
