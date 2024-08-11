@@ -19,13 +19,13 @@
 #include "Simple_defines.h"
 #include "Simple_Error.h"
 #include "Simple_typedefs.h"
+#include "Simple_Iterator.h"
 #include "Libs.h"
 
 namespace Simple {
-	String ReadCodeFromFile(String path);
+	WString ReadCodeFromFile(WString& path);
 	void RegisterStandartModules();
-	void HandleErrors(void (*func)(String), String code);
-	void compile(String& code);
+	void compile(WString& code);
 }
 
 #endif // _SIMPLE_LANGUAGE_

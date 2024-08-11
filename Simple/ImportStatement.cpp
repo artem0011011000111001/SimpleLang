@@ -11,7 +11,7 @@
 
 using namespace Simple;
 
-ImportStatement::ImportStatement(String key, bool isPath) : key(key), isPath(isPath) {}
+ImportStatement::ImportStatement(WString key, bool isPath) : key(key), isPath(isPath) {}
 
 void ImportStatement::execute() {
 
@@ -43,7 +43,7 @@ void ImportStatement::execute() {
 	InitAll();*/
 	if (std::find(connected_modules.begin(), connected_modules.end(), key) == connected_modules.end()) {
 		if (isPath) {
-			String code = ReadCodeFromFile(key);
+			WString code = ReadCodeFromFile(key);
 			compile(code);
 		}
 		else {
@@ -52,10 +52,10 @@ void ImportStatement::execute() {
 			if (Module)
 				Module->Init();
 			else
-				throw Simple_Error("\"" + key + "\" not found");
+				throw Simple_Error(L"\"" + key + L"\" not found");
 		}
 		connected_modules.push_back(key);
 	}
 }
 
-std::vector<String> ImportStatement::connected_modules;
+WStr_vec ImportStatement::connected_modules;

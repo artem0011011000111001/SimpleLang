@@ -1,21 +1,37 @@
 #include "Parser.h"
 #include "Simple_defines.h"
 #include "Simple_Error.h"
+#include "ArgParams.h"
 
 using namespace Simple;
 
-void Parser::AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body) {
+void Parser::AnalyzeFunction(ArgsParams_t& argsParams, StatementPtr& body, bool& is_any_args) {
 	consume(TokenType::LPAREN);
 
 	while (!match(TokenType::RPAREN)) {
-		if (match(TokenType::CONST))
-			argsParam.second.push_back(true);
-		else
-			argsParam.second.push_back(false);
-		argsParam.first.push_back(consume(TokenType::WORD).getText());
+		ArgParams currentArgParam;
 
-		if (match(TokenType::COMMA) && (get(0).getType() == TokenType::RPAREN))
-			throw Simple_Error("Name required");
+		if (match(TokenType::CONST)) currentArgParam.isConst = true;
+		else currentArgParam.isConst = false;
+
+		currentArgParam.name = consume(TokenType::WORD).getText();
+
+		if (match(TokenType::STAR)) {
+			is_any_args = true;
+			consume(TokenType::RPAREN);
+			argsParams.push_back(MOVE(currentArgParam));
+			break;
+		}
+
+		else if (match(TokenType::EQ))
+			currentArgParam.defaultValue = MOVE(expression());
+
+		argsParams.push_back(MOVE(currentArgParam));
+
+		if (match(TokenType::RPAREN))
+			break;
+
+		consume(TokenType::COMMA);
 	}
 
 	body = statementOrBlock();
@@ -23,13 +39,14 @@ void Parser::AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body) {
 
 StatementPtr Parser::FunctionDefine() {
 
-	String name = consume(TokenType::WORD).getText();
-	ArgsParam_t argsParam;
+	WString name = consume(TokenType::WORD).getText();
+	ArgsParams_t argsParam;
 	StatementPtr body;
+	bool is_any_args = false;
 
-	AnalyzeFunction(argsParam, body);
+	AnalyzeFunction(argsParam, body, is_any_args);
 
-	return CREATE_PTR<FunctionDefineStatement>(name, argsParam, std::move(body));
+	return CREATE_PTR<FunctionDefineStatement>(name, MOVE(argsParam), MOVE(body), is_any_args);
 }
 
 StatementPtr Parser::Return() {
@@ -37,5 +54,5 @@ StatementPtr Parser::Return() {
 
 	CHECK_END_STR;
 
-	return CREATE_PTR<ReturnStatement>(std::move(expr));
+	return CREATE_PTR<ReturnStatement>(MOVE(expr));
 }

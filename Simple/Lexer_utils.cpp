@@ -2,55 +2,33 @@
 #include "Simple_defines.h"
 #include "Simple_Error.h"
 
+#include <cwctype>
+
 using namespace Simple;
 
 void Lexer::addToken(const TokenType type) {
-	addToken(type, "");
+    addToken(type, L"");
 }
 
-void Lexer::addToken(const TokenType type, const String text) {
-	tokens.push_back(Token(type, text));
+void Lexer::addToken(const TokenType type, const WString text) {
+    tokens.push_back(Token(type, text));
 }
 
-char Lexer::peek(const size_t relativePosition) const {
-	const size_t position = pos + relativePosition;
-	if (position >= length) return '\0';
-	return input[position];
+WChar Lexer::peek(const size_t relativePosition) const {
+    const size_t position = pos + relativePosition;
+    if (position >= length) return L'\0';
+    return input[position];
 }
 
-char Lexer::next() {
-	pos++;
-	return peek(0);
+WChar Lexer::next() {
+    pos++;
+    return peek(0);
 }
 
-bool Lexer::IsWord(const char c) {
-	return std::isalnum(c) || c == '_' || c == '$';
+bool Lexer::IsWord(const WChar c) {
+    return std::iswalnum(c) || c == L'_' || c == L'$';
 }
 
-bool Lexer::IsHex(const char c) {
-	return std::isdigit(c) || indexOf(String("abcdef"), std::tolower(c)) != simple_npos;
+bool Lexer::IsHex(const WChar c) {
+    return std::iswdigit(c) || indexOf(WString(L"abcdefABCDEF"), std::towlower(c)) != simple_npos;
 }
-
-//template<class _Ty, class _Ty2>
-//size_t Lexer::indexOf(const _Ty& collection, const _Ty2& val) {
-//	size_t count = 0;
-//	for (const auto& el : collection) {
-//		if (el == val) return count;
-//		count++;
-//	}
-//	return simple_npos;
-//}
-//
-//template<class _Ty, class _Ty2>
-//size_t Lexer::indexOfUnMap(const std::unordered_map<String, _Ty>& collection, const _Ty2& val) {
-//	size_t count = 0;
-//	for (const auto& el : collection)
-//	{
-//		for (const auto& c : el.first)
-//		{
-//			if (c == val) return count;
-//			count++;
-//		}
-//	}
-//	return simple_npos;
-//}

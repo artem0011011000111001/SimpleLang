@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <array>
+#include <cwchar>
 
 using namespace Simple;
 
@@ -17,41 +18,41 @@ void Simple_libs::System::System::InitVars() {
 
 void Simple_libs::System::System::InitFuncs() {
 	
-	_DEFINE_FUNCTION_WITH_ARGS("file_exists", BLOCK(args) {
+	_DEFINE_FUNCTION(L"file_exists", BLOCK(args) {
 		return BOOL(std::filesystem::exists(std::filesystem::path(args[0]->AsString())));
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("create_file", BLOCK(args) {
-		String path = args[0]->AsString();
+	_DEFINE_FUNCTION(L"create_file", BLOCK(args) {
+		WString path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
 		std::ofstream file(file_path, std::ios::out | std::ios::trunc);
 		if (!file) {
-			THROW_FILE_ERROR("Failed to create file: " + path);
+			THROW_FILE_ERROR(L"Failed to create file: " + path);
 		}
 		return VOID;
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("delete_file", BLOCK(args) {
-		String path = args[0]->AsString();
+	_DEFINE_FUNCTION(L"delete_file", BLOCK(args) {
+		WString path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
 		if (!std::filesystem::exists(file_path)) {
-			THROW_FILE_ERROR("File does not exist: " + path);
+			THROW_FILE_ERROR(L"File does not exist: " + path);
 		}
 
 		std::error_code ec;
 		std::filesystem::remove(file_path, ec);
 		if (ec) {
-			THROW_FILE_ERROR("Failed to delete file: " + path + " Error: " + ec.message());
+			THROW_FILE_ERROR(L"Failed to delete file: " + path + L" Error: " + WString(ec.message().begin(), ec.message().end()));
 		}
 
 		return VOID;
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("write", BLOCK(args) {
+	_DEFINE_FUNCTION(L"write", BLOCK(args) {
 		std::filesystem::path file_path(args[0]->AsString());
 
 		write_file_content(file_path, args[1]->AsString());
@@ -59,7 +60,7 @@ void Simple_libs::System::System::InitFuncs() {
 		return VOID;
 	}, 2);
 
-	_DEFINE_FUNCTION_WITH_ARGS("write_append", BLOCK(args) {
+	_DEFINE_FUNCTION(L"write_append", BLOCK(args) {
 		std::filesystem::path file_path(args[0]->AsString());
 
 		write_file_content(file_path, args[1]->AsString(), true);
@@ -67,25 +68,25 @@ void Simple_libs::System::System::InitFuncs() {
 		return VOID;
 	}, 2);
 
-	_DEFINE_FUNCTION_WITH_ARGS("read", BLOCK(args) {
+	_DEFINE_FUNCTION(L"read", BLOCK(args) {
 		return STRING(read_file_content(args[0]->AsString()));
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("run", BLOCK(args) {
-		String command = args[0]->AsString();
-		std::array<char, 128> buffer;
-		String result;
+	_DEFINE_FUNCTION(L"run", BLOCK(args) {
+		WString command = args[0]->AsString();
+		std::array<WChar, 128> buffer;
+		WString result;
 
 		#ifdef _WIN32
-			FILE* pipe = _popen(command.c_str(), "r");
+			FILE* pipe = _wpopen(command.c_str(), L"r");
 		#else
-			FILE* pipe = popen(command.c_str(), "r");
+			FILE* pipe = wpopen(command.c_str(), L"r");
 		#endif
 
 		if (!pipe) {
-			throw STRING("Failed to run command: " + command);
+			throw STRING(L"Failed to run command: " + command);
 		}
-		while (fgets(buffer.data(), (int)buffer.size(), pipe) != nullptr) {
+		while (fgetws(buffer.data(), (int)buffer.size(), pipe) != nullptr) {
 			result += buffer.data();
 		}
 
@@ -98,81 +99,77 @@ void Simple_libs::System::System::InitFuncs() {
 		return STRING(result);
 	}, 1);
 
-	_DEFINE_FUNCTION_WITH_ARGS("upload_to_git", BLOCK(args) {
-		CALL("run", HAND_OVER_ARGS(STRING("git add .")));
-		CALL("run", HAND_OVER_ARGS(STRING("git commit -m \"" + args[0]->AsString() + "\"")));
-		CALL("run", HAND_OVER_ARGS(STRING("git push origin master")));
+	_DEFINE_FUNCTION(L"upload_to_git", BLOCK(args) {
+		CALL(L"run", HAND_OVER_ARGS(STRING(L"git add .")));
+		CALL(L"run", HAND_OVER_ARGS(STRING(L"git commit -m \"" + args[0]->AsString() + L"\"")));
+		CALL(L"run", HAND_OVER_ARGS(STRING(L"git push origin master")));
 		return VOID;
 	}, 1);
 
-	_DEFINE_FUNCTION("clear_rep", BLOCK(args) {
-		CALL("run", HAND_OVER_ARGS(STRING("git pull origin master")));
-		CALL("run", HAND_OVER_ARGS(STRING("git fetch origin master")));
+	_DEFINE_FUNCTION(L"clear_rep", BLOCK(args) {
+		CALL(L"run", HAND_OVER_ARGS(STRING(L"git pull origin master")));
+		CALL(L"run", HAND_OVER_ARGS(STRING(L"git fetch origin master")));
 		return VOID;
-	});
+	}, 0);
 }
 
 void Simple_libs::System::System::InitStructs() {
-	Fields_decl_t file_error_fields_info = {
-		{ "error",      ValueType::_STRING }
-	};
-	_DEFINE_STRUCT("FileError", file_error_fields_info);
 
+	_DEFINE_STRUCT(L"FileError", FIELD_DECL(
+		fields.emplace(L"error", FIELD(L"str"))
+	));
 
-	Fields_decl_t file_info_fields_info = {
-		{ "path",      ValueType::_STRING },
-		{ "name",      ValueType::_STRING },
-		{ "extension", ValueType::_STRING },
-		{ "content",   ValueType::_STRING },
-		{ "size",      ValueType::_NUMBER }
-	};
-	_ADD_STRUCT("file_info", file_info_fields_info);
-
-	_DEFINE_STRUCT_WITH_CONSTRUCTOR("file_info", BLOCK(args) {
-		Val_map fields;
-		String path = args[0]->AsString();
+	_DEFINE_STRUCT_WITH_CONSTRUCTOR(L"file_info", BLOCK(args) {
+		Fields_t fields;
+		WString path = args[0]->AsString();
 
 		std::filesystem::path file_path(path);
 
 		if (std::filesystem::exists(file_path)) {
-			fields.emplace("path",      STRING(file_path.string()));
-			fields.emplace("name",      STRING(file_path.stem().string()));
-			fields.emplace("extension", STRING(file_path.extension().string()));
-			fields.emplace("content",   STRING(read_file_content(file_path)));
-			fields.emplace("size",		NUMBER((double)std::filesystem::file_size(file_path)));
+			fields.emplace(L"path",      STRING(file_path.wstring()));
+			fields.emplace(L"name",      STRING(file_path.stem().wstring()));
+			fields.emplace(L"extension", STRING(file_path.extension().wstring()));
+			fields.emplace(L"content",   STRING(read_file_content(file_path)));
+			fields.emplace(L"size",		 NUMBER((double)std::filesystem::file_size(file_path)));
 		} else {
-			THROW_FILE_ERROR("File does not exist: " + path);
+			THROW_FILE_ERROR(L"File does not exist: " + path);
 		}
-		return STRUCT("file_info", fields);
-	}, 1);
+		return STRUCT(L"file_info", fields);
+	}, 1, FIELD_DECL(
+		L"path",		L"str",
+		L"name",		L"str",
+		L"extension",	L"str",
+		L"content",		L"str",
+		L"size",		L"num"
+	));
 }
 
-String Simple_libs::System::System::read_file_content(const std::filesystem::path& file_path) {
-	std::ifstream file(file_path, std::ios::in | std::ios::binary);
+WString Simple_libs::System::System::read_file_content(const std::filesystem::path& file_path) {
+	std::wifstream file(file_path, std::ios::in | std::ios::binary);
 	if (!file) {
-		THROW_FILE_ERROR("Failed to open file: " + file_path.string());
+		THROW_FILE_ERROR(L"Failed to open file: " + file_path.wstring());
 	}
 
 	file.seekg(0, std::ios::end);
 	std::streamsize size = file.tellg();
 	file.seekg(0, std::ios::beg);
 
-	String content(size, '\0');
+	WString content(size, '\0');
 	if (!file.read(&content[0], size)) {
-		THROW_FILE_ERROR("Failed to read file content: " + file_path.string());
+		THROW_FILE_ERROR(L"Failed to read file content: " + file_path.wstring());
 	}
 
 	return content;
 }
 
-void Simple_libs::System::System::write_file_content(const std::filesystem::path& file_path, const String& content, bool isAppend) {
-	std::ofstream file(file_path, std::ios::out | (isAppend ? std::ios::app : std::ios::trunc));
+void Simple_libs::System::System::write_file_content(const std::filesystem::path& file_path, const WString& content, bool isAppend) {
+	std::wofstream file(file_path, std::ios::out | (isAppend ? std::ios::app : std::ios::trunc));
 	if (!file) {
-		THROW_FILE_ERROR("Failed to open file for writing: " + file_path.string());
+		THROW_FILE_ERROR(L"Failed to open file for writing: " + file_path.wstring());
 	}
 
 	file << content;
 	if (!file) {
-		THROW_FILE_ERROR("Failed to write content to file: " + file_path.string());
+		THROW_FILE_ERROR(L"Failed to write content to file: " + file_path.wstring());
 	}
 }

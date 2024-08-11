@@ -16,7 +16,7 @@ void Simple_libs::Time::Time::InitVars() {
 }
 
 void Simple_libs::Time::Time::InitFuncs() {
-	_DEFINE_FUNCTION_WITH_ARGS("now", [](Args_t args) {
+	_DEFINE_FUNCTION(L"now", BLOCK(args) {
 		return NUMBER(std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count());
 		}, 0);
 
@@ -43,29 +43,35 @@ void Simple_libs::Time::Time::InitFuncs() {
 		_Date_args.push_back(std::move(minute));
 		_Date_args.push_back(std::move(second));	// Decided
 
-		VALUE temp = Functions::Get("Date")->execute(std::move(_Date_args));	
-		return std::move(temp);
+		VALUE temp = CALL(L"Date", MOVE(_Date_args))/*HAND_OVER_ARGS(
+			NUMBER(localTime.tm_year + 1900),
+			(ValuePtr)NUMBER(localTime.tm_mon + 1),
+			(ValuePtr)NUMBER(localTime.tm_mday),
+			(ValuePtr)NUMBER(localTime.tm_hour),
+			(ValuePtr)NUMBER(localTime.tm_min),
+			(ValuePtr)NUMBER(localTime.tm_sec)
+		)*/;	
+		return MOVE(temp);
 		};
 
-	_DEFINE_FUNCTION_WITH_ARGS("system_now", _system_now, 0);
+	_DEFINE_FUNCTION(L"system_now", _system_now, 0);
 
-	_DEFINE_FUNCTION_WITH_ARGS("sleep", [](Args_t args) {
+	_DEFINE_FUNCTION(L"sleep", BLOCK(args) {
 		std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(args.front()->AsDouble()));
 		return VOID;
 	}, 1);
 }
 
 void Simple_libs::Time::Time::InitStructs() {
-	Fields_decl_t fields_decl = {
-		{ "year" , ValueType::_NUMBER },
-		{ "month" , ValueType::_NUMBER },
-		{ "day" , ValueType::_NUMBER },
-		{ "hour" , ValueType::_NUMBER },
-		{ "minute" , ValueType::_NUMBER },
-		{ "second" , ValueType::_NUMBER }
-	};
 
-	_DEFINE_STRUCT("Date", fields_decl);
+	_DEFINE_STRUCT(L"Date", FIELD_DECL(
+		fields.emplace(L"year",   FIELD(L"num")),
+		fields.emplace(L"month",  FIELD(L"num")),
+		fields.emplace(L"day",    FIELD(L"num")),
+		fields.emplace(L"hour",   FIELD(L"num")),
+		fields.emplace(L"minute", FIELD(L"num")),
+		fields.emplace(L"second", FIELD(L"num"))
+	));
 }
 
 //VALUE Simple_libs::Time::Time::_Date(Args_t args) {

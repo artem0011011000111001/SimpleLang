@@ -16,30 +16,43 @@ namespace Simple {
 	class Statement;
 	class Function;
 	struct Variable;
+	struct ArgParams;
+	struct Field_decl;
+	struct RawField_decl;
+	struct FuncParams;
+
 	enum class ValueType;
 
-	using String = std::string;
+	using String			= std::string;
+	using WString			= std::wstring;
+	using WChar = wchar_t;
 	template<class _PtrTy>
-	using Ptr			= std::unique_ptr<_PtrTy>;
+	using Ptr				= std::unique_ptr<_PtrTy>;
 	template<class _KeyTy, class _ValTy>
-	using Map			= std::unordered_map<_KeyTy, _ValTy>;
+	using Map				= std::unordered_map<_KeyTy, _ValTy>;
 	template<class _ValTy>
-	using Str_map		= Map<String, _ValTy>;
+	using Str_map			= Map<String, _ValTy>;
+	template<class _ValTy>
+	using WStr_map			= Map<WString, _ValTy>;
 	template<class _Ty>
-	using Vec			= std::vector<_Ty>;
-	using Str_vec		= Vec<String>;
-	using ValuePtr      = Ptr<Value>;
-	using ExpressionPtr = Ptr<Expression>;
-	using StatementPtr  = Ptr<Statement>;
-	using FunctionPtr   = Ptr<Function>;
-	using VALUE			= ValuePtr;
-	using Val_map		= Str_map<ValuePtr>;
-	using Vars_t		= Str_map<Variable>;
-	using Funcs_t		= Str_map<FunctionPtr>;
-	using Fields_decl_t = Str_map<ValueType>;
-	using Structs_t		= Str_map<Fields_decl_t>;
-	using Args_t		= Vec<ValuePtr>;
-	using ArgsParam_t   = std::pair<std::list<String>, std::list<bool>>;
-	using Elements_t	= Args_t;
+	using Vec				= std::vector<_Ty>;
+	using Str_vec			= Vec<String>;
+	using WStr_vec			= Vec<WString>;
+	using ValuePtr			= Ptr<Value>;
+	using ExpressionPtr		= Ptr<Expression>;
+	using StatementPtr		= Ptr<Statement>;
+	using FunctionPtr		= Ptr<Function>;
+	using VALUE				= ValuePtr;
+	using Val_map			= WStr_map<ValuePtr>;
+	using Vars_t			= WStr_map<Variable>;
+	using Funcs_t			= WStr_map<FuncParams>;
+	using Fields_decl_t		= WStr_map<Field_decl>;
+	using RawFields_decl_t  = WStr_map<RawField_decl>;
+	using Structs_t			= WStr_map<Fields_decl_t>;
+	using Args_t			= Vec<ValuePtr>;
+	using ArgsParams_t		= Vec<ArgParams>;
+	using Elements_t		= Args_t;
+	using Field				= Variable;
+	using Fields_t			= Vars_t;
 }
 #endif // _SIMPLE_TYPEDEFS_H_

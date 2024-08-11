@@ -76,7 +76,7 @@ ExpressionPtr Parser::Unary() {
 
 	while (true) {
 		if (match(TokenType::DOT)) {
-			String field_name = consume(TokenType::WORD).getText();
+			WString field_name = consume(TokenType::WORD).getText();
 			result = CREATE_PTR<StructExpression>(std::move(result), field_name);
 		}
 
@@ -109,16 +109,17 @@ ExpressionPtr Parser::primary() {
 			return Function();
 	}
 
-	if (match(TokenType::WORD)) {
-		if (get(-1).getText() == "true")
-			return CREATE_PTR<NumberExpression>(1);
-		else if (get(-1).getText() == "false")
-			return CREATE_PTR<NumberExpression>(0);
-		else if (get(-1).getText() == "void")
-			return CREATE_PTR<VoidExpression>();
-		else
-			return CREATE_PTR<VariableExpression>(CurrentToken.getText());
-	}
+	if (match(TokenType::_TRUE))
+		return CREATE_PTR<NumberExpression>(1);
+
+	if (match(TokenType::_FALSE))
+		return CREATE_PTR<NumberExpression>(0);
+
+	if (match(TokenType::_VOID_))
+		return CREATE_PTR<VoidExpression>();
+
+	if (match(TokenType::WORD))
+		return CREATE_PTR<WordExpression>(CurrentToken.getText());
 
 	if (match(TokenType::NUM))
 		return CREATE_PTR<NumberExpression>(std::stod(CurrentToken.getText()));
@@ -154,16 +155,31 @@ ExpressionPtr Parser::primary() {
 }
 
 ExpressionPtr Parser::Function() {
-	String name = consume(TokenType::WORD).getText();
+	WString name = consume(TokenType::WORD).getText();
 	consume(TokenType::LPAREN);
 
-	FunctionalExpression function(name);
-	while (!match(TokenType::RPAREN)) {
-		function.AddArgument(expression());
+	CallFunctionExpression function(name);
+	while (true) {
 
-		if (match(TokenType::COMMA) && (get(0).getType() == TokenType::RPAREN))
-			throw Simple_Error("Expression required");
+		ExpressionPtr expr;
+
+		if (match(TokenType::RPAREN)) {
+			expr = DEFAULT;
+			break;
+		}
+
+		else if (get(0).getType() == TokenType::COMMA)
+			expr = DEFAULT;
+
+		else expr = expression();
+
+		function.AddArgument(MOVE(expr));
+
+		if (match(TokenType::RPAREN))
+			break;
+		
+		consume(TokenType::COMMA);
 	}
 
-	return CREATE_PTR<FunctionalExpression>(std::move(function));
+	return CREATE_PTR<CallFunctionExpression>(std::move(function));
 }

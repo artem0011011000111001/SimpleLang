@@ -46,6 +46,8 @@ namespace Simple {
 
 		StatementPtr For();
 
+		StatementPtr ForEach();
+
 		StatementPtr Break();
 
 		StatementPtr Continue();
@@ -62,7 +64,9 @@ namespace Simple {
 
 		StatementPtr ConstObjectDefine();
 
-		void AnalyzeFunction(ArgsParam_t& argsParam, StatementPtr& body);
+		StatementPtr ConstDestructDefine();
+
+		void AnalyzeFunction(ArgsParams_t& argsParams, StatementPtr& body, bool& is_any_args);
 
 		StatementPtr FunctionDefine();
 
@@ -73,6 +77,8 @@ namespace Simple {
 		StatementPtr TryCatch();
 
 		StatementPtr Throw();
+
+		StatementPtr DestructDefine(bool isConst = false);
 
 		//StatementPtr NewLine();
 
@@ -109,7 +115,7 @@ namespace Simple {
 
 		Token consume(const TokenType type);
 
-		static int stoihex(const String& hex);
+		static int stoihex(const WString& hex);
 	};
 }
 #endif // !_PARSER_H_

@@ -205,6 +205,27 @@
     <Filter Include="src\libs\System">
       <UniqueIdentifier>{dc04b663-6668-48cb-90f6-7423e1a661ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\structures\Iterator">
+      <UniqueIdentifier>{7890025e-5913-4687-980e-15299d0d46b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Iterator">
+      <UniqueIdentifier>{fee2af2b-c3b3-40af-a3a4-dfb6b356c640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Destruct">
+      <UniqueIdentifier>{8ffd7baf-8978-48f5-b8bf-f753bfca08ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Args">
+      <UniqueIdentifier>{d6eef698-05d6-4162-ab11-6a55626f6924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures\Field">
+      <UniqueIdentifier>{19e826fb-6bf7-4450-8779-b31aa624f30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures\Arg">
+      <UniqueIdentifier>{afbbdc0c-f04e-4005-b5c4-bf415d8f9b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Field">
+      <UniqueIdentifier>{5f5adb47-543d-401f-af69-d6fd26caff02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -294,7 +315,7 @@
     <ClCompile Include="ConditionalExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
-    <ClCompile Include="FunctionalExpression.cpp">
+    <ClCompile Include="CallFunctionExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
     <ClCompile Include="NumberExpression.cpp">
@@ -306,7 +327,7 @@
     <ClCompile Include="UnaryExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
-    <ClCompile Include="VariableExpression.cpp">
+    <ClCompile Include="WordExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
     <ClCompile Include="ArithmeticExpression.cpp">
@@ -378,7 +399,7 @@
     <ClCompile Include="AbbreviatedOperationsStatement.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
-    <ClCompile Include="VariableDefine_parsing.cpp">
+    <ClCompile Include="Define_parsing.cpp">
       <Filter>src\core\Parser\Semantics\Assign</Filter>
     </ClCompile>
     <ClCompile Include="VariableDefineStatement.cpp">
@@ -431,6 +452,36 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>src\libs\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Simple_Iterator.cpp">
+      <Filter>src\structures\Iterator</Filter>
+    </ClCompile>
+    <ClCompile Include="ForEachStatement.cpp">
+      <Filter>src\core\AST\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="DestructDefineStatement.cpp">
+      <Filter>src\core\AST\Destruct</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgParams.cpp">
+      <Filter>src\structures\Args</Filter>
+    </ClCompile>
+    <ClCompile Include="Field_decl.h">
+      <Filter>include\structures\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="Field_decl_.cpp">
+      <Filter>src\structures\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="RawVariable.cpp">
+      <Filter>src\structures\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncParams.cpp">
+      <Filter>src\structures\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -512,10 +563,28 @@
     <ClInclude Include="System.h">
       <Filter>libs\System</Filter>
     </ClInclude>
+    <ClInclude Include="Simple_Iterator.h">
+      <Filter>include\structures\Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgParams.h">
+      <Filter>include\structures\Arg</Filter>
+    </ClInclude>
+    <ClInclude Include="RawVariable.h">
+      <Filter>include\structures\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncParams.h">
+      <Filter>include\structures\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="Upload_to_git.simple">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="code3.simple">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="Array_test.simple">
       <Filter>tests</Filter>
     </None>
   </ItemGroup>

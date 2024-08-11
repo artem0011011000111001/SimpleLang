@@ -1,0 +1,13 @@
+func say_hello() {
+	print("hello");
+}
+
+struct Vector2D{
+	field x: num = 0;
+	field y: num = 0;
+
+	func constructor(x, y){
+		this.x = x;
+		this.y = y;
+	}
+}

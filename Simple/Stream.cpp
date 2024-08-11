@@ -10,35 +10,37 @@ void Simple_libs::Stream::Stream::Init() {
 }
 
 void Simple_libs::Stream::Stream::InitVars() {
-	_DEFINE_VAR_STR("endl", "\n", true);
+	_DEFINE_VAR_STR(L"endl", L"\n", true);
 }
 
 void Simple_libs::Stream::Stream::InitFuncs() {
-	_DEFINE_FUNCTION("output", [](Args_t args) {
+	_DEFINE_FUNCTION(L"output", [](Args_t args) {
 		size_t param_count = args.size();
 		for (const auto& arg : args) {
-			std::cout << arg->AsString();
+			std::wcout << arg->AsString();
 		}
 		return VOID;
-		});
-	_DEFINE_FUNCTION("outputln", [](Args_t args) {
+		}, any_args);
+
+	_DEFINE_FUNCTION(L"outputln", [](Args_t args) {
 		size_t param_count = args.size();
 		for (const auto& arg : args) {
-			std::cout << arg->AsString() << std::endl;
+			std::wcout << arg->AsString() << std::endl;
 		}
 		return VOID;
-		});
-	_DEFINE_FUNCTION("input", [](Args_t args) -> VALUE {
+		}, any_args);
+
+	_DEFINE_FUNCTION(L"input", [](Args_t args) -> VALUE {
 		size_t param_count = args.size();
 		if (param_count > 1)
 			throw Simple_Error("Expected 1 or 0 parameters instead of " + std::to_string(param_count));
 
-		String input;
+		WString input;
 
-		if (param_count == 0) std::cout << "";
-		else std::cout << args.front()->AsString();
+		if (param_count == 0) std::wcout << L"";
+		else std::wcout << args.front()->AsString();
 
-		std::cin >> input;
+		std::wcin >> input;
 
 		try {
 			return NUMBER(strict_stod(input));
@@ -46,5 +48,5 @@ void Simple_libs::Stream::Stream::InitFuncs() {
 		catch (const Simple_Error&) {
 			return STRING(input);
 		}
-		});
+		}, any_args);
 }

@@ -10,12 +10,16 @@
 #include <vector>
 
 namespace Simple {
-	struct Simple_Error : std::exception {
+
+	struct Simple_Error {
 	private:
-		String error_text;
+		WString error_text;
 		size_t error_line;
-	public:///////////////////////
-		Simple_Error(String error_text = "", size_t error_line = simple_npos); ///////////////////////
+	public: ///////////////////////
+		Simple_Error(String error_text = "", size_t error_line = simple_npos);
+		Simple_Error(WString error_text = L"", size_t error_line = simple_npos); ///////////////////////
+
+		WString what() const;
 
 		size_t line() const;
 	};

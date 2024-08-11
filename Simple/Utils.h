@@ -5,6 +5,7 @@
 
 #include "Simple_typedefs.h"
 #include "Variable.h"
+#include "Simple_defines.h"
 
 #include <string>
 #include <unordered_map>
@@ -21,7 +22,8 @@ namespace Simple {
 		_STRUCT,
 		_VOID,
 		_ARRAY,
-		_USER_STRUCT
+		_FUNCTION
+		//_USER_STRUCT
 	};
 
 	enum class LogicOperators {
@@ -54,15 +56,19 @@ namespace Simple {
 		POST_DEC,
 	};
 
-	double strict_stod(const String str);
+	Val_map CreateTypedDefaultValue();
+
+	double strict_stod(const WString str);
 	String to_string(LogicOperators op);
 	String to_string(BinaryOperators op);
-	String IdentifyCategory(ValueType type);
-	ValueType IdentifyValueType(const String& key);
-	bool equals_type(const String& key1, const String& key2);
-	void copy_variables(const std::unordered_map<String, Variable>& from, std::unordered_map<String, Variable>& whom);
-	void create_arguments(ArgsParam_t& argsParam, Args_t& args, std::unordered_map<String, Variable>& whom);
-	void disassemble_arguments(std::unordered_map<String, Variable> &from);
+	WString IdentifyCategory(ValueType type);
+	ValueType IdentifyValueType(const WString& key);
+	bool equals_type(const WString& key1, const WString& key2);
+	void copy_variables(const Vars_t& from, Vars_t& whom);
+	void create_arguments(ArgsParams_t& argsParam, Args_t& args, Vars_t& whom, bool is_any_args);
+	void disassemble_arguments(Vars_t &from);
 	void check_pos(int pos, int max_pos, const String& designator);
+	Fields_decl_t copy_fields_params(const Fields_decl_t& from);
+	FunctionPtr CheckAndGetFunc(const FuncParams& func, int argsCount);
 }
 #endif // _UTILS_H_

@@ -3,7 +3,7 @@
 
 using namespace Simple;
 
-VariableDefineStatement::VariableDefineStatement(String name, ExpressionPtr expr, bool IsConst)
+VariableDefineStatement::VariableDefineStatement(WString name, ExpressionPtr expr, bool IsConst)
 	: name(name), expr(std::move(expr)), IsConst(IsConst) {}
 
 void VariableDefineStatement::execute() {

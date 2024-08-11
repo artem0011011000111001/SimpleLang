@@ -14,16 +14,16 @@ StatementPtr Parser::TryCatch() {
 	if (match(TokenType::CONST))
 		isConst = true;
 
-	String key = consume(TokenType::WORD).getText();
+	WString key = consume(TokenType::WORD).getText();
 	consume(TokenType::COLON);
 
-	String type_in_str = consume(TokenType::WORD).getText();
+	WString type_in_str = consume(TokenType::WORD).getText();
 
 	consume(TokenType::RPAREN);
 
 	StatementPtr catchBlock = statementOrBlock();
 
-	return CREATE_PTR<TryCatchStatement>(std::move(tryBlock), key, isConst, type_in_str, std::move(catchBlock));
+	return CREATE_PTR<TryCatchStatement>(MOVE(tryBlock), key, isConst, type_in_str, MOVE(catchBlock));
 }
 
 StatementPtr Parser::Throw() {

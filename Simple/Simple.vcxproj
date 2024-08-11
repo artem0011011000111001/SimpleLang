@@ -129,8 +129,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbbreviatedOperationsStatement.cpp" />
+    <ClCompile Include="ArgParams.cpp" />
     <ClCompile Include="ArrayExpression.cpp" />
     <ClCompile Include="ArrayValue.cpp" />
+    <ClCompile Include="Field_decl_.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
     <ClCompile Include="CharExpression.cpp" />
     <ClCompile Include="CharValue.cpp" />
@@ -141,12 +143,18 @@
     <ClCompile Include="BreakStatement.cpp" />
     <ClCompile Include="CaseStatement.cpp" />
     <ClCompile Include="ArithmeticExpression.cpp" />
+    <ClCompile Include="DestructDefineStatement.cpp" />
     <ClCompile Include="DigitExpression.cpp" />
     <ClCompile Include="DigitValue.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
+    <ClCompile Include="Field_decl.h" />
+    <ClCompile Include="ForEachStatement.cpp" />
+    <ClCompile Include="FuncParams.cpp" />
+    <ClCompile Include="FunctionExpression.cpp" />
     <ClCompile Include="Function_parsing.cpp" />
     <ClCompile Include="FunctionDefineStatement.cpp" />
+    <ClCompile Include="FunctionValue.cpp" />
     <ClCompile Include="IfElse_parsing.cpp" />
     <ClCompile Include="Import_parsing.cpp" />
     <ClCompile Include="IndexExpression.cpp" />
@@ -156,9 +164,11 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="ObjectDefineStatement.cpp" />
     <ClCompile Include="Parser_utils.cpp" />
+    <ClCompile Include="RawVariable.cpp" />
     <ClCompile Include="ReturnStatement.cpp" />
     <ClCompile Include="ShortBlockStatement.cpp" />
     <ClCompile Include="Simple.cpp" />
+    <ClCompile Include="Simple_Iterator.cpp" />
     <ClCompile Include="StructExpression.cpp" />
     <ClCompile Include="Structs.cpp" />
     <ClCompile Include="StructValue.cpp" />
@@ -175,7 +185,7 @@
     <ClCompile Include="DoWhileStatement.cpp" />
     <ClCompile Include="ForStatement.cpp" />
     <ClCompile Include="Functions.cpp" />
-    <ClCompile Include="FunctionalExpression.cpp" />
+    <ClCompile Include="CallFunctionExpression.cpp" />
     <ClCompile Include="GlobalBlockStatement.cpp" />
     <ClCompile Include="IfStatement.cpp" />
     <ClCompile Include="ImportStatement.cpp" />
@@ -189,9 +199,9 @@
     <ClCompile Include="SwitchStatement.cpp" />
     <ClCompile Include="Variable.cpp" />
     <ClCompile Include="VariableDefineStatement.cpp" />
-    <ClCompile Include="VariableDefine_parsing.cpp" />
+    <ClCompile Include="Define_parsing.cpp" />
     <ClCompile Include="Variables.cpp" />
-    <ClCompile Include="VariableExpression.cpp" />
+    <ClCompile Include="WordExpression.cpp" />
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="NumberExpression.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -207,7 +217,11 @@
     <ClCompile Include="WhileStatement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgParams.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="FuncParams.h" />
+    <ClInclude Include="RawVariable.h" />
+    <ClInclude Include="Simple_Iterator.h" />
     <ClInclude Include="Libs.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module_defines.h" />
@@ -241,6 +255,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="Array_test.simple" />
+    <None Include="code3.simple" />
     <None Include="Upload_to_git.simple" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

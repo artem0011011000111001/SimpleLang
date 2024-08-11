@@ -1,3 +1,19 @@
-import System;
+import Exception;
 
-write("test.txt", "not this time _Noreturn");
+func assert(cond, error) {
+	if (!cond)
+		error(error);
+	else print("Success");
+}
+
+func assert(val, res, error) {
+	if (val != res)
+		error(error);
+	else print("Success");
+}
+
+func return_5(){
+	return 5;
+}
+
+assert(return_5(), 2, "expected 5");

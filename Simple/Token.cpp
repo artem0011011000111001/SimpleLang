@@ -2,156 +2,156 @@
 
 using namespace Simple;
 
-Token::Token(TokenType type, String text) : type(type), text(text) {}
+Token::Token(TokenType type, WString text) : type(type), text(text) {}
 
-String Token::enum_in_string() const {
+WString Token::enum_in_string() const {
 	switch (type) {
 	case TokenType::NUM:
-		return "NUMBER " + text;
+		return L"NUMBER " + text;
 
 	case TokenType::HEX_NUM:
-		return "HEX_NUMBER " + text;
+		return L"HEX_NUMBER " + text;
 
 	case TokenType::WORD:
-		return "WORD " + text;
+		return L"WORD " + text;
 
 	case TokenType::TEXT:
-		return "TEXT " + text;
+		return L"TEXT " + text;
 
 	case TokenType::PLUS:
-		return "PLUS";
+		return L"PLUS";
 
 	case TokenType::MINUS:
-		return "MINUS";
+		return L"MINUS";
 
 	case TokenType::STAR:
-		return "STAR";
+		return L"STAR";
 
 	case TokenType::SLASH:
-		return "SLASH";
+		return L"SLASH";
 
 	case TokenType::STARSTAR:
-		return "STARSTAR";
+		return L"STARSTAR";
 
 	case TokenType::PLUSPLUS:
-		return "PLUSPLUS";
+		return L"PLUSPLUS";
 
 	case TokenType::MINUSMINUS:
-		return "MINUSMINUS";
+		return L"MINUSMINUS";
 
 	case TokenType::LT:
-		return "LT";
+		return L"LT";
 
 	case TokenType::LTEQ:
-		return "LTEQ";
+		return L"LTEQ";
 
 	case TokenType::GT:
-		return "GT";
+		return L"GT";
 
 	case TokenType::GTEQ:
-		return "GTEQ";
+		return L"GTEQ";
 
 	case TokenType::EXCL:
-		return "EXCL";
+		return L"EXCL";
 
 	case TokenType::EXCLEQ:
-		return "EXCLEQ";
+		return L"EXCLEQ";
 
 	case TokenType::BAR:
-		return "BAR";
+		return L"BAR";
 
 	case TokenType::BARBAR:
-		return "BARBAR";
+		return L"BARBAR";
 
 	case TokenType::AMP:
-		return "AMP";
+		return L"AMP";
 
 	case TokenType::AMPAMP:
-		return "AMPAMP";
+		return L"AMPAMP";
 
 	case TokenType::LPAREN:
-		return "LPAREN";
+		return L"LPAREN";
 
 	case TokenType::RPAREN:
-		return "RPAREN";
+		return L"RPAREN";
 
 	case TokenType::LBRACE:
-		return "LBRACE";
+		return L"LBRACE";
 
 	case TokenType::RBRACE:
-		return "RBRACE";
+		return L"RBRACE";
 
 	case TokenType::EQ:
-		return "EQ";
+		return L"EQ";
 
 	case TokenType::SEMICOLON:
-		return "SEMICOLON";
+		return L"SEMICOLON";
 
 	case TokenType::COLON:
-		return "COLON";
+		return L"COLON";
 
 	case TokenType::EQEQ:
-		return "EQEQ";
+		return L"EQEQ";
 
 	case TokenType::COMMA:
-		return "COMMA";
+		return L"COMMA";
 
 	case TokenType::CONST:
-		return "CONST";
+		return L"CONST";
 
 	case TokenType::IF:
-		return "IF";
+		return L"IF";
 
 	case TokenType::ELSE:
-		return "ELSE";
+		return L"ELSE";
 
 	case TokenType::DO:
-		return "DO";
+		return L"DO";
 
 	case TokenType::WHILE:
-		return "WHILE";
+		return L"WHILE";
 
 	case TokenType::FOR:
-		return "FOR";
+		return L"FOR";
 
 	case TokenType::BREAK:
-		return "BREAK";
+		return L"BREAK";
 
 	case TokenType::CONTINUE:
-		return "CONTINUE";
+		return L"CONTINUE";
 
 	case TokenType::IMPORT:
-		return "IMPORT";
+		return L"IMPORT";
 
 	case TokenType::SWITCH:
-		return "SWITCH";
+		return L"SWITCH";
 
 	case TokenType::CASE:
-		return "CASE";
+		return L"CASE";
 
-	case TokenType::DEFAULT:
-		return "DEFAULT";
+	case TokenType::_DEFAULT:
+		return L"DEFAULT";
 
 	case TokenType::END_OF_FILE:
-		return "END_OF_FILE";
+		return L"END_OF_FILE";
 
 	default:
-		return "Unknown token";
+		return L"Unknown token";
 	}
 }
 
-TokenType Token::getType() const { 
-	return type; 
+TokenType Token::getType() const {
+	return type;
 }
 
-void Token::setType(TokenType newType) { 
+void Token::setType(TokenType newType) {
 	type = newType;
 }
 
-String Token::getText() const {
+WString Token::getText() const {
 	return text;
 }
 
-void Token::setText(String newText) { 
+void Token::setText(WString newText) {
 	text = newText;
 }

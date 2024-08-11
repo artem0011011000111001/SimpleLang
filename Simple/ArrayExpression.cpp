@@ -6,7 +6,7 @@ using namespace Simple;
 ArrayExpression::ArrayExpression(Vec<ExpressionPtr> elements)
 	: elements(std::move(elements)) {}
 
-Value& Simple::ArrayExpression::eval() {
+Value& ArrayExpression::eval() {
 	ArrayValue arr;
 
 	for (auto& el : elements) {

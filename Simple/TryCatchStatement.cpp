@@ -4,7 +4,7 @@
 
 using namespace Simple;
 
-TryCatchStatement::TryCatchStatement(StatementPtr tryBlock, const String& key, bool isConst, const String& type_in_str
+TryCatchStatement::TryCatchStatement(StatementPtr tryBlock, const WString& key, bool isConst, const WString& type_in_str
 	, StatementPtr catchBlock) : tryBlock(std::move(tryBlock)), key(key), isConst(isConst), type_in_str(type_in_str), catchBlock(std::move(catchBlock)) {}
 
 void TryCatchStatement::execute(){

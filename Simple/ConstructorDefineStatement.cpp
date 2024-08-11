@@ -4,44 +4,60 @@
 #include "Functions.h"
 #include "Variables.h"
 #include "Structs.h"
+#include "ArgParams.h"
+#include "Field_decl.h"
+#include "Function.h"
+#include "Utils.h"
 
 #include <algorithm>
 #include <iterator>
 
 using namespace Simple;
 
-std::function<VALUE(Args_t)> Simple::ConstructorDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement) {
+std::function<VALUE(Args_t)> ConstructorDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement) {
 	return [&statement, this](Args_t args) -> VALUE {
 		Vars_t savedGlobals;
 		try {
 			Variables::PushState();
-			create_arguments(argsParam, args, savedGlobals);
+			create_arguments(argsParam, args, savedGlobals, is_any_args);
 
-			Val_map fields;
+			Vars_t fields;
+
+			Val_map TypedDefaultValue = CreateTypedDefaultValue();
 
 			for (auto& fields_param : fields_params) {
-				fields.emplace(fields_param.first, [fields_param]() -> ValuePtr {
+				fields.emplace(fields_param.first, [&fields_param, &TypedDefaultValue]() -> Field {
 
-					if (fields_param.second == ValueType::_NUMBER)
-						return NUMBER(0);
+					WString type = fields_param.second.type;
 
-					else if (fields_param.second == ValueType::_STRING)
-						return STRING("");
+					ValuePtr defaultValue;
+					ValuePtr finalValue;
+					
+					if (fields_param.second.defaultValue)
+						defaultValue = fields_param.second.defaultValue->clone();
 
-					else if (fields_param.second == ValueType::_DIGIT_)
-						return DIGIT(0);
+					bool isConst = fields_param.second.isConst;
 
-					else if (fields_param.second == ValueType::_CHAR)
-						return CHAR("");
+					if (defaultValue) {
+						if (type == defaultValue->GetTypeInString())
+							finalValue = MOVE(defaultValue);
 
-					else if (fields_param.second == ValueType::_VOID)
-						return VOID;
+						else throw Simple_Error("Invalid type");
+					}
 
-					else throw Simple_Error("Unknown type");
+					else if (Structs::IsExist(type))
+						finalValue = CALL(type, Args_t());
+
+					else if (TypedDefaultValue.find(type) != TypedDefaultValue.end())
+						finalValue = TypedDefaultValue[type]->clone();
+
+					else throw Simple_Error(type + L" - undeclared type");
+
+					return Field(MOVE(finalValue), isConst);
 					}());
 			}
 
-			Variables::SetNew("this", Variable(STRUCT(name, fields), false));
+			Variables::SetNew(L"this", Variable(STRUCT(name, fields), false));
 			
 			/*auto argNameIt = argsParam.first.begin();
 			auto argIsConstIt = argsParam.second.begin();
@@ -55,12 +71,12 @@ std::function<VALUE(Args_t)> Simple::ConstructorDefineStatement::TurnFuncFromVoi
 
 			statement->execute();
 
-			ValuePtr value_this = Variables::Get("this");
+			ValuePtr value_this = Variables::Get(L"this");
 
 			disassemble_arguments(savedGlobals);
 			Variables::PopState();
 
-			return std::move(value_this);
+			return MOVE(value_this);
 		}
 		catch (ReturnStatement&) {
 			throw Simple_Error("Constructor cannot return a value");
@@ -68,12 +84,35 @@ std::function<VALUE(Args_t)> Simple::ConstructorDefineStatement::TurnFuncFromVoi
 		};
 }
 
-ConstructorDefineStatement::ConstructorDefineStatement(String name,
-	ArgsParam_t argsParam, StatementPtr statement, Fields_decl_t fields_params)
-	: name(name), argsParam(std::move(argsParam)), statement(std::move(statement)), fields_params(fields_params) {
-	Structs::Add(name, fields_params);
+ConstructorDefineStatement::ConstructorDefineStatement(WString name,
+	ArgsParams_t argsParam, StatementPtr statement, RawFields_decl_t RawFields_params, bool is_any_args)
+	: name(name), argsParam(MOVE(argsParam)), statement(MOVE(statement)), RawFields_params(MOVE(RawFields_params)), is_any_args(is_any_args) {
 }
 
 void ConstructorDefineStatement::execute() {
-	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToVALUE(statement), { argsParam.first.size() });
+	fields_params = [this]() {
+
+		Fields_decl_t transform;
+
+		for (auto& Rawfield_params : RawFields_params) {
+			ValuePtr defaultValue;
+
+			if (Rawfield_params.second.defaultValue)
+				defaultValue = Rawfield_params.second.defaultValue->eval().clone();
+
+			transform.emplace(Rawfield_params.first, FIELD(
+
+				Rawfield_params.second.type,
+				Rawfield_params.second.isConst,
+				MOVE(defaultValue))
+
+			);
+		}
+
+		return MOVE(transform);
+		}();
+
+	Structs::Add(name, copy_fields_params(fields_params));
+
+	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToVALUE(statement), { is_any_args ? any_args : (int)argsParam.size() });
 }

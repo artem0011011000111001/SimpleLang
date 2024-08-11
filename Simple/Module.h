@@ -9,6 +9,7 @@
 #include "Function.h"
 #include "Functions.h"
 #include "Structs.h"
+#include "Field_decl.h"
 
 #include <string>
 #include <memory>
@@ -26,23 +27,23 @@ namespace Simple {
 
     class CreateModuleByName {
     public:
-        using CreateFunc = std::unique_ptr<Module_Base>(*)();
+        using CreateFunc = Ptr<Module_Base>(*)();
 
         static CreateModuleByName& getInstance();
 
-        void registerClass(const String& className, CreateFunc createFunc);
+        void registerClass(const WString& className, CreateFunc createFunc);
 
-        std::unique_ptr<Module_Base> createInstance(const String& className);
+        Ptr<Module_Base> createInstance(const WString& className);
 
     private:
         CreateModuleByName() = default;
-        std::unordered_map<String, CreateFunc> registry;
+        WStr_map<CreateFunc> registry;
     };
 
     template<class _ModuleTy>
-    void RegisterModule(const String& designator) {
+    void RegisterModule(const WString& designator) {
         CreateModuleByName::getInstance().registerClass(designator, []() -> std::unique_ptr<Module_Base> {
-            return std::make_unique<_ModuleTy>();
+            return CREATE_PTR<_ModuleTy>();
             });
     }
 }

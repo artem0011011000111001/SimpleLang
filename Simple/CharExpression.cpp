@@ -3,7 +3,7 @@
 
 using namespace Simple;
 
-CharExpression::CharExpression(String value)
+CharExpression::CharExpression(WString value)
 	: value(value) {}
 
 Value& CharExpression::eval() {

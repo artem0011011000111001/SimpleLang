@@ -3,7 +3,7 @@
 
 using namespace Simple;
 
-CharValue::CharValue(const String& value)
+CharValue::CharValue(const WString& value)
 	: value(value) {}
 
 double CharValue::AsDouble() const {
@@ -12,7 +12,7 @@ double CharValue::AsDouble() const {
 	throw Simple_Error("\'" + value[0] + String("\' not digit"));
 }
 
-String CharValue::AsString() const {
+WString CharValue::AsString() const {
 	return value;
 }
 
@@ -37,16 +37,24 @@ ValueType CharValue::GetType() const {
 	return ValueType::_CHAR;
 }
 
-String CharValue::GetTypeInString() const {
-	return "char";
+WString CharValue::GetTypeInString() const {
+	return L"char";
+}
+
+Simple_Iterator CharValue::begin() {
+	throw Simple_Error("begin There is no operator corresponding");
+}
+
+Simple_Iterator CharValue::end() {
+	throw Simple_Error("end There is no operator corresponding");
 }
 
 ValuePtr CharValue::operator+(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_CHAR || other->GetType() == ValueType::_STRING)
 		return STRING(value + other->AsString());
 
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr CharValue::operator-(const ValuePtr& other) const {
@@ -56,14 +64,14 @@ ValuePtr CharValue::operator-(const ValuePtr& other) const {
 ValuePtr CharValue::operator*(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return STRING([this, &other]() {
-		String result;
+		WString result;
 			for (size_t i = 0, count = static_cast<size_t>(other->AsDouble()); i < count; i++) {
 				result += value;
 			}
 			return result;
 			}());
-	throw Simple_Error("* There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"* There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr CharValue::operator/(const ValuePtr& other) const {
@@ -114,10 +122,14 @@ Value& CharValue::operator[](int pos) {
 	throw Simple_Error("[] There is no operator corresponding");
 }
 
+ValuePtr CharValue::operator()(Args_t args) const {
+	throw Simple_Error("() There is no operator corresponding");
+}
+
 ValuePtr CharValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-Value& CharValue::dot(const String& key) const {
-	throw Simple_Error("Void does not have a member named \"" + key + "\"");
+Value& CharValue::dot(const WString& key) const {
+	throw Simple_Error(L"Void does not have a member named \"" + key + L"\"");
 }

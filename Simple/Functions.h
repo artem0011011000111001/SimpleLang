@@ -5,6 +5,7 @@
 
 #include "Simple_typedefs.h"
 #include "Variable.h"
+#include "FuncParams.h"
 
 #include <unordered_map>
 #include <vector>
@@ -19,13 +20,15 @@ namespace Simple {
 
 	public:
 
-		static bool IsExist(const String& key);
+		static bool IsExist(const WString& key, int argsCount = not_specified_args);
 
-		static FunctionPtr Get(const String& key);
+		static FunctionPtr Get(const WString& key, int argsCount);
 
-		static void Set(const String& key, FunctionPtr value);
+		static FuncParams Get(const WString& key);
 
-		static void RegisterDynamicFunction(const String& name, std::function<VALUE(Args_t)> funcbody, const size_t argscount);
+		static void Set(const WString& key, FunctionPtr func, int argsCount);
+
+		static void RegisterDynamicFunction(const WString& name, std::function<VALUE(Args_t)> funcbody, const int argscount);
 
 		static void CreateStandartFunctions();
 	};

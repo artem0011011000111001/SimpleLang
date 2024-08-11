@@ -6,7 +6,8 @@
 #include "Simple_typedefs.h"
 #include "Expressions.h"
 #include "Values.h"
-#include "Simple_typedefs.h"
+#include "Simple_defines.h"
+#include "RawVariable.h"
 
 #include <list>
 #include <string>
@@ -22,22 +23,22 @@ namespace Simple {
 	};
 
 	class VariableDefineStatement : public Statement {
-		String name;
+		WString name;
 		ExpressionPtr expr;
 		bool IsConst;
 
 	public:
-		VariableDefineStatement(String name, ExpressionPtr expr, bool IsConst);
+		VariableDefineStatement(WString name, ExpressionPtr expr, bool IsConst);
 		void execute() override;
 	};
 
 	class ObjectDefineStatement : public Statement {
-		String name;
-		Str_map<ExpressionPtr> fields;
+		WString name;
+		WStr_map<RawVariable> fields;
 		bool IsConst;
 
 	public:
-		ObjectDefineStatement(String name, Str_map<ExpressionPtr> fields, bool IsConst);
+		ObjectDefineStatement(WString name, WStr_map<RawVariable> fields, bool IsConst);
 		void execute() override;
 	};
 
@@ -116,15 +117,26 @@ namespace Simple {
 	};
 
 	class ForStatement : public Statement {
-		String InitName;
+		WString InitName;
 		StatementPtr initialization;
 		ExpressionPtr termination;
 		ExpressionPtr increment;
 		StatementPtr statement;
 
 	public:
-		ForStatement(String InitName, StatementPtr initialization, ExpressionPtr termination,
+		ForStatement(WString InitName, StatementPtr initialization, ExpressionPtr termination,
 			ExpressionPtr increment, StatementPtr block);
+		void execute() override;
+	};
+
+	class ForEachStatement : public Statement {
+		WString name;
+		bool isConst;
+		WString in;
+		StatementPtr block;
+
+	public:
+		ForEachStatement(WString name, bool isConst, WString in, StatementPtr block);
 		void execute() override;
 	};
 
@@ -139,12 +151,12 @@ namespace Simple {
 	};
 
 	class ImportStatement : public Statement {
-		String key;
-		static Str_vec connected_modules;
+		WString key;
+		static WStr_vec connected_modules;
 		bool isPath;
 
 	public:
-		ImportStatement(String key, bool isPath = false);
+		ImportStatement(WString key, bool isPath = false);
 		void execute() override;
 	};
 
@@ -188,13 +200,14 @@ namespace Simple {
 	};
 
 	class FunctionDefineStatement : public Statement {
-		String name;
-		ArgsParam_t argsParam;
+		WString name;
+		ArgsParams_t argsParam;
 		StatementPtr statement;
+		bool is_any_args;
 
 		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement);
 	public:
-		FunctionDefineStatement(String name, ArgsParam_t argsParam, StatementPtr statement);
+		FunctionDefineStatement(WString name, ArgsParams_t argsParam, StatementPtr statement, bool is_any_args);
 
 		void execute() override;
 
@@ -202,14 +215,17 @@ namespace Simple {
 	};
 
 	class ConstructorDefineStatement : public Statement {
-		String name;
-		ArgsParam_t argsParam;
+		WString name;
+		ArgsParams_t argsParam;
 		StatementPtr statement;
+		bool is_any_args;
+
 		Fields_decl_t fields_params;
+		RawFields_decl_t RawFields_params;
 
 		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement);
 	public:
-		ConstructorDefineStatement(String name, ArgsParam_t argsParam, StatementPtr statement, Fields_decl_t fields_params);
+		ConstructorDefineStatement(WString name, ArgsParams_t argsParam, StatementPtr statement, RawFields_decl_t RawFields_params, bool is_any_args);
 		void execute() override;
 	};
 
@@ -240,20 +256,29 @@ namespace Simple {
 	class TryCatchStatement : public Statement {
 
 		StatementPtr tryBlock;
-		String key;
+		WString key;
 		bool isConst;
-		String type_in_str;
+		WString type_in_str;
 		StatementPtr catchBlock;
 	public:
-		TryCatchStatement(StatementPtr tryBlock, const String& key, bool isConst, const String& type_in_str, StatementPtr catchBlock);
-		void execute() override;
-	};
+		TryCatchStatement(StatementPtr tryBlock, const WString& key, bool isConst, const WString& type_in_str, StatementPtr catchBlock);
+		void execute() override;	};
 
 	class ThrowStatement : public Statement {
 
 		ExpressionPtr expr;
 	public:
 		ThrowStatement(ExpressionPtr expr);
+		void execute() override;
+	};
+
+	class DestructDefineStatement : public Statement {
+
+		WStr_vec fields_names;
+		WString obj_name;
+		bool isConst;
+	public:
+		DestructDefineStatement(WStr_vec fields_names, WString obj_name, bool isConst);
 		void execute() override;
 	};
 }

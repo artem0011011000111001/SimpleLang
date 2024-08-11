@@ -18,7 +18,7 @@ namespace Simple {
 	{
 	private:
 
-		/*const String OPERATORS_CHARS = "+-()=;<>";
+		/*const WWString OPERATORS_CHARS = "+-()=;<>";
 		const TokenType OPERATORS_TOKENS[10] = {
 			TokenType::PLUS, TokenType::MINUS,
 			TokenType::STAR, TokenType::SLASH,
@@ -27,51 +27,52 @@ namespace Simple {
 			TokenType::LT, TokenType::GT
 		};*/
 
-		const Str_map<TokenType> OPERATORS = {
-			{"+",      TokenType::PLUS},
-			{"-",      TokenType::MINUS},
-			{"*",      TokenType::STAR},
-			{"/",      TokenType::SLASH},
-			{"**",     TokenType::STARSTAR},
-			{"++",     TokenType::PLUSPLUS},
-			{"--",     TokenType::MINUSMINUS},
-			{"+=",     TokenType::PLUSEQ},
-			{"-=",     TokenType::MINUSEQ},
-			{"*=",     TokenType::STAREQ},
-			{"/=",     TokenType::SLASHEQ},
-			{"**=",    TokenType::STARSTAREQ},
-			{"(",      TokenType::LPAREN},
-			{")",      TokenType::RPAREN},
-			{"=",      TokenType::EQ},
-			{";",      TokenType::SEMICOLON},
-			{"<",      TokenType::LT},
-			{">",      TokenType::GT},
-			{"!",      TokenType::EXCL},
-			{"!=",     TokenType::EXCLEQ},
-			{"&",      TokenType::AMP},
-			{"&&",     TokenType::AMPAMP},
-			{"|",      TokenType::BAR},
-			{"||",     TokenType::BARBAR},
-			{"==",     TokenType::EQEQ},
-			{"<=",     TokenType::LTEQ},
-			{">=",     TokenType::GTEQ},
-			{"{" ,     TokenType::LBRACE},
-			{"}" ,     TokenType::RBRACE},
-			{"," ,     TokenType::COMMA},
-			{"." ,     TokenType::DOT},
-			{"[" ,     TokenType::LSBRACKET},
-			{"]" ,     TokenType::RSBRACKET},
-			{":" ,     TokenType::COLON}
+		const WStr_map<TokenType> OPERATORS = {
+			{L"+",      TokenType::PLUS},
+			{L"-",      TokenType::MINUS},
+			{L"*",      TokenType::STAR},
+			{L"/",      TokenType::SLASH},
+			{L"**",     TokenType::STARSTAR},
+			{L"++",     TokenType::PLUSPLUS},
+			{L"--",     TokenType::MINUSMINUS},
+			{L"+=",     TokenType::PLUSEQ},
+			{L"-=",     TokenType::MINUSEQ},
+			{L"*=",     TokenType::STAREQ},
+			{L"/=",     TokenType::SLASHEQ},
+			{L"**=",    TokenType::STARSTAREQ},
+			{L"(",      TokenType::LPAREN},
+			{L")",      TokenType::RPAREN},
+			{L"=",      TokenType::EQ},
+			{L";",      TokenType::SEMICOLON},
+			{L"<",      TokenType::LT},
+			{L">",      TokenType::GT},
+			{L"!",      TokenType::EXCL},
+			{L"!=",     TokenType::EXCLEQ},
+			{L"&",      TokenType::AMP},
+			{L"&&",     TokenType::AMPAMP},
+			{L"|",      TokenType::BAR},
+			{L"||",     TokenType::BARBAR},
+			{L"==",     TokenType::EQEQ},
+			{L"<=",     TokenType::LTEQ},
+			{L">=",     TokenType::GTEQ},
+			{L"{",      TokenType::LBRACE},
+			{L"}",      TokenType::RBRACE},
+			{L",",      TokenType::COMMA},
+			{L".",      TokenType::DOT},
+			{L"[",      TokenType::LSBRACKET},
+			{L"]",      TokenType::RSBRACKET},
+			{L":",      TokenType::COLON},
+			{L"...",    TokenType::ELLIPSIS}
 		};
 
 	private:
-		const String input;
+		const WString input;
 		std::list<Token> tokens;
 		size_t pos;
 		const size_t length;
 
 	public:
-		Lexer(String& input);
+		Lexer(WString& input);
 
 		std::list<Token> tokenize();
 	private:
@@ -99,11 +100,11 @@ namespace Simple {
 
 		void addToken(const TokenType type);
 
-		void addToken(const TokenType type, const String text);
+		void addToken(const TokenType type, const WString text);
 
-		char peek(const size_t relativePostion) const;
+		WChar peek(const size_t relativePostion) const;
 
-		char next();
+		WChar next();
 
 	private:
 		template<class _Ty, class _Ty2>
@@ -117,7 +118,7 @@ namespace Simple {
 		}
 
 		template<class _Ty, class _Ty2>
-		size_t indexOfUnMap(const Str_map<_Ty>& collection, const _Ty2& val) {
+		size_t check_operator(const WStr_map<_Ty>& collection, const _Ty2& val) {
 			size_t count = 0;
 			for (const auto& el : collection)
 			{
@@ -130,9 +131,9 @@ namespace Simple {
 			return simple_npos;
 		}
 
-		bool IsWord(const char c);
+		bool IsWord(const WChar c);
 
-		bool IsHex(const char c);
+		bool IsHex(const WChar c);
 	};
 }
 

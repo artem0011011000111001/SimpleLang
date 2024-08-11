@@ -3,7 +3,7 @@
 
 using namespace Simple;
 
-ForStatement::ForStatement(String InitName, StatementPtr initialization, ExpressionPtr termination,
+ForStatement::ForStatement(WString InitName, StatementPtr initialization, ExpressionPtr termination,
 	ExpressionPtr increment, StatementPtr block)
 	: InitName(InitName), initialization(std::move(initialization)), 
 	termination(std::move(termination)), increment(std::move(increment)), statement(std::move(block)) {}

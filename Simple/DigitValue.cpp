@@ -11,8 +11,8 @@ double DigitValue::AsDouble() const {
 	return value;
 }
 
-String DigitValue::AsString() const {
-	return std::to_string(static_cast<int>(value));
+WString DigitValue::AsString() const {
+	return std::to_wstring(static_cast<int>(value));
 }
 
 ValuePtr DigitValue::clone() const {
@@ -36,22 +36,30 @@ ValueType DigitValue::GetType() const {
 	return ValueType::_DIGIT_;
 }
 
-String DigitValue::GetTypeInString() const {
-	return "digit";
+WString DigitValue::GetTypeInString() const {
+	return L"digit";
+}
+
+Simple_Iterator DigitValue::begin() {
+	throw Simple_Error("begin There is no operator corresponding");
+}
+
+Simple_Iterator DigitValue::end() {
+	throw Simple_Error("end There is no operator corresponding");
 }
 
 ValuePtr DigitValue::operator+(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return NUMBER(value + other->AsDouble());
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator-(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return NUMBER(value - other->AsDouble());
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator*(const ValuePtr& other) const {
@@ -59,7 +67,7 @@ ValuePtr DigitValue::operator*(const ValuePtr& other) const {
 		return NUMBER(value * other->AsDouble());
 
 	auto multiply_str = [this, &other]() {
-		String result, str = other->AsString();
+		WString result, str = other->AsString();
 		for (size_t i = 0; i < value; i++) {
 			result += str;
 		}
@@ -69,15 +77,15 @@ ValuePtr DigitValue::operator*(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_STRING || other->GetType() == ValueType::_CHAR)
 		return STRING(multiply_str());
 
-	throw Simple_Error("* There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"* There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator/(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return NUMBER(value / other->AsDouble());
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"/ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator++() {
@@ -114,62 +122,66 @@ bool DigitValue::operator<(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value < other->AsDouble();
 
-	throw Simple_Error("< There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"< There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool DigitValue::operator>(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value > other->AsDouble();
 
-	throw Simple_Error("> There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"> There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool DigitValue::operator<=(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value <= other->AsDouble();
 
-	throw Simple_Error("<= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"<= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool DigitValue::operator>=(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value >= other->AsDouble();
 
-	throw Simple_Error(">= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L">= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool DigitValue::operator==(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value == other->AsDouble();
 
-	throw Simple_Error("== There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"== There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool DigitValue::operator!=(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return value != other->AsDouble();
 
-	throw Simple_Error("!= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"!= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 Value& DigitValue::operator[](int pos) {
 	throw Simple_Error("[] There is no operator corresponding");
 }
 
+ValuePtr DigitValue::operator()(Args_t args) const {
+	throw Simple_Error("() There is no operator corresponding");
+}
+
 ValuePtr DigitValue::power(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
 		return NUMBER(std::pow(value, other->AsDouble()));
 
-	throw Simple_Error("!= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"!= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
-Value& DigitValue::dot(const String& key) const {
-	throw Simple_Error("Digit does not have a member named \"" + key + "\"");
+Value& DigitValue::dot(const WString& key) const {
+	throw Simple_Error(L"Digit does not have a member named \"" + key + L"\"");
 }

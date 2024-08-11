@@ -10,10 +10,6 @@ using namespace Simple;
 
 Parser::Parser(const std::list<Token>& tokens) : size(tokens.size()), pos(0) {
 	std::copy(tokens.begin(), tokens.end(), std::back_inserter(this->tokens));
-	//for (const auto& token : tokens)
-	//{
-	//	this->tokens.push_back(token);
-	//}
 }
 
 GlobalBlockStatement Parser::parse() {
@@ -43,11 +39,18 @@ StatementPtr Parser::getNextGlobalStatement() {
 
 StatementPtr Parser::getNextStatement() {
 	if (match(TokenType::CONST)) {
+
 		StatementPtr result;
-		if (get(2).getType() == TokenType::EQ)
+
+		if (match(TokenType::DESTRUCT))
+			result = ConstDestructDefine();
+
+		else if (get(2).getType() == TokenType::EQ)
 			result = ConstVariableDefine();
+
 		else if (get(2).getType() == TokenType::LBRACE)
 			result = ConstObjectDefine();
+
 		CHECK_END_STR;
 		return std::move(result);
 	}
@@ -66,6 +69,9 @@ StatementPtr Parser::getNextStatement() {
 
 	else if (match(TokenType::FOR))
 		return For();
+
+	else if (match(TokenType::FOREACH))
+		return ForEach();
 
 	else if (match(TokenType::BREAK))
 		return Break();
@@ -88,7 +94,7 @@ StatementPtr Parser::getNextStatement() {
 	else if (match(TokenType::STRUCT))
 		throw Simple_Error("You cannot declare a struct not in global visibility", line);
 
-	else if (match(TokenType::FIELD))
+	else if (match(TokenType::_FIELD))
 		throw Simple_Error("Keyword field cannot be used here");
 
 	else if (match(TokenType::TRY))
@@ -97,23 +103,29 @@ StatementPtr Parser::getNextStatement() {
 	else if (match(TokenType::THROW)) {
 		StatementPtr result = Throw();
 		CHECK_END_STR;
-		return std::move(result);
+		return MOVE(result);
+	}
+
+	else if (match(TokenType::DESTRUCT)) {
+		StatementPtr result = DestructDefine();
+		CHECK_END_STR;
+		return MOVE(result);
 	}
 
 	else if (get(0).getType() == TokenType::WORD) {
 		if (get(1).getType() == TokenType::EQ) {
 			StatementPtr result = VariableDefine();
 			CHECK_END_STR;
-			return std::move(result);
+			return MOVE(result);
 		}
 		else if (get(1).getType() == TokenType::LBRACE) {
 			StatementPtr result = ObjectDefine();
 			CHECK_END_STR;
-			return std::move(result);
+			return MOVE(result);
 		}
 	}
 
-	ExpressionPtr expr = std::move(expression());
+	ExpressionPtr expr = MOVE(expression());
 
 	Token CurrentToken = get(0);
 	if (CurrentToken.getType() == TokenType::EQ ||
@@ -123,13 +135,13 @@ StatementPtr Parser::getNextStatement() {
 		CurrentToken.getType() == TokenType::SLASHEQ ||
 		CurrentToken.getType() == TokenType::STARSTAREQ
 		) {
-		StatementPtr result = Assignment(std::move(expr));
+		StatementPtr result = Assignment(MOVE(expr));
 		CHECK_END_STR;
-		return std::move(result);
+		return MOVE(result);
 	}
 
 	else CHECK_END_STR;
-	return CREATE_PTR<ExpressionStatement>(std::move(expr));
+	return CREATE_PTR<ExpressionStatement>(MOVE(expr));
 }
 
 StatementPtr Parser::statementOrBlock() {

@@ -17,33 +17,35 @@ namespace Simple {
 
 	struct Variables {
 	private:
-		static std::unordered_map<String, Variable> variables;
+		static Vars_t variables;
 
-		static std::stack<std::unordered_map<String, Variable>> variablesState;
+		static std::stack<Vars_t> variablesState;
 
 	public:
 
-		static bool IsExist(const String& key);
+		static bool IsExist(const WString& key);
 
-		static bool IsConstant(const String& key);
+		static bool IsConstant(const WString& key);
 
-		static ValuePtr Get(const String& key);
+		static ValuePtr Get(const WString& key);
 
-		static Value& GetRef(const String& key);
+		static Value& GetRef(const WString& key);
 
-		static void SetAllVariables(std::unordered_map<String, Variable>&& variables);
+		static void SetAllVariables(Vars_t&& variables);
 
-		static const std::unordered_map<String, Variable>& GetAllVariables();
+		static const std::unordered_map<WString, Variable>& GetAllVariables();
 
-		static void Set(const String& key, Variable value);
+		static void Set(const WString& key, Variable value);
 
-		static void SetNew(const String& key, Variable value);
+		static void SetNew(const WString& key, Variable value);
 
-		static std::unordered_map<String, Variable> CreateStandartVariables();
+		static std::unordered_map<WString, Variable> CreateStandartVariables();
 
 		static void PushState();
 
 		static void PopState();
+
+		static bool StateEmpty();
 	};
 }
 

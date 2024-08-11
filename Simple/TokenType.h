@@ -26,14 +26,20 @@ namespace Simple {
 		IMPORT,
 		SWITCH,
 		CASE,
-		DEFAULT,
+		_DEFAULT,
 		FUNC,
 		RETURN,
 		STRUCT,
-		FIELD,
+		_FIELD,
+		IMMUTABLE,
 		TRY,
 		CATCH,
 		THROW,
+		FOREACH,
+		_TRUE,
+		_FALSE,
+		_VOID_,
+		DESTRUCT,
 
 		// Operators
 		PLUS,          //   +
@@ -70,6 +76,7 @@ namespace Simple {
 		LSBRACKET,     //   [
 		RSBRACKET,     //   ]
 		COLON,		   //   :
+		ELLIPSIS,      //   ...
 
 		NEW_LINE,
 		END_OF_FILE

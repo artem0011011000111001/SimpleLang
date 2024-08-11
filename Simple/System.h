@@ -9,7 +9,7 @@
 
 #include <filesystem>
 
-#define THROW_FILE_ERROR(msg) throw CALL("FileError", HAND_OVER_ARGS(STRING(msg)))
+#define THROW_FILE_ERROR(msg) throw CALL(L"FileError", HAND_OVER_ARGS(STRING(msg)))
 
 using namespace Simple;
 
@@ -22,8 +22,8 @@ namespace Simple_libs {
 			void InitFuncs();
 			void InitStructs();
 
-			String read_file_content(const std::filesystem::path& file_path);
-			void write_file_content(const std::filesystem::path& file_path, const String& content, bool isAppend = false);
+			WString read_file_content(const std::filesystem::path& file_path);
+			void write_file_content(const std::filesystem::path& file_path, const WString& content, bool isAppend = false);
 		public:
 			void Init() override;
 		};

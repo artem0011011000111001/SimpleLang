@@ -7,11 +7,11 @@ CreateModuleByName& CreateModuleByName::getInstance() {
     return instance;
 }
 
-void CreateModuleByName::registerClass(const String& className, CreateFunc createFunc) {
+void CreateModuleByName::registerClass(const WString& className, CreateFunc createFunc) {
     registry[className] = createFunc;
 }
 
-std::unique_ptr<Module_Base> CreateModuleByName::createInstance(const String& className) {
+Ptr<Module_Base> CreateModuleByName::createInstance(const WString& className) {
     auto it = registry.find(className);
     if (it != registry.end()) {
         return it->second();

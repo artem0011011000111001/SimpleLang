@@ -4,7 +4,7 @@
 
 using namespace Simple;
 
-StringExpression::StringExpression(String value) : value(value) {}
+StringExpression::StringExpression(WString value) : value(value) {}
 
 //ValuePtr StringExpression::eval() {
 //	return get_ref().clone();
@@ -13,4 +13,4 @@ StringExpression::StringExpression(String value) : value(value) {}
 Value& StringExpression::eval() {
 	ref = STRING(value);
 	return *ref;
-}
+} 

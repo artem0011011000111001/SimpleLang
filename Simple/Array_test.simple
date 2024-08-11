@@ -1,0 +1,95 @@
+import Time;
+import Math;
+import System;
+
+func print_array(array) {
+	foreach(el : array) {
+		println(el);
+	}
+}
+
+func square(x) {
+	return x ** 2;
+}
+
+println("Creating array...");
+
+arr = Array(1, "as", "you", 1.672);
+sleep(3000);
+
+print_array(arr);
+
+
+println("Adding last an element...");
+
+arr = push(arr, 10);
+sleep(3000);
+
+print_array(arr);
+
+
+println("Adding to pos an element...");
+
+arr = push(arr, "Hi", 3);
+sleep(3000);
+
+print_array(arr);
+
+
+println("Removing last an element...");
+
+arr = pop(arr);
+sleep(3000);
+
+print_array(arr);
+
+
+println("Removing pos an element...");
+
+arr = pop(arr, 1);
+sleep(3000);
+
+print_array(arr);
+
+
+str = "www.google.com";
+
+println("Spliting \"" + str + "\" by using \".\"...");
+
+arr = split(str, ".");
+sleep(3000);
+
+print_array(arr);
+
+
+println("Array clearing...");
+
+arr = clear();
+sleep(3000);
+
+print_array(arr);
+
+
+println("Checking for empty...");
+
+sleep(3000);
+
+println(empty(arr));
+
+
+println("Filling an array with random numbers in the range from zero to 100...");
+
+for (i = 0; i < 10; i++) {
+	arr = push(arr, random(0, 100));
+}
+sleep(3000);
+
+print_array(arr);
+
+
+println("Mapping array per square...");
+
+arr = map(arr, square);
+sleep(3000);
+
+print_array(arr);

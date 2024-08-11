@@ -19,7 +19,7 @@ CaseStatement Parser::caseStatement() {
 	bool isDefault = false;
 
 	if (!match(TokenType::CASE)) {
-		if (match(TokenType::DEFAULT)) {
+		if (match(TokenType::_DEFAULT)) {
 			expr = nullptr;
 			isDefault = true;
 		}

@@ -4,6 +4,8 @@
 #define _STRUCTS_H_
 
 #include "Simple_typedefs.h"
+#include "Field_decl.h"
+
 
 namespace Simple {
 
@@ -13,13 +15,13 @@ namespace Simple {
 
 	public:
 
-		static bool IsExist(const String& key);
+		static bool IsExist(const WString& key);
 
-		static Fields_decl_t Get(const String& key);
+		static Fields_decl_t Get(const WString& key);
 
-		static void Add(const String& key, Fields_decl_t fields);
+		static void Add(const WString& key, Fields_decl_t fields);
 
-		static bool _equals(const String& key1, const String& key2);
+		static bool _equals(const WString& key1, const WString& key2);
 	};
 }
 

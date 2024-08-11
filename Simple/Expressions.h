@@ -42,22 +42,22 @@ namespace Simple {
 
 	class StringExpression : public Expression {
 
-		String value;
+		WString value;
 		ValuePtr ref;
 	public:
 
-		StringExpression(String value);
+		StringExpression(WString value);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
 
 	class CharExpression : public Expression {
 
-		String value;
+		WString value;
 		ValuePtr ref;
 	public:
 
-		CharExpression(String value);
+		CharExpression(WString value);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
@@ -86,12 +86,13 @@ namespace Simple {
 		Value& eval() override;
 	};
 
-	class VariableExpression : public Expression {
+	class WordExpression : public Expression {
 
-		String name;
+		WString name;
+		ValuePtr ref;
 	public:
 
-		VariableExpression(const String& name);
+		WordExpression(const WString& name);
 		//ValuePtr eval() override;
 		Value& eval() override;
 	};
@@ -108,14 +109,14 @@ namespace Simple {
 		Value& eval() override;
 	};
 
-	class FunctionalExpression : public Expression {
+	class CallFunctionExpression : public Expression {
 
-		String name;
+		WString name;
 		Vec<ExpressionPtr> args;
 		ValuePtr ref;
 	public:
 		
-		FunctionalExpression(String name, std::vector<ExpressionPtr> args = {});
+		CallFunctionExpression(WString name, Vec<ExpressionPtr> args = {});
 		//ValuePtr eval() override;
 		Value& eval() override;
 
@@ -125,10 +126,10 @@ namespace Simple {
 	class StructExpression : public Expression {
 
 		ExpressionPtr expr;
-		String field_name;
+		WString field_name;
 	public:
 
-		StructExpression(ExpressionPtr expr, String field_name);
+		StructExpression(ExpressionPtr expr, WString field_name);
 
 		Value& eval() override;
 	};
@@ -159,6 +160,16 @@ namespace Simple {
 		ValuePtr ref;
 	public:
 		ArrayExpression(Vec<ExpressionPtr> elements);
+
+		Value& eval() override;
+	};
+
+	class FunctionExpression : public Expression {
+
+		WString key;
+		ValuePtr ref;
+	public:
+		FunctionExpression(WString& key);
 
 		Value& eval() override;
 	};

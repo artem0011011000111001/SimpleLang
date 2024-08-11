@@ -13,22 +13,22 @@ namespace Simple {
 	struct Token {
 	private:
 		TokenType type;
-		String text;
+		WString text;
 
 	public:
 		Token() = default;
 
-		Token(TokenType type, String text);
+		Token(TokenType type, WString text);
 
-		String enum_in_string() const;
+		WString enum_in_string() const;
 
 		TokenType getType() const;
 
 		void setType(TokenType newType);
 
-		String getText() const;
+		WString getText() const;
 
-		void setText(String newText);
+		void setText(WString newText);
 	};
 }
 

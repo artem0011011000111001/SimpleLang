@@ -11,8 +11,8 @@ double ArrayValue::AsDouble() const {
 	throw Simple_Error("to_num There is no operator corresponding");
 }
 
-String ArrayValue::AsString() const {
-	String result;
+WString ArrayValue::AsString() const {
+	WString result;
 
 	for (auto& el : elements) {
 		result += el->AsString();
@@ -48,8 +48,16 @@ ValueType ArrayValue::GetType() const {
 	return ValueType::_ARRAY;
 }
 
-String ArrayValue::GetTypeInString() const {
-	return "arr";
+WString ArrayValue::GetTypeInString() const {
+	return L"arr";
+}
+
+Simple_Iterator ArrayValue::begin() {
+	return Simple_Iterator(elements.data());
+}
+
+Simple_Iterator ArrayValue::end() {
+	return Simple_Iterator(elements.data() + elements.size());
 }
 
 ValuePtr ArrayValue::operator+(const ValuePtr& other) const {
@@ -65,8 +73,8 @@ ValuePtr ArrayValue::operator+(const ValuePtr& other) const {
 			return final_array;
 			}()));
 	}
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr ArrayValue::operator-(const ValuePtr& other) const {
@@ -83,8 +91,8 @@ ValuePtr ArrayValue::operator*(const ValuePtr& other) const {
 		}
 		return ARRAY(MOVE(final_array));
 	}
-	throw Simple_Error("+ There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr ArrayValue::operator/(const ValuePtr& other) const {
@@ -111,32 +119,32 @@ bool ArrayValue::operator<(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_ARRAY) {
 		return elements.size() < dynamic_cast<ArrayValue*>(other.get())->elements.size();
 	}
-	throw Simple_Error("< There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"< There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool ArrayValue::operator>(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_ARRAY) {
 		return elements.size() > dynamic_cast<ArrayValue*>(other.get())->elements.size();
 	}
-	throw Simple_Error("> There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"> There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool ArrayValue::operator<=(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_ARRAY) {
 		return elements.size() <= dynamic_cast<ArrayValue*>(other.get())->elements.size();
 	}
-	throw Simple_Error("<= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"<= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool ArrayValue::operator>=(const ValuePtr& other) const {
 	if (other->GetType() == ValueType::_ARRAY) {
 		return elements.size() >= dynamic_cast<ArrayValue*>(other.get())->elements.size();
 	}
-	throw Simple_Error(">= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L">= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool ArrayValue::operator==(const ValuePtr& other) const {
@@ -150,8 +158,8 @@ bool ArrayValue::operator==(const ValuePtr& other) const {
 		}
 		return true;
 	}
-	throw Simple_Error("== There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"== There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 bool ArrayValue::operator!=(const ValuePtr& other) const {
@@ -165,8 +173,8 @@ bool ArrayValue::operator!=(const ValuePtr& other) const {
 		}
 		return false;
 	}
-	throw Simple_Error("!= There is no operator corresponding to these operands: "
-		+ GetTypeInString() + " " + other->GetTypeInString());
+	throw Simple_Error(L"!= There is no operator corresponding to these operands: "
+		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 Value& ArrayValue::operator[](int pos) {
@@ -174,15 +182,40 @@ Value& ArrayValue::operator[](int pos) {
 	return elements[pos]->get_ref();
 }
 
+ValuePtr ArrayValue::operator()(Args_t args) const {
+	throw Simple_Error("() There is no operator corresponding");
+}
+
 ValuePtr ArrayValue::power(const ValuePtr& other) const {
 	throw Simple_Error("** There is no operator corresponding");
 }
 
-Value& ArrayValue::dot(const String& key) const {
-	if (key == "size") return *(sizeRef = NUMBER((double)elements.size()));
-	throw Simple_Error("Array does not have a member named \"" + key + "\"");
+Value& ArrayValue::dot(const WString& key) const {
+	if (key == L"size") return *(sizeRef = NUMBER((double)elements.size()));
+	throw Simple_Error(L"Array does not have a member named \"" + key + L"\"");
 }
 
 void ArrayValue::AddElement(ValuePtr el) {
 	elements.push_back(MOVE(el));
+}
+
+void ArrayValue::PopElement() {
+	if (elements.size())
+		elements.pop_back();
+}
+
+void ArrayValue::Push_pos(ValuePtr el, int pos) {
+	check_pos(pos, (int)elements.size(), "array size");
+
+	elements.emplace(elements.begin() + pos, MOVE(el));
+}
+
+void ArrayValue::Pop_pos(int pos) {
+	check_pos(pos, (int)elements.size(), "array size");
+
+	elements.erase(elements.begin() + pos);
+}
+
+bool ArrayValue::Empty() {
+	return elements.empty();
 }

@@ -30,30 +30,29 @@ Token Parser::consume(const TokenType type) {
 
 	const Token CurrentToken = get(0);
 	if (type != CurrentToken.getType()) {
-		throw Simple_Error("Expected " + Token(type, "").enum_in_string(), line);
+		throw Simple_Error(L"Expected " + Token(type, L"").enum_in_string(), line);
 	}
 	pos++;
 
 	return CurrentToken;
 }
 
-int Parser::stoihex(const String& hex)
-{
+int Parser::stoihex(const WString& hex) {
 	int decimal = 0;
 	size_t length = hex.length();
 
-	for (int i = 0; i < length; ++i) {
-		char hexDigit = hex[length - 1 - i];
+	for (size_t i = 0; i < length; ++i) {
+		wchar_t hexDigit = hex[length - 1 - i];
 		int value = 0;
 
-		if (hexDigit >= '0' && hexDigit <= '9') {
-			value = hexDigit - '0';
+		if (hexDigit >= L'0' && hexDigit <= L'9') {
+			value = hexDigit - L'0';
 		}
-		else if (hexDigit >= 'A' && hexDigit <= 'F') {
-			value = 10 + (hexDigit - 'A');
+		else if (hexDigit >= L'A' && hexDigit <= L'F') {
+			value = 10 + (hexDigit - L'A');
 		}
-		else if (hexDigit >= 'a' && hexDigit <= 'f') {
-			value = 10 + (hexDigit - 'a');
+		else if (hexDigit >= L'a' && hexDigit <= L'f') {
+			value = 10 + (hexDigit - L'a');
 		}
 
 		decimal += static_cast<int>(value * pow(16, i));
