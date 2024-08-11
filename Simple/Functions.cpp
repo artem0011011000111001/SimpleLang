@@ -104,7 +104,7 @@ void Functions::CreateStandartFunctions() {
         CHECK_TYPE(L"arr", args[0]);
         ArrayValue* arr = dynamic_cast<ArrayValue*>(args[0].get());
 
-        arr->Push_pos(MOVE(args[1]), args[2]->AsDouble());
+        arr->Push_pos(MOVE(args[1]), (int)args[2]->AsDouble());
 
         return ARRAY(MOVE(*arr));
         }, 3);  // get: arr, value, pos
@@ -123,7 +123,7 @@ void Functions::CreateStandartFunctions() {
         CHECK_TYPE(L"arr", args[0]);
         ArrayValue* arr = dynamic_cast<ArrayValue*>(args[0].get());
 
-        arr->Pop_pos(args[1]->AsDouble());
+        arr->Pop_pos((int)args[1]->AsDouble());
 
         return ARRAY(MOVE(*arr));
         }, 2);   // get: arr, pos
@@ -186,7 +186,7 @@ void Functions::CreateStandartFunctions() {
         ArrayValue* arr = dynamic_cast<ArrayValue*>(args[0].get());
 
         return BOOL(arr->Empty());
-        }, 1); // get: nothing
+        }, 1); // get: arr
 
     _DEFINE_FUNCTION(L"join", [](Args_t args) {
 

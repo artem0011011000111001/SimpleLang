@@ -1,7 +1,6 @@
 ﻿  Functions.cpp
-D:\Projects\MYFOLDER\C++\Simple\Simple\Functions.cpp(107,55): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-D:\Projects\MYFOLDER\C++\Simple\Simple\Functions.cpp(126,39): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-  Main.cpp
+  Type.cpp
+  Создание кода...
   Simple.vcxproj -> D:\Projects\MYFOLDER\C++\Simple\x64\Debug\Simple.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

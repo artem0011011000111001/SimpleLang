@@ -71,14 +71,11 @@ void Simple_libs::Type::Type::InitStruct() {
 		Fields_t fields;
 
 		CHECK_TYPE(L"str", args[0]);
-		CHECK_TYPE(L"num", args[1]);
 
 		WString key	  = args[0]->AsString();
-		int argsCount = (int)args[1]->AsDouble();
-
 
 		fields.emplace(L"_var",    BOOL(Variables::IsExist(key)));
-		fields.emplace(L"_func",   BOOL(Functions::IsExist(key, argsCount)));
+		fields.emplace(L"_func",   BOOL(Functions::IsExist(key)));
 		fields.emplace(L"_struct", BOOL(Structs::IsExist(key)));
 
 		return STRUCT(L"is_exist", fields);

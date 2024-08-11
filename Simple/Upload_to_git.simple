@@ -1,4 +1,4 @@
 import System;
 
 //clear_rep();
-upload_to_git("Small updates");
+upload_to_git("Added foreach, improved fields and args and import, added keyword immutable, added standart functions, updated README");
