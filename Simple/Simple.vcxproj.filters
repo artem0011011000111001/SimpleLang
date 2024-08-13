@@ -226,6 +226,9 @@
     <Filter Include="src\structures\Field">
       <UniqueIdentifier>{5f5adb47-543d-401f-af69-d6fd26caff02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\core\Parser\Semantics\Enum">
+      <UniqueIdentifier>{0d50ff28-0f6f-486e-89fb-dcd930fc66c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -482,6 +485,9 @@
     </ClCompile>
     <ClCompile Include="FunctionExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="Enum_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Enum</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -142,6 +142,9 @@ void Lexer::tokenizeWord() {
     else if (buffer == L"destruct")
         addToken(TokenType::DESTRUCT);
 
+    else if (buffer == L"enum")
+        addToken(TokenType::ENUM);
+
     else addToken(TokenType::WORD, buffer);
 }
 

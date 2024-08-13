@@ -72,6 +72,8 @@ namespace Simple {
 
 		StatementPtr StructDefine();
 
+		StatementPtr EnumDefine();
+
 		StatementPtr Return();
 
 		StatementPtr TryCatch();

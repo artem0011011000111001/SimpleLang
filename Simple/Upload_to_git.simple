@@ -1,4 +1,9 @@
 import System;
 
+commit = "Added enum";
+
+print("Confirm whether you want to publish the project with this commit \n\n\"" + commit + "\"\n");
+run("pause");
+
 //clear_rep();
-upload_to_git("Added foreach, improved fields and args and import, added keyword immutable, added standart functions, updated README");
+upload_to_git(commit);

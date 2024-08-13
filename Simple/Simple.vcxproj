@@ -132,6 +132,7 @@
     <ClCompile Include="ArgParams.cpp" />
     <ClCompile Include="ArrayExpression.cpp" />
     <ClCompile Include="ArrayValue.cpp" />
+    <ClCompile Include="Enum_parsing.cpp" />
     <ClCompile Include="Field_decl_.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
     <ClCompile Include="CharExpression.cpp" />

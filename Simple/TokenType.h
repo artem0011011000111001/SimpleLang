@@ -40,6 +40,7 @@ namespace Simple {
 		_FALSE,
 		_VOID_,
 		DESTRUCT,
+		ENUM,
 
 		// Operators
 		PLUS,          //   +

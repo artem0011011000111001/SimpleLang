@@ -15,9 +15,6 @@ Parser::Parser(const std::list<Token>& tokens) : size(tokens.size()), pos(0) {
 GlobalBlockStatement Parser::parse() {
 	GlobalBlockStatement result;
 	while (!match(TokenType::END_OF_FILE)) {
-		/*StatementPtr CurrentStatement = statement();
-		CurrentStatement->execute();
-		result.add(std::move(CurrentStatement));*/
 		result.add(getNextGlobalStatement());
 	}
 	return result;
@@ -33,6 +30,9 @@ StatementPtr Parser::getNextGlobalStatement() {
 
 	else if (match(TokenType::STRUCT))
 		return StructDefine();
+
+	else if (match(TokenType::ENUM))
+		return EnumDefine();
 
 	else return getNextStatement();
 }
@@ -95,7 +95,7 @@ StatementPtr Parser::getNextStatement() {
 		throw Simple_Error("You cannot declare a struct not in global visibility", line);
 
 	else if (match(TokenType::_FIELD))
-		throw Simple_Error("Keyword field cannot be used here");
+		throw Simple_Error("Keyword field cannot be used here", line);
 
 	else if (match(TokenType::TRY))
 		return TryCatch();
@@ -111,6 +111,9 @@ StatementPtr Parser::getNextStatement() {
 		CHECK_END_STR;
 		return MOVE(result);
 	}
+
+	else if (match(TokenType::ENUM))
+		throw Simple_Error("You cannot declare a enum not in global visibility", line);
 
 	else if (get(0).getType() == TokenType::WORD) {
 		if (get(1).getType() == TokenType::EQ) {

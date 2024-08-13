@@ -1,0 +1,6 @@
+enum type {
+	OPEN  = 0,
+	WRITE = 1
+}
+
+print(type.OPEN);
