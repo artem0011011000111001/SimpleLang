@@ -183,10 +183,19 @@ print(Struct_test.x); // output 2
 Object declaration
 ```
 test_object {
-  name: "Nick"
+  name: "Nick",
   age: 15
-}
+};
 print("Name = ", test_object.name, ", Age = ", test_object.age); // output Name = Nick, Age = 15
+```
+Enum declaration
+```
+enum Level {
+  FIRST = 1,
+  SECOND = 2,
+  NONE = -1
+}
+println(Level.FIRST, Level.SECOND, Level.NONE); // output 1 2 -1
 ```
 Statement import
 ```
