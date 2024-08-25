@@ -63,7 +63,7 @@ Simple_Iterator StringValue::end() {
 }
 
 ValuePtr StringValue::operator+(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_STRING || other->GetType() == ValueType::_CHAR)
+	if (is_char_value(other))
 		return STRING(AsString() + other->AsString());
 
 	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
@@ -75,22 +75,36 @@ ValuePtr StringValue::operator-(const ValuePtr& other) const {
 }
 
 ValuePtr StringValue::operator*(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_) {
-		auto result = [this, &other]() {
-			WString result;
-			for (size_t i = 0, size = (size_t)other->AsDouble(); i < size; i++) {
-				result += AsString();
-			}
-			return result;
-			};
-		return STRING(result());
+	if (is_number_value(other)) {
+		return STRING(multiply_str(AsString(), (int)other->AsDouble()));
 	}
+
 	throw Simple_Error(L"* There is no operator corresponding to these operands: "
 		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr StringValue::operator/(const ValuePtr& other) const {
 	throw Simple_Error("/ There is no operator corresponding");
+}
+
+void StringValue::operator+=(const ValuePtr& other) {
+	value = dynamic_cast<StringValue*>(this->operator+(other).get())->value;
+}
+
+void StringValue::operator-=(const ValuePtr& other) {
+	value = dynamic_cast<StringValue*>(this->operator-(other).get())->value;
+}
+
+void StringValue::operator*=(const ValuePtr& other) {
+	value = dynamic_cast<StringValue*>(this->operator*(other).get())->value;
+}
+
+void StringValue::operator/=(const ValuePtr& other) {
+	value = dynamic_cast<StringValue*>(this->operator/(other).get())->value;
+}
+
+void StringValue::powereq(const ValuePtr& other) {
+	value = dynamic_cast<StringValue*>(this->power(other).get())->value;
 }
 
 ValuePtr StringValue::operator++() {
@@ -171,5 +185,9 @@ ValuePtr StringValue::power(const ValuePtr& other) const {
 }
 
 Value& StringValue::dot(const WString& key) const {
+	throw Simple_Error(L"String does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr StringValue::call_method(const WString& key, int args_count, Args_t args) const {
 	throw Simple_Error(L"String does not have a member named \"" + key + L"\"");
 }

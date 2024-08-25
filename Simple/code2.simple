@@ -1,4 +1,4 @@
-import Exception;
+﻿import Exception;
 
 func assert(cond, error) {
 	if (!cond)
@@ -16,4 +16,4 @@ func return_5(){
 	return 5;
 }
 
-assert(return_5(), 2, "expected 5");
+//assert(return_5(), 2, "expected 5");

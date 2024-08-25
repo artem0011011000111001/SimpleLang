@@ -15,8 +15,7 @@ void BlockStatement::execute() {
 	//std::unordered_map<String, ValuePtr> VariablesBefore;
 	//copy_variables(Variables::GetAllVariables(), VariablesBefore);
 
-	for (const auto& statement : statements)
-	{
+	for (const auto& statement : statements) {
 		if (statement)
 			statement->execute();
 	}

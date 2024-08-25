@@ -9,7 +9,7 @@ StatementPtr Parser::block() {
 	while (!match(TokenType::RBRACE)) {
 		block.add(getNextStatement());
 	}
-	return CREATE_PTR<BlockStatement>(std::move(block));
+	return CREATE_PTR<BlockStatement>(MOVE(block));
 }
 
 SwitchBlockStatement Parser::switchBlock() {
@@ -18,7 +18,7 @@ SwitchBlockStatement Parser::switchBlock() {
 	bool IsFirst = true;
 
 	while (!match(TokenType::RBRACE)) {
-		block.add(std::move(caseStatement()));
+		block.add(MOVE(caseStatement()));
 		IsFirst = false;
 	}
 	if (IsFirst) throw Simple_Error("Expected case or default");

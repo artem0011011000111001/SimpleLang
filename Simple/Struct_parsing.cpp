@@ -3,17 +3,20 @@
 #include "Simple_Error.h"
 #include "Functions.h"
 #include "ArgParams.h"
-#include "Field_decl.h"
+#include "Field_info.h"
 
 using namespace Simple;
 
 StatementPtr Parser::StructDefine() {
+
 	WString name = consume(TokenType::WORD).getText();
 
 	RawFields_decl_t fields_params;
 	consume(TokenType::LBRACE);
 
-	StatementPtr constructor;
+	Vec<ArgsParams_t> argsParam;
+	Vec<StatementPtr> bodies;
+	Vec<bool> is_any_args;
 
 	while (!match(TokenType::RBRACE)) {
 		if (match(TokenType::_FIELD)) {
@@ -27,15 +30,13 @@ StatementPtr Parser::StructDefine() {
 			consume(TokenType::COLON);
 
 			WString type_in_str = consume(TokenType::WORD).getText();
-			
-			//ValueType type = IdentifyValueType(type_in_str);
 
-			ExpressionPtr defaultValue = nullptr;
+			ExpressionPtr defaultValue;
 
 			if (match(TokenType::EQ))
 				defaultValue = expression();
 
-			fields_params.emplace(name, RawField_decl(type_in_str, isImmut, MOVE(defaultValue)));
+			fields_params.emplace(name, RawField_info(type_in_str, isImmut, MOVE(defaultValue)));
 
 			CHECK_END_STR;
 		}
@@ -44,16 +45,18 @@ StatementPtr Parser::StructDefine() {
 			if (consume(TokenType::WORD).getText() != L"constructor")
 				throw Simple_Error("Constructor name required");
 
-			ArgsParams_t argsParam;
-			StatementPtr body;
-			bool is_any_args = false;
+			ArgsParams_t CurrentArgsParam;
+			StatementPtr CurrentBody;
+			bool Current_is_any_args = false;
 
-			AnalyzeFunction(argsParam, body, is_any_args);
+			AnalyzeFunction(CurrentArgsParam, CurrentBody, Current_is_any_args);
 
-			constructor = CREATE_PTR<ConstructorDefineStatement>(name, MOVE(argsParam), MOVE(body), MOVE(fields_params), is_any_args);
+			argsParam.push_back(MOVE(CurrentArgsParam));
+			bodies.push_back(MOVE(CurrentBody));
+			is_any_args.push_back(Current_is_any_args);
 		}
 		else throw Simple_Error("Expected field or constructor declaration");
 	}
 
-	return constructor;
+	return CREATE_PTR<StructDefineStatement>(name, MOVE(argsParam), MOVE(bodies), MOVE(fields_params), is_any_args);
 }

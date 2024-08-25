@@ -7,14 +7,12 @@
 
 using namespace Simple;
 
-
 std::function<VALUE(Args_t)> FunctionDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement) {
 	return [&statement, this](Args_t args) -> VALUE {
-		Vars_t savedGlobals;
 		try {
 			Variables::PushState();
 
-			create_arguments(argsParam, args, savedGlobals, is_any_args);
+			create_arguments(argsParam, args, is_any_args);
 
 			/*auto argNameIt = argsParam.first.begin();
 			auto argIsConstIt = argsParam.second.begin();
@@ -28,13 +26,13 @@ std::function<VALUE(Args_t)> FunctionDefineStatement::TurnFuncFromVoidToVALUE(St
 
 			statement->execute();
 
-			disassemble_arguments(savedGlobals);
+			disassemble_arguments();
 			Variables::PopState();
 
 			return VOID;
 		}
 		catch (ReturnStatement::ReturnValue& ReturnValue) {
-			disassemble_arguments(savedGlobals);
+			disassemble_arguments();
 
 			Variables::PopState();
 			return MOVE(ReturnValue.value);
@@ -46,5 +44,5 @@ FunctionDefineStatement::FunctionDefineStatement(WString name, ArgsParams_t args
 	: statement(MOVE(statement)), name(MOVE(name)), argsParam(MOVE(argsParam)), is_any_args(is_any_args) {}
 
 void FunctionDefineStatement::execute() {
-	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToVALUE(statement), { is_any_args ? any_args : (int)argsParam.size() });
+	Functions::RegisterDynamicFunction(name, Statement_to_func(statement, argsParam, is_any_args), { is_any_args ? any_args : (int)argsParam.size() });
 }

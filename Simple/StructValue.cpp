@@ -7,7 +7,7 @@
 
 using namespace Simple;
 
-StructValue::StructValue(const WString& name, Vars_t fields)
+StructValue::StructValue(const WString& name, Fields_t fields)
 	: name(name), fields(MOVE(fields)) {}
 
 double StructValue::AsDouble() const {
@@ -16,18 +16,11 @@ double StructValue::AsDouble() const {
 
 WString StructValue::AsString() const {
 	throw Simple_Error("You can't convert a structure to a string");
-	/*return name + L" {\n" + [this]() {
-		WString result;
-		for (auto& field : fields) {
-			result += L"    " + field.first + L": " + field.second->AsString() + L"\n";
-		}
-		return result;
-		}() + L"}";*/
 }
 
 ValuePtr StructValue::clone() const {
-	return STRUCT(name, [this]() -> Vars_t {
-		Vars_t clone_fields;
+	return CREATE_PTR<StructValue>(name, [this]() -> Fields_t {
+		Fields_t clone_fields;
 
 		for (auto& field : fields) {
 			clone_fields.emplace(field.first, Variable(MOVE(field.second.value->clone()), field.second.is_const));
@@ -81,6 +74,26 @@ ValuePtr StructValue::operator*(const ValuePtr& other) const {
 
 ValuePtr StructValue::operator/(const ValuePtr& other) const {
 	throw Simple_Error("Structures cannot be divided");
+}
+
+void StructValue::operator+=(const ValuePtr& other) {
+	throw Simple_Error("Structures cannot be added");
+}
+
+void StructValue::operator-=(const ValuePtr& other) {
+	throw Simple_Error("Structures cannot be subtructed");
+}
+
+void StructValue::operator*=(const ValuePtr& other) {
+	throw Simple_Error("Structures cannot be multiplicated");
+}
+
+void StructValue::operator/=(const ValuePtr& other) {
+	throw Simple_Error("Structures cannot be divided");
+}
+
+void StructValue::powereq(const ValuePtr& other) {
+	throw Simple_Error("Structure cannot be raised to a power");
 }
 
 ValuePtr StructValue::operator++() {
@@ -147,6 +160,10 @@ Value& StructValue::dot(const WString& key) const {
 
 		else return find_result->second.value->get_ref();
 	}
+	throw Simple_Error(L"Struct \"" + name + L"\" does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr StructValue::call_method(const WString& key, int args_count, Args_t args) const {
 	throw Simple_Error(L"Struct \"" + name + L"\" does not have a member named \"" + key + L"\"");
 }
 

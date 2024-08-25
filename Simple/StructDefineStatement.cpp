@@ -5,7 +5,7 @@
 #include "Variables.h"
 #include "Structs.h"
 #include "ArgParams.h"
-#include "Field_decl.h"
+#include "Field_info.h"
 #include "Function.h"
 #include "Utils.h"
 
@@ -14,12 +14,12 @@
 
 using namespace Simple;
 
-std::function<VALUE(Args_t)> ConstructorDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement) {
-	return [&statement, this](Args_t args) -> VALUE {
-		Vars_t savedGlobals;
+std::function<VALUE(Args_t)> StructDefineStatement::TurnFuncFromVoidToVALUE(StatementPtr& statement, ArgsParams_t& argsParam, bool is_any_args_) {
+	return [&statement, &argsParam, &is_any_args_, this](Args_t args) -> VALUE {
 		try {
 			Variables::PushState();
-			create_arguments(argsParam, args, savedGlobals, is_any_args);
+
+			create_arguments(argsParam, args, is_any_args_);
 
 			Vars_t fields;
 
@@ -33,8 +33,9 @@ std::function<VALUE(Args_t)> ConstructorDefineStatement::TurnFuncFromVoidToVALUE
 					ValuePtr defaultValue;
 					ValuePtr finalValue;
 					
-					if (fields_param.second.defaultValue)
-						defaultValue = fields_param.second.defaultValue->clone();
+					if (!dynamic_cast<nullptrValue*>(fields_param.second.value.get())) {
+						defaultValue = fields_param.second.value->clone();
+					}
 
 					bool isConst = fields_param.second.isConst;
 
@@ -73,7 +74,7 @@ std::function<VALUE(Args_t)> ConstructorDefineStatement::TurnFuncFromVoidToVALUE
 
 			ValuePtr value_this = Variables::Get(L"this");
 
-			disassemble_arguments(savedGlobals);
+			disassemble_arguments();
 			Variables::PopState();
 
 			return MOVE(value_this);
@@ -84,23 +85,23 @@ std::function<VALUE(Args_t)> ConstructorDefineStatement::TurnFuncFromVoidToVALUE
 		};
 }
 
-ConstructorDefineStatement::ConstructorDefineStatement(WString name,
-	ArgsParams_t argsParam, StatementPtr statement, RawFields_decl_t RawFields_params, bool is_any_args)
-	: name(name), argsParam(MOVE(argsParam)), statement(MOVE(statement)), RawFields_params(MOVE(RawFields_params)), is_any_args(is_any_args) {
+StructDefineStatement::StructDefineStatement(WString name, Vec<ArgsParams_t> argsParam,
+	Vec<StatementPtr> statements, RawFields_decl_t RawFields_params, Vec<bool> is_any_args)
+	: name(name), argsParam(MOVE(argsParam)), statements(MOVE(statements)), RawFields_params(MOVE(RawFields_params)), is_any_args(is_any_args) {
 }
 
-void ConstructorDefineStatement::execute() {
+void StructDefineStatement::execute() {
 	fields_params = [this]() {
 
 		Fields_decl_t transform;
 
 		for (auto& Rawfield_params : RawFields_params) {
-			ValuePtr defaultValue;
+			ValuePtr defaultValue = NOT_VALUE;
 
 			if (Rawfield_params.second.defaultValue)
 				defaultValue = Rawfield_params.second.defaultValue->eval().clone();
 
-			transform.emplace(Rawfield_params.first, FIELD(
+			transform.emplace(Rawfield_params.first, FIELD_INFO(
 
 				Rawfield_params.second.type,
 				Rawfield_params.second.isConst,
@@ -114,5 +115,14 @@ void ConstructorDefineStatement::execute() {
 
 	Structs::Add(name, copy_fields_params(fields_params));
 
-	Functions::RegisterDynamicFunction(name, TurnFuncFromVoidToVALUE(statement), { is_any_args ? any_args : (int)argsParam.size() });
+	auto is_any_args_it = is_any_args.begin();
+	auto args_param_it  = argsParam.begin();
+
+	for (auto& statement : statements) {
+		bool _is_any_args_ = *is_any_args_it;
+		Functions::RegisterDynamicFunction(name, Statement_to_struct_constructor(statement, *args_param_it, _is_any_args_, fields_params, name),
+			{ _is_any_args_ ? any_args : (int)args_param_it->size() });
+		++is_any_args_it;
+		++args_param_it;
+	}
 }

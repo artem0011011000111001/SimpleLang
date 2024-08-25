@@ -132,12 +132,19 @@
     <ClCompile Include="ArgParams.cpp" />
     <ClCompile Include="ArrayExpression.cpp" />
     <ClCompile Include="ArrayValue.cpp" />
+    <ClCompile Include="ClassDefineStatement.cpp" />
+    <ClCompile Include="ClassValue.cpp" />
+    <ClCompile Include="Class_parsing.cpp" />
     <ClCompile Include="Enum_parsing.cpp" />
-    <ClCompile Include="Field_decl_.cpp" />
+    <ClCompile Include="Field_info_.cpp" />
     <ClCompile Include="Assigment_parsing.cpp" />
     <ClCompile Include="CharExpression.cpp" />
     <ClCompile Include="CharValue.cpp" />
-    <ClCompile Include="ConstructorDefineStatement.cpp" />
+    <ClCompile Include="MethodExpression.cpp" />
+    <ClCompile Include="Method_info.cpp" />
+    <ClCompile Include="PercentExpression.cpp" />
+    <ClCompile Include="PercentValue.cpp" />
+    <ClCompile Include="StructDefineStatement.cpp" />
     <ClCompile Include="BinaryExpression.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockStatement.cpp" />
@@ -149,7 +156,7 @@
     <ClCompile Include="DigitValue.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
-    <ClCompile Include="Field_decl.h" />
+    <ClCompile Include="Field_info.h" />
     <ClCompile Include="ForEachStatement.cpp" />
     <ClCompile Include="FuncParams.cpp" />
     <ClCompile Include="FunctionExpression.cpp" />
@@ -159,10 +166,12 @@
     <ClCompile Include="IfElse_parsing.cpp" />
     <ClCompile Include="Import_parsing.cpp" />
     <ClCompile Include="IndexExpression.cpp" />
+    <ClCompile Include="InsideFunctionExpression.cpp" />
     <ClCompile Include="Lexer_utils.cpp" />
     <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="Loops_parsing.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="nullptrValue.cpp" />
     <ClCompile Include="ObjectDefineStatement.cpp" />
     <ClCompile Include="Parser_utils.cpp" />
     <ClCompile Include="RawVariable.cpp" />
@@ -176,6 +185,7 @@
     <ClCompile Include="Struct_parsing.cpp" />
     <ClCompile Include="Switch_parsing.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TernaryExpression.cpp" />
     <ClCompile Include="ThrowStatement.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="TryCatchStatement.cpp" />
@@ -193,7 +203,6 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="NumberValue.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Stream.cpp" />
     <ClCompile Include="StringExpression.cpp" />
     <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="SwitchBlockStatement.cpp" />
@@ -221,6 +230,7 @@
     <ClInclude Include="ArgParams.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FuncParams.h" />
+    <ClInclude Include="Method_info.h" />
     <ClInclude Include="RawVariable.h" />
     <ClInclude Include="Simple_Iterator.h" />
     <ClInclude Include="Libs.h" />
@@ -242,7 +252,6 @@
     <ClInclude Include="Simple_Error.h" />
     <ClInclude Include="Simple_typedefs.h" />
     <ClInclude Include="AST.h" />
-    <ClInclude Include="Stream.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenType.h" />
     <ClInclude Include="Values.h" />
@@ -258,6 +267,8 @@
     <None Include=".gitignore" />
     <None Include="Array_test.simple" />
     <None Include="code3.simple" />
+    <None Include="Inside_func_test.simple" />
+    <None Include="Map.simple" />
     <None Include="Upload_to_git.simple" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

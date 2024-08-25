@@ -60,6 +60,26 @@ ValuePtr VoidValue::operator/(const ValuePtr& other) const {
 	throw Simple_Error("/ There is no operator corresponding");
 }
 
+void VoidValue::operator+=(const ValuePtr& other) {
+	throw Simple_Error("+= There is no operator corresponding");
+}
+
+void VoidValue::operator-=(const ValuePtr& other) {
+	throw Simple_Error("-= There is no operator corresponding");
+}
+
+void VoidValue::operator*=(const ValuePtr& other) {
+	throw Simple_Error("*= There is no operator corresponding");
+}
+
+void VoidValue::operator/=(const ValuePtr& other) {
+	throw Simple_Error("/= There is no operator corresponding");
+}
+
+void VoidValue::powereq(const ValuePtr& other) {
+	throw Simple_Error("**= There is no operator corresponding");
+}
+
 ValuePtr VoidValue::operator++() {
 	throw Simple_Error("++i There is no operator corresponding");
 }
@@ -113,5 +133,9 @@ ValuePtr VoidValue::power(const ValuePtr& other) const {
 }
 
 Value& VoidValue::dot(const WString& key) const {
+	throw Simple_Error(L"Void does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr VoidValue::call_method(const WString& key, int args_count, Args_t args) const {
 	throw Simple_Error(L"Void does not have a member named \"" + key + L"\"");
 }

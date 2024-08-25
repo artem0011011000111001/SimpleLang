@@ -12,25 +12,12 @@ CallFunctionExpression::CallFunctionExpression(WString name, Vec<ExpressionPtr> 
 	: name(name), args(MOVE(args)) {}
 
 Value& CallFunctionExpression::eval() {
-	Args_t values;
-	values.reserve(args.size());
+	Args_t values = exprs_to_args(MOVE(args));
 
-	for (const auto& arg : args) {
-		ValuePtr argValue;
-		if (arg)
-			argValue = arg->eval().clone();
-		else argValue = DEFAULT;
-
-		values.push_back(MOVE(argValue));
-	}
-
-	bool FuncExist = Functions::IsExist(name);
-	bool VarExist  = Variables::IsExist(name);
-
-	if (FuncExist)
+	if (Functions::IsExist(name))
 		ref = Functions::Get(name, (int)values.size())->execute(MOVE(values));
 
-	else if (VarExist)
+	else if (Variables::IsExist(name))
 		ref = Variables::Get(name)->operator()(MOVE(values));
 
 	else throw Simple_Error(L"Function \"" + name + L"\" with " + std::to_wstring((int)values.size()) + L" args not defined");

@@ -21,6 +21,8 @@ namespace Simple {
 
 		static std::stack<Vars_t> variablesState;
 
+		static std::stack<Vars_t> variablesMatches;
+
 	public:
 
 		static bool IsExist(const WString& key);
@@ -45,7 +47,15 @@ namespace Simple {
 
 		static void PopState();
 
+		static void PushMatches(Vars_t matches);
+
+		static void PushMatches(WString key, Variable match);
+
+		static void PopMatches();
+
 		static bool StateEmpty();
+
+		static bool MatchesEmpty();
 	};
 }
 

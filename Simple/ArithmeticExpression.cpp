@@ -1,6 +1,8 @@
 #include "Parser.h"
 #include "Simple_Error.h"
 #include "Expressions.h"
+#include "Functions.h"
+#include "ArgParams.h"
 
 using namespace Simple;
 
@@ -76,8 +78,12 @@ ExpressionPtr Parser::Unary() {
 
 	while (true) {
 		if (match(TokenType::DOT)) {
-			WString field_name = consume(TokenType::WORD).getText();
-			result = CREATE_PTR<StructExpression>(std::move(result), field_name);
+			WString name = consume(TokenType::WORD).getText();
+
+			if (match(TokenType::LPAREN))
+				result = Method(MOVE(result), name);
+
+			else result = CREATE_PTR<FieldExpression>(MOVE(result), name);
 		}
 
 		else if (match(TokenType::LSBRACKET)) {
@@ -109,6 +115,9 @@ ExpressionPtr Parser::primary() {
 			return Function();
 	}
 
+	if (match(TokenType::FUNC))
+		return InsideFunc();
+
 	if (match(TokenType::_TRUE))
 		return CREATE_PTR<NumberExpression>(1);
 
@@ -129,6 +138,9 @@ ExpressionPtr Parser::primary() {
 
 	if (match(TokenType::HEX_NUM))
 		return CREATE_PTR<NumberExpression>(stoihex(CurrentToken.getText()));
+
+	if (match(TokenType::_PERCENT))
+		return CREATE_PTR<PercentExpression>(std::stod(CurrentToken.getText()));
 
 	if (match(TokenType::TEXT))
 		return CREATE_PTR<StringExpression>(CurrentToken.getText());
@@ -154,22 +166,51 @@ ExpressionPtr Parser::primary() {
 	else throw Simple_Error("Unknown expression");
 }
 
-ExpressionPtr Parser::Function() {
-	WString name = consume(TokenType::WORD).getText();
-	consume(TokenType::LPAREN);
+template<class _Ty>
+inline void Parser::AnalyzeArgs(_Ty& f) {
 
-	CallFunctionExpression function(name);
 	while (true) {
 
 		ExpressionPtr expr;
 
 		if (match(TokenType::RPAREN)) {
-			expr = DEFAULT;
+			expr = EXPR_DEFAULT;
 			break;
 		}
 
 		else if (get(0).getType() == TokenType::COMMA)
-			expr = DEFAULT;
+			expr = EXPR_DEFAULT;
+
+		else expr = expression();
+
+		f.AddArgument(MOVE(expr));
+
+		if (match(TokenType::RPAREN))
+			break;
+
+		consume(TokenType::COMMA);
+	}
+
+}
+
+ExpressionPtr Parser::Function() {
+
+	WString name = consume(TokenType::WORD).getText();
+	consume(TokenType::LPAREN);
+
+	CallFunctionExpression function(name);
+	AnalyzeArgs(function);
+	/*while (true) {
+
+		ExpressionPtr expr;
+
+		if (match(TokenType::RPAREN)) {
+			expr = EXPR_DEFAULT;
+			break;
+		}
+
+		else if (get(0).getType() == TokenType::COMMA)
+			expr = EXPR_DEFAULT;
 
 		else expr = expression();
 
@@ -179,7 +220,26 @@ ExpressionPtr Parser::Function() {
 			break;
 		
 		consume(TokenType::COMMA);
-	}
+	}*/
 
-	return CREATE_PTR<CallFunctionExpression>(std::move(function));
+	return CREATE_PTR<CallFunctionExpression>(MOVE(function));
+}
+
+ExpressionPtr Parser::Method(ExpressionPtr expr, const WString& name) {
+
+	MethodExpression method(MOVE(expr), name);
+
+	AnalyzeArgs(method);
+
+	return CREATE_PTR<MethodExpression>(MOVE(method));
+}
+
+ExpressionPtr Parser::InsideFunc() {
+	ArgsParams_t argsParam;
+	StatementPtr body;
+	bool is_any_args = false;
+
+	AnalyzeFunction(argsParam, body, is_any_args);
+
+	return CREATE_PTR<InsideFunctionExpression>(MOVE(argsParam), MOVE(body), is_any_args);
 }

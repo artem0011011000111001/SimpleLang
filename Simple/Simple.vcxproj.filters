@@ -10,9 +10,6 @@
     <Filter Include="libs\Math">
       <UniqueIdentifier>{6dfb1c92-d660-4769-a6ba-e6d3f2b94652}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs\Stream">
-      <UniqueIdentifier>{793dfa17-8585-4faa-8cc7-4fff1d09b39f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libs\Type">
       <UniqueIdentifier>{03e0fffb-78ba-4959-82e0-2fd2979a4e92}</UniqueIdentifier>
     </Filter>
@@ -111,9 +108,6 @@
     </Filter>
     <Filter Include="src\libs\Math">
       <UniqueIdentifier>{ea6a4c7d-a690-4051-8e5d-e0cf12f9aded}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\libs\Stream">
-      <UniqueIdentifier>{a0eaf80a-b1b2-405a-86a4-7ac0086b4729}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\libs\Type">
       <UniqueIdentifier>{602b0707-3541-4f50-a073-d4d8cdfd083e}</UniqueIdentifier>
@@ -229,13 +223,22 @@
     <Filter Include="src\core\Parser\Semantics\Enum">
       <UniqueIdentifier>{0d50ff28-0f6f-486e-89fb-dcd930fc66c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\core\Parser\Semantics\Class">
+      <UniqueIdentifier>{fdb2da12-5d32-468b-9cee-434338466c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\structures\Method">
+      <UniqueIdentifier>{e3582f38-5208-4070-b813-ae47c8f55aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\structures\Method">
+      <UniqueIdentifier>{f87a5127-eb52-4d27-8de9-4918169b12d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\AST\Class">
+      <UniqueIdentifier>{a8fbf6f0-92e0-44e7-bcdf-0d9cee3febee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
       <Filter>src\libs\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Stream.cpp">
-      <Filter>src\libs\Stream</Filter>
     </ClCompile>
     <ClCompile Include="Type.cpp">
       <Filter>src\libs\Type</Filter>
@@ -417,7 +420,7 @@
     <ClCompile Include="VoidExpression.cpp">
       <Filter>src\modules\Expressions</Filter>
     </ClCompile>
-    <ClCompile Include="ConstructorDefineStatement.cpp">
+    <ClCompile Include="StructDefineStatement.cpp">
       <Filter>src\core\AST\Struct</Filter>
     </ClCompile>
     <ClCompile Include="CharValue.cpp">
@@ -468,10 +471,10 @@
     <ClCompile Include="ArgParams.cpp">
       <Filter>src\structures\Args</Filter>
     </ClCompile>
-    <ClCompile Include="Field_decl.h">
+    <ClCompile Include="Field_info.h">
       <Filter>include\structures\Field</Filter>
     </ClCompile>
-    <ClCompile Include="Field_decl_.cpp">
+    <ClCompile Include="Field_info_.cpp">
       <Filter>src\structures\Field</Filter>
     </ClCompile>
     <ClCompile Include="RawVariable.cpp">
@@ -489,13 +492,40 @@
     <ClCompile Include="Enum_parsing.cpp">
       <Filter>src\core\Parser\Semantics\Enum</Filter>
     </ClCompile>
+    <ClCompile Include="nullptrValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="InsideFunctionExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="PercentExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="PercentValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="TernaryExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="Class_parsing.cpp">
+      <Filter>src\core\Parser\Semantics\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Method_info.cpp">
+      <Filter>src\structures\Method</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassDefineStatement.cpp">
+      <Filter>src\core\AST\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassValue.cpp">
+      <Filter>src\modules\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="MethodExpression.cpp">
+      <Filter>src\modules\Expressions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
       <Filter>libs\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Stream.h">
-      <Filter>libs\Stream</Filter>
     </ClInclude>
     <ClInclude Include="Type.h">
       <Filter>libs\Type</Filter>
@@ -581,6 +611,9 @@
     <ClInclude Include="FuncParams.h">
       <Filter>include\structures\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Method_info.h">
+      <Filter>include\structures\Method</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -591,6 +624,12 @@
       <Filter>tests</Filter>
     </None>
     <None Include="Array_test.simple">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="Inside_func_test.simple">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="Map.simple">
       <Filter>tests</Filter>
     </None>
   </ItemGroup>

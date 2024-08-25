@@ -6,28 +6,9 @@
 
 using namespace Simple;
 
-StructExpression::StructExpression(ExpressionPtr expr, WString field_name)
+FieldExpression::FieldExpression(ExpressionPtr expr, WString field_name)
 	: expr(std::move(expr)), field_name(field_name) {}
 
-//ValuePtr StructExpression::eval() {
-//	if (is_request)
-//		return expr->eval()->dot(field_name)->operator[](index);
-//	return expr->eval()->dot(field_name);
-//}
-
-Value& StructExpression::eval() {
+Value& FieldExpression::eval() {
    return expr->eval().dot(field_name);
 }
-
-//StructExpression::~StructExpression() {
-//    std::cout << "destructor";
-//    if (ref) {
-//        delete ref;
-//        ref = nullptr;
-//    }
-//}
-
-//void StructExpression::SetIndex(const int index) {
-//	this->index = index;
-//	is_request = true;
-//}

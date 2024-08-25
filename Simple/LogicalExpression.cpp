@@ -5,7 +5,27 @@
 using namespace Simple;
 
 ExpressionPtr Parser::expression() {
-	return logicalOr();
+	return ternary();
+}
+
+ExpressionPtr Parser::ternary() {
+	ExpressionPtr result = logicalOr();
+
+	while (true)
+	{
+		if (match(TokenType::QUESTION)) {
+			ExpressionPtr expr1 = logicalOr();
+
+			consume(TokenType::COLON);
+
+			ExpressionPtr expr2 = logicalOr();
+
+			return CREATE_PTR<TernaryExpression>(MOVE(result), MOVE(expr1), MOVE(expr2));
+			continue;
+		}
+		break;
+	}
+	return result;
 }
 
 ExpressionPtr Parser::logicalOr() {
@@ -14,7 +34,7 @@ ExpressionPtr Parser::logicalOr() {
 	while (true)
 	{
 		if (match(TokenType::BARBAR)) {
-			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::OR, std::move(logicalAnd()));
+			return CREATE_PTR<ConditionalExpression>(MOVE(result), LogicOperators::OR, MOVE(logicalAnd()));
 			continue;
 		}
 		break;
@@ -28,7 +48,7 @@ ExpressionPtr Parser::logicalAnd() {
 	while (true)
 	{
 		if (match(TokenType::AMPAMP)) {
-			return CREATE_PTR<ConditionalExpression>(std::move(result), LogicOperators::AND, std::move(equality()));
+			return CREATE_PTR<ConditionalExpression>(MOVE(result), LogicOperators::AND, MOVE(equality()));
 			continue;
 		}
 		break;

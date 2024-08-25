@@ -1,0 +1,4 @@
+﻿square = func(x) return x ** 2; ;
+sqrt   = func(x) return x ** 0.5; ;
+
+print(square(4), ", ", sqrt(4)); // Expected 16, 4

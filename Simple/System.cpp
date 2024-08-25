@@ -13,7 +13,7 @@ void Simple_libs::System::System::Init() {
 }
 
 void Simple_libs::System::System::InitVars() {
-	
+
 }
 
 void Simple_libs::System::System::InitFuncs() {
@@ -80,7 +80,7 @@ void Simple_libs::System::System::InitFuncs() {
 		#ifdef _WIN32
 			FILE* pipe = _wpopen(command.c_str(), L"r");
 		#else
-			FILE* pipe = wpopen(command.c_str(), L"r");
+			FILE* pipe = popen(uni_to_ascii(command).c_str(), "r");
 		#endif
 
 		if (!pipe) {
@@ -114,10 +114,61 @@ void Simple_libs::System::System::InitFuncs() {
 }
 
 void Simple_libs::System::System::InitStructs() {
+	
+	DEF_STRUCT(FileError)
 
-	_DEFINE_STRUCT(L"FileError", FIELD_DECL(
-		fields.emplace(L"error", FIELD(L"str"))
-	));
+	FIELD(L"error", L"str", false, NOT_VALUE);
+
+	CONSTRUCTOR({
+
+		fields[L"error"].value = STRING(args[0]->AsString());
+
+		}, 1)
+
+		END_STRUCT(FileError);
+
+
+	/*static Fields_decl_t FileErrorFields = DECL_FIELDS({
+		{ L"error", FIELD_INFO(L"str") }
+		});
+
+	_DEFINE_STRUCT(L"FileError", FileErrorFields);*/
+
+
+	DEF_STRUCT(file_info)
+		
+	FIELD(L"path",      L"str", false, NOT_VALUE);
+	FIELD(L"name",      L"str", false, NOT_VALUE);
+	FIELD(L"extension", L"str", false, NOT_VALUE);
+	FIELD(L"content",   L"str", false, NOT_VALUE);
+	FIELD(L"size",		L"num", false, NOT_VALUE);
+
+	CONSTRUCTOR({
+
+		WString path = args[0]->AsString();
+
+		std::filesystem::path file_path(path);
+
+		if (std::filesystem::exists(file_path)) {
+			fields[L"path"].value	   = STRING(file_path.wstring());
+			fields[L"name"].value	   = STRING(file_path.stem().wstring());
+			fields[L"extension"].value = STRING(file_path.extension().wstring());
+			fields[L"content"].value   = CALL(L"read", HAND_OVER_ARGS(STRING(file_path.wstring())));
+			fields[L"size"].value      = NUMBER((double)std::filesystem::file_size(file_path));
+		}
+		else THROW_FILE_ERROR(L"File does not exist: " + path);
+
+		}, 1)
+
+		END_STRUCT(file_info);
+
+	/*static Fields_decl_t file_infoFields = DECL_FIELDS({
+		{ L"path",		FIELD_INFO(L"str") },
+		{ L"name",		FIELD_INFO(L"str") },
+		{ L"extension",	FIELD_INFO(L"str") },
+		{ L"content",	FIELD_INFO(L"str") },
+		{ L"size",		FIELD_INFO(L"num") }
+		});
 
 	_DEFINE_STRUCT_WITH_CONSTRUCTOR(L"file_info", BLOCK(args) {
 		Fields_t fields;
@@ -135,13 +186,7 @@ void Simple_libs::System::System::InitStructs() {
 			THROW_FILE_ERROR(L"File does not exist: " + path);
 		}
 		return STRUCT(L"file_info", fields);
-	}, 1, FIELD_DECL(
-		L"path",		L"str",
-		L"name",		L"str",
-		L"extension",	L"str",
-		L"content",		L"str",
-		L"size",		L"num"
-	));
+	}, 1, file_infoFields);*/
 }
 
 WString Simple_libs::System::System::read_file_content(const std::filesystem::path& file_path) {

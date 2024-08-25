@@ -1,0 +1,61 @@
+﻿struct Map {
+	field keys: arr;
+	field vals: arr;
+
+	func constructor(elements*) {
+	
+		foreach(el : elements) {
+			println(el);
+		}
+
+		addToKeys = true;
+
+		for (i = 0; i < elements.size; ++i) {
+
+			print("addToKeys = ", addToKeys, "\n");
+
+			if (addToKeys) {
+				print("Added to keys value - ");
+				println(elements[i]);
+				this.keys = push(this.keys, elements[i]);
+			}
+			
+			if (!addToKeys) {
+				print("Added to vals value - ");
+				println(elements[i]);
+				this.vals = push(this.vals, elements[i]);
+			}
+
+			addToKeys = !addToKeys;
+		}
+		keys = this.keys;
+		foreach(key : keys) 
+			println(key);
+	}
+}
+
+func find(array, val) {
+	for (i = 0; i < array.size; ++i) {
+		println(array[i]);
+		if (array[i] == val) return i;
+	}
+	return -1;
+}
+
+func get(map, key) {
+	return map.vals[find(map.keys, key)];
+}
+
+func size(map) {
+	return map.keys.size;
+}
+
+products = Map("sugar", 50, "milk", 10, "a", 5);
+
+/*for (i = 0; i < size(products); ++i) {
+	print("Key - ", products.keys[i], ": ");
+	//print("Value - ", products.vals[i], ";", "\n");
+	print("\n");
+}*/
+
+//print(get(products, "sugar"));

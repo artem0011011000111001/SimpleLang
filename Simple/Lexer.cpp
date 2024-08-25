@@ -19,7 +19,7 @@ std::list<Token> Lexer::tokenize() {
         else if (current == L'\"') tokenizeText();
         else if (current == L'\'') tokenizeChar();
         else if (current == L'#') tokenizeHexNumber();
-        else if (current == L'\n') tokenizeNewLine();
+        else if (current == L'\r') tokenizeNewLine();
         else if (check_operator(OPERATORS, current) != simple_npos) tokenizeOperator();
         else next();
     }
@@ -34,8 +34,14 @@ void Lexer::tokenizeNumber() {
             if (indexOf(buffer, L'.') != simple_npos) throw Simple_Error("Two dots in float number");
             if (!std::iswdigit(peek(1))) throw Simple_Error("Expected digit after .");
         }
-        else if (!std::iswdigit(current))
+        else if (!std::iswdigit(current)) {
+            if (current == L'%') { 
+                addToken(TokenType::_PERCENT, buffer); 
+                next(); // skip %
+                return; 
+            }
             break;
+        }
         buffer.push_back(current);
         current = next();
     }
@@ -145,6 +151,18 @@ void Lexer::tokenizeWord() {
     else if (buffer == L"enum")
         addToken(TokenType::ENUM);
 
+    else if (buffer == L"finally")
+        addToken(TokenType::FINALLY);
+
+    else if (buffer == L"class")
+        addToken(TokenType::CLASS);
+
+    else if (buffer == L"public")
+        addToken(TokenType::PUBLIC);
+
+    else if (buffer == L"private")
+        addToken(TokenType::PRIVATE);
+
     else addToken(TokenType::WORD, buffer);
 }
 
@@ -229,7 +247,8 @@ void Lexer::tokenizeComment() {
 void Lexer::tokenizeMultilineComment() {
     WChar current = peek(0);
     while (!(current == L'*' && peek(1) == L'/')) {
-        if (current == L'\0') throw Simple_Error("Missing close tag");
+        if (current == L'\0') throw Simple_Error("Missing close comment");
+        if (current == L'\r') addToken(TokenType::NEW_LINE);
         current = next();
     }
     next(); // skip *

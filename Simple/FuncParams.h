@@ -7,8 +7,6 @@
 
 namespace Simple {
 
-	struct FuncParams;
-
 	struct FuncParams {
 		Map<int, FunctionPtr> func_bodies;
 
@@ -16,6 +14,15 @@ namespace Simple {
 		FuncParams() = default;
 
 		FuncParams clone() const;
+	};
+
+	struct MethodParams : public FuncParams {
+		bool isPrivate;
+
+		MethodParams(Map<int, FunctionPtr> func_bodies, bool isPrivate);
+		MethodParams() = default;
+
+		MethodParams clone() const;
 	};
 }
 

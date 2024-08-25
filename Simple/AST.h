@@ -214,18 +214,19 @@ namespace Simple {
 		virtual ~FunctionDefineStatement() = default;
 	};
 
-	class ConstructorDefineStatement : public Statement {
+	class StructDefineStatement : public Statement {
+
 		WString name;
-		ArgsParams_t argsParam;
-		StatementPtr statement;
-		bool is_any_args;
+		Vec<ArgsParams_t> argsParam;
+		Vec<StatementPtr> statements;
+		Vec<bool> is_any_args;
 
 		Fields_decl_t fields_params;
 		RawFields_decl_t RawFields_params;
 
-		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement);
+		std::function<VALUE(Args_t)> TurnFuncFromVoidToVALUE(StatementPtr& statement, ArgsParams_t& argsParam, bool is_any_args_);
 	public:
-		ConstructorDefineStatement(WString name, ArgsParams_t argsParam, StatementPtr statement, RawFields_decl_t RawFields_params, bool is_any_args);
+		StructDefineStatement(WString name, Vec<ArgsParams_t> argsParam, Vec<StatementPtr> statements, RawFields_decl_t RawFields_params, Vec<bool> is_any_args);
 		void execute() override;
 	};
 
@@ -256,13 +257,16 @@ namespace Simple {
 	class TryCatchStatement : public Statement {
 
 		StatementPtr tryBlock;
-		WString key;
-		bool isConst;
-		WString type_in_str;
-		StatementPtr catchBlock;
+
+		WStr_vec keys;
+		Vec<bool> isConsts;
+		WStr_vec types_in_str;
+		Vec<StatementPtr> catchBlocks;
+		StatementPtr finally_block;
 	public:
-		TryCatchStatement(StatementPtr tryBlock, const WString& key, bool isConst, const WString& type_in_str, StatementPtr catchBlock);
-		void execute() override;	};
+		TryCatchStatement(StatementPtr tryBlock, const WStr_vec& keys, Vec<bool> isConsts, const WStr_vec& types_in_str, Vec<StatementPtr> catchBlocks, StatementPtr finally_block);
+		void execute() override;	
+	};
 
 	class ThrowStatement : public Statement {
 
@@ -279,6 +283,17 @@ namespace Simple {
 		bool isConst;
 	public:
 		DestructDefineStatement(WStr_vec fields_names, WString obj_name, bool isConst);
+		void execute() override;
+	};
+
+	class ClassDefineStatement : public Statement {
+
+		WString name;
+		RawClassFields_decl_t fields_params;
+		ClassFields_decl_t fields;
+		RawMethod_decl_t methods_params;
+	public:
+		ClassDefineStatement(const WString& name, RawClassFields_decl_t fields_params, RawMethod_decl_t methods_params);
 		void execute() override;
 	};
 }

@@ -4,8 +4,8 @@
 
 using namespace Simple;
 
-TryCatchStatement::TryCatchStatement(StatementPtr tryBlock, const WString& key, bool isConst, const WString& type_in_str
-	, StatementPtr catchBlock) : tryBlock(std::move(tryBlock)), key(key), isConst(isConst), type_in_str(type_in_str), catchBlock(std::move(catchBlock)) {}
+TryCatchStatement::TryCatchStatement(StatementPtr tryBlock, const WStr_vec& keys, Vec<bool> isConsts, const WStr_vec& types_in_str, Vec<StatementPtr> catchBlocks, StatementPtr finally_block)
+	: tryBlock(MOVE(tryBlock)), keys(keys), isConsts(isConsts), types_in_str(types_in_str), catchBlocks(MOVE(catchBlocks)), finally_block(MOVE(finally_block)) {}
 
 void TryCatchStatement::execute(){
 	try {
@@ -15,24 +15,38 @@ void TryCatchStatement::execute(){
 	}
 	catch (ValuePtr& ThrowValue) {
 		Variables::PopState();
+		
+		auto types_in_str_it = types_in_str.begin();
+		auto keys_it		 = keys.begin();
+		auto isConsts_it	 = isConsts.begin();
 
-		if (equals_type(type_in_str, ThrowValue->GetTypeInString())) {
-			//if (Variables::IsExist(key))
+		for (auto& catchBlock : catchBlocks) {
+
+			if (equals_type(*types_in_str_it, ThrowValue->GetTypeInString())) {
+
+				Variables::PushState();
+				Variables::PushMatches(*keys_it, Variable(Variables::Get(*keys_it), Variables::IsConstant(*keys_it)));
+
+				Variables::Set(*keys_it, Variable(MOVE(ThrowValue), *isConsts_it));
+
+				catchBlock->execute();
+
+				Variables::PopMatches();
+				Variables::PopState();
+				return;
+			}
+			++types_in_str_it;
+			++keys_it;
+			++isConsts_it;
+		}
+		if (finally_block) {
 			Variables::PushState();
-			Variable SaveGlobalMatchWithInitNameValue;
 
-			if (Variables::IsExist(key))
-				SaveGlobalMatchWithInitNameValue = Variable(Variables::Get(key), Variables::IsConstant(key));
-
-			Variables::Set(key, Variable(std::move(ThrowValue), isConst));
-
-			catchBlock->execute();
-
-			if (SaveGlobalMatchWithInitNameValue.value)
-				Variables::Set(key, std::move(SaveGlobalMatchWithInitNameValue));
+			finally_block->execute();
 
 			Variables::PopState();
 		}
+
 		else throw ThrowValue->clone();
 	}
 }

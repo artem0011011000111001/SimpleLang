@@ -26,7 +26,11 @@ void Simple_libs::Time::Time::InitFuncs() {
 		std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
 
 		std::tm localTime;
+#ifdef __linux__
+		localtime_r(&currentTime, &localTime);
+#else
 		localtime_s(&localTime, &currentTime);
+#endif 
 
 		VALUE year   = NUMBER(localTime.tm_year + 1900); // To solve the problem of calling the copy constructor from the vector
 		VALUE month  = NUMBER(localTime.tm_mon + 1);
@@ -64,14 +68,97 @@ void Simple_libs::Time::Time::InitFuncs() {
 
 void Simple_libs::Time::Time::InitStructs() {
 
-	_DEFINE_STRUCT(L"Date", FIELD_DECL(
-		fields.emplace(L"year",   FIELD(L"num")),
-		fields.emplace(L"month",  FIELD(L"num")),
-		fields.emplace(L"day",    FIELD(L"num")),
-		fields.emplace(L"hour",   FIELD(L"num")),
-		fields.emplace(L"minute", FIELD(L"num")),
-		fields.emplace(L"second", FIELD(L"num"))
-	));
+	DEF_STRUCT(Date)
+
+	FIELD(L"year",   L"num", false, NOT_VALUE);
+	FIELD(L"month",  L"num", false, NOT_VALUE);
+	FIELD(L"day",    L"num", false, NOT_VALUE);
+	FIELD(L"hour",   L"num", false, NOT_VALUE);
+	FIELD(L"minute", L"num", false, NOT_VALUE);
+	FIELD(L"second", L"num", false, NOT_VALUE);
+
+	CONSTRUCTOR({
+
+		fields[L"year"].value   = MOVE(args[0]);
+		fields[L"month"].value  = MOVE(args[1]);
+		fields[L"day"].value    = MOVE(args[2]);
+		fields[L"hour"].value   = MOVE(args[3]);
+		fields[L"minute"].value = MOVE(args[4]);
+		fields[L"second"].value = MOVE(args[5]);
+
+		}, 6)
+
+	END_STRUCT(Date);
+		
+
+	//auto fields_params = DECL_FIELDS({
+	//	{ L"year",	 FIELD(L"num") },
+	//	{ L"month",  FIELD(L"num") },
+	//	{ L"day",	 FIELD(L"num") },
+	//	{ L"hour",	 FIELD(L"num") },
+	//	{ L"minute", FIELD(L"num") },
+	//	{ L"second", FIELD(L"num") }
+	//	});
+	/*Fields_decl_t DateFields = {
+		{ L"year",	 FIELD(L"num") },
+		{ L"month",  FIELD(L"num") },
+		{ L"day",	 FIELD(L"num") },
+		{ L"hour",	 FIELD(L"num") },
+		{ L"minute", FIELD(L"num") },
+		{ L"second", FIELD(L"num") }
+	};*/
+
+	/*static Fields_decl_t DateFields = DECL_FIELDS({
+		{ L"year",	 FIELD(L"num") },
+		{ L"month",  FIELD(L"num") },
+		{ L"day",	 FIELD(L"num") },
+		{ L"hour",	 FIELD(L"num") },
+		{ L"minute", FIELD(L"num") },
+		{ L"second", FIELD(L"num") }
+	});*/
+
+
+	/*DECL_FIELDS(DateFields, div({
+		{ L"year",	 FIELD(L"num") },
+		{ L"month",  FIELD(L"num") },
+		{ L"day",	 FIELD(L"num") },
+		{ L"hour",	 FIELD(L"num") },
+		{ L"minute", FIELD(L"num") },
+		{ L"second", FIELD(L"num") }
+		}));*/
+
+	//auto bbbb = BLOCK(args) {
+	//	Vars_t fields;
+	//	auto field_decl_it = DateFields.begin();  //// mnisdafysdgfuyas fields_params is null
+	//	for (auto& arg : args) {
+
+	//		if (arg->GetTypeInString() !=
+	//			field_decl_it->second.type) throw Simple_Error("Invalid type");
+	//		fields.emplace(field_decl_it->first, arg->clone());
+	//		++field_decl_it;
+	//	}
+	//	return STRUCT(L"Date", fields);
+	//};
+
+	/*_DEFINE_STRUCT(L"Date", DECL_FIELDS({
+		{ L"year",	 FIELD(L"num") },
+		{ L"month",  FIELD(L"num") },
+		{ L"day",	 FIELD(L"num") },
+		{ L"hour",	 FIELD(L"num") },
+		{ L"minute", FIELD(L"num") },
+		{ L"second", FIELD(L"num") }
+		}));*/
+
+	//_DEFINE_STRUCT(L"Date", DateFields);
+
+	/*_DEFINE_STRUCT(L"Date", DECL_FIELDS({
+		{ L"year",	 FIELD(L"num") },
+		{ L"month",  FIELD(L"num") },
+		{ L"day",	 FIELD(L"num") },
+		{ L"hour",	 FIELD(L"num") },
+		{ L"minute", FIELD(L"num") },
+		{ L"second", FIELD(L"num") }
+		}));*/
 }
 
 //VALUE Simple_libs::Time::Time::_Date(Args_t args) {

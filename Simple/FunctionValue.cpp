@@ -69,6 +69,26 @@ ValuePtr FunctionValue::operator/(const ValuePtr& other) const {
 	throw Simple_Error("/ There is no operator corresponding");
 }
 
+void FunctionValue::operator+=(const ValuePtr& other) {
+	throw Simple_Error("+= There is no operator corresponding");
+}
+
+void FunctionValue::operator-=(const ValuePtr& other) {
+	throw Simple_Error("-= There is no operator corresponding");
+}
+
+void FunctionValue::operator*=(const ValuePtr& other) {
+	throw Simple_Error("*= There is no operator corresponding");
+}
+
+void FunctionValue::operator/=(const ValuePtr& other) {
+	throw Simple_Error("/= There is no operator corresponding");
+}
+
+void FunctionValue::powereq(const ValuePtr& other) {
+	throw Simple_Error("**= There is no operator corresponding");
+}
+
 ValuePtr FunctionValue::operator++() {
 	throw Simple_Error("++i There is no operator corresponding");
 }
@@ -127,5 +147,9 @@ ValuePtr FunctionValue::power(const ValuePtr& other) const {
 }
 
 Value& FunctionValue::dot(const WString& key) const {
+	throw Simple_Error(L"Function does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr FunctionValue::call_method(const WString& key, int args_count, Args_t args) const {
 	throw Simple_Error(L"Function does not have a member named \"" + key + L"\"");
 }

@@ -4,7 +4,7 @@
 #define _STRUCTS_H_
 
 #include "Simple_typedefs.h"
-#include "Field_decl.h"
+#include "Field_info.h"
 
 
 namespace Simple {

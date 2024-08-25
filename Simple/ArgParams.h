@@ -11,10 +11,10 @@ namespace Simple {
 	struct ArgParams {
 
 		WString name;
-		bool isConst;
+		bool isConst = false;
 		ExpressionPtr defaultValue;
 
-		ArgParams(WString name, bool isConst = false, ExpressionPtr defaultValue = NOT_VALUE);
+		ArgParams(WString name, bool isConst = false, ExpressionPtr defaultValue = EXPR_NOT_VALUE);
 		ArgParams() = default;
 	};
 

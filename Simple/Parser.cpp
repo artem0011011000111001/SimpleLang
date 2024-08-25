@@ -34,6 +34,9 @@ StatementPtr Parser::getNextGlobalStatement() {
 	else if (match(TokenType::ENUM))
 		return EnumDefine();
 
+	else if (match(TokenType::CLASS))
+		return ClassDefine();
+
 	else return getNextStatement();
 }
 
@@ -85,9 +88,6 @@ StatementPtr Parser::getNextStatement() {
 	else if (match(TokenType::SWITCH))
 		return Switch();
 
-	else if (match(TokenType::FUNC))
-		throw Simple_Error("You cannot declare a function not in global visibility", line);
-
 	else if (match(TokenType::RETURN))
 		return Return();
 
@@ -99,6 +99,12 @@ StatementPtr Parser::getNextStatement() {
 
 	else if (match(TokenType::TRY))
 		return TryCatch();
+
+	else if (match(TokenType::CATCH))
+		throw Simple_Error("Keyword catch cannot be used here", line);
+
+	else if (match(TokenType::FINALLY))
+		throw Simple_Error("Keyword finally cannot be used here", line);
 
 	else if (match(TokenType::THROW)) {
 		StatementPtr result = Throw();
@@ -150,14 +156,7 @@ StatementPtr Parser::getNextStatement() {
 StatementPtr Parser::statementOrBlock() {
 	if (get(0).getType() == TokenType::LBRACE) return block();
 
-	/*const auto& CurrentVariables = Variables::GetAllVariables();
-	std::unordered_map<String, ValuePtr> VariablesBefore;
-
-	for (auto& var : CurrentVariables)
-	{
-		VariablesBefore[var.first] = var.second->clone();
-	}*/
-	return CREATE_PTR<ShortBlockStatement>(std::move(getNextStatement()));
+	return CREATE_PTR<ShortBlockStatement>(MOVE(getNextStatement()));
 }
 
 //StatementPtr Parser::NewLine() {

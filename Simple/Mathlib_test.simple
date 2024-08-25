@@ -1,4 +1,4 @@
-import Math;
+﻿import Math;
 
 println(PI);				// Expected: 3.141593
 println(E);					// Expected: 2.718282

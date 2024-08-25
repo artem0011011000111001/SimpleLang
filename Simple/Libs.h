@@ -4,7 +4,6 @@
 #define _LIBS_H_
 
 #include "Math.h"
-#include "Stream.h"
 #include "Type.h"
 #include "Time.h"
 #include "Exception.h"

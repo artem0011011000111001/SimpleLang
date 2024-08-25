@@ -6,9 +6,10 @@
 namespace Simple {
 
 	enum class TokenType {
-		// Types
+		// Values
 		NUM,
 		HEX_NUM,
+		_PERCENT,
 		WORD,
 		TEXT,
 		CHAR_,
@@ -41,6 +42,10 @@ namespace Simple {
 		_VOID_,
 		DESTRUCT,
 		ENUM,
+		FINALLY,
+		CLASS,
+		PRIVATE,
+		PUBLIC,
 
 		// Operators
 		PLUS,          //   +
@@ -77,7 +82,8 @@ namespace Simple {
 		LSBRACKET,     //   [
 		RSBRACKET,     //   ]
 		COLON,		   //   :
-		ELLIPSIS,      //   ...
+		//ELLIPSIS,      //   ...
+		QUESTION,
 
 		NEW_LINE,
 		END_OF_FILE

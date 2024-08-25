@@ -7,7 +7,18 @@ AbbreviatedOperationsStatement::AbbreviatedOperationsStatement(ExpressionPtr exp
 	: expr1(std::move(expr1)), operation(operation), expr2(std::move(expr2)) {}
 
 void AbbreviatedOperationsStatement::execute() {
-	Value& ref = expr1->eval();
-	ValuePtr result = BinaryExpression(std::move(expr1), operation, std::move(expr2)).eval().clone();
-	ref.set_ref(result);
+	if (operation == BinaryOperators::PLUS)
+		expr1->eval() += expr2->eval().clone();
+
+	else if (operation == BinaryOperators::MINUS)
+		expr1->eval() -= expr2->eval().clone();
+
+	else if (operation == BinaryOperators::MULTIPLY)
+		expr1->eval() *= expr2->eval().clone();
+
+	else if (operation == BinaryOperators::DIVIDE)
+		expr1->eval() /= expr2->eval().clone();
+
+	else if (operation == BinaryOperators::POWER)
+		expr1->eval().powereq(expr2->eval().clone());
 }

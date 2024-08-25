@@ -42,20 +42,49 @@
     ([&]() -> Args_t {                      \
         Args_t _args;                       \
         (_args.push_back(__VA_ARGS__));     \
-        return std::move(_args);            \
+        return MOVE(_args);                 \
     })()
 
 #define CALL(funcname, args) Functions::Get(funcname, (int)args.size())->execute(args)
 
 #define MOVE std::move
 
-#define FIELD Field_decl
+#define FIELD_INFO       Field_info
 
-#define FIELD_DECL(...)        \
-    ([&]() -> Fields_decl_t {  \
-        Fields_decl_t fields;  \
-        __VA_ARGS__;           \
-        return MOVE(fields);   \
-    })()
+//#define FIELD_DECL(...)         \
+//    ([&]() -> Fields_decl_t {   \
+//        Fields_decl_t _fields_; \
+//        (_fields_.insert(__VA_ARGS__));            \
+//        return MOVE(_fields_);  \
+//    })()
+
+#define DECL_FIELDS _DECL_FIELDS
+        /*return MOVE(fields); \
+    }*/
+
+
+#define FIELD(name, type, is_immutable, default_value) \
+    fields[name] = Field_info(type, is_immutable, default_value)
+
+#define DEF_STRUCT(name) \
+    struct name { \
+        Fields_decl_t fields; \
+        std::function<void(Args_t)> __constructor; \
+        int __argscount; \
+        void init() { \
+            _ADD_STRUCT(L###name, fields); \
+            _DEFINE_FUNCTION(L###name, BLOCK(args) { __constructor(MOVE(args)); return STRUCT(L###name, to_vars_t(fields)); }, __argscount); \
+        } \
+        name() {
+
+#define CONSTRUCTOR(body, argscount)             \
+        __argscount = argscount;                 \
+        __constructor = [&](Args_t args) -> void \
+            body;                     
+
+#define END_STRUCT(name) \
+        } \
+    }; \
+    static name name##struct; name##struct.init();
         
 #endif // _MODULE_DEFINES_H_

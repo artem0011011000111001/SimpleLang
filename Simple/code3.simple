@@ -1,4 +1,4 @@
-func say_hello() {
+﻿func say_hello() {
 	print("hello");
 }
 

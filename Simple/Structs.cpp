@@ -1,5 +1,5 @@
 #include "Structs.h"
-#include "Field_decl.h"
+#include "Field_info.h"
 #include "Simple_Error.h"
 
 using namespace Simple;

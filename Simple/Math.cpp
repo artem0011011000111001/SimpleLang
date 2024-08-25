@@ -11,8 +11,9 @@ void Simple_libs::Math::Math::Init() {
 }
 
 void Simple_libs::Math::Math::InitVars() {
-	_DEFINE_VAR_NUM(L"PI", MATH_PI, true);
-	_DEFINE_VAR_NUM(L"E",  MATH_E,  true);
+	_DEFINE_VAR_NUM(L"PI",  MATH_PI,  true);
+    _DEFINE_VAR_NUM(L"PHI", MATH_PHI, true);
+	_DEFINE_VAR_NUM(L"E",   MATH_E,   true);
 }
 
 void Simple_libs::Math::Math::InitFuncs() {

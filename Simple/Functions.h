@@ -28,6 +28,8 @@ namespace Simple {
 
 		static void Set(const WString& key, FunctionPtr func, int argsCount);
 
+		static FunctionPtr CreateDynamicFunction(std::function<VALUE(Args_t)> funcbody);
+
 		static void RegisterDynamicFunction(const WString& name, std::function<VALUE(Args_t)> funcbody, const int argscount);
 
 		static void CreateStandartFunctions();

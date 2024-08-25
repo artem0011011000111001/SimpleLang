@@ -2,6 +2,8 @@
 #include "Simple_defines.h"
 #include "Simple_Error.h"
 
+#include <cmath>
+
 using namespace Simple;
 
 DigitValue::DigitValue(const double value)
@@ -49,43 +51,57 @@ Simple_Iterator DigitValue::end() {
 }
 
 ValuePtr DigitValue::operator+(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return NUMBER(value + other->AsDouble());
+
 	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
 		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator-(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return NUMBER(value - other->AsDouble());
+
 	throw Simple_Error(L"+ There is no operator corresponding to these operands: "
 		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator*(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return NUMBER(value * other->AsDouble());
 
-	auto multiply_str = [this, &other]() {
-		WString result, str = other->AsString();
-		for (size_t i = 0; i < value; i++) {
-			result += str;
-		}
-		return result;
-		};
-
-	if (other->GetType() == ValueType::_STRING || other->GetType() == ValueType::_CHAR)
-		return STRING(multiply_str());
+	if (is_char_value(other))
+		return STRING(multiply_str(other->AsString(), (int)AsDouble()));
 
 	throw Simple_Error(L"* There is no operator corresponding to these operands: "
 		+ GetTypeInString() + L" " + other->GetTypeInString());
 }
 
 ValuePtr DigitValue::operator/(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return NUMBER(value / other->AsDouble());
 	throw Simple_Error(L"/ There is no operator corresponding to these operands: "
 		+ GetTypeInString() + L" " + other->GetTypeInString());
+}
+
+void DigitValue::operator+=(const ValuePtr& other) {
+	value = this->operator+(other)->AsDouble();
+}
+
+void DigitValue::operator-=(const ValuePtr& other) {
+	value = this->operator-(other)->AsDouble();
+}
+
+void DigitValue::operator*=(const ValuePtr& other) {
+	value = this->operator*(other)->AsDouble();
+}
+
+void DigitValue::operator/=(const ValuePtr& other) {
+	value = this->operator/(other)->AsDouble();
+}
+
+void DigitValue::powereq(const ValuePtr& other) {
+	value = this->power(other)->AsDouble();
 }
 
 ValuePtr DigitValue::operator++() {
@@ -119,7 +135,7 @@ ValuePtr DigitValue::operator--(int) {
 }
 
 bool DigitValue::operator<(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value < other->AsDouble();
 
 	throw Simple_Error(L"< There is no operator corresponding to these operands: "
@@ -127,7 +143,7 @@ bool DigitValue::operator<(const ValuePtr& other) const {
 }
 
 bool DigitValue::operator>(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value > other->AsDouble();
 
 	throw Simple_Error(L"> There is no operator corresponding to these operands: "
@@ -135,7 +151,7 @@ bool DigitValue::operator>(const ValuePtr& other) const {
 }
 
 bool DigitValue::operator<=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value <= other->AsDouble();
 
 	throw Simple_Error(L"<= There is no operator corresponding to these operands: "
@@ -143,7 +159,7 @@ bool DigitValue::operator<=(const ValuePtr& other) const {
 }
 
 bool DigitValue::operator>=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value >= other->AsDouble();
 
 	throw Simple_Error(L">= There is no operator corresponding to these operands: "
@@ -151,7 +167,7 @@ bool DigitValue::operator>=(const ValuePtr& other) const {
 }
 
 bool DigitValue::operator==(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value == other->AsDouble();
 
 	throw Simple_Error(L"== There is no operator corresponding to these operands: "
@@ -159,7 +175,7 @@ bool DigitValue::operator==(const ValuePtr& other) const {
 }
 
 bool DigitValue::operator!=(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return value != other->AsDouble();
 
 	throw Simple_Error(L"!= There is no operator corresponding to these operands: "
@@ -175,7 +191,7 @@ ValuePtr DigitValue::operator()(Args_t args) const {
 }
 
 ValuePtr DigitValue::power(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return NUMBER(std::pow(value, other->AsDouble()));
 
 	throw Simple_Error(L"!= There is no operator corresponding to these operands: "
@@ -183,5 +199,9 @@ ValuePtr DigitValue::power(const ValuePtr& other) const {
 }
 
 Value& DigitValue::dot(const WString& key) const {
+	throw Simple_Error(L"Digit does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr DigitValue::call_method(const WString& key, int args_count, Args_t args) const {
 	throw Simple_Error(L"Digit does not have a member named \"" + key + L"\"");
 }

@@ -62,7 +62,7 @@ ValuePtr CharValue::operator-(const ValuePtr& other) const {
 }
 
 ValuePtr CharValue::operator*(const ValuePtr& other) const {
-	if (other->GetType() == ValueType::_NUMBER || other->GetType() == ValueType::_DIGIT_)
+	if (is_number_value(other))
 		return STRING([this, &other]() {
 		WString result;
 			for (size_t i = 0, count = static_cast<size_t>(other->AsDouble()); i < count; i++) {
@@ -76,7 +76,27 @@ ValuePtr CharValue::operator*(const ValuePtr& other) const {
 
 ValuePtr CharValue::operator/(const ValuePtr& other) const {
 	throw Simple_Error("/ There is no operator corresponding");
-}	
+}
+
+void CharValue::operator+=(const ValuePtr& other) {
+	value = this->operator+(other)->AsString();
+}
+
+void CharValue::operator-=(const ValuePtr& other) {
+	value = this->operator-(other)->AsString();
+}
+
+void CharValue::operator*=(const ValuePtr& other) {
+	value = this->operator*(other)->AsString();
+}
+
+void CharValue::operator/=(const ValuePtr& other) {
+	value = this->operator+(other)->AsString();
+}
+
+void CharValue::powereq(const ValuePtr& other) {
+	value = this->power(other)->AsString();
+}
 
 ValuePtr CharValue::operator++() {
 	throw Simple_Error("++i There is no operator corresponding");
@@ -132,4 +152,8 @@ ValuePtr CharValue::power(const ValuePtr& other) const {
 
 Value& CharValue::dot(const WString& key) const {
 	throw Simple_Error(L"Void does not have a member named \"" + key + L"\"");
+}
+
+ValuePtr CharValue::call_method(const WString& key, int args_count, Args_t args) const {
+	throw Simple_Error(L"Char does not have a member named \"" + key + L"\"");
 }

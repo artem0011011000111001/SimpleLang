@@ -1,6 +1,8 @@
 #include "Parser.h"
 #include "Simple_Error.h"
 
+#include <cmath>
+
 using namespace Simple;
 
 Token Parser::get(const size_t relativePosition) {

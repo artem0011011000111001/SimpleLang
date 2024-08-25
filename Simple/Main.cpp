@@ -3,17 +3,14 @@
 #include <fstream>
 #include <string>
 #include <codecvt>
-
-#pragma warning(disable : 4996)
-
-int main(int argc, wchar_t* argv[]) {
+int main(int argc, char** argv) {
 	WString code;
-	WString path;
-	if (argc > 1) {
+	String path;
+ 	if (argc > 1) {
 		path = argv[1];
 	}
 	else {
-		path = L"Upload_to_git.simple";
+		path = "Upload_to_git.simple";
 	}
 
 	code = Simple::ReadCodeFromFile(path);

@@ -1,9 +1,9 @@
 import System;
 
-commit = "Added enum";
+commit = "Added ternary operator, Move Stream library to standart, Small updates";
 
 print("Confirm whether you want to publish the project with this commit \n\n\"" + commit + "\"\n");
 run("pause");
 
-//clear_rep();
+clear_rep();
 upload_to_git(commit);

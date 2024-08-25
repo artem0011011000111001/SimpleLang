@@ -13,6 +13,7 @@ namespace Simple {
 		bool is_const;
 		Variable() : value(nullptr), is_const(false) {}
 		Variable(ValuePtr value, bool is_const = false);
+		ValuePtr clone_value() const;
 	};
 }
 #endif // _VARIABLE_H_

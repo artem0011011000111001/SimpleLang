@@ -62,7 +62,8 @@ namespace Simple {
 			{L"[",      TokenType::LSBRACKET},
 			{L"]",      TokenType::RSBRACKET},
 			{L":",      TokenType::COLON},
-			{L"...",    TokenType::ELLIPSIS}
+			//{L"...",    TokenType::ELLIPSIS}
+			{L"?",      TokenType::QUESTION}
 		};
 
 	private:

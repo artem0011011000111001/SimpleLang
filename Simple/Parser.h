@@ -74,6 +74,8 @@ namespace Simple {
 
 		StatementPtr EnumDefine();
 
+		StatementPtr ClassDefine();
+
 		StatementPtr Return();
 
 		StatementPtr TryCatch();
@@ -85,9 +87,18 @@ namespace Simple {
 		//StatementPtr NewLine();
 
 		// expression
+		template<class _Ty>
+		void AnalyzeArgs(_Ty& f);
+
 		ExpressionPtr Function();
 
+		ExpressionPtr Method(ExpressionPtr expr, const WString& name);
+
+		ExpressionPtr InsideFunc();
+
 		ExpressionPtr expression();
+
+		ExpressionPtr ternary();
 
 		ExpressionPtr logicalOr();
 

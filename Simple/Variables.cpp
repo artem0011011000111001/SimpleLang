@@ -23,7 +23,7 @@ void Variables::SetAllVariables(Vars_t&& variables) {
 			resultMap.operator[](pair.first) = std::move(pair.second);
 		}
 	}
-	Variables::variables = std::move(resultMap);
+	Variables::variables = MOVE(resultMap);
 }
 
 bool Variables::IsExist(const WString& key) {
@@ -50,7 +50,7 @@ void Variables::Set(const WString& key, Variable value) {
 			throw Simple_Error(L"\"" + invalidName + L"\" invalid name");
 		};
 
-	CheckInvalidName(L"true");	////
+	CheckInvalidName(L"true");
 	CheckInvalidName(L"false");
 	CheckInvalidName(L"void");
 	CheckInvalidName(L"this");
@@ -69,11 +69,9 @@ void Variables::SetNew(const WString& key, Variable value) {
 Vars_t Variables::CreateStandartVariables() {
 	Vars_t vars;
 
-	//Math::InitVars();
-	//Stream::InitVars();
-	//vars.emplace("true",    Variable(CREATE_PTR<NumberValue>(1),   true));
-	//vars.emplace("false",   Variable(CREATE_PTR<NumberValue>(0),   true));
 	vars.emplace(L"__denys", Variable(NUMBER(666), false));
+	vars.emplace(L"__nazar", Variable(NUMBER(228), false));
+	vars.emplace(L"endl",	 Variable(STRING(L"\n"), true));
 	return vars;
 }
 
@@ -104,8 +102,31 @@ void Variables::PopState() {
 	}
 }
 
+void Variables::PushMatches(Vars_t matches) {
+	variablesMatches.push(MOVE(matches));
+}
+
+void Variables::PushMatches(WString key, Variable match) {
+	Vars_t matches;
+	matches.emplace(key, MOVE(match));
+	PushMatches(MOVE(matches));
+}
+
+void Variables::PopMatches() {
+	
+	for (const auto& var : variablesMatches.top()) {
+		Variables::SetNew(var.first, Variable(var.second.value->clone(), var.second.is_const));
+	}
+
+	variablesMatches.pop();
+}
+
 bool Variables::StateEmpty() {
 	return variablesState.empty();
+}
+
+bool Variables::MatchesEmpty() {
+	return variablesMatches.empty();
 }
 
 bool Variables::IsConstant(const WString& key) {
@@ -119,3 +140,5 @@ bool Variables::IsConstant(const WString& key) {
 Vars_t Variables::variables = CreateStandartVariables();
 
 std::stack<Vars_t> Variables::variablesState;
+
+std::stack<Vars_t> Variables::variablesMatches;

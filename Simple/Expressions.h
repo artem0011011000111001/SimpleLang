@@ -40,6 +40,17 @@ namespace Simple {
 		Value& eval() override;
 	};
 
+	class PercentExpression : public Expression {
+
+		double value;
+		ValuePtr ref;
+	public:
+
+		PercentExpression(double value);
+		//ValuePtr eval() override;
+		Value& eval() override;
+	};
+
 	class StringExpression : public Expression {
 
 		WString value;
@@ -123,13 +134,26 @@ namespace Simple {
 		void AddArgument(ExpressionPtr arg);
 	};
 
-	class StructExpression : public Expression {
+	class InsideFunctionExpression : public Expression {
+
+		ArgsParams_t argsParam;
+		StatementPtr body;
+		bool is_any_args = false;
+		ValuePtr ref;
+	public:
+
+		InsideFunctionExpression(ArgsParams_t argsParam, StatementPtr body, bool is_any_args = false);
+		//ValuePtr eval() override;
+		Value& eval() override;
+	};
+
+	class FieldExpression : public Expression {
 
 		ExpressionPtr expr;
 		WString field_name;
 	public:
 
-		StructExpression(ExpressionPtr expr, WString field_name);
+		FieldExpression(ExpressionPtr expr, WString field_name);
 
 		Value& eval() override;
 	};
@@ -172,6 +196,30 @@ namespace Simple {
 		FunctionExpression(WString& key);
 
 		Value& eval() override;
+	};
+
+	class TernaryExpression : public Expression {
+		
+		ExpressionPtr condition, expr1, expr2;
+		ValuePtr ref;
+	public:
+		TernaryExpression(ExpressionPtr condition, ExpressionPtr expr1, ExpressionPtr expr2);
+
+		Value& eval() override;
+	};
+
+	class MethodExpression : public Expression {
+
+		ExpressionPtr key;
+		WString name;
+		Vec<ExpressionPtr> args;
+		ValuePtr ref;
+	public:
+		MethodExpression(ExpressionPtr key, const WString& name, Vec<ExpressionPtr> args = {});
+
+		Value& eval() override;
+
+		void AddArgument(ExpressionPtr arg);
 	};
 }
 
