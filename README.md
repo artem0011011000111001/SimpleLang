@@ -5,6 +5,8 @@ Launch project:
 4. Call "ReadCodeFromFile" from namespace Simple pass the path to the file as an argument and pass the resulting result to "compile" from namespace Simple
 5. Launch .cpp file.
 
+Convenient and practical IDE for Simple - [Script Studio](https://github.com/denis557/Script-Studio).
+
 Language syntax:
 Variable declaration
 ```
@@ -45,11 +47,37 @@ a += 5;  // a = 15
 a++;     // a = 16
 --a;     // a = 15
 a /= 5;  // a = 3
+
+// Also avaible
+a = 100% // a = 100%
+```
+Ternary operator
+```
+b = 10;
+
+a = b > 10 ? true : false // a = false
 ```
 Standart functions
 ```
-print(args);   // output to console args
-println(args); // output to console args who will split "\n"
+print(args*);                           // output to console args
+println(args*);                         // output to console args who will split "\n"
+input(msg)                              // return input of user
+input()                                 // calling input("")
+mod(val1, val2)                         // return module val1 of val2
+str(val)                                // cast to string val
+num(val)                                // cast to string num
+Array(args);                            // return array filled with args
+print_array(arr, start, separator, end) // output to console arr taking into account the passed arguments
+print_array(arr)                        // calling print_array(arr, "[", ", ", "]")
+push(arr, val);                         // adds val to the end arr
+push(arr, val, pos);                    // adds a value to a pos in the arr
+pop(arr);                               // removes the last element of the arr
+pop(arr, pos);                          // removes an element by pos in an arr
+split(str, separator);                  // splits a str by separator and return this in the array view
+map(arr, func);                         // takes each element of the arr, passes it to the func and returns a new array
+clear();                                // return empty array
+empty(arr);                             // return checks if the arr is empty and returns the result
+join(arr, separator)                    // return a string with arr elements cast to string separated by a separator
 ```
 Statement if-else
 ```
@@ -79,14 +107,24 @@ a = 0
 do {
   print(a, "\n");
   ++a;
-} while(a < 10)
+} while (a < 10)
 // Also available
 // keyword break and continue
 ```
 Statement for
 ```
-for(i = 0; i < 10; ++i) {
+for (i = 0; i < 10; ++i) {
    print(i, "\n");
+}
+// Also available
+// keyword break and continue
+```
+Statement foreach
+```
+arr = Array(1, "Nick", 2.5);
+
+foreach (el : arr) {
+   print(el);
 }
 // Also available
 // keyword break and continue
@@ -157,51 +195,99 @@ func test_function_with_constant_arg(const a, b) {
    a = 10; // error "a" is const
    b = 15; // good
 }
+
 // Also available
 func test_function_with_short_block(x)
    print(x);
 
 test_function_with_short_block("Hello"); // output Hello
+
+// Also available
+func test_function_with_default_values_of_args(x = 5)
+   print(x);
+
+test_function_with_default_values_of_args(,)  // will substitute the default value
+test_function_with_default_values_of_args(10) // the passed value will be supplied
+
+// Also available
+func test_function_with_same_name(x)
+   print(x);
+
+func test_function_with_same_name(x, y)
+   print(x ** y);
+
+test_function_with_same_name(5);    // calling first function
+test_function_with_same_name(5, 3); // calling second function
+
+// Also available
+func test_function_with_unlimited_count_of_arguments(msgs*) {
+    foreach(msg : msgs)
+        println(msg);
+}
+
+test_function_with_unlimited_count_ofarguments("Hello", 6.41, 15); // you can pass an unlimited number of arguments
+
+// Also avaible
+
+func func_square(x) return x ** 2;
+
+var_square = func_square;
+print(var_square(3)); // output 9
+
+inside_func_square = func(x) { return x ** 2; };
+print(inside_func_square(3)); // output 9
+
 ```
 Struct declaration
 ```
 struct MyStruct {
+
   field x: num;
   field y: num;
+  /*
+  // Also avaible
+    field x: num = 10;      // default value of x = 10
+    field immutable x: num; // it will be possible to get the value of x, but if you try to change it, it will remain the same
+    */
 
-  func constructor(x, y) {
+
+  func constructor(x, y, z) {
     this.x = x;
     this.y = y;
+    this.z = z;
   }
-  // field z: num; // this field will cause an error
+  // Also avaible
+  field z: num;
 }
 
-Struct_test = MyStruct(2, 3);
+Struct_test = MyStruct(2, 3, 9);
 
 print(Struct_test.x); // output 2
+
+// Also avaible
+
+destruct x, y, z = Struct_test; // Also works with objects
+print(y) // output 3
+
 ```
 Object declaration
 ```
 test_object {
-  name: "Nick",
+  name: "Nick"
   age: 15
-};
-print("Name = ", test_object.name, ", Age = ", test_object.age); // output Name = Nick, Age = 15
-```
-Enum declaration
-```
-enum Level {
-  FIRST = 1,
-  SECOND = 2,
-  NONE = -1
 }
-println(Level.FIRST, Level.SECOND, Level.NONE); // output 1 2 -1
+print("Name = ", test_object.name, ", Age = ", test_object.age); // output Name = Nick, Age = 15
 ```
 Statement import
 ```
-import Math;
+import Math; // import libs
 
 print(PI);
+
+import "file.simple";
+
+some_function_from_imported_file();
+
 ```
 Standart libs:
 Math
@@ -245,19 +331,6 @@ is_prime(arg)     // return is prime arg
 is_even(arg)      // return is even arg
 is_odd(arg)       // return is odd arg
 ```
-Stream
-```
-// include
-import Stream;
-
-// Variables
-const endl = "\n";
-
-// Functions
-output(args...)  // output to console args
-outputln(args...) // output to console args who will split "\n"
-input(arg = "")  // return user input with output arg
-```
 Type
 ```
 // include
@@ -267,8 +340,6 @@ import Type;
 // None
 
 // Functions
-cast_number(arg) // try cast arg to number
-cast_string(arg) // try cast arg to string
 instanseof(arg1, arg2) // returns whether the types are equal to each other
 is_const(arg)    // return is there a variable name from the passed string is constant
 
